@@ -1,0 +1,124 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:roloxmoney/utils/font.dart';
+/*Chinnadurai Viswanathan*/
+
+class PrimaryButton extends StatefulWidget {
+  final String? text;
+  final BuildContext context;
+  final double cardElevation;
+  final double cardShape;
+
+  final TextAlign textAlign;
+  final GestureTapCallback? onTap;
+  final bool isUnderLine;
+  final bool isSingleLine;
+  final bool isLeading;
+  final bool isTrailing;
+  final int? maxLines;
+  final Widget leadingWidget;
+  final Widget trailingWidget;
+  final FontWeight? fontWeight;
+  final Color textColor;
+  final IconData? trailingIconData;
+  final Axis axis;
+  final MainAxisAlignment alignment;
+  final double fontSize;
+  final Font font;
+  final bool isEnabled;
+  final Color? disableColor;
+
+  PrimaryButton(this.text, this.context,
+      {this.fontWeight = FontWeight.w600,
+      this.leadingWidget = const Expanded(
+        child: SizedBox.shrink(),
+      ),
+      this.trailingWidget = const Expanded(
+        child: SizedBox.shrink(),
+      ),
+      this.font = Font.poppinsRegular,
+      this.textAlign = TextAlign.left,
+      this.onTap,
+      this.textColor = Colors.white,
+      this.fontSize = FontSize.fourteen,
+      this.isUnderLine = false,
+      this.isLeading = false,
+      this.isTrailing = false,
+      this.isSingleLine = false,
+      this.trailingIconData = Icons.settings,
+      this.cardElevation = 0.0,
+      this.cardShape = 8.0,
+      this.axis = Axis.horizontal,
+      this.alignment = MainAxisAlignment.center,
+      this.maxLines,
+      this.isEnabled = true,
+      this.disableColor});
+
+  @override
+  _PrimaryButtonState createState() => _PrimaryButtonState();
+}
+
+class _PrimaryButtonState extends State<PrimaryButton> {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+        if (widget.onTap != null && widget.isEnabled) {
+          widget.onTap!();
+        }
+      },
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: 56,
+        child: Card(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(widget.cardShape),
+              side: BorderSide(
+                  color: Theme.of(context)
+                      .buttonTheme
+                      .colorScheme!
+                      .background
+                      .withOpacity(widget.isEnabled ? 1 : 0.5))),
+          color: widget.disableColor ??
+              Theme.of(context)
+                  .buttonTheme
+                  .colorScheme!
+                  .background
+                  .withOpacity(widget.isEnabled ? 1 : 0.5),
+          elevation: widget.cardElevation,
+          child: Padding(
+            padding: const EdgeInsets.all(0.0),
+            child: Flex(
+              direction: widget.axis,
+              mainAxisAlignment: widget.alignment,
+              children: [
+                if (widget.isLeading) widget.leadingWidget,
+                if (widget.text != null)
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
+                      widget.text.toString(),
+                      textAlign: widget.textAlign,
+                      style: Theme.of(context).textTheme.button!.copyWith(
+                          fontSize: widget.fontSize,
+                          color: widget.textColor.withOpacity(1)),
+                      maxLines: widget.maxLines,
+                      overflow:
+                          widget.isSingleLine ? TextOverflow.ellipsis : null,
+                    ),
+                  ),
+                if (widget.isTrailing) widget.trailingWidget
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+}
