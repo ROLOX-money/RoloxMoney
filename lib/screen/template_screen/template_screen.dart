@@ -7,7 +7,7 @@ import 'package:roloxmoney/widget/rolox_money_widget.dart';
 /*Chinnadurai Viswanathan*/
 class TemplateScreen extends StatefulWidget {
   const TemplateScreen({Key? key}) : super(key: key);
-
+  static const String routeName = '/TemplateScreen';
   @override
   TemplateScreenState createState() => TemplateScreenState();
 }

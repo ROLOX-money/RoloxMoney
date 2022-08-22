@@ -7,6 +7,7 @@ import 'package:roloxmoney/widget/rolox_money_widget.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
+  static const String routeName = '/splashScreen';
 
   @override
   SplashScreenState createState() => SplashScreenState();

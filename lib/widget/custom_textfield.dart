@@ -6,7 +6,7 @@ import 'package:roloxmoney/utils/validator.dart';
 
 // ignore: must_be_immutable
 class CustomTextField extends StatefulWidget {
-  final String hintText;
+  final String? hintText;
   final bool obscureText;
   final TextEditingController controller;
   final Widget? suffixWidget;
@@ -39,9 +39,9 @@ class CustomTextField extends StatefulWidget {
   AutovalidateMode? autoValidateMode;
 
   CustomTextField(
-    this.hintText,
     this.controller, {
     super.key,
+    this.hintText,
     this.obscureText = false,
     this.suffixWidget,
     this.prefixWidget,
@@ -51,10 +51,10 @@ class CustomTextField extends StatefulWidget {
     this.maximumWordCount,
     this.titleColor,
     this.textColor = ColorResource.colorFFFFFF,
-    this.borderColor,
-    this.enableColor,
-    this.disableColor,
-    this.focusedBorder,
+    this.borderColor = Colors.grey,
+    this.enableColor = Colors.grey,
+    this.disableColor = Colors.grey,
+    this.focusedBorder = Colors.grey,
     this.isHighlighted = false,
     this.highlightColor,
     this.focusNode,
@@ -85,9 +85,9 @@ class CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-    widget.titleColor = Theme.of(context).textTheme.titleMedium!.color!;
-    widget.borderColor =
-        Theme.of(context).textTheme.titleMedium!.backgroundColor!;
+    // widget.titleColor = Theme.of(context).textTheme.titleMedium!.color!;
+    // widget.borderColor =
+    //     Theme.of(context).textTheme.titleMedium!.backgroundColor!;
     return TextFormField(
       textInputAction: TextInputAction.done,
       validator: widget.validatorFunction ??
@@ -145,48 +145,54 @@ class CustomTextFieldState extends State<CustomTextField> {
               ? widget.focusTextColor
               : widget.textColor),
       decoration: InputDecoration(
-          prefix: widget.prefixWidget,
-          fillColor: ColorResource.colorFFFFFF,
-          filled: true,
-          labelText: widget.hintText,
-          isDense: true,
-          counterText: widget.descriptionText,
-          errorMaxLines: 2,
-          suffixIcon: widget.suffixWidget,
-          suffixIconConstraints:
-              const BoxConstraints(minHeight: 24, minWidth: 24),
-          prefixIcon: widget.prefixIcon,
-          errorStyle: widget.errorStyle ??
-              Theme.of(context)
-                  .textTheme
-                  .subtitle1!
-                  .copyWith(color: Colors.red),
-          counterStyle: const TextStyle(
-              color: ColorResource.colorFFFFFF,
-              fontFamily: 'Mulish-Regular',
-              fontWeight: FontWeight.normal,
-              fontStyle: FontStyle.normal,
-              fontSize: 12),
-          // errorText: validatePassword(widget.controller.text.trim()),
-          labelStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
-              color: (widget.focusNode != null && widget.focusNode!.hasFocus)
-                  ? ColorResource.colorF58220
-                  : ColorResource.colorFFFFFF),
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: widget.focusedBorder!)),
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: widget.borderColor!)),
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: widget.enableColor!)),
-          disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: widget.disableColor!)),
-          errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: widget.borderColor!))),
+        prefix: widget.prefixWidget,
+        fillColor: ColorResource.color151515,
+        filled: true,
+        labelText: widget.hintText,
+        isDense: true,
+        counterText: widget.descriptionText,
+        errorMaxLines: 2,
+        suffixIcon: widget.suffixWidget,
+        suffixIconConstraints:
+            const BoxConstraints(minHeight: 24, minWidth: 24),
+        prefixIcon: widget.prefixIcon,
+        errorStyle: widget.errorStyle ??
+            Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.red),
+        counterStyle: const TextStyle(
+            color: ColorResource.colorFFFFFF,
+            fontFamily: 'Poppins-Medium',
+            fontWeight: FontWeight.normal,
+            fontStyle: FontStyle.normal,
+            fontSize: 12),
+        // errorText: validatePassword(widget.controller.text.trim()),
+        labelStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
+            color: (widget.focusNode != null && widget.focusNode!.hasFocus)
+                ? ColorResource.colorF58220
+                : ColorResource.colorFFFFFF),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: BorderSide(color: widget.focusedBorder!, width: 0.25),
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: BorderSide(width: 0.5),
+        ),
+
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: BorderSide(color: widget.enableColor!, width: 0.25),
+        ),
+        enabled: true,
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: BorderSide(color: widget.disableColor!, width: 0.25),
+        ),
+
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: BorderSide(color: widget.borderColor!, width: 0.25),
+        ),
+      ),
     );
   }
 

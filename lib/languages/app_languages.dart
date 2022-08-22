@@ -7,4 +7,18 @@ abstract class Languages {
   }
 
   String get appName;
+
+  String get notAMember;
+
+  String get signIn;
+
+  String get signUP;
+
+  String get alreadyAMember;
+
+  String get mobileNumber;
+
+  String get send;
+
+  String get otp;
 }

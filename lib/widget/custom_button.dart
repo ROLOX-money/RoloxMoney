@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/font.dart';
+import 'package:roloxmoney/utils/image_resource.dart';
 /*Chinnadurai Viswanathan*/
 
 class PrimaryButton extends StatefulWidget {
@@ -15,6 +16,7 @@ class PrimaryButton extends StatefulWidget {
   final bool isSingleLine;
   final bool isLeading;
   final bool isTrailing;
+  final bool isIcon;
   final int? maxLines;
   final Widget leadingWidget;
   final Widget trailingWidget;
@@ -45,6 +47,7 @@ class PrimaryButton extends StatefulWidget {
       this.isLeading = false,
       this.isTrailing = false,
       this.isSingleLine = false,
+      this.isIcon = false,
       this.trailingIconData = Icons.settings,
       this.cardElevation = 0.0,
       this.cardShape = 8.0,
@@ -71,46 +74,44 @@ class _PrimaryButtonState extends State<PrimaryButton> {
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: 56,
-        child: Card(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(widget.cardShape),
-              side: BorderSide(
-                  color: Theme.of(context)
-                      .buttonTheme
-                      .colorScheme!
-                      .background
-                      .withOpacity(widget.isEnabled ? 1 : 0.5))),
-          color: widget.disableColor ??
-              Theme.of(context)
-                  .buttonTheme
-                  .colorScheme!
-                  .background
-                  .withOpacity(widget.isEnabled ? 1 : 0.5),
-          elevation: widget.cardElevation,
-          child: Padding(
-            padding: const EdgeInsets.all(0.0),
-            child: Flex(
-              direction: widget.axis,
-              mainAxisAlignment: widget.alignment,
-              children: [
-                if (widget.isLeading) widget.leadingWidget,
-                if (widget.text != null)
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Text(
-                      widget.text.toString(),
-                      textAlign: widget.textAlign,
-                      style: Theme.of(context).textTheme.button!.copyWith(
-                          fontSize: widget.fontSize,
-                          color: widget.textColor.withOpacity(1)),
-                      maxLines: widget.maxLines,
-                      overflow:
-                          widget.isSingleLine ? TextOverflow.ellipsis : null,
-                    ),
+        child: Container(
+          decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(color: Colors.white, width: 2),
+                right: BorderSide(color: Colors.white, width: 2),
+              ),
+              color: ColorResource.color00E94F),
+          padding: const EdgeInsets.all(0.0),
+          child: Flex(
+            direction: widget.axis,
+            mainAxisAlignment: widget.alignment,
+            children: [
+              if (widget.isLeading) widget.leadingWidget,
+              if (widget.text != null)
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Text(
+                    widget.text.toString(),
+                    textAlign: widget.textAlign,
+                    style: Theme.of(context).textTheme.button!.copyWith(
+                        fontSize: widget.fontSize,
+                        color: widget.textColor.withOpacity(1)),
+                    maxLines: widget.maxLines,
+                    overflow:
+                        widget.isSingleLine ? TextOverflow.ellipsis : null,
                   ),
-                if (widget.isTrailing) widget.trailingWidget
-              ],
-            ),
+                ),
+              if (widget.isIcon)
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Image.asset(
+                    ImageResource.buttonArrow,
+                    width: 20,
+                    height: 10,
+                  ),
+                ),
+              if (widget.isTrailing) widget.trailingWidget
+            ],
           ),
         ),
       ),

@@ -140,15 +140,28 @@ ThemeData lightTheme = ThemeData(
     canvasColor: const Color(0xffE09E45),
     scaffoldBackgroundColor: Colors.white,
     bottomAppBarColor: const Color(0xff6D42CE),
+    backgroundColor: Colors.black,
+    // buttonColor: const Color(0xff00E94F,
     cardColor: const Color(0xaaF5E0C3),
     dividerColor: const Color(0x1f6D42CE),
     focusColor: const Color(0x1aF5E0C3),
     textTheme: AppThemes().basicTextTheme(lightThemeBase.textTheme).copyWith(
-        subtitle1: lightThemeBase.textTheme.subtitle1!.copyWith(
-            fontFamily: 'SourceSansPro',
-            fontSize: 14.0,
-            color: ColorResource.black,
-            fontWeight: FontWeight.w400)),
+          subtitle1: lightThemeBase.textTheme.subtitle1!.copyWith(
+              fontFamily: 'Poppins-Medium',
+              fontSize: 16.0,
+              color: Colors.white,
+              fontWeight: FontWeight.w400),
+          // titleLarge: lightThemeBase.textTheme.subtitle1!.copyWith(
+          //     fontFamily: 'Poppins-Medium',
+          //     fontSize: 26.0,
+          //     color: Colors.white,
+          //     fontWeight: FontWeight.w400),
+          button: lightThemeBase.textTheme.button!.copyWith(
+              fontFamily: 'Poppins-Medium',
+              fontSize: 16.0,
+              color: Colors.white,
+              fontWeight: FontWeight.w400),
+        ),
     colorScheme: ColorScheme.fromSwatch(
         primarySwatch: const MaterialColor(
       0xFFF5E0C3,
