@@ -21,4 +21,37 @@ abstract class Languages {
   String get send;
 
   String get otp;
+
+  String get digit;
+
+  String get enter;
+
+  String get sentOTPToRegisteredMobile;
+
+  String get resendIN;
+
+  String get profile;
+
+  String get page;
+
+  String get profilePageContent;
+
+  String get firstName;
+
+  String get lastName;
+
+  String get emailID;
+
+  String get typeOfBusiness;
+
+  String get individual;
+
+  String get business;
+
+  String get agency;
+
+  String get continueText;
+
+  String get oopsAgency;
+  String get oopsAgencyMessage;
 }
