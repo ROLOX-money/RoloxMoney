@@ -11,7 +11,8 @@ abstract class WidgetUtils {
   static Widget genericTextFiled(
       {required BuildContext context,
       required TextEditingController controller,
-      required String labelName}) {
+      required String labelName,
+      TextInputType? keyBoardType}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -34,7 +35,7 @@ abstract class WidgetUtils {
             enableColor: Colors.grey,
             borderColor: Colors.red,
             disableColor: Colors.red,
-            keyBoardType: TextInputType.name,
+            keyBoardType: keyBoardType ?? TextInputType.name,
           ),
           height: 70,
         ),
@@ -66,7 +67,7 @@ abstract class WidgetUtils {
           padding: EdgeInsets.symmetric(horizontal: 10),
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
-            border: Border.all(color: Colors.grey),
+            border: Border.all(color: Colors.grey, width: 0.25),
             color: ColorResource.color151515,
             borderRadius: BorderRadius.all(Radius.circular(5.0)),
           ),

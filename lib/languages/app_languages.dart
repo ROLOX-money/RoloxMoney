@@ -67,4 +67,12 @@ abstract class Languages {
   String get industryOfWork;
 
   String get otherIndustryOfWork;
+
+  String get panNumber;
+
+  String get typeOfAddress;
+
+  String get pincode;
+
+  String get fullAddress;
 }

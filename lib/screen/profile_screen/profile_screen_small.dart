@@ -80,7 +80,7 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                   NumberStepper(
                     totalSteps: stepLength,
                     width: MediaQuery.of(context).size.width,
-                    curStep: currentStep,
+                    currentStep: 1,
                     stepCompleteColor: Colors.blue,
                     currentStepColor: Color(0xffdbecff),
                     inactiveColor: Color(0xffbababa),
@@ -106,7 +106,7 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                             ),
                           ),
                   ),
-                  first()
+                  secondPageForIndividual()
                 ],
               ),
             ],
@@ -117,7 +117,7 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
     );
   }
 
-  Widget first() {
+  Widget firstPageForIndividual() {
     return ListView(
       shrinkWrap: true,
       children: [
@@ -270,6 +270,58 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                   )
                 ],
               )
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget secondPageForIndividual() {
+    return ListView(
+      shrinkWrap: true,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              WidgetUtils.genericTextFiled(
+                context: context,
+                controller: widget.controller!.panNumberController,
+                labelName: '${Languages.of(context)?.panNumber}'.toUpperCase(),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              WidgetUtils.dropDown(
+                  context: context,
+                  lableName:
+                      '${Languages.of(context)?.typeOfAddress}'.toLowerCase(),
+                  dropDownList: widget.controller!.typeOfAddress.obs.value,
+                  selectedValues: widget.controller!.typeOfAddressValue.value,
+                  onChanged: (value) {
+                    widget.controller!.updateValuesOnUI(
+                        value: value,
+                        variableName: widget.controller!.typeOfAddressValue);
+                  }),
+              SizedBox(
+                height: 10,
+              ),
+              WidgetUtils.genericTextFiled(
+                  context: context,
+                  controller: widget.controller!.pincodeController,
+                  labelName: '${Languages.of(context)?.pincode}'.toUpperCase(),
+                  keyBoardType: TextInputType.number),
+              WidgetUtils.genericTextFiled(
+                  context: context,
+                  controller: widget.controller!.addressController,
+                  labelName:
+                      '${Languages.of(context)?.fullAddress}'.toUpperCase(),
+                  keyBoardType: TextInputType.streetAddress),
             ],
           ),
         ),

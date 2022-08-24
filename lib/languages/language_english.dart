@@ -66,4 +66,12 @@ class LanguageEn extends Languages {
   String get industryOfWork => 'Industry of work';
 
   String get otherIndustryOfWork => 'Other Industry of work';
+
+  String get panNumber => 'PAN Number';
+
+  String get typeOfAddress => 'Type of Address';
+
+  String get pincode => 'Pincode ';
+
+  String get fullAddress => 'Full Address ';
 }

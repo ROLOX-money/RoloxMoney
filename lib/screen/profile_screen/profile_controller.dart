@@ -6,6 +6,9 @@ import 'package:get/get.dart';
 class ProfileController extends GetxController with StateMixin {
   TextEditingController otherNatureController = TextEditingController();
   TextEditingController otherIndustryOfWorkController = TextEditingController();
+  TextEditingController panNumberController = TextEditingController();
+  TextEditingController pincodeController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
 
   RxList<String> modelOfWork = [
     'Full Time',
@@ -31,6 +34,14 @@ class ProfileController extends GetxController with StateMixin {
   ].obs;
   RxString industryOfWorkValue = 'Telecom'.obs;
 
+  RxList<String> typeOfAddress = [
+    'Work',
+    'Home',
+    'Current',
+    'Residence',
+  ].obs;
+  RxString typeOfAddressValue = 'Home'.obs;
+
   @override
   void onInit() async {
     change(null, status: RxStatus.success());
@@ -48,6 +59,9 @@ class ProfileController extends GetxController with StateMixin {
     } else if (variableName == this.industryOfWorkValue) {
       industryOfWorkValue = value!.obs;
       change(industryOfWorkValue);
+    } else if (variableName == this.typeOfAddressValue) {
+      typeOfAddressValue = value!.obs;
+      change(typeOfAddressValue);
     }
   }
 
