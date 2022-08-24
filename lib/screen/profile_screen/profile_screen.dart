@@ -1,31 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:roloxmoney/screen/login_screen/login_controller.dart';
-import 'package:roloxmoney/screen/login_screen/login_screen_small.dart';
 import 'package:roloxmoney/screen/profile_screen/profile_controller.dart';
 import 'package:roloxmoney/screen/profile_screen/profile_screen_small.dart';
+import 'package:roloxmoney/screen/template_screen/template_controller.dart';
+import 'package:roloxmoney/screen/template_screen/template_screen_small.dart';
 import 'package:roloxmoney/widget/responsive_widget.dart';
 
 /*Chinnadurai Viswanathan*/
-
-class ProfileScreen extends StatelessWidget {
-  final _loginScaffoldKey = GlobalKey<ScaffoldState>();
+class ProfileScreen extends StatefulWidget {
+  ProfileScreen({Key? key}) : super(key: key);
   static const String routeName = '/profileScreen';
-  final ProfileController loginController = Get.find();
+
+  @override
+  ProfileScreenState createState() => ProfileScreenState();
+}
+
+class ProfileScreenState extends State<ProfileScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+
+    final scaffoldKey = GlobalKey<ScaffoldState>();
     Get.put(ProfileController());
     return GetBuilder<ProfileController>(
       assignId: true,
       builder: (controller) {
+
         return ResponsiveWidget(
           largeScreen: ProfileScreenSmall(
-              controller: loginController, scaffoldKey: _loginScaffoldKey),
+              controller: controller, scaffoldKey: scaffoldKey),
           mediumScreen: ProfileScreenSmall(
-              controller: loginController, scaffoldKey: _loginScaffoldKey),
+              controller: controller, scaffoldKey: scaffoldKey),
           smallScreen: ProfileScreenSmall(
-              controller: loginController, scaffoldKey: _loginScaffoldKey),
+              controller: controller, scaffoldKey: scaffoldKey),
         );
       },
     );

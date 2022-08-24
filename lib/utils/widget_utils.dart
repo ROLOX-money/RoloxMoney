@@ -42,6 +42,67 @@ abstract class WidgetUtils {
     );
   }
 
+  static Widget dropDown(
+      {required BuildContext context,
+      required String lableName,
+      required List<String> dropDownList,
+      required String selectedValues,
+      required Function(String) onChanged}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomText(
+          text: lableName.toUpperCase(),
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+              color: ColorResource.colorA0BCD0,
+              fontSize: 14,
+              fontWeight: FontWeight.w500),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            border: Border.all(color: Colors.grey),
+            color: ColorResource.color151515,
+            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+          ),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<String>(
+              value: selectedValues,
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                  color: ColorResource.colorA0BCD0,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500),
+              borderRadius: BorderRadius.all(
+                Radius.circular(5.0),
+              ),
+              dropdownColor: ColorResource.color151515,
+              items: dropDownList.map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: CustomText(
+                    text: value,
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        color: ColorResource.colorFFFFFF,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500),
+                  ),
+                );
+              }).toList(),
+              onChanged: (value) {
+                onChanged(value!);
+              },
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   static showAlertDialog({required BuildContext context}) {
     showDialog(
       context: context,

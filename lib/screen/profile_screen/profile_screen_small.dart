@@ -6,8 +6,8 @@ import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/widget_utils.dart';
 import 'package:roloxmoney/widget/custom_button.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
-import 'package:roloxmoney/widget/custom_textfield.dart';
 import 'package:roloxmoney/widget/rolox_money_widget.dart';
+import 'package:roloxmoney/widget/stepper_view.dart';
 
 /*Chinnadurai Viswanathan*/
 // ignore: must_be_immutable
@@ -29,221 +29,251 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
     super.initState();
   }
 
+  int currentStep = 2;
+  int stepLength = 3;
+
   @override
   Widget build(BuildContext context) {
+    Get.put(ProfileController());
     return RoloxMoneyWidgetState(
       rxStatus: widget.controller!.status,
       child: Scaffold(
         body: Container(
           alignment: Alignment.topLeft,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AppBar(
-                  backgroundColor: Theme.of(context).backgroundColor,
-                  leading: Icon(
-                    Icons.arrow_back_sharp,
-                    size: 30,
-                    color: Colors.white,
-                  ),
-                  centerTitle: true,
-                  title: CustomText(
-                    text:
-                        '${Languages.of(context)?.profile} ${Languages.of(context)?.page}',
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: ColorResource.colorFFFFFF,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  shadowColor: Colors.grey,
-                  elevation: 0.75,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 10,
-                      ),
-                      CustomText(
-                        text: '${Languages.of(context)?.profilePageContent}',
+          child: ListView(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppBar(
+                    backgroundColor: Theme.of(context).backgroundColor,
+                    leading: Icon(
+                      Icons.arrow_back_sharp,
+                      size: 30,
+                      color: Colors.white,
+                    ),
+                    centerTitle: true,
+                    title: Text.rich(TextSpan(
+                        text:
+                            '${Languages.of(context)?.profile} ${Languages.of(context)?.page} ',
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
                             color: ColorResource.colorFFFFFF,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400),
-                      ),
-                      WidgetUtils.genericTextFiled(
-                        context: context,
-                        controller: widget.controller!.firstNameController,
-                        labelName:
-                            '${Languages.of(context)?.firstName}'.toUpperCase(),
-                      ),
-                      WidgetUtils.genericTextFiled(
-                        context: context,
-                        controller: widget.controller!.lastNameController,
-                        labelName:
-                            '${Languages.of(context)?.lastName}'.toUpperCase(),
-                      ),
-                      WidgetUtils.genericTextFiled(
-                        context: context,
-                        controller: widget.controller!.emailIDController,
-                        labelName:
-                            '${Languages.of(context)?.emailID}'.toUpperCase(),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey, width: 0.25),
-                            color: ColorResource.color151515),
-                        padding: EdgeInsets.all(10.0),
-                        child: Theme(
-                          data: Theme.of(context).copyWith(
-                              unselectedWidgetColor: Colors.grey,
-                              disabledColor: ColorResource.color00E94F),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                text: '${Languages.of(context)?.typeOfBusiness}'
-                                    .toUpperCase(),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleSmall!
-                                    .copyWith(
-                                        color: ColorResource.colorFFFFFF,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  widget.controller!.businessToggle(
-                                      value: TypOfBusiness.individual);
-                                },
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Radio(
-                                      value: TypOfBusiness.individual,
-                                      groupValue: widget.controller!
-                                          .typOfBusiness.obs.value.value,
-                                      activeColor: ColorResource.color00E94F,
-                                      onChanged: (TypOfBusiness? value) {
-                                        widget.controller!.businessToggle(
-                                            value: TypOfBusiness.individual);
-                                      },
-                                    ),
-                                    CustomText(
-                                      text:
-                                          '${Languages.of(context)?.individual}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall!
-                                          .copyWith(
-                                              color: ColorResource.colorFFFFFF,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  widget.controller!.businessToggle(
-                                      value: TypOfBusiness.business);
-                                },
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Radio(
-                                      value: TypOfBusiness.business,
-                                      groupValue: widget.controller!
-                                          .typOfBusiness.obs.value.value,
-                                      activeColor: ColorResource.color00E94F,
-                                      onChanged: (TypOfBusiness? value) {
-                                        widget.controller!.businessToggle(
-                                            value: TypOfBusiness.business);
-                                      },
-                                    ),
-                                    CustomText(
-                                      text:
-                                          '${Languages.of(context)?.business}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall!
-                                          .copyWith(
-                                              color: ColorResource.colorFFFFFF,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  widget.controller!.businessToggle(
-                                      value: TypOfBusiness.agency);
-                                },
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Radio(
-                                      value: TypOfBusiness.agency,
-                                      groupValue: widget.controller!
-                                          .typOfBusiness.obs.value.value,
-                                      activeColor: ColorResource.color00E94F,
-                                      onChanged: (TypOfBusiness? value) {
-                                        widget.controller!.businessToggle(
-                                            value: TypOfBusiness.agency);
-                                      },
-                                    ),
-                                    CustomText(
-                                      text: '${Languages.of(context)?.agency}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall!
-                                          .copyWith(
-                                              color: ColorResource.colorFFFFFF,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 40,
-                      ),
-                      PrimaryButton(
-                        '${Languages.of(context)!.continueText}',
-                        context,
-                        cardShape: 1,
-                        isIcon: true,
-                        textColor: ColorResource.black,
-                        fontSize: 20,
-                        onTap: () {
-                          if (widget
-                                  .controller!.typOfBusiness.obs.value.value ==
-                              TypOfBusiness.agency) {
-                            WidgetUtils.showAlertDialog(context: context);
-                          }
-                        },
-                      )
-                    ],
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600),
+                        children: <InlineSpan>[
+                          TextSpan(
+                            text: '(${Languages.of(context)?.individual})',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall!
+                                .copyWith(
+                                    color: ColorResource.color00E94F,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600),
+                          )
+                        ])),
+                    shadowColor: Colors.grey,
+                    elevation: 0.75,
                   ),
-                ),
-              ],
-            ),
+                  NumberStepper(
+                    totalSteps: stepLength,
+                    width: MediaQuery.of(context).size.width,
+                    curStep: currentStep,
+                    stepCompleteColor: Colors.blue,
+                    currentStepColor: Color(0xffdbecff),
+                    inactiveColor: Color(0xffbababa),
+                    lineWidth: 3.5,
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Container(
+                    child: currentStep <= stepLength
+                        ? Text(
+                            "Step $currentStep",
+                            style: TextStyle(
+                              fontSize: 30,
+                              color: Colors.blue,
+                            ),
+                          )
+                        : Text(
+                            "Completed!",
+                            style: TextStyle(
+                              fontSize: 30,
+                              color: Colors.blue,
+                            ),
+                          ),
+                  ),
+                  first()
+                ],
+              ),
+            ],
           ),
         ),
         backgroundColor: Theme.of(context).backgroundColor,
       ),
+    );
+  }
+
+  Widget first() {
+    return ListView(
+      shrinkWrap: true,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              CustomText(
+                text: '${Languages.of(context)?.profilePageContent}',
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: ColorResource.colorFFFFFF,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 20,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  WidgetUtils.dropDown(
+                      context: context,
+                      lableName:
+                          '${Languages.of(context)?.modelOfWork}'.toLowerCase(),
+                      dropDownList: widget.controller!.modelOfWork.obs.value,
+                      selectedValues: widget.controller!.modelOfWorkValue.value,
+                      onChanged: (value) {
+                        widget.controller!.updateValuesOnUI(
+                            value: value,
+                            variableName: widget.controller!.modelOfWorkValue);
+                      }),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  WidgetUtils.dropDown(
+                      context: context,
+                      lableName: '${Languages.of(context)?.natureOfWork}'
+                          .toLowerCase(),
+                      dropDownList: widget.controller!.natureOfWork.obs.value,
+                      selectedValues:
+                          widget.controller!.natureOfWorkValue.value,
+                      onChanged: (value) {
+                        widget.controller!.updateValuesOnUI(
+                            value: value,
+                            variableName: widget.controller!.natureOfWorkValue);
+                      }),
+                  if (widget.controller!.natureOfWorkValue.value
+                          .toLowerCase() ==
+                      'other')
+                    Column(
+                      children: [
+                        SizedBox(
+                          height: 20,
+                        ),
+                        WidgetUtils.genericTextFiled(
+                          context: context,
+                          controller: widget.controller!.otherNatureController,
+                          labelName:
+                              '${Languages.of(context)?.otherNatureOfWork}'
+                                  .toUpperCase(),
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Theme(
+                              data: Theme.of(context).copyWith(
+                                unselectedWidgetColor:
+                                    ColorResource.color00E94F,
+                              ),
+                              child: Checkbox(
+                                value: widget.controller!.iDontHaveBusiness.obs
+                                    .value.value,
+                                activeColor: Colors.blue,
+                                checkColor: ColorResource.color151515,
+                                onChanged: (value) {
+                                  widget.controller!
+                                      .noBusinessCheckBox(values: value);
+                                },
+                              ),
+                            ),
+                            CustomText(
+                              text:
+                                  '${Languages.of(context)?.iDontHaveABusiness}',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(
+                                      color: ColorResource.colorFFFFFF,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400),
+                            ),
+                          ],
+                        ), //Row
+                      ],
+                    ),
+                  SizedBox(
+                    height: 10,
+                  ),
+
+                  //industry of work
+                  WidgetUtils.dropDown(
+                      context: context,
+                      lableName: '${Languages.of(context)?.industryOfWork}'
+                          .toLowerCase(),
+                      dropDownList: widget.controller!.industryOfWork.obs.value,
+                      selectedValues:
+                          widget.controller!.industryOfWorkValue.value,
+                      onChanged: (value) {
+                        widget.controller!.updateValuesOnUI(
+                            value: value,
+                            variableName:
+                                widget.controller!.industryOfWorkValue);
+                      }),
+                  if (widget.controller!.industryOfWorkValue.value
+                          .toLowerCase() ==
+                      'other')
+                    Column(
+                      children: [
+                        SizedBox(
+                          height: 20,
+                        ),
+                        WidgetUtils.genericTextFiled(
+                          context: context,
+                          controller:
+                              widget.controller!.otherIndustryOfWorkController,
+                          labelName:
+                              '${Languages.of(context)?.otherIndustryOfWork}'
+                                  .toUpperCase(),
+                        ),
+                      ],
+                    ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  PrimaryButton(
+                    '${Languages.of(context)!.continueText}',
+                    context,
+                    cardShape: 1,
+                    isIcon: true,
+                    textColor: ColorResource.black,
+                    fontSize: 20,
+                    onTap: () {},
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

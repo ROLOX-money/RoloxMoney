@@ -53,5 +53,18 @@ abstract class Languages {
   String get continueText;
 
   String get oopsAgency;
+
   String get oopsAgencyMessage;
+
+  String get modelOfWork;
+
+  String get natureOfWork;
+
+  String get otherNatureOfWork;
+
+  String get iDontHaveABusiness;
+
+  String get industryOfWork;
+
+  String get otherIndustryOfWork;
 }

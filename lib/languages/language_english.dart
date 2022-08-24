@@ -54,4 +54,16 @@ class LanguageEn extends Languages {
 
   String get oopsAgencyMessage =>
       'We are working on something for you as well and would love to have you onboard with us.';
+
+  String get modelOfWork => 'Model of work';
+
+  String get natureOfWork => 'Nature of work';
+
+  String get otherNatureOfWork => 'Other Nature of work';
+
+  String get iDontHaveABusiness => 'I don\'t have a business/brand name';
+
+  String get industryOfWork => 'Industry of work';
+
+  String get otherIndustryOfWork => 'Other Industry of work';
 }

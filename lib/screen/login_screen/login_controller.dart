@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:roloxmoney/screen/profile_screen/profile_screen.dart';
+import 'package:roloxmoney/screen/login_profile_screen/login_profile_screen.dart';
 /*Chinnadurai Viswanathan*/
 
 class LoginController extends GetxController with StateMixin {
@@ -18,6 +18,6 @@ class LoginController extends GetxController with StateMixin {
   }
 
   void navigateProfile() {
-    Get.offNamed(ProfileScreen.routeName);
+    Get.offNamed(LoginProfileScreen.routeName);
   }
 }

@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_locale_constant.dart';
 import 'package:roloxmoney/languages/app_localizations_delegate.dart';
 import 'package:roloxmoney/router.dart';
+import 'package:roloxmoney/screen/login_profile_screen/login_profile_controller.dart';
 import 'package:roloxmoney/screen/login_screen/login_controller.dart';
-import 'package:roloxmoney/screen/profile_screen/profile_controller.dart';
 import 'package:roloxmoney/utils/app_themes.dart';
 import 'package:roloxmoney/widget/rolox_money_core_widgets.dart';
 
@@ -15,7 +15,7 @@ import 'package:roloxmoney/widget/rolox_money_core_widgets.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Get.put(LoginController());
-  Get.put(ProfileController());
+  Get.put(LoginProfileController());
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
