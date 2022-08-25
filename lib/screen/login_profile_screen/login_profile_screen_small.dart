@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
+import 'package:roloxmoney/screen/business_profile_screen/business_profile_screen.dart';
+import 'package:roloxmoney/screen/individual_profile_screen/individual_profile_screen.dart';
 import 'package:roloxmoney/screen/login_profile_screen/login_profile_controller.dart';
-import 'package:roloxmoney/screen/profile_screen/profile_screen.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/widget_utils.dart';
 import 'package:roloxmoney/widget/custom_button.dart';
@@ -230,10 +231,14 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                         onTap: () {
                           if (widget
                                   .controller!.typOfBusiness.obs.value.value ==
-                              TypOfBusiness.agency) {
+                              TypOfBusiness.business) {
+                            Get.offNamed(BusinessProfileScreen.routeName);
+                          } else if (widget
+                                  .controller!.typOfBusiness.obs.value.value ==
+                              TypOfBusiness.individual) {
+                            Get.offNamed(IndividualProfileScreen.routeName);
+                          } else {
                             WidgetUtils.showAlertDialog(context: context);
-                          }else{
-                            Get.offNamed(ProfileScreen.routeName);
                           }
                         },
                       )

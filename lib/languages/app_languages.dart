@@ -75,4 +75,32 @@ abstract class Languages {
   String get pincode;
 
   String get fullAddress;
+
+  String get iDontHaveAGSTNumber;
+
+  String get gstNumber;
+
+  String get role;
+
+  String get fullTime;
+
+  String get partTime;
+
+  String get businessName;
+
+  String get welcomeNote;
+
+  String get invoices;
+
+  String get welcomeToRolox;
+
+  String get explore;
+
+  String get home;
+
+  String get clients;
+
+  String get projects;
+
+  String get payments;
 }

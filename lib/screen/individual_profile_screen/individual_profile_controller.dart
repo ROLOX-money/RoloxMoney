@@ -3,12 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 /*Chinnadurai Viswanathan*/
-class ProfileController extends GetxController with StateMixin {
+class IndividualProfileController extends GetxController with StateMixin {
   TextEditingController otherNatureController = TextEditingController();
   TextEditingController otherIndustryOfWorkController = TextEditingController();
   TextEditingController panNumberController = TextEditingController();
   TextEditingController pincodeController = TextEditingController();
   TextEditingController addressController = TextEditingController();
+  TextEditingController gstController = TextEditingController();
 
   RxList<String> modelOfWork = [
     'Full Time',
@@ -41,6 +42,8 @@ class ProfileController extends GetxController with StateMixin {
     'Residence',
   ].obs;
   RxString typeOfAddressValue = 'Home'.obs;
+  RxBool gstNumber = true.obs;
+  RxInt currentStep = 1.obs;
 
   @override
   void onInit() async {
@@ -68,5 +71,13 @@ class ProfileController extends GetxController with StateMixin {
   void noBusinessCheckBox({bool? values}) {
     iDontHaveBusiness = values!.obs;
     change(iDontHaveBusiness);
+  }
+  void noGSTCheckBox({bool? values}) {
+    gstNumber = values!.obs;
+    change(gstNumber);
+  }
+  void stepCount({required int values}) {
+    currentStep = values.obs;
+    change(currentStep);
   }
 }

@@ -73,5 +73,33 @@ class LanguageEn extends Languages {
 
   String get pincode => 'Pincode ';
 
-  String get fullAddress => 'Full Address ';
+  String get fullAddress => 'Full Address';
+
+  String get gstNumber => 'GST Number';
+
+  String get iDontHaveAGSTNumber => 'I don\'t have a GSTIN';
+
+  String get role => 'Role';
+
+  String get fullTime => 'Full-time';
+
+  String get partTime => 'Part-time';
+
+  String get businessName => 'Business Name';
+
+  String get welcomeToRolox => 'Welcome to rolox!';
+
+  String get welcomeNote => 'Manage your business with professional';
+
+  String get invoices => 'invoices';
+
+  String get explore => 'Explore';
+
+  String get home => 'Home';
+
+  String get clients => 'Clients';
+
+  String get projects => 'Projects';
+
+  String get payments => 'Payments';
 }

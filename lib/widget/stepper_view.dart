@@ -63,7 +63,7 @@ class NumberStepper extends StatelessWidget {
         list.add(
           Expanded(
             child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 2),
+              margin: EdgeInsets.symmetric(horizontal: 3),
               height: 1,
               color: currentStep > i + 1
                   ? ColorResource.color00E94F

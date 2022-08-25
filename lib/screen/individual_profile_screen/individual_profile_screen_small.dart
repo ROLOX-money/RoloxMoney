@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
-import 'package:roloxmoney/screen/profile_screen/profile_controller.dart';
+import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
+import 'package:roloxmoney/screen/individual_profile_screen/individual_profile_controller.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/widget_utils.dart';
 import 'package:roloxmoney/widget/custom_button.dart';
@@ -11,108 +12,118 @@ import 'package:roloxmoney/widget/stepper_view.dart';
 
 /*Chinnadurai Viswanathan*/
 // ignore: must_be_immutable
-class ProfileScreenSmall extends StatefulWidget {
-  ProfileController? controller;
+class IndividualProfileScreenSmall extends StatefulWidget {
+  IndividualProfileController? controller;
   GlobalKey<ScaffoldState>? scaffoldKey;
 
-  ProfileScreenSmall(
+  IndividualProfileScreenSmall(
       {Key? key, required this.controller, required this.scaffoldKey})
       : super(key: key);
 
   @override
-  ProfileScreenSmallState createState() => ProfileScreenSmallState();
+  IndividualProfileScreenSmallState createState() =>
+      IndividualProfileScreenSmallState();
 }
 
-class ProfileScreenSmallState extends State<ProfileScreenSmall> {
+class IndividualProfileScreenSmallState
+    extends State<IndividualProfileScreenSmall> {
   @override
   void initState() {
     super.initState();
   }
 
-  int currentStep = 2;
-  int stepLength = 3;
-
   @override
   Widget build(BuildContext context) {
-    Get.put(ProfileController());
+    Get.put(IndividualProfileController());
     return RoloxMoneyWidgetState(
       rxStatus: widget.controller!.status,
-      child: Scaffold(
-        body: Container(
-          alignment: Alignment.topLeft,
-          child: ListView(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AppBar(
-                    backgroundColor: Theme.of(context).backgroundColor,
-                    leading: Icon(
-                      Icons.arrow_back_sharp,
-                      size: 30,
-                      color: Colors.white,
+      child: SafeArea(
+        child: Scaffold(
+          body: Container(
+            alignment: Alignment.topLeft,
+            child: ListView(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    AppBar(
+                      backgroundColor: Theme.of(context).backgroundColor,
+                      leading: Icon(
+                        Icons.arrow_back_sharp,
+                        size: 30,
+                        color: Colors.white,
+                      ),
+                      centerTitle: true,
+                      title: Text.rich(TextSpan(
+                          text:
+                              '${Languages.of(context)?.profile} ${Languages.of(context)?.page} ',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleSmall!
+                              .copyWith(
+                                  color: ColorResource.colorFFFFFF,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600),
+                          children: <InlineSpan>[
+                            TextSpan(
+                              text: '(${Languages.of(context)?.individual})',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(
+                                      color: ColorResource.color00E94F,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600),
+                            )
+                          ])),
+                      shadowColor: Colors.grey,
+                      elevation: 0.75,
                     ),
-                    centerTitle: true,
-                    title: Text.rich(TextSpan(
-                        text:
-                            '${Languages.of(context)?.profile} ${Languages.of(context)?.page} ',
-                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: ColorResource.colorFFFFFF,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600),
-                        children: <InlineSpan>[
-                          TextSpan(
-                            text: '(${Languages.of(context)?.individual})',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleSmall!
-                                .copyWith(
-                                    color: ColorResource.color00E94F,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600),
-                          )
-                        ])),
-                    shadowColor: Colors.grey,
-                    elevation: 0.75,
-                  ),
-                  NumberStepper(
-                    totalSteps: stepLength,
-                    width: MediaQuery.of(context).size.width,
-                    currentStep: 1,
-                    stepCompleteColor: Colors.blue,
-                    currentStepColor: Color(0xffdbecff),
-                    inactiveColor: Color(0xffbababa),
-                    lineWidth: 3.5,
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    child: currentStep <= stepLength
-                        ? Text(
-                            "Step $currentStep",
-                            style: TextStyle(
-                              fontSize: 30,
-                              color: Colors.blue,
-                            ),
-                          )
-                        : Text(
-                            "Completed!",
-                            style: TextStyle(
-                              fontSize: 30,
-                              color: Colors.blue,
-                            ),
-                          ),
-                  ),
-                  secondPageForIndividual()
-                ],
-              ),
-            ],
+                    Container(
+                      width: MediaQuery.of(context).size.width / 1.5,
+                      alignment: Alignment.center,
+                      child: NumberStepper(
+                        totalSteps: 2,
+                        width: MediaQuery.of(context).size.width,
+                        currentStep:
+                            widget.controller!.currentStep.obs.value.value,
+                        stepCompleteColor: Colors.blue,
+                        currentStepColor: Color(0xffdbecff),
+                        inactiveColor: Color(0xffbababa),
+                        lineWidth: 1,
+                      ),
+                    ),
+                    Container(
+                      // ignore: unrelated_type_equality_checks
+                      child: widget.controller!.currentStep.obs.value == 1
+                          ? firstPageForIndividual()
+                          : secondPageForIndividual(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          backgroundColor: Theme.of(context).backgroundColor,
+          bottomNavigationBar: PrimaryButton(
+            '${Languages.of(context)!.continueText}',
+            context,
+            cardShape: 1,
+            isIcon: true,
+            textColor: ColorResource.black,
+            fontSize: 20,
+            onTap: () {
+              if (widget.controller!.currentStep.obs.value.value != 2) {
+                widget.controller!.stepCount(
+                    values: widget.controller!.currentStep.obs.value.value + 1);
+              } else {
+                Get.offNamed(DashboardScreen.routeName);
+              }
+            },
           ),
         ),
-        backgroundColor: Theme.of(context).backgroundColor,
       ),
     );
   }
@@ -217,7 +228,7 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                       fontWeight: FontWeight.w400),
                             ),
                           ],
-                        ), //Row
+                        ),
                       ],
                     ),
                   SizedBox(
@@ -256,18 +267,6 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                         ),
                       ],
                     ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  PrimaryButton(
-                    '${Languages.of(context)!.continueText}',
-                    context,
-                    cardShape: 1,
-                    isIcon: true,
-                    textColor: ColorResource.black,
-                    fontSize: 20,
-                    onTap: () {},
-                  )
                 ],
               )
             ],
@@ -322,6 +321,40 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                   labelName:
                       '${Languages.of(context)?.fullAddress}'.toUpperCase(),
                   keyBoardType: TextInputType.streetAddress),
+              WidgetUtils.genericTextFiled(
+                  context: context,
+                  controller: widget.controller!.gstController,
+                  labelName:
+                      '${Languages.of(context)?.gstNumber}'.toUpperCase(),
+                  keyBoardType: TextInputType.streetAddress),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Theme(
+                    data: Theme.of(context).copyWith(
+                      unselectedWidgetColor: ColorResource.color00E94F,
+                    ),
+                    child: Checkbox(
+                      value: widget.controller!.gstNumber.obs.value.value,
+                      activeColor: Colors.blue,
+                      checkColor: ColorResource.color151515,
+                      onChanged: (value) {
+                        widget.controller!.noGSTCheckBox(values: value);
+                      },
+                    ),
+                  ),
+                  CustomText(
+                    text: '${Languages.of(context)?.iDontHaveAGSTNumber}',
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        color: ColorResource.colorFFFFFF,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 30,
+              )
             ],
           ),
         ),
