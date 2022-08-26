@@ -102,4 +102,34 @@ class LanguageEn extends Languages {
   String get projects => 'Projects';
 
   String get payments => 'Payments';
+
+  String get youWalletBalance => 'Your wallet balance';
+
+  String get withdraw => 'Withdraw';
+
+  String get upcomingInvoices => 'Upcoming Invoices';
+
+  String get dueInvoices => 'Due Invoices';
+
+  String get paidInvoices => 'Paid Invoices';
+
+  String get viewMore => 'View more';
+
+  String get projectDetails => 'Project Details';
+
+  String get clientDetails => 'Client Details';
+
+  String get addProject => 'Add Project';
+
+  String get addClient => 'Add Client';
+
+  String get addInvoice => 'Add Invoice';
+
+  String get invoiceDetails => 'invoice details';
+
+  String get addBankAccount => 'Add Bank Account';
+
+  String get credit => 'Credit';
+
+  String get debit => 'Debit';
 }

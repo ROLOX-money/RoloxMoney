@@ -11,6 +11,8 @@ class ImageResource {
   static const String projects = 'assets/png/bottom_navigation/projects.png';
   static const String invoice = 'assets/png/bottom_navigation/invoice.png';
   static const String wallet = 'assets/png/bottom_navigation/wallet.png';
+  static const String invoiceIcons = 'assets/png/invoice.png';
+  static const String calendar = 'assets/png/calendar.png';
   static const String bottomSelected =
       'assets/png/bottom_navigation/bottom_selected.png';
 }

@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
+import 'package:roloxmoney/model/dashboard_navigator_model.dart';
+import 'package:roloxmoney/screen/clients_screen/clients_screen.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_controller.dart';
 import 'package:roloxmoney/screen/home_screen/home_screen.dart';
+import 'package:roloxmoney/screen/invoice_screen/invoice_screen.dart';
+import 'package:roloxmoney/screen/payment_screen/payment_screen.dart';
+import 'package:roloxmoney/screen/projects_screen/projects_screen.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/widget/custom_button.dart';
@@ -28,8 +33,6 @@ class DashboardScreenSmallState extends State<DashboardScreenSmall> {
   void initState() {
     super.initState();
   }
-
-  PageController controller = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -73,15 +76,34 @@ class DashboardScreenSmallState extends State<DashboardScreenSmall> {
         body: widget.controller!.selectedBottomButton.obs.value.value != 'empty'
             ? PageView(
                 children: [
-                  HomeScreen(),
-                  HomeScreen(),
-                  HomeScreen(),
-                  HomeScreen(),
-                  HomeScreen(),
+                  if (widget.controller!.selectedBottomButton.obs.value.value ==
+                      'Home')
+                    HomeScreen(),
+                  if (widget.controller!.selectedBottomButton.obs.value.value ==
+                      'Clients')
+                    ClientsScreen(),
+                  if (widget.controller!.selectedBottomButton.obs.value.value ==
+                      'Projects')
+                    ProjectsScreen(),
+                  if (widget.controller!.selectedBottomButton.obs.value.value ==
+                      'Invoices')
+                    InvoiceScreen(),
+                  if (widget.controller!.selectedBottomButton.obs.value.value ==
+                      'Payments')
+                    PaymentScreen(),
                 ],
                 scrollDirection: Axis.horizontal,
-                controller: controller,
-                onPageChanged: (num) {},
+                controller: widget.controller!.pageController.obs.value.value,
+                onPageChanged: (num) {
+                  // widget.controller!.bottomNavigation(
+                  //     selectedBottom: widget
+                  //         .controller!
+                  //         .dashboardNavigatorModelList
+                  //         .obs
+                  //         .value!
+                  //         .value[num]
+                  //         .name!);
+                },
               )
             : Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -158,7 +180,7 @@ class DashboardScreenSmallState extends State<DashboardScreenSmall> {
                           selectedBottom: item.name!.obs.value);
                     },
                     child: AnimatedContainer(
-                      duration: Duration(seconds: 1),
+                      duration: Duration(seconds: 2),
                       curve: Curves.bounceIn,
                       child: Column(
                         children: [

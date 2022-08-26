@@ -103,4 +103,34 @@ abstract class Languages {
   String get projects;
 
   String get payments;
+
+  String get youWalletBalance;
+
+  String get withdraw;
+
+  String get upcomingInvoices;
+
+  String get dueInvoices;
+
+  String get paidInvoices;
+
+  String get viewMore;
+
+  String get projectDetails;
+
+  String get addProject;
+
+  String get addClient;
+
+  String get clientDetails;
+
+  String get addInvoice;
+
+  String get invoiceDetails;
+
+  String get addBankAccount;
+
+  String get credit;
+
+  String get debit;
 }
