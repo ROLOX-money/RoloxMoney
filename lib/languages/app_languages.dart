@@ -133,4 +133,42 @@ abstract class Languages {
   String get credit;
 
   String get debit;
+
+  String get brandName;
+
+  String get legalName;
+
+  String get save;
+
+  String get projectName;
+
+  String get clientName;
+
+  String get projectValue;
+
+  String get projectDueDate;
+
+  String get invoiceName;
+
+  String get invoiceNumber;
+
+  String get invoiceValueWithoutGST;
+
+  String get hsnCode;
+
+  String get gstCharges;
+
+  String get state;
+
+  String get bankAccountNumber;
+
+  String get accountHolderName;
+
+  String get bankIFSCCode;
+
+  String get branchName;
+
+  String get cityName;
+
+  String get enterAnyOneSocialMediaIdLabel;
 }

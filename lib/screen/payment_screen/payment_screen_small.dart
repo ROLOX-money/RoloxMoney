@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/model/project_model.dart';
+import 'package:roloxmoney/screen/payment_screen/add_bank_account/add_bank_account_screen.dart';
 import 'package:roloxmoney/screen/payment_screen/payment_controller.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
@@ -68,7 +69,9 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                           fontWeight: FontWeight.w500,
                           textColor: ColorResource.black,
                           fontSize: 14,
-                          onTap: () {},
+                          onTap: () {
+                            Get.offNamed(AddBankAccountScreen.routeName);
+                          },
                         ),
                       )
                     ],

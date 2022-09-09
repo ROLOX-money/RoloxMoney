@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
+import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/widget/custom_button.dart';
@@ -12,6 +13,7 @@ abstract class WidgetUtils {
       {required BuildContext context,
       required TextEditingController controller,
       required String labelName,
+      String? suffixImagePath,
       TextInputType? keyBoardType}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,6 +36,12 @@ abstract class WidgetUtils {
             textColor: Colors.white,
             enableColor: Colors.grey,
             borderColor: Colors.red,
+            suffixWidget: suffixImagePath != null
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: AppUtils.setSVG(svgPath: suffixImagePath),
+                  )
+                : null,
             disableColor: Colors.red,
             keyBoardType: keyBoardType ?? TextInputType.name,
           ),

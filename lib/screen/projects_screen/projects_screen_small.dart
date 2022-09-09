@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/model/project_model.dart';
+import 'package:roloxmoney/screen/projects_screen/add_project/add_project_screen.dart';
 import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
 import 'package:roloxmoney/screen/template_screen/template_controller.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
@@ -68,7 +69,10 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                         fontWeight: FontWeight.w500,
                         textColor: ColorResource.black,
                         fontSize: 14,
-                        onTap: () {},
+                        onTap: () {
+                          Get.offNamed(AddProjectScreen.routeName);
+                          // widget.controller!.navigateAddProjectScreen();
+                        },
                       ),
                     )
                   ],

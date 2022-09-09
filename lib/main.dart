@@ -6,13 +6,18 @@ import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_locale_constant.dart';
 import 'package:roloxmoney/languages/app_localizations_delegate.dart';
 import 'package:roloxmoney/router.dart';
+import 'package:roloxmoney/screen/clients_screen/add_client/add_client_controller.dart';
 import 'package:roloxmoney/screen/clients_screen/clients_controller.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_controller.dart';
 import 'package:roloxmoney/screen/home_screen/home_controller.dart';
+import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_controller.dart';
 import 'package:roloxmoney/screen/invoice_screen/invoice_controller.dart';
 import 'package:roloxmoney/screen/login_profile_screen/login_profile_controller.dart';
 import 'package:roloxmoney/screen/login_screen/login_controller.dart';
+import 'package:roloxmoney/screen/payment_screen/add_bank_account/add_bank_account_controller.dart';
 import 'package:roloxmoney/screen/payment_screen/payment_controller.dart';
+import 'package:roloxmoney/screen/profile_screen/profile_controller.dart';
+import 'package:roloxmoney/screen/projects_screen/add_project/add_project_controller.dart';
 import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
 import 'package:roloxmoney/utils/app_themes.dart';
 import 'package:roloxmoney/widget/rolox_money_core_widgets.dart';
@@ -28,6 +33,11 @@ Future<void> main() async {
   Get.lazyPut(() => ClientsController());
   Get.lazyPut(() => InvoiceController());
   Get.lazyPut(() => PaymentController());
+  Get.lazyPut(() => AddClientController());
+  Get.lazyPut(() => AddProjectController());
+  Get.lazyPut(() => AddInvoiceController());
+  Get.lazyPut(() => AddBankAccountController());
+  Get.lazyPut(() => ProfileController());
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

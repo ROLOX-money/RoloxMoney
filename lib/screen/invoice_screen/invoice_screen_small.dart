@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/model/project_model.dart';
 import 'package:roloxmoney/screen/clients_screen/clients_controller.dart';
+import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_screen.dart';
 import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
 import 'package:roloxmoney/screen/template_screen/template_controller.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
@@ -72,7 +73,9 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                           fontWeight: FontWeight.w500,
                           textColor: ColorResource.black,
                           fontSize: 14,
-                          onTap: () {},
+                          onTap: () {
+                            Get.offNamed(AddInvoiceScreen.routeName);
+                          },
                         ),
                       )
                     ],
@@ -223,7 +226,9 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                     fontWeight: FontWeight.w500,
                                     textColor: ColorResource.color00E94F,
                                     fontSize: 14,
-                                    onTap: () {},
+                                    onTap: () {
+
+                                    },
                                   ),
                                 )
                               ],

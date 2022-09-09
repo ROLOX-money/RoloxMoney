@@ -42,9 +42,9 @@ class LanguageEn extends Languages {
 
   String get typeOfBusiness => 'Type of Business';
 
-  String get individual => 'Individual';
+  String get individual => 'Freelancer';
 
-  String get business => 'Business';
+  String get business => 'Company';
 
   String get agency => 'Agency';
 
@@ -132,4 +132,43 @@ class LanguageEn extends Languages {
   String get credit => 'Credit';
 
   String get debit => 'Debit';
+
+  String get brandName => 'Brand Name';
+
+  String get legalName => 'Legal Name';
+
+  String get save => 'Save';
+
+  String get projectName => 'Project Name';
+
+  String get clientName => 'Client Name';
+
+  String get projectValue => 'Project Value';
+
+  String get projectDueDate => 'Project Due Date';
+
+  String get invoiceName => 'Invoice Name';
+
+  String get invoiceNumber => 'Invoice number';
+
+  String get invoiceValueWithoutGST => 'Invoice Value without GST';
+
+  String get hsnCode => 'HSN Code';
+
+  String get gstCharges => 'GST Charges';
+
+  String get state => 'State';
+
+  String get bankAccountNumber => 'Bank account number';
+
+  String get accountHolderName => 'Account holder name';
+
+  String get bankIFSCCode => 'Bank IFSC Code';
+
+  String get branchName => 'Branch name';
+
+  String get cityName => 'City name';
+
+  String get enterAnyOneSocialMediaIdLabel =>
+      'Facebook/Instagram/Youtube/Twitter/Linkedin';
 }

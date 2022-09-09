@@ -7,7 +7,7 @@ import 'package:roloxmoney/widget/responsive_widget.dart';
 /*Chinnadurai Viswanathan*/
 class IndividualProfileScreen extends StatefulWidget {
   IndividualProfileScreen({Key? key}) : super(key: key);
-  static const String routeName = '/profileScreen';
+  static const String routeName = '/individualProfileScreen';
 
   @override
   IndividualProfileScreenState createState() => IndividualProfileScreenState();

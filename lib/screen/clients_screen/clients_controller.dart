@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:roloxmoney/model/project_model.dart';
+import 'package:roloxmoney/screen/clients_screen/add_client/add_client_screen.dart';
 
 /*Chinnadurai Viswanathan*/
 class ClientsController extends GetxController with StateMixin {
@@ -30,5 +31,9 @@ class ClientsController extends GetxController with StateMixin {
     ]);
     change(projectInvoicesList);
     super.onInit();
+  }
+
+  void navigateAddClientScreen() {
+    Get.offNamed(AddClientScreen.routeName);
   }
 }

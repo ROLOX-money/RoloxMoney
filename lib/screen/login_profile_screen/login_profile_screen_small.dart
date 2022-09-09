@@ -218,6 +218,17 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                           ),
                         ),
                       ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      WidgetUtils.genericTextFiled(
+                        context: context,
+                        keyBoardType: TextInputType.name,
+                        controller:
+                        widget.controller!.socialId,
+                        labelName: '${Languages.of(context)?.enterAnyOneSocialMediaIdLabel}'
+                            .toUpperCase(),
+                      ),
                       SizedBox(
                         height: 40,
                       ),

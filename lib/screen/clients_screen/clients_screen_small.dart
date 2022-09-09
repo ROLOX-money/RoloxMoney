@@ -70,7 +70,9 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                           fontWeight: FontWeight.w500,
                           textColor: ColorResource.black,
                           fontSize: 14,
-                          onTap: () {},
+                          onTap: () {
+                            widget.controller!.navigateAddClientScreen();
+                          },
                         ),
                       )
                     ],

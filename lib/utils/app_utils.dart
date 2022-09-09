@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'color_resource.dart';
 
@@ -81,5 +82,9 @@ class AppUtils {
 
   static String getLastName(String fullName) {
     return fullName.split(" ").last;
+  }
+
+  static Widget setSVG({String? svgPath}) {
+    return SvgPicture.asset(svgPath!);
   }
 }

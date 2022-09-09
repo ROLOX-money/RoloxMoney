@@ -130,7 +130,7 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                                     .textTheme
                                     .titleSmall!
                                     .copyWith(
-                                        color: ColorResource.colorA0BCD0,
+                                        color: groupInvoices.boarderColor,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500),
                               ),
@@ -138,7 +138,7 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                                 padding: const EdgeInsets.only(left: 8.0),
                                 child: Image.asset(
                                   ImageResource.buttonArrow,
-                                  color: ColorResource.colorA0BCD0,
+                                  color: groupInvoices.boarderColor,
                                   width: 20,
                                   height: 10,
                                 ),
@@ -149,21 +149,21 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                             height: 15,
                           ),
                           Container(
-                            decoration: BoxDecoration(
-                                border: Border(
-                                  top: BorderSide(
-                                      color: groupInvoices.boarderColor!,
-                                      width: 4),
-                                  left: BorderSide(
-                                      color: groupInvoices.boarderColor!,
-                                      width: 4),
-                                  right: BorderSide(
-                                      color: Colors.white, width: .25),
-                                  bottom: BorderSide(
-                                      color: Colors.white, width: .25),
-                                ),
-                                color: Theme.of(context).backgroundColor),
-                            padding: EdgeInsets.all(15.0),
+                            // decoration: BoxDecoration(
+                            //     border: Border(
+                            //       top: BorderSide(
+                            //           color: groupInvoices.boarderColor!,
+                            //           width: 4),
+                            //       left: BorderSide(
+                            //           color: groupInvoices.boarderColor!,
+                            //           width: 4),
+                            //       right: BorderSide(
+                            //           color: Colors.white, width: .25),
+                            //       bottom: BorderSide(
+                            //           color: Colors.white, width: .25),
+                            //     ),
+                            //     color: Theme.of(context).backgroundColor),
+                            padding: EdgeInsets.all(1.0),
                             margin: EdgeInsets.only(bottom: 15.0),
                             child: Theme(
                               data: Theme.of(context).copyWith(
@@ -191,74 +191,77 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
   }
 
   Widget invoiceWidget({required GroupInvoices groupInvoices}) {
-    return ListView.separated(
-        separatorBuilder: (BuildContext context, int index) =>
-            Divider(height: 1, color: ColorResource.colorA0BCD0),
+    return ListView.builder(
+        // separatorBuilder: (BuildContext context, int index) =>
+        //     Divider(height: 1, color: ColorResource.colorA0BCD0),
         itemCount: groupInvoices.invoiceList!.length,
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
           InvoiceModel invoiceModel = groupInvoices.invoiceList![index];
-          return Container(
-            alignment: Alignment.centerLeft,
-            padding: EdgeInsets.symmetric(vertical: 20),
-            child: ListTile(
-              leading: Container(
-                height: 40,
-                width: 40,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(20),
+          return Card(
+            color: ColorResource.color151515,
+            child: Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.symmetric(vertical: 20),
+              child: ListTile(
+                leading: Container(
+                  height: 40,
+                  width: 40,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                    color: ColorResource.color381D4E,
                   ),
-                  color: ColorResource.color381D4E,
-                ),
-                child: CustomText(
-                  text:
-                      AppUtils.getInitials(invoiceModel.clientName).toString(),
-                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                      color: ColorResource.colorA0BCD0,
-                      fontWeight: FontWeight.w700),
-                ),
-              ),
-              trailing: CustomText(
-                text: '₹ ${invoiceModel.amount!}',
-                style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: ColorResource.color00E94F,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w800),
-              ),
-              title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomText(
-                    text: '${invoiceModel.clientName}',
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: ColorResource.colorFFFFFF,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  CustomText(
-                    text: '${invoiceModel.workName}',
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                  child: CustomText(
+                    text: AppUtils.getInitials(invoiceModel.clientName)
+                        .toString(),
+                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
                         color: ColorResource.colorA0BCD0,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
+                        fontWeight: FontWeight.w700),
                   ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  CustomText(
-                    text: '${invoiceModel.date}',
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: ColorResource.colorA0BCD0,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
-                  ),
-                ],
+                ),
+                trailing: CustomText(
+                  text: '₹ ${invoiceModel.amount!}',
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      color: ColorResource.color00E94F,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w800),
+                ),
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomText(
+                      text: '${invoiceModel.clientName}',
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          color: ColorResource.colorFFFFFF,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    CustomText(
+                      text: '${invoiceModel.workName}',
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          color: ColorResource.colorA0BCD0,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    CustomText(
+                      text: '${invoiceModel.date}',
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          color: ColorResource.colorA0BCD0,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                ),
               ),
             ),
           );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
@@ -48,6 +49,17 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                   children: [
                     Container(
                       alignment: Alignment.center,
+                      child: CustomText(
+                        text: '👋 Welcome to',
+                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                            color: ColorResource.colorA0BCD0,
+                            fontSize: 21,
+                            fontWeight: FontWeight.w500),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
                       padding: const EdgeInsets.only(left: 8.0),
                       child: Image.asset(
                         ImageResource.rolox,
@@ -55,7 +67,18 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                       ),
                     ),
                     const SizedBox(
-                      height: 70,
+                      height: 20,
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      child: Image.asset(
+                        ImageResource.loginImagePNG,
+                        height: 233,
+                        width: 170,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
                     ),
                     CustomText(
                       text: '${Languages.of(context)?.mobileNumber}'

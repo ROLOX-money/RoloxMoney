@@ -7,6 +7,7 @@ import 'package:roloxmoney/screen/dashboard_screen/dashboard_controller.dart';
 import 'package:roloxmoney/screen/home_screen/home_screen.dart';
 import 'package:roloxmoney/screen/invoice_screen/invoice_screen.dart';
 import 'package:roloxmoney/screen/payment_screen/payment_screen.dart';
+import 'package:roloxmoney/screen/profile_screen/profile_screen.dart';
 import 'package:roloxmoney/screen/projects_screen/projects_screen.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
@@ -69,7 +70,9 @@ class DashboardScreenSmallState extends State<DashboardScreenSmall> {
                   ),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Get.offNamed(ProfileScreen.routeName);
+              },
             ),
           ],
         ),

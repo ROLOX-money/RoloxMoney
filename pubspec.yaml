@@ -19,6 +19,7 @@ dependencies:
     sdk: flutter
   intl: ^0.17.0
   pin_code_fields: ^7.4.0
+  flutter_svg: ^1.1.4
 
 #  firebase_auth: ^3.6.4
 #  firebase_auth:
@@ -40,6 +41,7 @@ flutter:
 
   assets:
     - assets/png/
+    - assets/svg/
     - assets/png/bottom_navigation/
 
   fonts:

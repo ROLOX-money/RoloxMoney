@@ -13,6 +13,11 @@ class ImageResource {
   static const String wallet = 'assets/png/bottom_navigation/wallet.png';
   static const String invoiceIcons = 'assets/png/invoice.png';
   static const String calendar = 'assets/png/calendar.png';
+  static const String calendarSVG = 'assets/svg/calendar.svg';
+  static const String searchSVG = 'assets/svg/search.svg';
+  static const String arrowSVG = 'assets/svg/arrow.svg';
+  static const String loginImage = 'assets/svg/login_image.svg';
+  static const String loginImagePNG = 'assets/png/login_image.png';
   static const String bottomSelected =
       'assets/png/bottom_navigation/bottom_selected.png';
 }
