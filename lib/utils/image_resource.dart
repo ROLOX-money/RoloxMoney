@@ -17,7 +17,9 @@ class ImageResource {
   static const String searchSVG = 'assets/svg/search.svg';
   static const String arrowSVG = 'assets/svg/arrow.svg';
   static const String loginImage = 'assets/svg/login_image.svg';
+  static const String businessType = 'assets/png/business_type.png';
   static const String loginImagePNG = 'assets/png/login_image.png';
+  static const String OTPImagePNG = 'assets/png/otp_Image.png';
   static const String bottomSelected =
       'assets/png/bottom_navigation/bottom_selected.png';
 }

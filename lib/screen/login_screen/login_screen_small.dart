@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/login_screen/login_controller.dart';
+import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/widget/custom_button.dart';
@@ -37,6 +38,7 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
       rxStatus: widget.controller!.status,
       child: Scaffold(
         body: Container(
+          margin: MediaQuery.of(context).viewInsets,
           alignment: Alignment.center,
           child: SingleChildScrollView(
             child: Padding(
@@ -52,7 +54,7 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                       child: CustomText(
                         text: '👋 Welcome to',
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: ColorResource.colorA0BCD0,
+                            color: ColorResource.colorE08AF4,
                             fontSize: 21,
                             fontWeight: FontWeight.w500),
                         textAlign: TextAlign.center,
@@ -84,82 +86,89 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                       text: '${Languages.of(context)?.mobileNumber}'
                           .toUpperCase(),
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: ColorResource.colorA0BCD0,
+                          color: ColorResource.colorE08AF4,
                           fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(
                       height: 5,
                     ),
-                    SizedBox(
-                      child: CustomTextField(
-                        widget.controller!.mobilNumberController.obs.value,
-                        focusedBorder: Colors.grey,
-                        textColor: Colors.white,
-                        enableColor: Colors.grey,
-                        borderColor: Colors.red,
-                        disableColor: Colors.red,
-                        keyBoardType: TextInputType.phone,
-                        prefixIcon: Container(
-                          width: 100,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                ClipOval(
-                                  child: Material(
-                                    child: InkWell(
-                                      splashColor: Colors.red,
-                                      // Splash color
-                                      onTap: () {},
-                                      child: SizedBox(
-                                        width: 22,
-                                        height: 22,
-                                        child: Image.network(
-                                          'https://think360studio-media.s3.ap-south-1.amazonaws.com/download/india-flag-2021-wallpaper-1.png',
-                                          fit: BoxFit.fill,
+                    Form(
+                      key: widget.controller!.form,
+                      child: SizedBox(
+                        child: CustomTextField(
+                          widget.controller!.mobilNumberController.obs.value,
+                          focusedBorder: Colors.grey,
+                          validatorCallBack: (bool value) {
+                            debugPrint('Calback--> ${value}');
+                          },
+                          textColor: Colors.white,
+                          enableColor: Colors.grey,
+                          borderColor: Colors.red,
+                          validationRules: ['required', 'mobile_number'],
+                          disableColor: Colors.red,
+                          keyBoardType: TextInputType.phone,
+                          prefixIcon: Container(
+                            width: 100,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  ClipOval(
+                                    child: Material(
+                                      child: InkWell(
+                                        splashColor: Colors.red,
+                                        // Splash color
+                                        onTap: () {},
+                                        child: SizedBox(
+                                          width: 22,
+                                          height: 22,
+                                          child: Image.network(
+                                            'https://think360studio-media.s3.ap-south-1.amazonaws.com/download/india-flag-2021-wallpaper-1.png',
+                                            fit: BoxFit.fill,
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                CustomText(
-                                  text: '+91',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall!
-                                      .copyWith(
-                                          color: Theme.of(context)
-                                              .textTheme
-                                              .titleMedium!
-                                              .color,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400),
-                                ),
-                                Icon(
-                                  Icons.keyboard_arrow_down,
-                                  size: 22,
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium!
-                                      .color,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Container(
-                                  width: 0.40,
-                                  height: 20,
-                                  color: ColorResource.colorDDDDDD,
-                                )
-                              ],
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  CustomText(
+                                    text: '+91',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleSmall!
+                                        .copyWith(
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium!
+                                                .color,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400),
+                                  ),
+                                  Icon(
+                                    Icons.keyboard_arrow_down,
+                                    size: 22,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .color,
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Container(
+                                    width: 0.40,
+                                    height: 20,
+                                    color: ColorResource.colorDDDDDD,
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
+                        height: 70,
                       ),
-                      height: 70,
                     ),
                     const SizedBox(
                       height: 15,
@@ -170,7 +179,10 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                       cardShape: 1,
                       isIcon: true,
                       onTap: () {
-                        otpBottomSheet(controller: widget.controller!);
+                        if (widget.controller!.form.currentState!.validate())
+                          otpBottomSheet(
+                              controller: widget.controller!,
+                              mobileNumber: ' +91 9585313659');
                       },
                     )
                   ],
@@ -184,7 +196,7 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
     );
   }
 
-  void otpBottomSheet({LoginController? controller}) {
+  void otpBottomSheet({LoginController? controller, String? mobileNumber}) {
     showModalBottomSheet(
         enableDrag: true,
         context: context,
@@ -206,11 +218,22 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                 topRight: Radius.circular(22),
               ),
             ),
-            height: 400.0,
+            height: 500.0,
             child: Column(
               children: [
                 SizedBox(
                   height: 40,
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    ImageResource.OTPImagePNG,
+                    height: 80,
+                    width: 80,
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
                 ),
                 CustomText(
                   text:
@@ -223,13 +246,25 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                 SizedBox(
                   height: 15,
                 ),
-                CustomText(
-                  text:
-                      '${Languages.of(context)?.sentOTPToRegisteredMobile} +91 9585313659',
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: ColorResource.colorFFFFFF,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomText(
+                      text:
+                          '${Languages.of(context)?.sentOTPToRegisteredMobile}',
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          color: ColorResource.colorFFFFFF,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    CustomText(
+                      text: '$mobileNumber',
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          color: ColorResource.colorE08AF4,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 15,
@@ -240,6 +275,8 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                   child: PinCodeTextField(
                     appContext: context,
                     length: 4,
+                    cursorWidth: 1,
+                    cursorColor: ColorResource.colorFFFFFF,
                     pinTheme: PinTheme(
                         disabledColor: Theme.of(context).backgroundColor,
                         shape: PinCodeFieldShape.circle,
@@ -249,13 +286,14 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                         inactiveFillColor: Theme.of(context).backgroundColor,
                         activeFillColor: Theme.of(context).backgroundColor,
                         borderWidth: 6,
+                        errorBorderColor: Colors.red,
                         activeColor: Theme.of(context).backgroundColor,
                         selectedColor: Theme.of(context).backgroundColor,
                         selectedFillColor: Theme.of(context).backgroundColor,
                         inactiveColor: Theme.of(context).backgroundColor),
                     enableActiveFill: true,
                     backgroundColor: Theme.of(context).backgroundColor,
-                    // controller: controller!.otpController,
+                    controller: controller!.otpController,
                     textStyle: Theme.of(context).textTheme.titleMedium,
                     keyboardType: TextInputType.number,
                     boxShadows: const [
@@ -266,11 +304,10 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                       )
                     ],
                     onCompleted: (v) {
-                      debugPrint("Completed");
+
                     },
                     onChanged: (value) {
-                      debugPrint(value);
-                      setState(() {});
+
                     },
                   ),
                 ),
@@ -283,7 +320,7 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                   cardShape: 1,
                   isIcon: true,
                   onTap: () {
-                    controller!.navigateProfile();
+                    controller.navigateProfile();
                   },
                 ),
                 SizedBox(

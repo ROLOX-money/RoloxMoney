@@ -13,6 +13,7 @@ abstract class WidgetUtils {
       {required BuildContext context,
       required TextEditingController controller,
       required String labelName,
+      List<String> validationRules = const [],
       String? suffixImagePath,
       TextInputType? keyBoardType}) {
     return Column(
@@ -24,7 +25,7 @@ abstract class WidgetUtils {
         CustomText(
           text: labelName,
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
-              color: ColorResource.colorA0BCD0, fontWeight: FontWeight.w500),
+              color: ColorResource.colorE08AF4, fontWeight: FontWeight.w500),
         ),
         const SizedBox(
           height: 5,
@@ -35,6 +36,7 @@ abstract class WidgetUtils {
             focusedBorder: Colors.grey,
             textColor: Colors.white,
             enableColor: Colors.grey,
+            validationRules: validationRules! ?? [],
             borderColor: Colors.red,
             suffixWidget: suffixImagePath != null
                 ? Padding(
@@ -63,7 +65,7 @@ abstract class WidgetUtils {
         CustomText(
           text: lableName.toUpperCase(),
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
-              color: ColorResource.colorA0BCD0,
+              color: ColorResource.colorE08AF4,
               fontSize: 14,
               fontWeight: FontWeight.w500),
         ),
@@ -83,7 +85,7 @@ abstract class WidgetUtils {
             child: DropdownButton<String>(
               value: selectedValues,
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ColorResource.colorA0BCD0,
+                  color: ColorResource.colorE08AF4,
                   fontSize: 18,
                   fontWeight: FontWeight.w500),
               borderRadius: BorderRadius.all(
@@ -156,7 +158,7 @@ abstract class WidgetUtils {
                   CustomText(
                     text: '${Languages.of(context)?.oopsAgencyMessage}',
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: ColorResource.colorA0BCD0,
+                        color: ColorResource.colorE08AF4,
                         fontSize: 14,
                         fontWeight: FontWeight.w400),
                   ),

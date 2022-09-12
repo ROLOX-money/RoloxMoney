@@ -13,6 +13,10 @@ class LoginProfileController extends GetxController with StateMixin {
   TextEditingController socialId = TextEditingController();
   Rx<TypOfBusiness> typOfBusiness = TypOfBusiness.business.obs;
 
+
+  final form = GlobalKey<FormState>();
+
+
   @override
   void onInit() async {
     change(null, status: RxStatus.success());

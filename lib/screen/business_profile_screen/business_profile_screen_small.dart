@@ -401,7 +401,7 @@ class BusinessProfileScreenSmallState
                                         .textTheme
                                         .titleSmall!
                                         .copyWith(
-                                            color: ColorResource.colorA0BCD0,
+                                            color: ColorResource.colorE08AF4,
                                             fontWeight: FontWeight.w500),
                                   ),
                                   const SizedBox(

@@ -59,7 +59,7 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                         text: '${Languages.of(context)!.invoiceDetails}'
                             .toUpperCase(),
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: ColorResource.colorA0BCD0,
+                            color: ColorResource.colorE08AF4,
                             fontSize: 16,
                             fontWeight: FontWeight.w500),
                       ),
@@ -85,7 +85,8 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                   ),
                   ListView.separated(
                       separatorBuilder: (BuildContext context, int index) =>
-                          Divider(height: 1, color: ColorResource.colorA0BCD0),
+                          Divider(
+                              height: 1, color: Theme.of(context).dividerColor),
                       itemCount: widget.controller!.projectInvoicesList.obs
                           .value.value.length,
                       shrinkWrap: true,
@@ -115,7 +116,7 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                     .textTheme
                                     .bodyText1!
                                     .copyWith(
-                                        color: ColorResource.colorA0BCD0,
+                                        color: ColorResource.colorE08AF4,
                                         fontWeight: FontWeight.w700),
                               ),
                             ),
@@ -226,9 +227,7 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                     fontWeight: FontWeight.w500,
                                     textColor: ColorResource.color00E94F,
                                     fontSize: 14,
-                                    onTap: () {
-
-                                    },
+                                    onTap: () {},
                                   ),
                                 )
                               ],

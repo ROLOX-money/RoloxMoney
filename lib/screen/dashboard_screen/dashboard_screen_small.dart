@@ -71,7 +71,7 @@ class DashboardScreenSmallState extends State<DashboardScreenSmall> {
                 ),
               ),
               onPressed: () {
-                Get.offNamed(ProfileScreen.routeName);
+                Get.offAndToNamed(ProfileScreen.routeName);
               },
             ),
           ],
@@ -127,7 +127,7 @@ class DashboardScreenSmallState extends State<DashboardScreenSmall> {
                     text: '${Languages.of(context)?.welcomeToRolox}'
                         .toUpperCase(),
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: ColorResource.colorA0BCD0,
+                        color: ColorResource.colorE08AF4,
                         fontSize: 18,
                         fontWeight: FontWeight.w400),
                   ),

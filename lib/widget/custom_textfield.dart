@@ -157,12 +157,16 @@ class CustomTextFieldState extends State<CustomTextField> {
             const BoxConstraints(minHeight: 24, minWidth: 24),
         prefixIcon: widget.prefixIcon,
         errorStyle: widget.errorStyle ??
-            Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.red),
+            Theme.of(context)
+                .textTheme
+                .subtitle1!
+                .copyWith(color: Colors.red, height: 0.5),
         counterStyle: const TextStyle(
             color: ColorResource.colorFFFFFF,
             fontFamily: 'Poppins-Medium',
             fontWeight: FontWeight.normal,
             fontStyle: FontStyle.normal,
+            height: 1,
             fontSize: 12),
         // errorText: validatePassword(widget.controller.text.trim()),
         labelStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
@@ -190,7 +194,7 @@ class CustomTextFieldState extends State<CustomTextField> {
 
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
-          borderSide: BorderSide(color: widget.borderColor!, width: 0.25),
+          borderSide: BorderSide(color: widget.borderColor!, width: 0.5),
         ),
       ),
     );

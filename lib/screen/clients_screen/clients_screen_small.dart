@@ -56,7 +56,7 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                         text: '${Languages.of(context)!.clientDetails}'
                             .toUpperCase(),
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: ColorResource.colorA0BCD0,
+                            color: ColorResource.colorE08AF4,
                             fontSize: 16,
                             fontWeight: FontWeight.w500),
                       ),
@@ -112,7 +112,7 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                     .textTheme
                                     .bodyText1!
                                     .copyWith(
-                                        color: ColorResource.colorA0BCD0,
+                                        color: ColorResource.colorE08AF4,
                                         fontWeight: FontWeight.w700),
                               ),
                             ),

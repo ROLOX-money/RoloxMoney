@@ -55,12 +55,12 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                         text:
                             '${Languages.of(context)!.payments}'.toUpperCase(),
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: ColorResource.colorA0BCD0,
+                            color: ColorResource.colorE08AF4,
                             fontSize: 16,
                             fontWeight: FontWeight.w500),
                       ),
                       Container(
-                        width: 140,
+                        width: 160,
                         height: 40,
                         child: SecondaryButton(
                           '${Languages.of(context)!.addBankAccount}',
@@ -112,7 +112,7 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                     .textTheme
                                     .bodyText1!
                                     .copyWith(
-                                        color: ColorResource.colorA0BCD0,
+                                        color: ColorResource.colorE08AF4,
                                         fontWeight: FontWeight.w700),
                               ),
                             ),

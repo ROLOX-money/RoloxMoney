@@ -4,7 +4,9 @@ import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/business_profile_screen/business_profile_screen.dart';
 import 'package:roloxmoney/screen/individual_profile_screen/individual_profile_screen.dart';
 import 'package:roloxmoney/screen/login_profile_screen/login_profile_controller.dart';
+import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
+import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/utils/widget_utils.dart';
 import 'package:roloxmoney/widget/custom_button.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
@@ -43,10 +45,15 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
               children: [
                 AppBar(
                   backgroundColor: Theme.of(context).backgroundColor,
-                  leading: Icon(
-                    Icons.arrow_back_sharp,
-                    size: 30,
-                    color: Colors.white,
+                  leading: GestureDetector(
+                    onTap: () {
+                      Get.back(canPop: true);
+                    },
+                    child: Icon(
+                      Icons.arrow_back_sharp,
+                      size: 30,
+                      color: Colors.white,
+                    ),
                   ),
                   centerTitle: true,
                   title: CustomText(
@@ -75,23 +82,37 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                             fontSize: 16,
                             fontWeight: FontWeight.w400),
                       ),
-                      WidgetUtils.genericTextFiled(
-                        context: context,
-                        controller: widget.controller!.firstNameController,
-                        labelName:
-                            '${Languages.of(context)?.firstName}'.toUpperCase(),
-                      ),
-                      WidgetUtils.genericTextFiled(
-                        context: context,
-                        controller: widget.controller!.lastNameController,
-                        labelName:
-                            '${Languages.of(context)?.lastName}'.toUpperCase(),
-                      ),
-                      WidgetUtils.genericTextFiled(
-                        context: context,
-                        controller: widget.controller!.emailIDController,
-                        labelName:
-                            '${Languages.of(context)?.emailID}'.toUpperCase(),
+                      Form(
+                        key: widget.controller!.form,
+                        child: Column(
+                          children: [
+                            WidgetUtils.genericTextFiled(
+                              keyBoardType: TextInputType.name,
+                              context: context,
+                              validationRules: ['required'],
+                              controller:
+                                  widget.controller!.firstNameController,
+                              labelName: '${Languages.of(context)?.firstName}'
+                                  .toUpperCase(),
+                            ),
+                            WidgetUtils.genericTextFiled(
+                              context: context,
+                              keyBoardType: TextInputType.name,
+                              validationRules: ['required'],
+                              controller: widget.controller!.lastNameController,
+                              labelName: '${Languages.of(context)?.lastName}'
+                                  .toUpperCase(),
+                            ),
+                            WidgetUtils.genericTextFiled(
+                              context: context,
+                              keyBoardType: TextInputType.emailAddress,
+                              validationRules: ['required', 'email'],
+                              controller: widget.controller!.emailIDController,
+                              labelName: '${Languages.of(context)?.emailID}'
+                                  .toUpperCase(),
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(
                         height: 15,
@@ -119,100 +140,156 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600),
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  widget.controller!.businessToggle(
-                                      value: TypOfBusiness.individual);
-                                },
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Radio(
-                                      value: TypOfBusiness.individual,
-                                      groupValue: widget.controller!
-                                          .typOfBusiness.obs.value.value,
-                                      activeColor: ColorResource.color00E94F,
-                                      onChanged: (TypOfBusiness? value) {
-                                        widget.controller!.businessToggle(
-                                            value: TypOfBusiness.individual);
-                                      },
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          widget.controller!.businessToggle(
+                                              value: TypOfBusiness.individual);
+                                        },
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Radio(
+                                              value: TypOfBusiness.individual,
+                                              groupValue: widget
+                                                  .controller!
+                                                  .typOfBusiness
+                                                  .obs
+                                                  .value
+                                                  .value,
+                                              activeColor:
+                                                  ColorResource.color00E94F,
+                                              onChanged:
+                                                  (TypOfBusiness? value) {
+                                                widget.controller!
+                                                    .businessToggle(
+                                                        value: TypOfBusiness
+                                                            .individual);
+                                              },
+                                            ),
+                                            CustomText(
+                                              text:
+                                                  '${Languages.of(context)?.individual}',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleSmall!
+                                                  .copyWith(
+                                                      color: ColorResource
+                                                          .colorFFFFFF,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          widget.controller!.businessToggle(
+                                              value: TypOfBusiness.business);
+                                        },
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Radio(
+                                              value: TypOfBusiness.business,
+                                              groupValue: widget
+                                                  .controller!
+                                                  .typOfBusiness
+                                                  .obs
+                                                  .value
+                                                  .value,
+                                              activeColor:
+                                                  ColorResource.color00E94F,
+                                              onChanged:
+                                                  (TypOfBusiness? value) {
+                                                widget.controller!
+                                                    .businessToggle(
+                                                        value: TypOfBusiness
+                                                            .business);
+                                              },
+                                            ),
+                                            CustomText(
+                                              text:
+                                                  '${Languages.of(context)?.business}',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleSmall!
+                                                  .copyWith(
+                                                      color: ColorResource
+                                                          .colorFFFFFF,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          widget.controller!.businessToggle(
+                                              value: TypOfBusiness.agency);
+                                        },
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Radio(
+                                              value: TypOfBusiness.agency,
+                                              groupValue: widget
+                                                  .controller!
+                                                  .typOfBusiness
+                                                  .obs
+                                                  .value
+                                                  .value,
+                                              activeColor:
+                                                  ColorResource.color00E94F,
+                                              onChanged:
+                                                  (TypOfBusiness? value) {
+                                                widget.controller!
+                                                    .businessToggle(
+                                                        value: TypOfBusiness
+                                                            .agency);
+                                              },
+                                            ),
+                                            CustomText(
+                                              text:
+                                                  '${Languages.of(context)?.agency}',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleSmall!
+                                                  .copyWith(
+                                                      color: ColorResource
+                                                          .colorFFFFFF,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                  ),
+                                  Container(
+                                    alignment: Alignment.center,
+                                    padding: const EdgeInsets.only(right: 19),
+                                    child: Image.asset(
+                                      ImageResource.businessType,
+                                      height: 113,
+                                      width: 113,
                                     ),
-                                    CustomText(
-                                      text:
-                                          '${Languages.of(context)?.individual}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall!
-                                          .copyWith(
-                                              color: ColorResource.colorFFFFFF,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  widget.controller!.businessToggle(
-                                      value: TypOfBusiness.business);
-                                },
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Radio(
-                                      value: TypOfBusiness.business,
-                                      groupValue: widget.controller!
-                                          .typOfBusiness.obs.value.value,
-                                      activeColor: ColorResource.color00E94F,
-                                      onChanged: (TypOfBusiness? value) {
-                                        widget.controller!.businessToggle(
-                                            value: TypOfBusiness.business);
-                                      },
-                                    ),
-                                    CustomText(
-                                      text:
-                                          '${Languages.of(context)?.business}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall!
-                                          .copyWith(
-                                              color: ColorResource.colorFFFFFF,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  widget.controller!.businessToggle(
-                                      value: TypOfBusiness.agency);
-                                },
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Radio(
-                                      value: TypOfBusiness.agency,
-                                      groupValue: widget.controller!
-                                          .typOfBusiness.obs.value.value,
-                                      activeColor: ColorResource.color00E94F,
-                                      onChanged: (TypOfBusiness? value) {
-                                        widget.controller!.businessToggle(
-                                            value: TypOfBusiness.agency);
-                                      },
-                                    ),
-                                    CustomText(
-                                      text: '${Languages.of(context)?.agency}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall!
-                                          .copyWith(
-                                              color: ColorResource.colorFFFFFF,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600),
-                                    )
-                                  ],
-                                ),
+                                  )
+                                ],
                               ),
                             ],
                           ),
@@ -224,10 +301,10 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                       WidgetUtils.genericTextFiled(
                         context: context,
                         keyBoardType: TextInputType.name,
-                        controller:
-                        widget.controller!.socialId,
-                        labelName: '${Languages.of(context)?.enterAnyOneSocialMediaIdLabel}'
-                            .toUpperCase(),
+                        controller: widget.controller!.socialId,
+                        labelName:
+                            '${Languages.of(context)?.enterAnyOneSocialMediaIdLabel}'
+                                .toUpperCase(),
                       ),
                       SizedBox(
                         height: 40,
@@ -240,16 +317,19 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                         textColor: ColorResource.black,
                         fontSize: 20,
                         onTap: () {
-                          if (widget
-                                  .controller!.typOfBusiness.obs.value.value ==
-                              TypOfBusiness.business) {
-                            Get.offNamed(BusinessProfileScreen.routeName);
-                          } else if (widget
-                                  .controller!.typOfBusiness.obs.value.value ==
-                              TypOfBusiness.individual) {
-                            Get.offNamed(IndividualProfileScreen.routeName);
-                          } else {
-                            WidgetUtils.showAlertDialog(context: context);
+                          if (widget.controller!.form.currentState!
+                              .validate()) {
+                            if (widget.controller!.typOfBusiness.obs.value
+                                    .value ==
+                                TypOfBusiness.business) {
+                              Get.offAllNamed(BusinessProfileScreen.routeName);
+                            } else if (widget.controller!.typOfBusiness.obs
+                                    .value.value ==
+                                TypOfBusiness.individual) {
+                              Get.offAllNamed(IndividualProfileScreen.routeName);
+                            } else {
+                              WidgetUtils.showAlertDialog(context: context);
+                            }
                           }
                         },
                       )

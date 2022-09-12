@@ -55,7 +55,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                       text: '${Languages.of(context)!.projectDetails}'
                           .toUpperCase(),
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: ColorResource.colorA0BCD0,
+                          color: ColorResource.colorE08AF4,
                           fontSize: 16,
                           fontWeight: FontWeight.w500),
                     ),

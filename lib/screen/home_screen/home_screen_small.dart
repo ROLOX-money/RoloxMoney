@@ -130,7 +130,7 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                                     .textTheme
                                     .titleSmall!
                                     .copyWith(
-                                        color: groupInvoices.boarderColor,
+                                        color: ColorResource.colorE08AF4,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500),
                               ),
@@ -138,7 +138,7 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                                 padding: const EdgeInsets.only(left: 8.0),
                                 child: Image.asset(
                                   ImageResource.buttonArrow,
-                                  color: groupInvoices.boarderColor,
+                                  color: ColorResource.colorE08AF4,
                                   width: 20,
                                   height: 10,
                                 ),
@@ -219,7 +219,7 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                     text: AppUtils.getInitials(invoiceModel.clientName)
                         .toString(),
                     style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                        color: ColorResource.colorA0BCD0,
+                        color: ColorResource.colorE08AF4,
                         fontWeight: FontWeight.w700),
                   ),
                 ),

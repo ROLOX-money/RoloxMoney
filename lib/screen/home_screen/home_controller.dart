@@ -17,7 +17,7 @@ class HomeController extends GetxController with StateMixin {
 
     groupInvoicesList.addAll([
       GroupInvoices(
-          boarderColor: ColorResource.colorA0BCD0,
+          boarderColor: ColorResource.colorE08AF4,
           groupName: Languages.of(Get.context!)!.upcomingInvoices,
           invoiceList: [
             InvoiceModel(
