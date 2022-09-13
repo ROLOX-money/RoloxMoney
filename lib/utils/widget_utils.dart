@@ -36,7 +36,7 @@ abstract class WidgetUtils {
             focusedBorder: Colors.grey,
             textColor: Colors.white,
             enableColor: Colors.grey,
-            validationRules: validationRules! ?? [],
+            validationRules: validationRules,
             borderColor: Colors.red,
             suffixWidget: suffixImagePath != null
                 ? Padding(
@@ -139,8 +139,13 @@ abstract class WidgetUtils {
                 children: [
                   Container(
                     alignment: Alignment.center,
+                    // child: Image.asset(
+                    //   ImageResource.error,
+                    //   height: 280,
+                    //   width: 180,
+                    // ),
                     child: Image.asset(
-                      ImageResource.error,
+                      ImageResource.agencyAlertImage,
                       height: 280,
                       width: 180,
                     ),

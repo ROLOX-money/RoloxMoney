@@ -2,6 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:roloxmoney/languages/app_languages.dart';
+import 'package:roloxmoney/widget/custom_text.dart';
+import 'package:roloxmoney/widget/secondary_button.dart';
 
 import 'color_resource.dart';
 
@@ -86,5 +89,61 @@ class AppUtils {
 
   static Widget setSVG({String? svgPath}) {
     return SvgPicture.asset(svgPath!);
+  }
+
+  static Widget emptyViewWidget(
+      {required BuildContext context,
+      required String contentString,
+      required String imagePath,
+      required String buttonName,
+      Function()? callBack}) {
+    return Padding(
+      padding: EdgeInsets.only(top: 80),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey, width: 0.15),
+          color: ColorResource.color151515,
+        ),
+        height: 320,
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              imagePath,
+              height: 170,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            CustomText(
+              text: contentString,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Colors.white),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              width: 110,
+              height: 40,
+              child: SecondaryButton(
+                buttonName,
+                context,
+                fontWeight: FontWeight.w500,
+                borderRadius: 8,
+                textColor: ColorResource.color00E94F,
+                fontSize: 14,
+                onTap: () {
+                  callBack!();
+                },
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

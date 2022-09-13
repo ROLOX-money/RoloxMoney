@@ -5,8 +5,11 @@ import 'package:roloxmoney/model/dashboard_navigator_model.dart';
 import 'package:roloxmoney/screen/clients_screen/clients_screen.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_controller.dart';
 import 'package:roloxmoney/screen/home_screen/home_screen.dart';
+import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_controller.dart';
+import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_screen.dart';
 import 'package:roloxmoney/screen/invoice_screen/invoice_screen.dart';
 import 'package:roloxmoney/screen/payment_screen/payment_screen.dart';
+import 'package:roloxmoney/screen/profile_screen/profile_controller.dart';
 import 'package:roloxmoney/screen/profile_screen/profile_screen.dart';
 import 'package:roloxmoney/screen/projects_screen/projects_screen.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
@@ -30,6 +33,7 @@ class DashboardScreenSmall extends StatefulWidget {
 }
 
 class DashboardScreenSmallState extends State<DashboardScreenSmall> {
+
   @override
   void initState() {
     super.initState();
@@ -71,7 +75,8 @@ class DashboardScreenSmallState extends State<DashboardScreenSmall> {
                 ),
               ),
               onPressed: () {
-                Get.offAndToNamed(ProfileScreen.routeName);
+                Get.put(ProfileController());
+                Get.toNamed(ProfileScreen.routeName);
               },
             ),
           ],
@@ -128,8 +133,9 @@ class DashboardScreenSmallState extends State<DashboardScreenSmall> {
                         .toUpperCase(),
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
                         color: ColorResource.colorE08AF4,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.normal),
                   ),
                   SizedBox(
                     height: 10,
@@ -143,14 +149,17 @@ class DashboardScreenSmallState extends State<DashboardScreenSmall> {
                             fontWeight: FontWeight.w600),
                         children: <InlineSpan>[
                           TextSpan(
-                            text: ' ${Languages.of(context)?.invoices}',
+                            text:
+                                ' ${Languages.of(context)?.professionalInvoice}',
                             style: Theme.of(context)
                                 .textTheme
                                 .titleSmall!
                                 .copyWith(
-                                    color: ColorResource.color00E94F,
                                     fontSize: 24,
-                                    fontWeight: FontWeight.w600),
+                                    fontWeight: FontWeight.w600,
+                                    height: 1.5,
+                                    foreground: Paint()
+                                      ..shader = ColorResource.linearGradient),
                           )
                         ]),
                     maxLines: 2,
@@ -166,7 +175,10 @@ class DashboardScreenSmallState extends State<DashboardScreenSmall> {
                       isIcon: true,
                       textColor: ColorResource.black,
                       fontSize: 20,
-                      onTap: () {},
+                      onTap: () {
+                        Get.put(AddInvoiceController());
+                        Get.toNamed(AddInvoiceScreen.routeName);
+                      },
                     ),
                   )
                 ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
+import 'package:roloxmoney/screen/dashboard_screen/dashboard_controller.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
 import 'package:roloxmoney/screen/individual_profile_screen/individual_profile_controller.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
@@ -50,10 +51,15 @@ class IndividualProfileScreenSmallState
                   children: [
                     AppBar(
                       backgroundColor: Theme.of(context).backgroundColor,
-                      leading: Icon(
-                        Icons.arrow_back_sharp,
-                        size: 30,
-                        color: Colors.white,
+                      leading: GestureDetector(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: Icon(
+                          Icons.arrow_back_sharp,
+                          size: 30,
+                          color: Colors.white,
+                        ),
                       ),
                       centerTitle: true,
                       title: Text.rich(TextSpan(
@@ -119,7 +125,8 @@ class IndividualProfileScreenSmallState
                 widget.controller!.stepCount(
                     values: widget.controller!.currentStep.obs.value.value + 1);
               } else {
-                Get.offNamed(DashboardScreen.routeName);
+                Get.put(DashboardController());
+                Get.offAll(DashboardScreen());
               }
             },
           ),

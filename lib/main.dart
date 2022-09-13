@@ -27,7 +27,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Get.put(LoginController());
   Get.put(LoginProfileController());
-  Get.put(DashboardController());
+  Get.lazyPut(() => DashboardController());
   Get.lazyPut(() => HomeController());
   Get.lazyPut(() => ProjectsController());
   Get.lazyPut(() => ClientsController());

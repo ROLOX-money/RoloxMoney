@@ -49,10 +49,15 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                   children: [
                     AppBar(
                       backgroundColor: Theme.of(context).backgroundColor,
-                      leading: Icon(
-                        Icons.arrow_back_sharp,
-                        size: 30,
-                        color: Colors.white,
+                      leading: GestureDetector(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: Icon(
+                          Icons.arrow_back_sharp,
+                          size: 30,
+                          color: Colors.white,
+                        ),
                       ),
                       centerTitle: true,
                       title: Text.rich(

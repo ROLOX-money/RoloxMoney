@@ -17,6 +17,10 @@ class ImageResource {
   static const String searchSVG = 'assets/svg/search.svg';
   static const String arrowSVG = 'assets/svg/arrow.svg';
   static const String loginImage = 'assets/svg/login_image.svg';
+  static const String agencyAlertImage = 'assets/png/agency_alert_image.png';
+  static const String emptyProject = 'assets/png/empty_project.png';
+  static const String emptyPayment = 'assets/png/empty_payment.png';
+  static const String withdrawImage = 'assets/png/withdraw_image.png';
   static const String businessType = 'assets/png/business_type.png';
   static const String loginImagePNG = 'assets/png/login_image.png';
   static const String OTPImagePNG = 'assets/png/otp_Image.png';

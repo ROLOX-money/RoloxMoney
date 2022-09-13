@@ -32,7 +32,7 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(TemplateController());
+    Get.put(AddClientController());
     return RoloxMoneyWidgetState(
       rxStatus: widget.controller!.status,
       child: Scaffold(

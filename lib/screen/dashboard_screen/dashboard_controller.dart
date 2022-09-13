@@ -33,8 +33,8 @@ class DashboardController extends GetxController with StateMixin {
   void onInit() async {
     change(null, status: RxStatus.success());
     Future.delayed(const Duration(seconds: 5), () {
-      selectedBottomButton = 'Home'.obs;
-      change(selectedBottomButton);
+      // selectedBottomButton = 'Home'.obs;
+      // change(selectedBottomButton);
     });
     super.onInit();
   }

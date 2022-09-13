@@ -9,6 +9,7 @@ class SecondaryButton extends StatefulWidget {
   final BuildContext context;
   final double cardElevation;
   final double cardShape;
+  final double borderRadius;
 
   final TextAlign textAlign;
   final GestureTapCallback? onTap;
@@ -42,6 +43,7 @@ class SecondaryButton extends StatefulWidget {
       this.font = Font.poppinsRegular,
       this.textAlign = TextAlign.left,
       this.onTap,
+      this.borderRadius = 0,
       this.textColor = Colors.white,
       this.fontSize = FontSize.fourteen,
       this.isUnderLine = false,
@@ -78,6 +80,7 @@ class _SecondaryButtonState extends State<SecondaryButton> {
         height: 46,
         child: Container(
           decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(widget.borderRadius),
               border: Border.all(width: .5, color: ColorResource.color00E94F),
               color:
                   widget.backgroundColor ?? Theme.of(context).backgroundColor),
@@ -94,8 +97,7 @@ class _SecondaryButtonState extends State<SecondaryButton> {
                     widget.text.toString(),
                     textAlign: widget.textAlign,
                     style: Theme.of(context).textTheme.button!.copyWith(
-                        fontSize: widget.fontSize,
-                        color: widget.textColor),
+                        fontSize: widget.fontSize, color: widget.textColor),
                     maxLines: widget.maxLines,
                     overflow:
                         widget.isSingleLine ? TextOverflow.ellipsis : null,

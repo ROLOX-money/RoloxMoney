@@ -99,7 +99,7 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                           widget.controller!.mobilNumberController.obs.value,
                           focusedBorder: Colors.grey,
                           validatorCallBack: (bool value) {
-                            debugPrint('Calback--> ${value}');
+
                           },
                           textColor: Colors.white,
                           enableColor: Colors.grey,
@@ -276,6 +276,7 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                     appContext: context,
                     length: 4,
                     cursorWidth: 1,
+
                     cursorColor: ColorResource.colorFFFFFF,
                     pinTheme: PinTheme(
                         disabledColor: Theme.of(context).backgroundColor,
@@ -296,6 +297,7 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                     controller: controller!.otpController,
                     textStyle: Theme.of(context).textTheme.titleMedium,
                     keyboardType: TextInputType.number,
+
                     boxShadows: const [
                       BoxShadow(
                         offset: Offset(0, 0.5),
@@ -320,6 +322,7 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                   cardShape: 1,
                   isIcon: true,
                   onTap: () {
+                    Get.back();
                     controller.navigateProfile();
                   },
                 ),

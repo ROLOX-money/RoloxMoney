@@ -14,7 +14,6 @@ class HomeController extends GetxController with StateMixin {
   void onInit() async {
     change(null, status: RxStatus.success());
     Future.delayed(const Duration(seconds: 5), () {});
-
     groupInvoicesList.addAll([
       GroupInvoices(
           boarderColor: ColorResource.colorE08AF4,

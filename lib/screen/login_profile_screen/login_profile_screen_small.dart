@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
+import 'package:roloxmoney/screen/business_profile_screen/business_profile_controller.dart';
 import 'package:roloxmoney/screen/business_profile_screen/business_profile_screen.dart';
+import 'package:roloxmoney/screen/individual_profile_screen/individual_profile_controller.dart';
 import 'package:roloxmoney/screen/individual_profile_screen/individual_profile_screen.dart';
 import 'package:roloxmoney/screen/login_profile_screen/login_profile_controller.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
@@ -47,7 +49,7 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                   backgroundColor: Theme.of(context).backgroundColor,
                   leading: GestureDetector(
                     onTap: () {
-                      Get.back(canPop: true);
+                      Get.back();
                     },
                     child: Icon(
                       Icons.arrow_back_sharp,
@@ -322,11 +324,13 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                             if (widget.controller!.typOfBusiness.obs.value
                                     .value ==
                                 TypOfBusiness.business) {
-                              Get.offAllNamed(BusinessProfileScreen.routeName);
+                              Get.put(BusinessProfileController());
+                              Get.toNamed(BusinessProfileScreen.routeName);
                             } else if (widget.controller!.typOfBusiness.obs
                                     .value.value ==
                                 TypOfBusiness.individual) {
-                              Get.offAllNamed(IndividualProfileScreen.routeName);
+                              Get.put(IndividualProfileController());
+                              Get.toNamed(IndividualProfileScreen.routeName);
                             } else {
                               WidgetUtils.showAlertDialog(context: context);
                             }

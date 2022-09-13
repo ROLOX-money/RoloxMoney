@@ -54,6 +54,14 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                   children: [
                     Row(
                       children: [
+                        Container(
+                          alignment: Alignment.center,
+                          child: Image.asset(
+                            ImageResource.withdrawImage,
+                            height: 40,
+                            width: 40,
+                          ),
+                        ),
                         Column(
                           children: [
                             CustomText(
@@ -149,20 +157,6 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                             height: 15,
                           ),
                           Container(
-                            // decoration: BoxDecoration(
-                            //     border: Border(
-                            //       top: BorderSide(
-                            //           color: groupInvoices.boarderColor!,
-                            //           width: 4),
-                            //       left: BorderSide(
-                            //           color: groupInvoices.boarderColor!,
-                            //           width: 4),
-                            //       right: BorderSide(
-                            //           color: Colors.white, width: .25),
-                            //       bottom: BorderSide(
-                            //           color: Colors.white, width: .25),
-                            //     ),
-                            //     color: Theme.of(context).backgroundColor),
                             padding: EdgeInsets.all(1.0),
                             margin: EdgeInsets.only(bottom: 15.0),
                             child: Theme(

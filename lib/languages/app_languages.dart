@@ -92,6 +92,8 @@ abstract class Languages {
 
   String get invoices;
 
+  String get professionalInvoice;
+
   String get welcomeToRolox;
 
   String get explore;

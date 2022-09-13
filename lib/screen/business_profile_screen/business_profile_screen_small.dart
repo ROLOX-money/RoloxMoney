@@ -11,6 +11,8 @@ import 'package:roloxmoney/widget/custom_textfield.dart';
 import 'package:roloxmoney/widget/rolox_money_widget.dart';
 import 'package:roloxmoney/widget/stepper_view.dart';
 
+import '../dashboard_screen/dashboard_controller.dart';
+
 /*Chinnadurai Viswanathan*/
 // ignore: must_be_immutable
 class BusinessProfileScreenSmall extends StatefulWidget {
@@ -50,10 +52,15 @@ class BusinessProfileScreenSmallState
                   children: [
                     AppBar(
                       backgroundColor: Theme.of(context).backgroundColor,
-                      leading: Icon(
-                        Icons.arrow_back_sharp,
-                        size: 30,
-                        color: Colors.white,
+                      leading: GestureDetector(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: Icon(
+                          Icons.arrow_back_sharp,
+                          size: 30,
+                          color: Colors.white,
+                        ),
                       ),
                       centerTitle: true,
                       title: Text.rich(TextSpan(
@@ -393,6 +400,9 @@ class BusinessProfileScreenSmallState
                                         ),
                                       ],
                                     ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
                                   CustomText(
                                     text:
                                         '${Languages.of(context)?.mobileNumber}'
@@ -511,7 +521,8 @@ class BusinessProfileScreenSmallState
             textColor: ColorResource.black,
             fontSize: 20,
             onTap: () {
-              Get.offNamed(DashboardScreen.routeName);
+              Get.put(DashboardController());
+              Get.offAll(DashboardScreen());
             },
           ),
         ),

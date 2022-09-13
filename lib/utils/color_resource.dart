@@ -13,6 +13,7 @@ class ColorResource {
   static const Color colorFFFFFF = Color(0xffFFFFFF);
   static const Color color0093FF = Color(0xff0093FF);
   static const Color colorD4790F = Color(0xffD4790F);
+  static const Color colorFFC700 = Color(0xffFFC700);
   static const Color color1C415C = Color(0xff1C415C);
   static const Color color4A3114 = Color(0xff4A3114);
   static const Color colorDDDDDD = Color(0xffDDDDDD);
@@ -27,6 +28,16 @@ class ColorResource {
   static const Color black = Color(0xff222222);
   static const Color backgroundPatchGrey = Color.fromRGBO(248, 248, 250, 0.8);
   static const Color red = Color(0xffF92538);
+  static  Shader linearGradient = LinearGradient(
+    colors: <Color>[
+      Color(0xff5F8CFF),
+      Color(0xffA689FF),
+      Color(0xffED86F8),
+      Color(0xff82A8E0),
+      Color(0xff00CFB8),
+      Color(0xff00EC2D)
+    ],
+  ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 }
 
 //#E08AF4

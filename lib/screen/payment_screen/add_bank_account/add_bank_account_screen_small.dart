@@ -120,7 +120,9 @@ class AddBankAccountScreenSmallState extends State<AddBankAccountScreenSmall> {
                         isIcon: true,
                         textColor: ColorResource.black,
                         fontSize: 20,
-                        onTap: () {},
+                        onTap: () {
+                          Get.back();
+                        },
                       )
                     ],
                   ),
