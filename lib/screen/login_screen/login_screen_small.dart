@@ -54,11 +54,15 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                       child: CustomText(
                         text: '👋 Welcome to',
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: ColorResource.colorE08AF4,
+                            color: ColorResource.colorF8F8F8,
                             fontSize: 21,
-                            fontWeight: FontWeight.w500),
+                            fontWeight: FontWeight.w500,
+                            fontStyle: FontStyle.italic),
                         textAlign: TextAlign.center,
                       ),
+                    ),
+                    const SizedBox(
+                      height: 5,
                     ),
                     Container(
                       alignment: Alignment.center,
@@ -98,9 +102,7 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                         child: CustomTextField(
                           widget.controller!.mobilNumberController.obs.value,
                           focusedBorder: Colors.grey,
-                          validatorCallBack: (bool value) {
-
-                          },
+                          validatorCallBack: (bool value) {},
                           textColor: Colors.white,
                           enableColor: Colors.grey,
                           borderColor: Colors.red,
@@ -182,7 +184,8 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                         if (widget.controller!.form.currentState!.validate())
                           otpBottomSheet(
                               controller: widget.controller!,
-                              mobileNumber: ' +91 9585313659');
+                              mobileNumber:
+                                  ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
                       },
                     )
                   ],
@@ -209,134 +212,132 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
           ),
         ),
         builder: (builder) {
-          return Container(
-            margin: EdgeInsets.only(top: 0.5),
-            decoration: BoxDecoration(
-              color: Theme.of(context).backgroundColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(22),
-                topRight: Radius.circular(22),
+          return Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: Container(
+              margin: EdgeInsets.only(top: 0.5),
+              decoration: BoxDecoration(
+                color: Theme.of(context).backgroundColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(22),
+                  topRight: Radius.circular(22),
+                ),
               ),
-            ),
-            height: 500.0,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 40,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  child: Image.asset(
-                    ImageResource.OTPImagePNG,
-                    height: 80,
-                    width: 80,
+              height: 500.0,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 40,
                   ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                CustomText(
-                  text:
-                      '${Languages.of(context)?.enter} 4 ${Languages.of(context)?.digit} ${Languages.of(context)?.otp}',
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: ColorResource.colorFFFFFF,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomText(
-                      text:
-                          '${Languages.of(context)?.sentOTPToRegisteredMobile}',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: ColorResource.colorFFFFFF,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400),
+                  Container(
+                    alignment: Alignment.center,
+                    child: Image.asset(
+                      ImageResource.OTPImagePNG,
+                      height: 80,
+                      width: 80,
                     ),
-                    CustomText(
-                      text: '$mobileNumber',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: ColorResource.colorE08AF4,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30),
-                  child: PinCodeTextField(
-                    appContext: context,
-                    length: 4,
-                    cursorWidth: 1,
-
-                    cursorColor: ColorResource.colorFFFFFF,
-                    pinTheme: PinTheme(
-                        disabledColor: Theme.of(context).backgroundColor,
-                        shape: PinCodeFieldShape.circle,
-                        borderRadius: BorderRadius.circular(5),
-                        fieldHeight: 50,
-                        fieldWidth: 50,
-                        inactiveFillColor: Theme.of(context).backgroundColor,
-                        activeFillColor: Theme.of(context).backgroundColor,
-                        borderWidth: 6,
-                        errorBorderColor: Colors.red,
-                        activeColor: Theme.of(context).backgroundColor,
-                        selectedColor: Theme.of(context).backgroundColor,
-                        selectedFillColor: Theme.of(context).backgroundColor,
-                        inactiveColor: Theme.of(context).backgroundColor),
-                    enableActiveFill: true,
-                    backgroundColor: Theme.of(context).backgroundColor,
-                    controller: controller!.otpController,
-                    textStyle: Theme.of(context).textTheme.titleMedium,
-                    keyboardType: TextInputType.number,
-
-                    boxShadows: const [
-                      BoxShadow(
-                        offset: Offset(0, 0.5),
-                        color: Colors.grey,
-                        blurRadius: 5,
-                      )
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  CustomText(
+                    text:
+                        '${Languages.of(context)?.enter} 4 ${Languages.of(context)?.digit} ${Languages.of(context)?.otp}',
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        color: ColorResource.colorFFFFFF,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomText(
+                        text:
+                            '${Languages.of(context)?.sentOTPToRegisteredMobile}',
+                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                            color: ColorResource.colorFFFFFF,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      CustomText(
+                        text: '$mobileNumber',
+                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                            color: ColorResource.colorE08AF4,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400),
+                      ),
                     ],
-                    onCompleted: (v) {
-
-                    },
-                    onChanged: (value) {
-
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 30),
+                    child: PinCodeTextField(
+                      appContext: context,
+                      length: 4,
+                      cursorWidth: 1,
+                      cursorColor: ColorResource.colorFFFFFF,
+                      pinTheme: PinTheme(
+                          disabledColor: Theme.of(context).backgroundColor,
+                          shape: PinCodeFieldShape.circle,
+                          borderRadius: BorderRadius.circular(5),
+                          fieldHeight: 50,
+                          fieldWidth: 50,
+                          inactiveFillColor: Theme.of(context).backgroundColor,
+                          activeFillColor: Theme.of(context).backgroundColor,
+                          borderWidth: 6,
+                          errorBorderColor: Colors.red,
+                          activeColor: Theme.of(context).backgroundColor,
+                          selectedColor: Theme.of(context).backgroundColor,
+                          selectedFillColor: Theme.of(context).backgroundColor,
+                          inactiveColor: Theme.of(context).backgroundColor),
+                      enableActiveFill: true,
+                      backgroundColor: Theme.of(context).backgroundColor,
+                      controller: controller!.otpController,
+                      textStyle: Theme.of(context).textTheme.titleMedium,
+                      keyboardType: TextInputType.number,
+                      boxShadows: const [
+                        BoxShadow(
+                          offset: Offset(0, 0.5),
+                          color: Colors.grey,
+                          blurRadius: 5,
+                        )
+                      ],
+                      onCompleted: (v) {},
+                      onChanged: (value) {},
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  PrimaryButton(
+                    '${Languages.of(context)!.signIn}',
+                    context,
+                    cardShape: 1,
+                    isIcon: true,
+                    onTap: () {
+                      Get.back();
+                      controller.navigateProfile();
                     },
                   ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                PrimaryButton(
-                  '${Languages.of(context)!.signIn}',
-                  context,
-                  cardShape: 1,
-                  isIcon: true,
-                  onTap: () {
-                    Get.back();
-                    controller.navigateProfile();
-                  },
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-                CustomText(
-                  text: '${Languages.of(context)?.resendIN} 0:45',
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: ColorResource.colorFFFFFF,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400),
-                ),
-              ],
+                  SizedBox(
+                    height: 25,
+                  ),
+                  CustomText(
+                    text: '${Languages.of(context)?.resendIN} 0:45',
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        color: ColorResource.colorFFFFFF,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400),
+                  ),
+                ],
+              ),
             ),
           );
         });

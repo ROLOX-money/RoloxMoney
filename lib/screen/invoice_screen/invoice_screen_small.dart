@@ -52,36 +52,40 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                   widget.controller!.projectInvoicesList.obs.value.value
                               .length >
                           0
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CustomText(
-                              text: '${Languages.of(context)!.invoiceDetails}'
-                                  .toUpperCase(),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall!
-                                  .copyWith(
-                                      color: ColorResource.colorE08AF4,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500),
-                            ),
-                            Container(
-                              width: 110,
-                              height: 40,
-                              child: SecondaryButton(
-                                '${Languages.of(context)!.addInvoice}',
-                                context,
-                                backgroundColor: ColorResource.color00E94F,
-                                fontWeight: FontWeight.w500,
-                                textColor: ColorResource.black,
-                                fontSize: 14,
-                                onTap: () {
-                                  widget.controller!.navigateAddInvoiceScreen();
-                                },
+                      ? Container(
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomText(
+                                text: '${Languages.of(context)!.invoiceDetails}'
+                                    .toUpperCase(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(
+                                        color: ColorResource.colorE08AF4,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
                               ),
-                            )
-                          ],
+                              Container(
+                                width: 110,
+                                height: 40,
+                                child: SecondaryButton(
+                                  '${Languages.of(context)!.addInvoice}',
+                                  context,
+                                  backgroundColor: ColorResource.color00E94F,
+                                  fontWeight: FontWeight.w500,
+                                  textColor: ColorResource.black,
+                                  fontSize: 14,
+                                  onTap: () {
+                                    widget.controller!
+                                        .navigateAddInvoiceScreen();
+                                  },
+                                ),
+                              )
+                            ],
+                          ),
                         )
                       : SizedBox(),
                   SizedBox(

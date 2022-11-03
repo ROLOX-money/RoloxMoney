@@ -100,6 +100,7 @@ class AppUtils {
     return Padding(
       padding: EdgeInsets.only(top: 80),
       child: Container(
+        margin: EdgeInsets.all(20.0),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey, width: 0.15),
           color: ColorResource.color151515,

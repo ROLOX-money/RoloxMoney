@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_locale_constant.dart';
 import 'package:roloxmoney/languages/app_localizations_delegate.dart';
 import 'package:roloxmoney/router.dart';
+import 'package:roloxmoney/screen/bank_list_screen/bank_list_controller.dart';
 import 'package:roloxmoney/screen/clients_screen/add_client/add_client_controller.dart';
 import 'package:roloxmoney/screen/clients_screen/clients_controller.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_controller.dart';
@@ -38,6 +39,7 @@ Future<void> main() async {
   Get.lazyPut(() => AddInvoiceController());
   Get.lazyPut(() => AddBankAccountController());
   Get.lazyPut(() => ProfileController());
+  Get.lazyPut(() => BankListController());
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

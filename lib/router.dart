@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:roloxmoney/screen/bank_list_screen/bank_list_screen.dart';
 import 'package:roloxmoney/screen/business_profile_screen/business_profile_screen.dart';
 import 'package:roloxmoney/screen/clients_screen/add_client/add_client_screen.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
@@ -14,7 +15,8 @@ import 'package:roloxmoney/screen/splash_screen/splash_screen.dart';
 /*Chinnadurai Viswanathan*/
 class AppRoutes {
   static List<GetPage<dynamic>>? routes = [
-    GetPage(name: '/', page: () => SplashScreen()),
+    // GetPage(name: '/', page: () => SplashScreen()),
+    GetPage(name: '/', page: () => DashboardScreen()),
     GetPage(name: LoginScreen.routeName, page: () => LoginScreen()),
     GetPage(
         name: LoginProfileScreen.routeName, page: () => LoginProfileScreen()),
@@ -32,5 +34,6 @@ class AppRoutes {
         name: AddBankAccountScreen.routeName,
         page: () => AddBankAccountScreen()),
     GetPage(name: ProfileScreen.routeName, page: () => ProfileScreen()),
+    GetPage(name: BankListScreen.routeName, page: () => BankListScreen()),
   ];
 }

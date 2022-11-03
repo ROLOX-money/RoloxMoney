@@ -42,7 +42,7 @@ class PrimaryButton extends StatefulWidget {
       this.font = Font.poppinsRegular,
       this.textAlign = TextAlign.left,
       this.onTap,
-      this.textColor = Colors.white,
+      this.textColor = ColorResource.color0D0D0D,
       this.fontSize = FontSize.fourteen,
       this.isUnderLine = false,
       this.isLeading = false,
@@ -96,7 +96,8 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                     textAlign: widget.textAlign,
                     style: Theme.of(context).textTheme.button!.copyWith(
                         fontSize: widget.fontSize,
-                        color: widget.textColor.withOpacity(1)),
+                        color: widget.textColor.withOpacity(1),
+                        fontWeight: FontWeight.w600),
                     maxLines: widget.maxLines,
                     overflow:
                         widget.isSingleLine ? TextOverflow.ellipsis : null,

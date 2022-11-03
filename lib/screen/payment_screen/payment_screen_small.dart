@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/model/project_model.dart';
+import 'package:roloxmoney/screen/bank_list_screen/bank_list_controller.dart';
+import 'package:roloxmoney/screen/bank_list_screen/bank_list_screen.dart';
 import 'package:roloxmoney/screen/payment_screen/add_bank_account/add_bank_account_controller.dart';
 import 'package:roloxmoney/screen/payment_screen/add_bank_account/add_bank_account_screen.dart';
 import 'package:roloxmoney/screen/payment_screen/payment_controller.dart';
@@ -50,34 +52,42 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomText(
-                        text:
-                            '${Languages.of(context)!.payments}'.toUpperCase(),
-                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: ColorResource.colorE08AF4,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      Container(
-                        width: 160,
-                        height: 40,
-                        child: SecondaryButton(
-                          '${Languages.of(context)!.addBankAccount}',
-                          context,
-                          backgroundColor: ColorResource.color00E94F,
-                          fontWeight: FontWeight.w500,
-                          textColor: ColorResource.black,
-                          fontSize: 14,
-                          onTap: () {
-                            Get.put(AddBankAccountController());
-                            Get.toNamed(AddBankAccountScreen.routeName);
-                          },
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomText(
+                          text: '${Languages.of(context)!.payments}'
+                              .toUpperCase(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleSmall!
+                              .copyWith(
+                                  color: ColorResource.colorE08AF4,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500),
                         ),
-                      )
-                    ],
+                        Container(
+                          width: 160,
+                          height: 40,
+                          child: SecondaryButton(
+                            'View Bank Account',
+                            context,
+                            backgroundColor: Colors.transparent,
+                            fontWeight: FontWeight.w500,
+                            textColor: ColorResource.color00E94F,
+                            fontSize: 14,
+                            onTap: () {
+                              // Get.put(AddBankAccountController());
+                              // Get.toNamed(AddBankAccountScreen.routeName);
+                              Get.put(BankListController());
+                              Get.toNamed(BankListScreen.routeName);
+                            },
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: 15,

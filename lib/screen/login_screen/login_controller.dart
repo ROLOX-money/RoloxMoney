@@ -17,7 +17,7 @@ class LoginController extends GetxController with StateMixin {
   @override
   void onInit() async {
     change(null, status: RxStatus.success());
-    if (kDebugMode) mobilNumberController.text = '9585313659';
+    // if (kDebugMode) mobilNumberController.text = '9585313659';
     Future.delayed(const Duration(seconds: 5), () {});
     super.onInit();
   }

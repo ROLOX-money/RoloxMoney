@@ -52,37 +52,40 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                   widget.controller!.projectInvoicesList.obs.value.value
                               .length >
                           0
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CustomText(
-                              text: '${Languages.of(context)!.clientDetails}'
-                                  .toUpperCase(),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall!
-                                  .copyWith(
-                                      color: ColorResource.colorE08AF4,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500),
-                            ),
-                            Container(
-                              width: 110,
-                              height: 40,
-                              child: SecondaryButton(
-                                '${Languages.of(context)!.addClient}',
-                                context,
-                                backgroundColor: ColorResource.color00E94F,
-                                fontWeight: FontWeight.w500,
-                                textColor: ColorResource.black,
-                                fontSize: 14,
-                                onTap: () {
-                                  widget.controller!.navigateAddClientScreen();
-                                },
+                      ? Container(
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomText(
+                                text: '${Languages.of(context)!.clientDetails}'
+                                    .toUpperCase(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(
+                                        color: ColorResource.colorE08AF4,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
                               ),
-                            )
-                          ],
-                        )
+                              Container(
+                                width: 110,
+                                height: 40,
+                                child: SecondaryButton(
+                                  '${Languages.of(context)!.addClient}',
+                                  context,
+                                  backgroundColor: ColorResource.color00E94F,
+                                  fontWeight: FontWeight.w500,
+                                  textColor: ColorResource.black,
+                                  fontSize: 14,
+                                  onTap: () {
+                                    widget.controller!.navigateAddClientScreen();
+                                  },
+                                ),
+                              )
+                            ],
+                          ),
+                      )
                       : SizedBox(),
                   SizedBox(
                     height: 15,
