@@ -200,25 +200,7 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
                             SizedBox(
                               height: 10,
                             ),
-                            Container(
-                              decoration: new BoxDecoration(
-                                  border: Border(
-                                      left: BorderSide(color: Color(0XFFFF6D64), width: 2.0))),
-                              height: 20.0,
-                              margin: const EdgeInsets.only(left: 35.0),
-                              child: new Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  new DecoratedBox(
-                                    decoration: new BoxDecoration(
-                                        border: Border(
-                                            left:
-                                            BorderSide(color: Color(0XFFFF6D64), width: 2.0,style: BorderStyle.solid))),
 
-                                  )
-                                ],
-                              ),
-                            ),
                             Container(
                               margin: EdgeInsets.only(top: 25),
                               alignment: Alignment.centerLeft,
