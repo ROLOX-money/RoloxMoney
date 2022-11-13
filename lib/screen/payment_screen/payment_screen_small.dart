@@ -74,9 +74,9 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                           child: SecondaryButton(
                             'View Bank Account',
                             context,
-                            backgroundColor: Colors.transparent,
+                            backgroundColor: ColorResource.color00E94F,
                             fontWeight: FontWeight.w500,
-                            textColor: ColorResource.color00E94F,
+                            textColor: ColorResource.color151515,
                             fontSize: 14,
                             onTap: () {
                               // Get.put(AddBankAccountController());

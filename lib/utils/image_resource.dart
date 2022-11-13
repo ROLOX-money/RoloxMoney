@@ -2,6 +2,7 @@
 
 class ImageResource {
   static const String splashScreen = 'assets/png/splash_screen.png';
+  static const String login_screen_rolox = 'assets/png/login_screen_rolox.png';
   static const String buttonArrow = 'assets/png/button_arrow.png';
   static const String rolox = 'assets/png/rolox.png';
   static const String error = 'assets/png/error.png';
@@ -20,6 +21,8 @@ class ImageResource {
   static const String agencyAlertImage = 'assets/png/agency_alert_image.png';
   static const String emptyProject = 'assets/png/empty_project.png';
   static const String emptyPayment = 'assets/png/empty_payment.png';
+  static const String emptyClient = 'assets/png/empty_client.png';
+  static const String emptyInvoice = 'assets/png/empty_invoice.png';
   static const String withdrawImage = 'assets/png/withdraw_image.png';
   static const String businessType = 'assets/png/business_type.png';
   static const String loginImagePNG = 'assets/png/login_image.png';

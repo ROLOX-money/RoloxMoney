@@ -135,7 +135,8 @@ class AppUtils {
                 context,
                 fontWeight: FontWeight.w500,
                 borderRadius: 8,
-                textColor: ColorResource.color00E94F,
+                backgroundColor: ColorResource.color00E94F,
+                textColor: ColorResource.color151515,
                 fontSize: 14,
                 onTap: () {
                   callBack!();

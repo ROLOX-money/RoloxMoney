@@ -257,7 +257,7 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                           context: Get.context!,
                           buttonName: Languages.of(context)!.addInvoice,
                           contentString: "No Invoice are there",
-                          imagePath: ImageResource.agencyAlertImage,
+                          imagePath: ImageResource.emptyInvoice,
                           callBack: () {
                             widget.controller!.navigateAddInvoiceScreen();
                           }),

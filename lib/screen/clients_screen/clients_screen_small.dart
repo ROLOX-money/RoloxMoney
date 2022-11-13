@@ -249,7 +249,7 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                           context: Get.context!,
                           buttonName: Languages.of(context)!.addClient,
                           contentString: "No Clients are there",
-                          imagePath: ImageResource.agencyAlertImage,
+                          imagePath: ImageResource.emptyClient,
                           callBack: () {
                             widget.controller!.navigateAddClientScreen();
                           }),

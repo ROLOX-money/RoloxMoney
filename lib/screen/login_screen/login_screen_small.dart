@@ -49,27 +49,13 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      alignment: Alignment.center,
-                      child: CustomText(
-                        text: '👋 Welcome to',
-                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: ColorResource.colorF8F8F8,
-                            fontSize: 21,
-                            fontWeight: FontWeight.w500,
-                            fontStyle: FontStyle.italic),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
+
                     Container(
                       alignment: Alignment.center,
                       padding: const EdgeInsets.only(left: 8.0),
                       child: Image.asset(
-                        ImageResource.rolox,
-                        height: 30,
+                        ImageResource.login_screen_rolox,
+                        height: 80,
                       ),
                     ),
                     const SizedBox(
