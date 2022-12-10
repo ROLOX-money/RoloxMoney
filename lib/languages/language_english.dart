@@ -89,7 +89,7 @@ class LanguageEn extends Languages {
 
   String get welcomeToRolox => 'Welcome to rolox!';
 
-  String get welcomeNote => 'Manage your business with';
+  String get welcomeNote => 'Manage your business \nwith';
 
   String get professionalInvoice => 'professional invoices';
 
