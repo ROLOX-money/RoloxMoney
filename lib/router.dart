@@ -18,6 +18,7 @@ class AppRoutes {
     GetPage(name: '/', page: () => SplashScreen()),
     // GetPage(name: '/', page: () => DashboardScreen()),
     GetPage(name: LoginScreen.routeName, page: () => LoginScreen()),
+
     GetPage(
         name: LoginProfileScreen.routeName, page: () => LoginProfileScreen()),
     GetPage(
