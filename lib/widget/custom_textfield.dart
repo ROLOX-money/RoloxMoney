@@ -35,6 +35,7 @@ class CustomTextField extends StatefulWidget {
   final Widget? prefixIcon;
   final bool isEnableLabel;
   TextStyle? errorStyle;
+  TextStyle? hintStyle;
   String? Function(String?)? validatorFunction;
   AutovalidateMode? autoValidateMode;
 
@@ -69,6 +70,7 @@ class CustomTextField extends StatefulWidget {
     this.inputformaters,
     this.validatorFunction,
     this.autoValidateMode,
+    this.hintStyle,
     this.errorStyle,
     this.validationRules = const [],
   });
@@ -145,10 +147,12 @@ class CustomTextFieldState extends State<CustomTextField> {
               ? widget.focusTextColor
               : widget.textColor),
       decoration: InputDecoration(
+        floatingLabelBehavior: FloatingLabelBehavior.never,
         prefix: widget.prefixWidget,
         fillColor: ColorResource.color151515,
         filled: true,
         labelText: widget.hintText,
+        hintText: widget.hintText,
         isDense: true,
         counterText: widget.descriptionText,
         errorMaxLines: 2,
@@ -156,6 +160,14 @@ class CustomTextFieldState extends State<CustomTextField> {
         suffixIconConstraints:
             const BoxConstraints(minHeight: 24, minWidth: 24),
         prefixIcon: widget.prefixIcon,
+        hintStyle: widget.hintStyle ??
+            TextStyle(
+                color: ColorResource.colorFFFFFF.withOpacity(0.4),
+                fontFamily: 'Poppins-Medium',
+                fontWeight: FontWeight.w400,
+                fontStyle: FontStyle.normal,
+                height: 1,
+                fontSize: 14),
         errorStyle: widget.errorStyle ??
             Theme.of(context)
                 .textTheme

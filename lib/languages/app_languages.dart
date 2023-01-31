@@ -173,4 +173,36 @@ abstract class Languages {
   String get cityName;
 
   String get enterAnyOneSocialMediaIdLabel;
+
+  String get agree;
+
+  String get roloxTermsAndCondition;
+
+  String get fullName;
+
+  String get fullNameHint;
+
+  String get emailIdHint;
+
+  String get socialIdHint;
+
+  String get companyName ;
+
+  String get companyNameHint;
+
+  String get panNumberHint;
+
+  String get aadhaarNumberHint;
+
+  String get gstNumberHint;
+
+  String get aadhaarNumber;
+
+  String get congratulations;
+
+  String get accountCreatedSuccessfully;
+
+  String get accountCreatedScreenContent;
+
+  String get letsExplore;
 }

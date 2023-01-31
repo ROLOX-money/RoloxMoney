@@ -15,6 +15,7 @@ abstract class WidgetUtils {
       required String labelName,
       List<String> validationRules = const [],
       String? suffixImagePath,
+        String? hintText,
       TextInputType? keyBoardType}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,6 +34,7 @@ abstract class WidgetUtils {
         SizedBox(
           child: CustomTextField(
             controller.obs.value,
+            hintText: hintText,
             focusedBorder: Colors.grey,
             textColor: Colors.white,
             enableColor: Colors.grey,

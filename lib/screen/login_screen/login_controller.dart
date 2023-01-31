@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:roloxmoney/screen/login_profile_screen/login_profile_controller.dart';
-import 'package:roloxmoney/screen/login_profile_screen/login_profile_screen.dart';
-import 'package:roloxmoney/utils/app_utils.dart';
+import 'package:roloxmoney/screen/welcome_screen/welcome_screen.dart';
+import 'package:roloxmoney/screen/welcome_screen/welcome_screen_controller.dart';
+
+
 /*Chinnadurai Viswanathan*/
 
 class LoginController extends GetxController with StateMixin {
@@ -13,6 +13,7 @@ class LoginController extends GetxController with StateMixin {
   final form = GlobalKey<FormState>();
 
   RxBool isLogin = true.obs;
+  RxBool acceptTermsAndCondition = false.obs;
 
   @override
   void onInit() async {
@@ -24,8 +25,15 @@ class LoginController extends GetxController with StateMixin {
 
   void navigateProfile() {
     if (otpController.text.length == 4) {
-      Get.put(LoginProfileController());
-      Get.toNamed(LoginProfileScreen.routeName);
+      Get.put(WelcomeController());
+      Get.toNamed(WelcomeScreen.routeName);
+      // Get.put(LoginProfileController());
+      // Get.toNamed(LoginProfileScreen.routeName);
     }
+  }
+
+  void noAgreeTermsAndConditionCheckBox({bool? values}) {
+    acceptTermsAndCondition = values!.obs;
+    change(acceptTermsAndCondition);
   }
 }

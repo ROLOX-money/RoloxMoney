@@ -6,7 +6,6 @@ import 'package:roloxmoney/screen/business_profile_screen/business_profile_scree
 import 'package:roloxmoney/screen/individual_profile_screen/individual_profile_controller.dart';
 import 'package:roloxmoney/screen/individual_profile_screen/individual_profile_screen.dart';
 import 'package:roloxmoney/screen/login_profile_screen/login_profile_controller.dart';
-import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/utils/widget_utils.dart';
@@ -77,6 +76,7 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                       SizedBox(
                         height: 10,
                       ),
+                      // Profile page Content
                       CustomText(
                         text: '${Languages.of(context)?.profilePageContent}',
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
@@ -84,41 +84,10 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                             fontSize: 16,
                             fontWeight: FontWeight.w400),
                       ),
-                      Form(
-                        key: widget.controller!.form,
-                        child: Column(
-                          children: [
-                            WidgetUtils.genericTextFiled(
-                              keyBoardType: TextInputType.name,
-                              context: context,
-                              validationRules: ['required'],
-                              controller:
-                                  widget.controller!.firstNameController,
-                              labelName: '${Languages.of(context)?.firstName}'
-                                  .toUpperCase(),
-                            ),
-                            WidgetUtils.genericTextFiled(
-                              context: context,
-                              keyBoardType: TextInputType.name,
-                              validationRules: ['required'],
-                              controller: widget.controller!.lastNameController,
-                              labelName: '${Languages.of(context)?.lastName}'
-                                  .toUpperCase(),
-                            ),
-                            WidgetUtils.genericTextFiled(
-                              context: context,
-                              keyBoardType: TextInputType.emailAddress,
-                              validationRules: ['required', 'email'],
-                              controller: widget.controller!.emailIDController,
-                              labelName: '${Languages.of(context)?.emailID}'
-                                  .toUpperCase(),
-                            ),
-                          ],
-                        ),
-                      ),
                       const SizedBox(
                         height: 15,
                       ),
+                      // Type of Business
                       Container(
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey, width: 0.25),
@@ -300,17 +269,210 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                       const SizedBox(
                         height: 15,
                       ),
-                      WidgetUtils.genericTextFiled(
-                        context: context,
-                        keyBoardType: TextInputType.name,
-                        controller: widget.controller!.socialId,
-                        labelName:
-                            '${Languages.of(context)?.enterAnyOneSocialMediaIdLabel}'
-                                .toUpperCase(),
+                      // Forms filed
+                      (widget.controller!.typOfBusiness.obs.value ==
+                              TypOfBusiness.individual)
+                          ? Form(
+                              key: widget.controller!.form,
+                              child: Column(
+                                children: [
+                                  WidgetUtils.genericTextFiled(
+                                      keyBoardType: TextInputType.name,
+                                      context: context,
+                                      validationRules: ['required'],
+                                      controller: widget
+                                          .controller!.firstNameController,
+                                      labelName:
+                                          '${Languages.of(context)?.fullName}',
+                                      hintText:
+                                          Languages.of(context)?.fullNameHint),
+                                  // WidgetUtils.genericTextFiled(
+                                  //   context: context,
+                                  //   keyBoardType: TextInputType.name,
+                                  //   validationRules: ['required'],
+                                  //   controller: widget.controller!.lastNameController,
+                                  //   labelName: '${Languages.of(context)?.lastName}'
+                                  //       .toUpperCase(),
+                                  // ),
+                                  WidgetUtils.genericTextFiled(
+                                      context: context,
+                                      keyBoardType: TextInputType.emailAddress,
+                                      validationRules: ['required', 'email'],
+                                      controller:
+                                          widget.controller!.emailIDController,
+                                      labelName:
+                                          '${Languages.of(context)?.emailID}',
+                                      hintText:
+                                          Languages.of(context)?.emailIdHint),
+                                  WidgetUtils.genericTextFiled(
+                                      context: context,
+                                      keyBoardType: TextInputType.name,
+                                      controller: widget.controller!.socialId,
+                                      labelName:
+                                          '${Languages.of(context)?.enterAnyOneSocialMediaIdLabel}',
+                                      hintText:
+                                          Languages.of(context)?.socialIdHint),
+                                ],
+                              ),
+                            )
+                          : (widget.controller!.typOfBusiness.obs.value ==
+                                  TypOfBusiness.business)
+                              ? Form(
+                                  key: widget.controller!.form,
+                                  child: Column(
+                                    children: [
+                                      // Company Name
+                                      WidgetUtils.genericTextFiled(
+                                          keyBoardType: TextInputType.name,
+                                          context: context,
+                                          validationRules: ['required'],
+                                          controller: widget.controller!
+                                              .companyNameController,
+                                          labelName:
+                                              '${Languages.of(context)?.companyName}',
+                                          hintText: Languages.of(context)
+                                              ?.companyName),
+                                      // Company Email ID
+                                      WidgetUtils.genericTextFiled(
+                                          context: context,
+                                          keyBoardType:
+                                              TextInputType.emailAddress,
+                                          validationRules: [
+                                            'required',
+                                            'email'
+                                          ],
+                                          controller: widget
+                                              .controller!.emailIDController,
+                                          labelName:
+                                              '${Languages.of(context)?.emailID}',
+                                          hintText: Languages.of(context)
+                                              ?.emailIdHint),
+                                      // Company Pan Number
+                                      WidgetUtils.genericTextFiled(
+                                          context: context,
+                                          keyBoardType: TextInputType.name,
+                                          validationRules: ['required'],
+                                          controller: widget
+                                              .controller!.panNumberController,
+                                          labelName:
+                                              '${Languages.of(context)?.panNumber}',
+                                          hintText:
+                                              '${Languages.of(context)?.panNumberHint}'),
+                                      // aadhaar Number
+                                      WidgetUtils.genericTextFiled(
+                                          context: context,
+                                          keyBoardType: TextInputType.name,
+                                          validationRules: ['required'],
+                                          controller: widget.controller!
+                                              .aadhaarNumberController,
+                                          labelName:
+                                              '${Languages.of(context)?.aadhaarNumber}',
+                                          hintText:
+                                              '${Languages.of(context)?.aadhaarNumberHint}'),
+                                      // GST Number
+                                      WidgetUtils.genericTextFiled(
+                                          context: context,
+                                          keyBoardType: TextInputType.name,
+                                          validationRules: ['required'],
+                                          controller: widget
+                                              .controller!.gstNumberController,
+                                          labelName:
+                                              '${Languages.of(context)?.gstNumber}',
+                                          hintText:
+                                              '${Languages.of(context)?.gstNumberHint}'),
+                                      // social id
+                                      WidgetUtils.genericTextFiled(
+                                          context: context,
+                                          keyBoardType: TextInputType.name,
+                                          controller:
+                                              widget.controller!.socialId,
+                                          labelName:
+                                              '${Languages.of(context)?.enterAnyOneSocialMediaIdLabel}',
+                                          hintText: Languages.of(context)
+                                              ?.socialIdHint),
+                                    ],
+                                  ),
+                                )
+                              : Form(
+                                  key: widget.controller!.form,
+                                  child: Column(
+                                    children: [
+                                      // Company Name
+                                      WidgetUtils.genericTextFiled(
+                                          keyBoardType: TextInputType.name,
+                                          context: context,
+                                          validationRules: ['required'],
+                                          controller: widget.controller!
+                                              .companyNameController,
+                                          labelName:
+                                              '${Languages.of(context)?.companyName}',
+                                          hintText: Languages.of(context)
+                                              ?.companyName),
+                                      // Company Email ID
+                                      WidgetUtils.genericTextFiled(
+                                          context: context,
+                                          keyBoardType:
+                                              TextInputType.emailAddress,
+                                          validationRules: [
+                                            'required',
+                                            'email'
+                                          ],
+                                          controller: widget
+                                              .controller!.emailIDController,
+                                          labelName:
+                                              '${Languages.of(context)?.emailID}',
+                                          hintText: Languages.of(context)
+                                              ?.emailIdHint),
+                                      // Company Pan Number
+                                      WidgetUtils.genericTextFiled(
+                                          context: context,
+                                          keyBoardType: TextInputType.name,
+                                          validationRules: ['required'],
+                                          controller: widget
+                                              .controller!.panNumberController,
+                                          labelName:
+                                              '${Languages.of(context)?.panNumber}',
+                                          hintText:
+                                              '${Languages.of(context)?.panNumberHint}'),
+                                      // aadhaar Number
+                                      WidgetUtils.genericTextFiled(
+                                          context: context,
+                                          keyBoardType: TextInputType.name,
+                                          validationRules: ['required'],
+                                          controller: widget.controller!
+                                              .aadhaarNumberController,
+                                          labelName:
+                                              '${Languages.of(context)?.aadhaarNumber}',
+                                          hintText:
+                                              '${Languages.of(context)?.aadhaarNumberHint}'),
+                                      // GST Number
+                                      WidgetUtils.genericTextFiled(
+                                          context: context,
+                                          keyBoardType: TextInputType.name,
+                                          validationRules: ['required'],
+                                          controller: widget
+                                              .controller!.gstNumberController,
+                                          labelName:
+                                              '${Languages.of(context)?.gstNumber}',
+                                          hintText:
+                                              '${Languages.of(context)?.gstNumberHint}'),
+                                      // social id
+                                      WidgetUtils.genericTextFiled(
+                                          context: context,
+                                          keyBoardType: TextInputType.name,
+                                          controller:
+                                              widget.controller!.socialId,
+                                          labelName:
+                                              '${Languages.of(context)?.enterAnyOneSocialMediaIdLabel}',
+                                          hintText: Languages.of(context)
+                                              ?.socialIdHint),
+                                    ],
+                                  ),
+                                ),
+                      const SizedBox(
+                        height: 15,
                       ),
-                      SizedBox(
-                        height: 40,
-                      ),
+
                       PrimaryButton(
                         '${Languages.of(context)!.continueText}',
                         context,

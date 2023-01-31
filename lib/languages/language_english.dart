@@ -173,4 +173,36 @@ class LanguageEn extends Languages {
 
   String get enterAnyOneSocialMediaIdLabel =>
       'Facebook/Instagram/Youtube/Twitter/Linkedin';
+
+  String get agree => 'I agree to the ';
+
+  String get roloxTermsAndCondition => 'Rolox Terms & Conditions';
+
+  String get fullName => 'Full Name';
+
+  String get fullNameHint => 'Enter your full name';
+
+  String get emailIdHint => 'Enter your Email ID';
+
+  String get socialIdHint => 'Enter any one social ID';
+
+  String get companyName => 'Company Name';
+
+  String get companyNameHint => 'Enter your company name';
+
+  String get panNumberHint => 'Enter your PAN number';
+
+  String get aadhaarNumberHint => 'Enter your Aadhaar number';
+
+  String get gstNumberHint => 'Enter your GST number';
+
+  String get aadhaarNumber => 'Aadhaar Number';
+
+  String get congratulations => 'Congratulations!';
+
+  String get accountCreatedSuccessfully => 'Your Rolox account has been created successfully';
+
+  String get accountCreatedScreenContent => 'Banking for Creators, Influencers, Freelancers, Gig, Solopreneurs, Small Business, Brands, Agencies';
+
+  String get letsExplore => 'Lets Explore';
 }

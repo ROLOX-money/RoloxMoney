@@ -30,4 +30,6 @@ class ImageResource {
   static const String bank = 'assets/png/bank.png';
   static const String bottomSelected =
       'assets/png/bottom_navigation/bottom_selected.png';
+  static const String welcomeScreenImage =
+      'assets/png/congrats_image.png';
 }
