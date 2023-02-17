@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1091881610495",
+    "project_id": "roloxmoney-dev",
+    "storage_bucket": "roloxmoney-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1091881610495:android:27324cb6869610c67370ca",
+        "android_client_info": {
+          "package_name": "com.rolox.money.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1091881610495-9aronvgds7ervtvilhphpl3hi6o1mh9l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPZh7Cta0V_PnFqQ6xmwHzquB2ayafTIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1091881610495-9aronvgds7ervtvilhphpl3hi6o1mh9l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

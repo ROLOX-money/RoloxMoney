@@ -1,8 +1,7 @@
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
-    localPropertiesFile.withReader('UTF-8') { reader ->
-        localProperties.load(reader)
+    localPropertiesFile.withReader('UTF-8') { reader -> localProperties.load(reader)
     }
 }
 
@@ -24,6 +23,29 @@ if (flutterVersionName == null) {
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+apply plugin: 'com.google.gms.google-services'
+
+//Signing APK
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+if (project.hasProperty("local.signing")) {
+    apply from: getSigningFile()
+}
+
+def getSigningFile() {
+    return project.property("local.signing");
+}
+
+def apkNamePrefix = "RoloxMoney"
+def majorNumber = "1"
+if (flutterVersionName != null) {
+    majorNumber = flutterVersionName
+}
+def sprintNumber = "0"
 
 android {
     compileSdkVersion flutter.compileSdkVersion
@@ -43,21 +65,51 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.rolox.money.roloxmoney"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
+        applicationId "com.rolox"
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        android.applicationVariants.all { variant ->
+            variant.outputs.all {
+                def displayVersionName = versionName + "." + sprintNumber + "." + flutterVersionCode != null ? flutterVersionCode : 1
+                def date = getDate()
+                def modifiedApkName = apkNamePrefix + "-" + displayVersionName + "-" + variant.flavorName + "-" + variant.buildType.name + "-" + date + ".apk"
+                outputFileName = modifiedApkName
+                def fullVersionName = versionName + "." + sprintNumber
+                buildConfigField("String", "displayVersionName", "\"" + displayVersionName + "\"")
+                buildConfigField("String", "fullVersionName", "\"" + fullVersionName + "\"")
+            }
+        }
     }
 
     buildTypes {
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+        def CHARACTER = "Character"
+        def XPOSELEVEL = "exposeLevel"
+        debug {
             signingConfig signingConfigs.debug
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            buildConfigField(CHARACTER, XPOSELEVEL, "null")
+            signingConfig signingConfigs.release
+            shrinkResources true
+            minifyEnabled true
+            debuggable false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    flavorDimensions "default"
+    productFlavors {
+        dev {
+            applicationIdSuffix ".money.dev"
+        }
+        uat {
+            applicationIdSuffix ".money.uat"
+        }
+        prod {
+            applicationIdSuffix ".money"
         }
     }
 }
@@ -66,6 +118,13 @@ flutter {
     source '../..'
 }
 
+static def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMddHHmmss')
+    return formattedDate
+}
+
 dependencies {
+    implementation "com.google.android.gms:play-services-auth:$play_services_auth"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
