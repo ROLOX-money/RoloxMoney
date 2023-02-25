@@ -4,10 +4,11 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/screen/login_profile_screen/login_profile_controller.dart';
 import 'package:roloxmoney/screen/login_profile_screen/login_profile_screen.dart';
+import 'package:roloxmoney/utils/RoloxGetxController.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 /*Chinnadurai Viswanathan*/
 
-class LoginController extends GetxController with StateMixin {
+class LoginController extends RoloxGetXController {
   TextEditingController mobilNumberController = TextEditingController();
   TextEditingController otpController = TextEditingController();
   final form = GlobalKey<FormState>();
