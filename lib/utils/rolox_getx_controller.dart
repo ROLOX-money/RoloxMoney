@@ -10,9 +10,10 @@ import 'package:roloxmoney/utils/dio_client.dart';
 enum APIRequestType { get, post, put, delete, upload, download }
 
 class RoloxGetXController extends GetxController with StateMixin {
-  static Future<Map<String, dynamic>> apiRequest(
-      APIRequestType requestType, String urlString,
-      {dynamic requestBodyData,
+  Future<Map<String, dynamic>> apiRequest(
+      {required APIRequestType requestType,
+      required String urlString,
+      dynamic requestBodyData,
       List<File>? file,
       bool isEncryptionDecryptionEnabled = true,
       bool isToastEnable = true,

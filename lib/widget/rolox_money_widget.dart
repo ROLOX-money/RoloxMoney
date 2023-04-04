@@ -30,7 +30,7 @@ class RoloxMoneyWidgetState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: [child, if (rxStatus.isLoading) RoloxMoenyLoading()],
+      children: [child, if (rxStatus.isLoading) RoloxMoneyLoading()],
     );
   }
 }

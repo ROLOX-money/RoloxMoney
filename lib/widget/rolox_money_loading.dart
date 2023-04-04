@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 /*Chinnadurai Viswanathan*/
 
 // ignore: must_be_immutable
-class RoloxMoenyLoading extends StatefulWidget {
-  RoloxMoenyLoading(
+class RoloxMoneyLoading extends StatefulWidget {
+  RoloxMoneyLoading(
       {Key? key,
       this.radius = 20,
       this.gradientColors,
@@ -18,10 +18,10 @@ class RoloxMoenyLoading extends StatefulWidget {
   Color backgroundColor;
 
   @override
-  State<RoloxMoenyLoading> createState() => RoloxMoenyLoadingState();
+  State<RoloxMoneyLoading> createState() => RoloxMoneyLoadingState();
 }
 
-class RoloxMoenyLoadingState extends State<RoloxMoenyLoading>
+class RoloxMoneyLoadingState extends State<RoloxMoneyLoading>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
 

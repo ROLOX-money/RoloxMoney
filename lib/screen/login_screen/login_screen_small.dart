@@ -49,7 +49,6 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     Container(
                       alignment: Alignment.center,
                       padding: const EdgeInsets.only(left: 8.0),
@@ -168,10 +167,11 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                       isIcon: true,
                       onTap: () {
                         if (widget.controller!.form.currentState!.validate())
-                          otpBottomSheet(
-                              controller: widget.controller!,
-                              mobileNumber:
-                                  ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
+                          widget.controller!.triggerLogin();
+                        // otpBottomSheet(
+                        //     controller: widget.controller!,
+                        //     mobileNumber:
+                        //         ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
                       },
                     )
                   ],
