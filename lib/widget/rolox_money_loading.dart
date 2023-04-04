@@ -42,10 +42,6 @@ class RoloxMoneyLoadingState extends State<RoloxMoneyLoading>
 
   @override
   Widget build(BuildContext context) {
-    widget.gradientColors!.addAll([
-      Theme.of(context).progressIndicatorTheme.color!,
-      Theme.of(context).progressIndicatorTheme.circularTrackColor!
-    ]);
     return WillPopScope(
       onWillPop: () async {
         return false;
@@ -59,14 +55,18 @@ class RoloxMoneyLoadingState extends State<RoloxMoneyLoading>
               RotationTransition(
                 turns: Tween<double>(begin: 0.0, end: 1.0)
                     .animate(_animationController),
-                child: CustomPaint(
-                  size: const Size.fromRadius(30),
-                  painter: GradientCircularProgressPainter(
-                    radius: 30,
-                    gradientColors: widget.gradientColors!,
-                    strokeWidth: widget.strokeWidth,
-                  ),
-                ),
+                // child: CustomPaint(
+                //   size: const Size.fromRadius(30),
+                //   painter: GradientCircularProgressPainter(
+                //     radius: 30,
+                //     gradientColors: [
+                //       Theme.of(context).progressIndicatorTheme.color!,
+                //       Theme.of(context).progressIndicatorTheme.circularTrackColor!
+                //     ],
+                //     strokeWidth: widget.strokeWidth,
+                //   ),
+                // ),
+                child: CircularProgressIndicator(),
               ),
             ],
           ),

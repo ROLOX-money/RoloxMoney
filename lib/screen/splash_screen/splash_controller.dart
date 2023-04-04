@@ -7,7 +7,7 @@ import 'package:roloxmoney/utils/RoloxKey.dart';
 class SplashScreenController extends GetxController with StateMixin {
   @override
   void onInit() async {
-    RoloxKey.baseUrl = '65.2.137.244:8080';
+    RoloxKey.baseUrl = 'http://65.2.137.244:8080/';
 
     change(null, status: RxStatus.success());
     Future.delayed(const Duration(seconds: 1), () {
