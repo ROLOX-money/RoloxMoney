@@ -10,6 +10,12 @@ class LoginProfileController extends GetxController with StateMixin {
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController emailIDController = TextEditingController();
+  TextEditingController companyNameController = TextEditingController();
+  TextEditingController panNumberController = TextEditingController();
+  TextEditingController gstNumberController = TextEditingController();
+  TextEditingController aadhaarNumberController = TextEditingController();
+
+
   TextEditingController socialId = TextEditingController();
   Rx<TypOfBusiness> typOfBusiness = TypOfBusiness.business.obs;
 

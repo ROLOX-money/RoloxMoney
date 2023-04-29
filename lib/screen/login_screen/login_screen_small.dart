@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -157,8 +158,53 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                         height: 70,
                       ),
                     ),
-                    const SizedBox(
-                      height: 15,
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      horizontalTitleGap: 0,
+                      leading:  Checkbox(
+                        value: widget.controller!.acceptTermsAndCondition
+                            .obs.value.value,
+                        activeColor: Colors.blue,
+                        checkColor: ColorResource.color151515,
+                        onChanged: (value) {
+                          widget.controller!
+                              .noAgreeTermsAndConditionCheckBox(
+                              values: value);
+                        },
+                      ),
+                      title: RichText(
+                          overflow: TextOverflow.fade,
+                          softWrap: true,
+                          text: TextSpan(
+                            text: '${Languages.of(context)?.agree}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall!
+                                .copyWith(
+                                color: ColorResource.colorFFFFFF,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400),
+                            children: [
+                              TextSpan(
+                                text:
+                                '${Languages.of(context)?.roloxTermsAndCondition}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(
+                                    color: ColorResource.color0093FF,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    decoration: TextDecoration.underline),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    debugPrint("onTap of Terms and condition screen");
+                                    ///fixme
+                                    // need to navigate the terms and condition Screen
+                                  },
+                              ),
+                            ],
+                          )),
                     ),
                     PrimaryButton(
                       '${Languages.of(context)!.send} ${Languages.of(context)!.otp}',

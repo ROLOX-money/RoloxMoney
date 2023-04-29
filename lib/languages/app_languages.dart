@@ -76,7 +76,7 @@ abstract class Languages {
 
   String get fullAddress;
 
-  String get iDontHaveAGSTNumber;
+  String get iHaveAGSTNumber;
 
   String get gstNumber;
 
@@ -173,4 +173,71 @@ abstract class Languages {
   String get cityName;
 
   String get enterAnyOneSocialMediaIdLabel;
+
+  String get agree;
+
+  String get roloxTermsAndCondition;
+
+  String get fullName;
+
+  String get fullNameHint;
+
+  String get emailIdHint;
+
+  String get socialIdHint;
+
+  String get companyName ;
+
+  String get companyNameHint;
+
+  String get panNumberHint;
+
+  String get aadhaarNumberHint;
+
+  String get gstNumberHint;
+
+  String get aadhaarNumber;
+
+  String get congratulations;
+
+  String get accountCreatedSuccessfully;
+
+  String get accountCreatedScreenContent;
+
+  String get letsExplore;
+
+  String get contact;
+
+  String get modeOfWork;
+
+  String get natureOfBusiness;
+
+  String get plsIfSpecify;
+
+  String get profileSecondPageContent;
+
+  String get accountBalance;
+
+  String get allInvoices;
+
+  String get upcoming;
+
+  String get inNext1Week;
+
+  String get noOf;
+
+  String get  transactionWorth;
+
+  String get paid;
+
+  String get due;
+
+  String get person;
+
+  String get department;
+
+  String get designation;
+
+  String get profileScreenFreeContent;
+
 }

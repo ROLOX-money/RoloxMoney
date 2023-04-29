@@ -37,41 +37,41 @@ class CustomTextField extends StatefulWidget {
   TextStyle? errorStyle;
   String? Function(String?)? validatorFunction;
   AutovalidateMode? autoValidateMode;
+  double? cursorHeight;
 
-  CustomTextField(
-    this.controller, {
-    super.key,
-    this.hintText,
-    this.obscureText = false,
-    this.suffixWidget,
-    this.prefixWidget,
-    this.isEnable = true,
-    this.onTapped,
-    this.isReadOnly = false,
-    this.maximumWordCount,
-    this.titleColor,
-    this.textColor = ColorResource.colorFFFFFF,
-    this.borderColor = Colors.grey,
-    this.enableColor = Colors.grey,
-    this.disableColor = Colors.grey,
-    this.focusedBorder = Colors.grey,
-    this.isHighlighted = false,
-    this.highlightColor,
-    this.focusNode,
-    this.focusTextColor,
-    this.keyBoardType = TextInputType.name,
-    this.descriptionText,
-    this.oncomplete,
-    this.validatorCallBack,
-    this.onEditing,
-    this.prefixIcon,
-    this.isEnableLabel = true,
-    this.inputformaters,
-    this.validatorFunction,
-    this.autoValidateMode,
-    this.errorStyle,
-    this.validationRules = const [],
-  });
+  CustomTextField(this.controller,
+      {super.key,
+      this.hintText,
+      this.obscureText = false,
+      this.suffixWidget,
+      this.prefixWidget,
+      this.isEnable = true,
+      this.onTapped,
+      this.isReadOnly = false,
+      this.maximumWordCount,
+      this.titleColor,
+      this.textColor = ColorResource.colorFFFFFF,
+      this.borderColor = Colors.grey,
+      this.enableColor = Colors.grey,
+      this.disableColor = Colors.grey,
+      this.focusedBorder = Colors.grey,
+      this.isHighlighted = false,
+      this.highlightColor,
+      this.focusNode,
+      this.focusTextColor,
+      this.keyBoardType = TextInputType.name,
+      this.descriptionText,
+      this.oncomplete,
+      this.validatorCallBack,
+      this.onEditing,
+      this.prefixIcon,
+      this.isEnableLabel = true,
+      this.inputformaters,
+      this.validatorFunction,
+      this.autoValidateMode,
+      this.errorStyle,
+      this.validationRules = const [],
+      this.cursorHeight});
 
   @override
   CustomTextFieldState createState() => CustomTextFieldState();
@@ -138,7 +138,7 @@ class CustomTextFieldState extends State<CustomTextField> {
       readOnly: widget.isReadOnly,
       enabled: widget.isEnable,
       keyboardType: widget.keyBoardType,
-      cursorHeight: 20,
+      cursorHeight:  20,
       focusNode: widget.focusNode,
       style: Theme.of(context).textTheme.bodyText1!.copyWith(
           color: (widget.focusNode != null && widget.focusNode!.hasFocus)
@@ -181,7 +181,6 @@ class CustomTextFieldState extends State<CustomTextField> {
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(width: 0.5),
         ),
-
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(color: widget.enableColor!, width: 0.25),
@@ -191,7 +190,6 @@ class CustomTextFieldState extends State<CustomTextField> {
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(color: widget.disableColor!, width: 0.25),
         ),
-
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(color: widget.borderColor!, width: 0.5),

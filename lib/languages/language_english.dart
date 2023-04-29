@@ -50,7 +50,7 @@ class LanguageEn extends Languages {
 
   String get continueText => 'Continue';
 
-  String get oopsAgency => 'Oops! Thanks for your interest';
+  String get oopsAgency => 'Hey! Thanks for your interest';
 
   String get oopsAgencyMessage =>
       'We are working on something for you as well and would love to have you onboard with us.';
@@ -77,7 +77,7 @@ class LanguageEn extends Languages {
 
   String get gstNumber => 'GST Number';
 
-  String get iDontHaveAGSTNumber => 'I don\'t have a GSTIN';
+  String get iHaveAGSTNumber => 'I have a GSTIN (optional)';
 
   String get role => 'Role';
 
@@ -173,4 +173,76 @@ class LanguageEn extends Languages {
 
   String get enterAnyOneSocialMediaIdLabel =>
       'Facebook/Instagram/Youtube/Twitter/Linkedin';
+
+  String get agree => 'I agree to the ';
+
+  String get roloxTermsAndCondition => 'Rolox Terms & Conditions';
+
+  String get fullName => 'Full Name';
+
+  String get fullNameHint => 'Enter your full name';
+
+  String get emailIdHint => 'Enter your Email ID';
+
+  String get socialIdHint => 'Enter any one social ID';
+
+  String get companyName => 'Company Name';
+
+  String get companyNameHint => 'Enter your company name';
+
+  String get panNumberHint => 'Enter your PAN number';
+
+  String get aadhaarNumberHint => 'Enter your Aadhaar number';
+
+  String get gstNumberHint => 'Enter your GST number';
+
+  String get aadhaarNumber => 'Aadhaar Number';
+
+  String get congratulations => 'Congratulations!';
+
+  String get accountCreatedSuccessfully =>
+      'Your Rolox account has been created successfully';
+
+  String get accountCreatedScreenContent =>
+      'Banking for Creators, Influencers, Freelancers, Gig, Solopreneurs, Small Business, Brands, Agencies';
+
+  String get letsExplore => 'Lets Explore';
+
+  String get contact => 'Contact';
+
+  String get modeOfWork => 'Mode of Work';
+
+  String get plsIfSpecify => 'Pls Specify if others';
+
+  String get profileSecondPageContent =>
+      'Please share a bit about your setup to get your dashboard up and running!';
+
+  String get accountBalance => 'Account Balance';
+
+  String get allInvoices => 'All Invoices';
+
+  String get upcoming => 'Upcoming';
+
+  String get inNext1Week => 'in next 1 week';
+
+  String get noOf => 'No.of';
+
+  String get transactionWorth => 'Transaction worth';
+
+  String get paid => 'Paid';
+
+  String get due => 'Due';
+
+  String get person => 'Person';
+
+  String get department => 'Department';
+
+  String get designation => 'Designation';
+
+  String get profileScreenFreeContent =>
+      "Please share a bit about your business to setup things better for you!";
+
+  String get natureOfBusiness => 'Nature of Business';
+
+
 }

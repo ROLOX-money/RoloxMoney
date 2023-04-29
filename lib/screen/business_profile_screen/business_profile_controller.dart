@@ -13,6 +13,7 @@ class BusinessProfileController extends GetxController with StateMixin {
   TextEditingController otherIndustryOfWorkController = TextEditingController();
   TextEditingController mobilNumberController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController plsIfSpecifyController = TextEditingController();
 
 
   Rx<ModelOfWork> modelOfWork = ModelOfWork.fullTime.obs;

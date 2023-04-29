@@ -25,6 +25,7 @@ class LoginController extends RoloxGetXController {
   final form = GlobalKey<FormState>();
 
   RxBool isLogin = true.obs;
+  RxBool acceptTermsAndCondition = false.obs;
 
   @override
   void onInit() async {
@@ -37,10 +38,15 @@ class LoginController extends RoloxGetXController {
   }
 
   void navigateProfile() {
-    if (otpController.text.length == 4) {
+    if (otpController.text.length == 6) {
       Get.put(LoginProfileController());
       Get.toNamed(LoginProfileScreen.routeName);
     }
+  }
+
+  void noAgreeTermsAndConditionCheckBox({bool? values}) {
+    acceptTermsAndCondition = values!.obs;
+    change(acceptTermsAndCondition);
   }
 
   Future<void> triggerLogin() async {
@@ -149,7 +155,7 @@ class LoginController extends RoloxGetXController {
                             fontWeight: FontWeight.w400),
                       ),
                       CustomText(
-                        text: '$mobileNumber',
+                        text: ' +91 $mobileNumber',
                         style: Theme
                             .of(Get.context!)
                             .textTheme
@@ -233,20 +239,22 @@ class LoginController extends RoloxGetXController {
                     cardShape: 1,
                     isIcon: true,
                     onTap: () {
-                      debugPrint('otpController.text--> ${otpController.text}');
-                      debugPrint('otpString--> $otpString');
-                      if (otpString == otpController.text) {
-                        Get.snackbar(
-                            'Login Success', 'OTP verified...Thanks...',
-                            colorText: Colors.black,
-                            backgroundColor: Colors.white);
-                      } else {
-                        Get.snackbar('Login Failed', 'Something went wrong...',
-                            colorText: Colors.black,
-                            backgroundColor: Colors.white);
-                      }
+
+                      ///fixme
+                      // debugPrint('otpController.text--> ${otpController.text}');
+                      // debugPrint('otpString--> $otpString');
+                      // if (otpString == otpController.text) {
+                      //   Get.snackbar(
+                      //       'Login Success', 'OTP verified...Thanks...',
+                      //       colorText: Colors.black,
+                      //       backgroundColor: Colors.white);
+                      // } else {
+                      //   Get.snackbar('Login Failed', 'Something went wrong...',
+                      //       colorText: Colors.black,
+                      //       backgroundColor: Colors.white);
+                      // }
                       // Get.back();
-                      // navigateProfile();
+                      navigateProfile();
                     },
                   ),
                   SizedBox(
