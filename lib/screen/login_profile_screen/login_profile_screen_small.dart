@@ -255,7 +255,16 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                     alignment: Alignment.center,
                                     padding: const EdgeInsets.only(right: 19),
                                     child: Image.asset(
-                                      ImageResource.businessType,
+                                      (widget.controller!.typOfBusiness.obs
+                                                  .value ==
+                                              TypOfBusiness.individual)
+                                          ? ImageResource.businessType
+                                          : (widget.controller!.typOfBusiness
+                                                      .obs.value ==
+                                                  TypOfBusiness.business)
+                                              ? ImageResource
+                                                  .companyProfileImagePng
+                                              : ImageResource.businessType,
                                       height: 113,
                                       width: 113,
                                     ),
@@ -344,7 +353,7 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                           controller: widget
                                               .controller!.emailIDController,
                                           labelName:
-                                              '${Languages.of(context)?.emailID}',
+                                              '${Languages.of(context)?.contact}  ${Languages.of(context)?.emailID}',
                                           hintText: Languages.of(context)
                                               ?.emailIdHint),
                                       // Company Pan Number
@@ -420,7 +429,7 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                           controller: widget
                                               .controller!.emailIDController,
                                           labelName:
-                                              '${Languages.of(context)?.emailID}',
+                                              '${Languages.of(context)?.contact}  ${Languages.of(context)?.emailID}',
                                           hintText: Languages.of(context)
                                               ?.emailIdHint),
                                       // Company Pan Number
@@ -469,10 +478,10 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                     ],
                                   ),
                                 ),
+                      // : WidgetUtils.showAlertDialog(context: context),
                       const SizedBox(
                         height: 15,
                       ),
-
                       PrimaryButton(
                         '${Languages.of(context)!.continueText}',
                         context,

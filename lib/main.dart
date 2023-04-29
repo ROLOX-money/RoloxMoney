@@ -20,6 +20,7 @@ import 'package:roloxmoney/screen/payment_screen/payment_controller.dart';
 import 'package:roloxmoney/screen/profile_screen/profile_controller.dart';
 import 'package:roloxmoney/screen/projects_screen/add_project/add_project_controller.dart';
 import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
+import 'package:roloxmoney/screen/welcome_screen/welcome_screen_controller.dart';
 import 'package:roloxmoney/utils/app_themes.dart';
 import 'package:roloxmoney/widget/rolox_money_core_widgets.dart';
 
@@ -27,6 +28,7 @@ import 'package:roloxmoney/widget/rolox_money_core_widgets.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Get.put(LoginController());
+  Get.put(WelcomeController());
   Get.put(LoginProfileController());
   Get.lazyPut(() => DashboardController());
   Get.lazyPut(() => HomeController());

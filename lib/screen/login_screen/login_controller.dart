@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:roloxmoney/screen/login_profile_screen/login_profile_controller.dart';
+import 'package:roloxmoney/screen/login_profile_screen/login_profile_screen.dart';
 import 'package:roloxmoney/screen/welcome_screen/welcome_screen.dart';
 import 'package:roloxmoney/screen/welcome_screen/welcome_screen_controller.dart';
 
@@ -25,10 +27,14 @@ class LoginController extends GetxController with StateMixin {
 
   void navigateProfile() {
     if (otpController.text.length == 4) {
-      Get.put(WelcomeController());
-      Get.toNamed(WelcomeScreen.routeName);
-      // Get.put(LoginProfileController());
-      // Get.toNamed(LoginProfileScreen.routeName);
+
+      // Future.delayed(const Duration(seconds: 5), () {
+      //   Get.put(WelcomeController());
+      //   Get.toNamed(WelcomeScreen.routeName);
+        // });
+
+      Get.put(LoginProfileController());
+      Get.toNamed(LoginProfileScreen.routeName);
     }
   }
 

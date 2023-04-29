@@ -10,6 +10,10 @@ class IndividualProfileController extends GetxController with StateMixin {
   TextEditingController pincodeController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController gstController = TextEditingController();
+  TextEditingController plsIfSpecifyController = TextEditingController();
+  TextEditingController mobilNumberController = TextEditingController();
+  TextEditingController aadharNoController = TextEditingController();
+
 
   RxList<String> modelOfWork = [
     'Full Time',

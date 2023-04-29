@@ -62,7 +62,7 @@ abstract class Languages {
 
   String get otherNatureOfWork;
 
-  String get iDontHaveABusiness;
+  String get iHaveABusiness;
 
   String get industryOfWork;
 
@@ -76,7 +76,7 @@ abstract class Languages {
 
   String get fullAddress;
 
-  String get iDontHaveAGSTNumber;
+  String get iHaveAGSTNumber;
 
   String get gstNumber;
 
@@ -205,4 +205,40 @@ abstract class Languages {
   String get accountCreatedScreenContent;
 
   String get letsExplore;
+
+  String get contact;
+
+  String get modeOfWork;
+
+  String get natureOfBusiness;
+
+  String get plsIfSpecify;
+
+  String get profileSecondPageContent;
+
+  String get accountBalance;
+
+  String get allInvoices;
+
+  String get upcoming;
+
+  String get inNext1Week;
+
+  String get noOf;
+
+  String get  transactionWorth;
+
+  String get paid;
+
+  String get due;
+
+  String get person;
+
+  String get department;
+
+  String get designation;
+
+
+
+
 }

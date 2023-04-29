@@ -8,7 +8,7 @@ import 'package:roloxmoney/widget/responsive_widget.dart';
 /*Chinnadurai Viswanathan*/
 
 class WelcomeScreen extends StatelessWidget {
-  final _welcomeScaffoldKey = GlobalKey<ScaffoldState>();
+  final welcomeScaffoldKey = GlobalKey<ScaffoldState>();
   static const String routeName = '/welcomeScreen';
   final WelcomeController welcomeController = Get.find();
 
@@ -20,11 +20,11 @@ class WelcomeScreen extends StatelessWidget {
       builder: (controller) {
         return ResponsiveWidget(
           largeScreen: WelcomeScreenLarge(
-              controller: welcomeController, scaffoldKey: _welcomeScaffoldKey),
+              controller: welcomeController, scaffoldKey: welcomeScaffoldKey),
           mediumScreen: WelcomeScreenSmall(
-              controller: welcomeController, scaffoldKey: _welcomeScaffoldKey),
+              controller: welcomeController, scaffoldKey: welcomeScaffoldKey),
           smallScreen: WelcomeScreenSmall(
-              controller: welcomeController, scaffoldKey: _welcomeScaffoldKey),
+              controller: welcomeController, scaffoldKey: welcomeScaffoldKey),
         );
       },
     );

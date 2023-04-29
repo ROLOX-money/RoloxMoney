@@ -59,9 +59,11 @@ class LanguageEn extends Languages {
 
   String get natureOfWork => 'Nature of work';
 
+  String get natureOfBusiness => 'Nature of Business';
+
   String get otherNatureOfWork => 'Other Nature of work';
 
-  String get iDontHaveABusiness => 'I don\'t have a business/brand name';
+  String get iHaveABusiness => 'I  have a business/brand name';
 
   String get industryOfWork => 'Industry of work';
 
@@ -77,7 +79,7 @@ class LanguageEn extends Languages {
 
   String get gstNumber => 'GST Number';
 
-  String get iDontHaveAGSTNumber => 'I don\'t have a GSTIN';
+  String get iHaveAGSTNumber => 'I have a GSTIN (optional)';
 
   String get role => 'Role';
 
@@ -205,4 +207,38 @@ class LanguageEn extends Languages {
   String get accountCreatedScreenContent => 'Banking for Creators, Influencers, Freelancers, Gig, Solopreneurs, Small Business, Brands, Agencies';
 
   String get letsExplore => 'Lets Explore';
+
+  String get contact => 'Contact';
+
+  String get modeOfWork => 'Mode of Work';
+
+  String get plsIfSpecify => 'Pls Specify if others';
+
+  String get profileSecondPageContent => 'Please share a bit about your setup to get your dashboard up and running!';
+
+  String get accountBalance => 'Account Balance';
+
+  String get allInvoices => 'All Invoices';
+
+  String get upcoming => 'Upcoming';
+
+  String get inNext1Week => 'in next 1 week';
+
+  String get noOf => 'No.of';
+
+  String get transactionWorth => 'Transaction worth';
+
+  String get paid => 'Paid';
+
+  String get due => 'Due';
+
+  String get person => 'Person';
+
+  String get department => 'Department';
+
+  String get designation => 'Designation';
+
+
+
+
 }

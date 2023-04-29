@@ -16,7 +16,9 @@ abstract class WidgetUtils {
       List<String> validationRules = const [],
       String? suffixImagePath,
         String? hintText,
-      TextInputType? keyBoardType}) {
+      TextInputType? keyBoardType,
+      TextStyle? labelStyle,
+      }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -25,7 +27,7 @@ abstract class WidgetUtils {
         ),
         CustomText(
           text: labelName,
-          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+          style: labelStyle ?? Theme.of(context).textTheme.titleSmall!.copyWith(
               color: ColorResource.colorE08AF4, fontWeight: FontWeight.w500),
         ),
         const SizedBox(
@@ -65,7 +67,7 @@ abstract class WidgetUtils {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(
-          text: lableName.toUpperCase(),
+          text: lableName,
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
               color: ColorResource.colorE08AF4,
               fontSize: 14,
