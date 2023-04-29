@@ -62,7 +62,7 @@ abstract class Languages {
 
   String get otherNatureOfWork;
 
-  String get iDontHaveABusiness;
+  String get iHaveABusiness;
 
   String get industryOfWork;
 

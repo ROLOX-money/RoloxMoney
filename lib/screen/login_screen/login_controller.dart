@@ -7,6 +7,8 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/login_profile_screen/login_profile_controller.dart';
 import 'package:roloxmoney/screen/login_profile_screen/login_profile_screen.dart';
+import 'package:roloxmoney/screen/welcome_screen/welcome_screen.dart';
+import 'package:roloxmoney/screen/welcome_screen/welcome_screen_controller.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/http_url.dart';
@@ -39,11 +41,17 @@ class LoginController extends RoloxGetXController {
 
   void navigateProfile() {
     if (otpController.text.length == 6) {
-      Get.put(LoginProfileController());
-      Get.toNamed(LoginProfileScreen.routeName);
+      if (otpController.text.length == 4) {
+        // Future.delayed(const Duration(seconds: 5), () {
+        //   Get.put(WelcomeController());
+        //   Get.toNamed(WelcomeScreen.routeName);
+        // });
+
+        Get.put(LoginProfileController());
+        Get.toNamed(LoginProfileScreen.routeName);
+      }
     }
   }
-
   void noAgreeTermsAndConditionCheckBox({bool? values}) {
     acceptTermsAndCondition = values!.obs;
     change(acceptTermsAndCondition);
@@ -279,4 +287,5 @@ class LoginController extends RoloxGetXController {
           );
         });
   }
+
 }

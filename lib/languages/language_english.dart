@@ -59,9 +59,11 @@ class LanguageEn extends Languages {
 
   String get natureOfWork => 'Nature of work';
 
+  String get natureOfBusiness => 'Nature of Business';
+
   String get otherNatureOfWork => 'Other Nature of work';
 
-  String get iDontHaveABusiness => 'I don\'t have a business/brand name';
+  String get iHaveABusiness => 'I  have a business/brand name';
 
   String get industryOfWork => 'Industry of work';
 
@@ -89,7 +91,7 @@ class LanguageEn extends Languages {
 
   String get welcomeToRolox => 'Welcome to rolox!';
 
-  String get welcomeNote => 'Manage your business with';
+  String get welcomeNote => 'Manage your business \nwith';
 
   String get professionalInvoice => 'professional invoices';
 
@@ -200,11 +202,9 @@ class LanguageEn extends Languages {
 
   String get congratulations => 'Congratulations!';
 
-  String get accountCreatedSuccessfully =>
-      'Your Rolox account has been created successfully';
+  String get accountCreatedSuccessfully => 'Your Rolox account has been created successfully';
 
-  String get accountCreatedScreenContent =>
-      'Banking for Creators, Influencers, Freelancers, Gig, Solopreneurs, Small Business, Brands, Agencies';
+  String get accountCreatedScreenContent => 'Banking for Creators, Influencers, Freelancers, Gig, Solopreneurs, Small Business, Brands, Agencies';
 
   String get letsExplore => 'Lets Explore';
 
@@ -214,8 +214,7 @@ class LanguageEn extends Languages {
 
   String get plsIfSpecify => 'Pls Specify if others';
 
-  String get profileSecondPageContent =>
-      'Please share a bit about your setup to get your dashboard up and running!';
+  String get profileSecondPageContent => 'Please share a bit about your setup to get your dashboard up and running!';
 
   String get accountBalance => 'Account Balance';
 
@@ -242,7 +241,6 @@ class LanguageEn extends Languages {
   String get profileScreenFreeContent =>
       "Please share a bit about your business to setup things better for you!";
 
-  String get natureOfBusiness => 'Nature of Business';
 
 
 }

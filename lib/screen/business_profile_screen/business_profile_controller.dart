@@ -16,6 +16,7 @@ class BusinessProfileController extends GetxController with StateMixin {
   TextEditingController plsIfSpecifyController = TextEditingController();
 
 
+
   Rx<ModelOfWork> modelOfWork = ModelOfWork.fullTime.obs;
   RxList<String> roleDropDown = [
     'Founder',
@@ -30,7 +31,6 @@ class BusinessProfileController extends GetxController with StateMixin {
     'Other',
   ].obs;
   RxString natureOfWorkValue = 'Software'.obs;
-
 
   RxBool iDontHaveBusiness = true.obs;
 

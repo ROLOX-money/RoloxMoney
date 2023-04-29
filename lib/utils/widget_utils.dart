@@ -9,17 +9,16 @@ import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/custom_textfield.dart';
 
 abstract class WidgetUtils {
-  static Widget genericTextFiled({
-    required BuildContext context,
-    required TextEditingController controller,
-    required String labelName,
-    String? hintText,
-    double? height,
-    List<String> validationRules = const [],
-    String? suffixImagePath,
-    TextInputType? keyBoardType,
-    TextStyle? labelStyle,
-  }) {
+  static Widget genericTextFiled(
+      {required BuildContext context,
+      required TextEditingController controller,
+      required String labelName,
+      List<String> validationRules = const [],
+      String? suffixImagePath,
+        String? hintText,
+      TextInputType? keyBoardType,
+      TextStyle? labelStyle,
+      }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -28,7 +27,7 @@ abstract class WidgetUtils {
         ),
         CustomText(
           text: labelName,
-          style:  labelStyle ?? Theme.of(context).textTheme.titleSmall!.copyWith(
+          style: labelStyle ?? Theme.of(context).textTheme.titleSmall!.copyWith(
               color: ColorResource.colorE08AF4, fontWeight: FontWeight.w500),
         ),
         const SizedBox(
@@ -37,13 +36,12 @@ abstract class WidgetUtils {
         SizedBox(
           child: CustomTextField(
             controller.obs.value,
+            hintText: hintText,
             focusedBorder: Colors.grey,
             textColor: Colors.white,
-            hintText: hintText,
             enableColor: Colors.grey,
             validationRules: validationRules,
             borderColor: Colors.red,
-            cursorHeight: height ?? 20,
             suffixWidget: suffixImagePath != null
                 ? Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -69,7 +67,7 @@ abstract class WidgetUtils {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(
-          text: lableName.toUpperCase(),
+          text: lableName,
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
               color: ColorResource.colorE08AF4,
               fontSize: 14,
@@ -139,20 +137,10 @@ abstract class WidgetUtils {
                   Radius.circular(32.0),
                 ),
               ),
-              height: 500,
+              height: 460,
               width: MediaQuery.of(context).size.width,
               child: Column(
                 children: [
-                  MediaQuery.removePadding(
-                    removeBottom: true,
-                    context: context,
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: IconButton(onPressed: (){
-                        Get.back();
-                      }, icon: Icon(Icons.close,color: ColorResource.colorAAAAAA,)),
-                    ),
-                  ),
                   Container(
                     alignment: Alignment.center,
                     // child: Image.asset(
