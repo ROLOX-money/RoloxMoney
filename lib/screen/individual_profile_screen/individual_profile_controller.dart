@@ -57,6 +57,8 @@ class IndividualProfileController extends GetxController with StateMixin {
   RxBool gstNumber = true.obs;
   RxInt currentStep = 1.obs;
 
+  final form = GlobalKey<FormState>();
+
   @override
   void onInit() async {
     change(null, status: RxStatus.success());

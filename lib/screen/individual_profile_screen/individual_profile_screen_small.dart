@@ -104,12 +104,15 @@ class IndividualProfileScreenSmallState
                         lineWidth: 1,
                       ),
                     ),
-                    Container(
-                      height: 650,
-                      // ignore: unrelated_type_equality_checks
-                      child: widget.controller!.currentStep.obs.value == 1
-                          ? firstPageForIndividual()
-                          : secondPageForIndividual(),
+                    Form(
+                      key: widget.controller!.form,
+                      child: Container(
+                        height: 650,
+                        // ignore: unrelated_type_equality_checks
+                        child: widget.controller!.currentStep.obs.value == 1
+                            ? firstPageForIndividual()
+                            : secondPageForIndividual(),
+                      ),
                     ),
                   ],
                 ),
@@ -125,12 +128,15 @@ class IndividualProfileScreenSmallState
             textColor: ColorResource.black,
             fontSize: 20,
             onTap: () {
-              if (widget.controller!.currentStep.obs.value.value != 2) {
-                widget.controller!.stepCount(
-                    values: widget.controller!.currentStep.obs.value.value + 1);
-              } else {
-                Get.put(DashboardController());
-                Get.offAll(DashboardScreen());
+              if (widget.controller!.form.currentState!.validate()) {
+                if (widget.controller!.currentStep.obs.value.value != 2) {
+                  widget.controller!.stepCount(
+                      values:
+                          widget.controller!.currentStep.obs.value.value + 1);
+                } else {
+                  Get.put(DashboardController());
+                  Get.offAll(DashboardScreen());
+                }
               }
             },
           ),
@@ -228,6 +234,7 @@ class IndividualProfileScreenSmallState
                       'other')
                     WidgetUtils.genericTextFiled(
                       context: context,
+                      validationRules: ['required'],
                       controller: widget.controller!.plsIfSpecifyController,
                       labelName: '${Languages.of(context)?.plsIfSpecify}',
                       labelStyle: Theme.of(context)
@@ -256,6 +263,7 @@ class IndividualProfileScreenSmallState
                       'other')
                     WidgetUtils.genericTextFiled(
                       context: context,
+                      validationRules: ['required'],
                       controller: widget
                           .controller!.plsIfSpecifyControllerForNatureOfWork,
                       labelName: '${Languages.of(context)?.plsIfSpecify}',
@@ -285,6 +293,7 @@ class IndividualProfileScreenSmallState
                       borderColor: Colors.red,
                       disableColor: Colors.red,
                       keyBoardType: TextInputType.phone,
+                      validationRules: ['required'],
                       prefixIcon: Container(
                         width: 100,
                         child: Padding(
@@ -345,6 +354,7 @@ class IndividualProfileScreenSmallState
                     ),
                     height: 70,
                   ),
+                  const SizedBox(height: 5),
                 ],
               )
             ],
@@ -358,8 +368,8 @@ class IndividualProfileScreenSmallState
     return ListView(shrinkWrap: true, children: [
       Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             CustomText(
               text: '${Languages.of(context)?.profileSecondPageContent}',
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
@@ -371,6 +381,7 @@ class IndividualProfileScreenSmallState
             // PAN No
             WidgetUtils.genericTextFiled(
               context: context,
+              validationRules: ['required'],
               controller: widget.controller!.panNumberController,
               labelName: '${Languages.of(context)?.panNumber}',
               labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
@@ -380,7 +391,7 @@ class IndividualProfileScreenSmallState
             ),
             // I have GST no
             ListTile(
-              visualDensity: VisualDensity(horizontal: -4,vertical: -4),
+              visualDensity: VisualDensity(horizontal: -4, vertical: -4),
               contentPadding: EdgeInsets.zero,
               dense: true,
               leading: Theme(
@@ -406,6 +417,7 @@ class IndividualProfileScreenSmallState
             ),
             WidgetUtils.genericTextFiled(
               context: context,
+              validationRules: ['required'],
               controller: widget.controller!.gstController,
               labelName: '${Languages.of(context)?.gstNumber}',
               labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
@@ -419,6 +431,7 @@ class IndividualProfileScreenSmallState
               context: context,
               maxLines: 20,
               minLines: 10,
+              validationRules: ['required'],
               controller: widget.controller!.addressController,
               labelName: '${Languages.of(context)?.fullAddress}',
               labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
@@ -430,6 +443,7 @@ class IndividualProfileScreenSmallState
             // PinCode
             WidgetUtils.genericTextFiled(
                 context: context,
+                validationRules: ['required'],
                 controller: widget.controller!.pincodeController,
                 labelName: '${Languages.of(context)?.pincode}',
                 labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
@@ -441,6 +455,7 @@ class IndividualProfileScreenSmallState
             // type of address
             WidgetUtils.dropDown(
                 context: context,
+
                 lableName: '${Languages.of(context)?.typeOfAddress}',
                 dropDownList: widget.controller!.typeOfAddress.obs.value,
                 selectedValues: widget.controller!.typeOfAddressValue.value,
@@ -452,75 +467,5 @@ class IndividualProfileScreenSmallState
             SizedBox(height: 10),
           ]))
     ]);
-  }
-
-  Widget secondPageForIndividual2() {
-    return ListView(
-      shrinkWrap: true,
-      physics: const AlwaysScrollableScrollPhysics(),
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomText(
-                text: '${Languages.of(context)?.profileSecondPageContent}',
-                style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: ColorResource.colorFFFFFF,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-
-              //  Full Address
-              // WidgetUtils.genericTextFiled(
-              //     context: context,
-              //     controller: widget.controller!.addressController,
-              //     labelName:
-              //         '${Languages.of(context)?.fullAddress}'.toUpperCase(),
-              //     keyBoardType: TextInputType.streetAddress),
-              // WidgetUtils.genericTextFiled(
-              //     context: context,
-              //     controller: widget.controller!.gstController,
-              //     labelName:
-              //         '${Languages.of(context)?.gstNumber}'.toUpperCase(),
-              //     keyBoardType: TextInputType.streetAddress),
-
-              // Row(
-              //   crossAxisAlignment: CrossAxisAlignment.center,
-              //   children: <Widget>[
-              //     Theme(
-              //       data: Theme.of(context).copyWith(
-              //         unselectedWidgetColor: ColorResource.color00E94F,
-              //       ),
-              //       child: Checkbox(
-              //         value: widget.controller!.gstNumber.obs.value.value,
-              //         activeColor: Colors.blue,
-              //         checkColor: ColorResource.color151515,
-              //         onChanged: (value) {
-              //           widget.controller!.noGSTCheckBox(values: value);
-              //         },
-              //       ),
-              //     ),
-              //     CustomText(
-              //       text: '${Languages.of(context)?.iHaveAGSTNumber}',
-              //       style: Theme.of(context).textTheme.titleSmall!.copyWith(
-              //           color: ColorResource.colorFFFFFF,
-              //           fontSize: 16,
-              //           fontWeight: FontWeight.w400),
-              //     ),
-              //   ],
-              // ),
-              SizedBox(
-                height: 30,
-              )
-            ],
-          ),
-        ),
-      ],
-    );
   }
 }

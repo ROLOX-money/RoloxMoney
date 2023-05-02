@@ -64,68 +64,82 @@ class AddProjectScreenSmallState extends State<AddProjectScreenSmall> {
                   shadowColor: Colors.grey,
                   elevation: 0.75,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 10,
-                      ),
-                      WidgetUtils.genericTextFiled(
-                        context: context,
-                        keyBoardType: TextInputType.name,
-                        hintText: Languages.of(context)?.brandNameHintText,
-                        controller: widget.controller!.projectNameController,
-                        labelName: '${Languages.of(context)?.projectName}',
-                      ),
-                      WidgetUtils.genericTextFiled(
-                        context: context,
-                        hintText: Languages.of(context)?.searchClientNameHintText,
-                        suffixImagePath: ImageResource.searchSVG,
-                        controller: widget.controller!.clientNameController,
-                        labelName: '${Languages.of(context)?.clientName}',
-                      ),
-                      WidgetUtils.genericTextFiled(
-                        context: context,
-                        hintText: Languages.of(context)?.projectValueHintText,
-                        keyBoardType: TextInputType.name,
-                        controller: widget.controller!.projectValueController,
-                        labelName: '${Languages.of(context)?.projectValue}',
-                      ),
-                      WidgetUtils.genericTextFiled(
-                        context: context,
-                        hintText: "DD/MM/YYYY",
-                        controller: widget.controller!.projectDueDateDController,
-                        keyBoardType: TextInputType.emailAddress,
-                        suffixImagePath: ImageResource.calendarSVG,
-                        labelName: '${Languages.of(context)?.projectDueDate}',
-                      ),
-                      WidgetUtils.genericTextFiled(
-                        context: context,
-                        hintText: Languages.of(context)?.projectsEmailIDHintText,
-                        keyBoardType: TextInputType.phone,
-                        controller: widget.controller!.emailIDController,
-                        labelName: '${Languages.of(context)?.emailID}',
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      PrimaryButton(
-                        '${Languages.of(context)!.save}',
-                        context,
-                        cardShape: 1,
-                        isIcon: true,
-                        textColor: ColorResource.black,
-                        fontSize: 20,
-                        onTap: () {
-                          Get.back();
-                        },
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                    ],
+                Form(
+                  key: widget.controller!.form,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        WidgetUtils.genericTextFiled(
+                          context: context,
+                          validationRules: ['required'],
+                          keyBoardType: TextInputType.name,
+                          hintText: Languages.of(context)?.brandNameHintText,
+                          controller: widget.controller!.projectNameController,
+                          labelName: '${Languages.of(context)?.projectName}',
+                        ),
+                        WidgetUtils.genericTextFiled(
+                          context: context,
+                          validationRules: ['required'],
+                          hintText:
+                              Languages.of(context)?.searchClientNameHintText,
+                          suffixImagePath: ImageResource.searchSVG,
+                          controller: widget.controller!.clientNameController,
+                          labelName: '${Languages.of(context)?.clientName}',
+                        ),
+                        WidgetUtils.genericTextFiled(
+                          context: context,
+                          validationRules: ['required'],
+                          hintText: Languages.of(context)?.projectValueHintText,
+                          keyBoardType: TextInputType.name,
+                          controller: widget.controller!.projectValueController,
+                          labelName: '${Languages.of(context)?.projectValue}',
+                        ),
+                        WidgetUtils.genericTextFiled(
+                          context: context,
+                          validationRules: ['required',],
+                          hintText: "DD/MM/YYYY",
+                          controller:
+                              widget.controller!.projectDueDateDController,
+                          keyBoardType: TextInputType.emailAddress,
+                          suffixImagePath: ImageResource.calendarSVG,
+                          labelName: '${Languages.of(context)?.projectDueDate}',
+                        ),
+                        WidgetUtils.genericTextFiled(
+                          context: context,
+                          validationRules: ['required','email'],
+                          hintText:
+                              Languages.of(context)?.projectsEmailIDHintText,
+                          keyBoardType: TextInputType.phone,
+                          controller: widget.controller!.emailIDController,
+                          labelName: '${Languages.of(context)?.emailID}',
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        PrimaryButton(
+                          '${Languages.of(context)!.save}',
+                          context,
+                          cardShape: 1,
+                          isIcon: true,
+                          textColor: ColorResource.black,
+                          fontSize: 20,
+                          onTap: () {
+                            if (widget.controller!.form.currentState!
+                                .validate()) {
+                              Get.back();
+                            }
+                          },
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

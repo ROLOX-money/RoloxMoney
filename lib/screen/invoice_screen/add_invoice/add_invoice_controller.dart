@@ -14,6 +14,8 @@ class AddInvoiceController extends GetxController with StateMixin {
   TextEditingController hsnController = TextEditingController();
   TextEditingController stateController = TextEditingController();
 
+  final form = GlobalKey<FormState>();
+
   @override
   void onInit() async {
     change(null, status: RxStatus.success());

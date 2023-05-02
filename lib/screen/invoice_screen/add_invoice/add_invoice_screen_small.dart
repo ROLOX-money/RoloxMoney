@@ -39,7 +39,7 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
           alignment: Alignment.topLeft,
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.only(left: 1,right: 1),
+              padding: const EdgeInsets.only(left: 1, right: 1),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -66,89 +66,112 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                     shadowColor: Colors.grey,
                     elevation: 0.75,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        WidgetUtils.genericTextFiled(
-                          context: context,
-                          hintText: Languages.of(context)?.invoiceNameHintText,
-                          keyBoardType: TextInputType.name,
-                          controller: widget.controller!.invoiceNameController,
-                          labelName: '${Languages.of(context)?.invoiceName}',
-                        ),
-                        WidgetUtils.genericTextFiled(
-                          context: context,
-                          hintText: Languages.of(context)?.invoiceNoHintText,
-                          controller: widget.controller!.invoiceNumberController,
-                          labelName: '${Languages.of(context)?.invoiceNumber}',
-                        ),
-                        WidgetUtils.genericTextFiled(
-                          context: context,
-                          hintText: Languages.of(context)?.valueHintText,
-                          keyBoardType: TextInputType.name,
-                          controller: widget.controller!.invoiceValueWithoutGSTController,
-                          labelName: '${Languages.of(context)?.invoiceValueWithoutGST}',
-                        ),
-                        WidgetUtils.genericTextFiled(
-                          context: context,
-                          hintText: Languages.of(context)?.brandNameHintText,
-                          controller: widget.controller!.projectNameController,
-                          keyBoardType: TextInputType.emailAddress,
-                          suffixImagePath: ImageResource.searchSVG,
-                          labelName: '${Languages.of(context)?.projectName}',
-                        ),
-                        WidgetUtils.genericTextFiled(
-                          context: context,
-                          hintText: "DD/MM/YYYY",
-                          controller: widget.controller!.invoiceDueDateController,
-                          keyBoardType: TextInputType.emailAddress,
-                          suffixImagePath: ImageResource.calendarSVG,
-                          labelName: '${Languages.of(context)?.invoiceDueDate}',
-                        ),
-                        WidgetUtils.genericTextFiled(
-                          context: context,
-                          hintText: Languages.of(context)?.hsnCodeHintText,
-                          keyBoardType: TextInputType.phone,
-                          controller: widget.controller!.gstChargesController,
-                          labelName: '${Languages.of(context)?.hsnCode}',
-                        ),
-                        WidgetUtils.genericTextFiled(
-                          context: context,
-                          hintText: Languages.of(context)?.gstCharges,
-                          keyBoardType: TextInputType.phone,
-                          controller: widget.controller!.gstChargesController,
-                          labelName: '${Languages.of(context)?.gstCharges}',
-                        ),
-                        WidgetUtils.genericTextFiled(
-                          context: context,
-                          hintText: Languages.of(context)?.state,
-                          keyBoardType: TextInputType.phone,
-                          controller: widget.controller!.stateController,
-                          labelName: '${Languages.of(context)?.state}',
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        PrimaryButton(
-                          '${Languages.of(context)!.save}',
-                          context,
-                          cardShape: 1,
-                          isIcon: true,
-                          textColor: ColorResource.black,
-                          fontSize: 20,
-                          onTap: () {
-                            Get.back();
-                          },
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                      ],
+                  Form(
+                    key: widget.controller!.form,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 10,
+                          ),
+                          WidgetUtils.genericTextFiled(
+                            context: context,
+                            validationRules: ['required'],
+                            hintText:
+                                Languages.of(context)?.invoiceNameHintText,
+                            keyBoardType: TextInputType.name,
+                            controller:
+                                widget.controller!.invoiceNameController,
+                            labelName: '${Languages.of(context)?.invoiceName}',
+                          ),
+                          WidgetUtils.genericTextFiled(
+                            context: context,
+                            validationRules: ['required'],
+                            hintText: Languages.of(context)?.invoiceNoHintText,
+                            controller:
+                                widget.controller!.invoiceNumberController,
+                            labelName:
+                                '${Languages.of(context)?.invoiceNumber}',
+                          ),
+                          WidgetUtils.genericTextFiled(
+                            context: context,
+                            validationRules: ['required'],
+                            hintText: Languages.of(context)?.valueHintText,
+                            keyBoardType: TextInputType.name,
+                            controller: widget
+                                .controller!.invoiceValueWithoutGSTController,
+                            labelName:
+                                '${Languages.of(context)?.invoiceValueWithoutGST}',
+                          ),
+                          WidgetUtils.genericTextFiled(
+                            context: context,
+                            validationRules: ['required'],
+                            hintText: Languages.of(context)?.brandNameHintText,
+                            controller:
+                                widget.controller!.projectNameController,
+                            keyBoardType: TextInputType.emailAddress,
+                            suffixImagePath: ImageResource.searchSVG,
+                            labelName: '${Languages.of(context)?.projectName}',
+                          ),
+                          WidgetUtils.genericTextFiled(
+                            context: context,
+                            hintText: "DD/MM/YYYY",
+                            validationRules: ['required'],
+                            controller:
+                                widget.controller!.invoiceDueDateController,
+                            keyBoardType: TextInputType.emailAddress,
+                            suffixImagePath: ImageResource.calendarSVG,
+                            labelName:
+                                '${Languages.of(context)?.invoiceDueDate}',
+                          ),
+                          WidgetUtils.genericTextFiled(
+                            context: context,
+                            validationRules: ['required'],
+                            hintText: Languages.of(context)?.hsnCodeHintText,
+                            keyBoardType: TextInputType.phone,
+                            controller: widget.controller!.gstChargesController,
+                            labelName: '${Languages.of(context)?.hsnCode}',
+                          ),
+                          WidgetUtils.genericTextFiled(
+                            context: context,
+                            validationRules: ['required'],
+                            hintText: Languages.of(context)?.gstCharges,
+                            keyBoardType: TextInputType.phone,
+                            controller: widget.controller!.gstChargesController,
+                            labelName: '${Languages.of(context)?.gstCharges}',
+                          ),
+                          WidgetUtils.genericTextFiled(
+                            context: context,
+                            validationRules: ['required'],
+                            hintText: Languages.of(context)?.state,
+                            keyBoardType: TextInputType.phone,
+                            controller: widget.controller!.stateController,
+                            labelName: '${Languages.of(context)?.state}',
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          PrimaryButton(
+                            '${Languages.of(context)!.save}',
+                            context,
+                            cardShape: 1,
+                            isIcon: true,
+                            textColor: ColorResource.black,
+                            fontSize: 20,
+                            onTap: () {
+                              if (widget.controller!.form.currentState!
+                                  .validate()) {
+                                Get.back();
+                              }
+                            },
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],

@@ -9,6 +9,7 @@ class AddProjectController extends GetxController with StateMixin {
   TextEditingController projectValueController = TextEditingController();
   TextEditingController projectDueDateDController = TextEditingController();
   TextEditingController emailIDController = TextEditingController();
+  final form = GlobalKey<FormState>();
 
   @override
   void onInit() async {

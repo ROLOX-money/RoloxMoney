@@ -16,7 +16,7 @@ class ProfileController extends GetxController with StateMixin {
   TextEditingController bankAccountController = TextEditingController();
   TextEditingController bankIFSCController = TextEditingController();
 
-
+  final form = GlobalKey<FormState>();
   Rx<ModelOfWork> modelOfWork = ModelOfWork.fullTime.obs;
   RxList<String> roleDropDown = [
     'Founder',

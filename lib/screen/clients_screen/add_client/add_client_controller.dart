@@ -19,6 +19,7 @@ class AddClientController extends GetxController with StateMixin {
   TextEditingController designationController = TextEditingController();
 
   Rx<TypOfBusiness> typOfBusiness = TypOfBusiness.business.obs;
+  final form = GlobalKey<FormState>();
 
   @override
   void onInit() async {
