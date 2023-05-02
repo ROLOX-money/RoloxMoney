@@ -71,40 +71,42 @@ class AddBankAccountScreenSmallState extends State<AddBankAccountScreenSmall> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        height: 10,
-                      ),
+                      SizedBox(height: 10),
                       WidgetUtils.genericTextFiled(
                         context: context,
+                        hintText: Languages.of(context)?.accountNoHintText,
                         keyBoardType: TextInputType.name,
                         controller:
                             widget.controller!.bankAccountNumberController,
-                        labelName: '${Languages.of(context)?.bankAccountNumber}'
-                            .toUpperCase(),
+                        labelName:
+                            '${Languages.of(context)?.bankAccountNumber}',
                       ),
                       WidgetUtils.genericTextFiled(
                         context: context,
+                        hintText: Languages.of(context)?.accountHolderName,
                         controller:
                             widget.controller!.accountHolderNameController,
-                        labelName: '${Languages.of(context)?.accountHolderName}'
-                            .toUpperCase(),
+                        labelName:
+                            '${Languages.of(context)?.accountHolderName}',
                       ),
                       WidgetUtils.genericTextFiled(
                         context: context,
+                        hintText: Languages.of(context)?.accountIfscHintText,
                         keyBoardType: TextInputType.name,
                         controller: widget.controller!.bankIFSCCodeController,
-                        labelName: '${Languages.of(context)?.bankIFSCCode}'
-                            .toUpperCase(),
+                        labelName: '${Languages.of(context)?.bankIFSCCode}',
                       ),
                       WidgetUtils.genericTextFiled(
                         context: context,
+                        hintText: Languages.of(context)?.brandNameHintText,
                         controller: widget.controller!.branchNameController,
                         keyBoardType: TextInputType.emailAddress,
-                        labelName: '${Languages.of(context)?.branchName}'
-                            .toUpperCase(),
+                        labelName: '${Languages.of(context)?.branchName}',
                       ),
                       WidgetUtils.genericTextFiled(
                         context: context,
+                        hintText:
+                            '${Languages.of(context)?.enter} ${Languages.of(context)?.cityName}',
                         controller: widget.controller!.cityNameController,
                         keyBoardType: TextInputType.emailAddress,
                         labelName:

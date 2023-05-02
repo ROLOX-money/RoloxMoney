@@ -41,7 +41,7 @@ class LoginController extends RoloxGetXController {
 
   void navigateProfile() {
     if (otpController.text.length == 6) {
-      if (otpController.text.length == 4) {
+      if (otpController.text.length == 6) {
         // Future.delayed(const Duration(seconds: 5), () {
         //   Get.put(WelcomeController());
         //   Get.toNamed(WelcomeScreen.routeName);

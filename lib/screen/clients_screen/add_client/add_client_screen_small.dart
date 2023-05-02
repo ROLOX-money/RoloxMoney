@@ -176,97 +176,100 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                         ),
                       ),
                       SizedBox(height: 10),
-                      if (widget.controller!.typOfBusiness.obs.value ==
-                          TypOfBusiness.business) ...[
-                        // Brand Name
+                      // Brand Name
+                      WidgetUtils.genericTextFiled(
+                        context: context,
+                        keyBoardType: TextInputType.name,
+                        hintText: widget.controller!.typOfBusiness.obs.value == TypOfBusiness.business
+                            ? Languages.of(context)?.brandNameHintText
+                        : Languages.of(context)?.fullNameHint,
+                        controller: widget.controller!.brandNameController,
+                        labelName: widget.controller!.typOfBusiness.obs.value == TypOfBusiness.business
+                            ? '${Languages.of(context)?.brandName}'
+                            : '${Languages.of(context)?.fullName}',
+                      ),
+                      // Legal Name
+                      if (widget.controller!.typOfBusiness.obs.value == TypOfBusiness.business)
                         WidgetUtils.genericTextFiled(
                           context: context,
                           keyBoardType: TextInputType.name,
-                          controller: widget.controller!.brandNameController,
-                          labelName: '${Languages.of(context)?.brandName}'
-                              .toUpperCase(),
-                        ),
-                        // Legal Name
-                        WidgetUtils.genericTextFiled(
-                          context: context,
-                          keyBoardType: TextInputType.name,
+                          hintText: Languages.of(context)?.companyNameHint,
                           controller: widget.controller!.legalNameController,
-                          labelName:
-                              ' ${Languages.of(context)?.business}  ${Languages.of(context)?.legalName}'
-                                  .toUpperCase(),
-                        )
-                      ],
-
+                          labelName: '${Languages.of(context)?.business}  ${Languages.of(context)?.legalName}',
+                        ),
                       //  GST No
                       WidgetUtils.genericTextFiled(
                         context: context,
+                        hintText: Languages.of(context)?.gstNumberHint,
                         controller: widget.controller!.gstNumberController,
-                        labelName:
-                            '${Languages.of(context)?.gstNumber}'.toUpperCase(),
+                        labelName: '${Languages.of(context)?.gstNumber}',
                       ),
                       // Pan No
                       WidgetUtils.genericTextFiled(
                         context: context,
+                        hintText: Languages.of(context)?.panNumberHint,
                         controller: widget.controller!.panNoController,
-                        labelName:
-                            '${Languages.of(context)?.panNumber}'.toUpperCase(),
+                        labelName: '${Languages.of(context)?.panNumber}',
                       ),
                       // Aadhaar No
                       WidgetUtils.genericTextFiled(
-                        context: context,
-                        controller: widget.controller!.aadhaarNoController,
-                        keyBoardType: TextInputType.emailAddress,
-                        labelName: '${Languages.of(context)?.aadhaarNumber}'
-                            .toUpperCase(),
-                      ),
+                          context: context,
+                          hintText: Languages.of(context)?.aadhaarNumberHint,
+                          controller: widget.controller!.aadhaarNoController,
+                          keyBoardType: TextInputType.emailAddress,
+                          labelName: '${Languages.of(context)?.aadhaarNumber}'),
                       // contact Person
                       WidgetUtils.genericTextFiled(
                         context: context,
+                        hintText: Languages.of(context)?.contactPersonNameHintText,
                         controller: widget.controller!.contactPersonController,
                         keyBoardType: TextInputType.emailAddress,
-                        labelName:
-                            '${Languages.of(context)?.contact} ${Languages.of(context)?.person}'
-                                .toUpperCase(),
+                        labelName: (widget.controller!.typOfBusiness.obs.value == TypOfBusiness.business)
+                            ? '${Languages.of(context)?.contact} ${Languages.of(context)?.person}'
+                            : '${Languages.of(context)?.contact} ${Languages.of(context)?.person} ${Languages.of(context)?.optional}',
                       ),
                       // Department
+                      if (widget.controller!.typOfBusiness.obs.value ==
+                          TypOfBusiness.business)
                       WidgetUtils.genericTextFiled(
                         context: context,
+                        hintText: Languages.of(context)?.departmentNameHintText,
                         controller: widget.controller!.departmentController,
                         keyBoardType: TextInputType.emailAddress,
                         labelName: '${Languages.of(context)?.department}'
-                            .toUpperCase(),
                       ),
                       // Designation
                       WidgetUtils.genericTextFiled(
                         context: context,
+                        hintText: Languages.of(context)?.designationNameHintText,
                         keyBoardType: TextInputType.phone,
                         controller: widget.controller!.designationController,
                         labelName: '${Languages.of(context)?.designation}'
-                            .toUpperCase(),
                       ),
                       // Email ID
                       WidgetUtils.genericTextFiled(
                         context: context,
-                        keyBoardType: TextInputType.streetAddress,
-                        controller: widget.controller!.fullAddressController,
-                        labelName:
-                            '${Languages.of(context)?.emailID}'.toUpperCase(),
+                        hintText: Languages.of(context)?.clientsEmailIdHintText,
+                        keyBoardType: TextInputType.emailAddress,
+                        controller: widget.controller!.emailIDController,
+                        labelName: '${Languages.of(context)?.emailID}',
                       ),
                       // Mobile No
                       WidgetUtils.genericTextFiled(
                         context: context,
+                        hintText: Languages.of(context)?.clientMobileNumberHintText,
                         keyBoardType: TextInputType.phone,
-                        controller: widget.controller!.designationController,
+                        controller: widget.controller!.mobileNumberController,
                         labelName: '${Languages.of(context)?.mobileNumber}'
-                            .toUpperCase(),
                       ),
                       // Full Address
                       WidgetUtils.genericTextFiled(
                         context: context,
+                        hintText: Languages.of(context)?.enterYourAddressHintText,
                         keyBoardType: TextInputType.streetAddress,
                         controller: widget.controller!.fullAddressController,
-                        labelName: '${Languages.of(context)?.fullAddress}'
-                            .toUpperCase(),
+                        labelName: '${Languages.of(context)?.fullAddress}',
+                        maxLines: 10
                       ),
                       const SizedBox(
                         height: 15,
@@ -281,7 +284,10 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                         onTap: () {
                           Get.back();
                         },
-                      )
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
                     ],
                   ),
                 ),

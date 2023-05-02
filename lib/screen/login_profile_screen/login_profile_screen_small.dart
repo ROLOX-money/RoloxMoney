@@ -73,9 +73,7 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        height: 10,
-                      ),
+                      SizedBox(height: 10),
                       // Profile page Content
                       CustomText(
                         text: '${Languages.of(context)?.profilePageContent}',
@@ -207,7 +205,8 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                         onTap: () {
                                           widget.controller!.businessToggle(
                                               value: TypOfBusiness.agency);
-                                          WidgetUtils.showAlertDialog(context: context);
+                                          WidgetUtils.showAlertDialog(
+                                              context: context);
                                         },
                                         child: Row(
                                           mainAxisAlignment:
@@ -229,7 +228,8 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                                     .businessToggle(
                                                         value: TypOfBusiness
                                                             .agency);
-                                                WidgetUtils.showAlertDialog(context: context);
+                                                WidgetUtils.showAlertDialog(
+                                                    context: context);
                                               },
                                             ),
                                             CustomText(
@@ -297,14 +297,6 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                           '${Languages.of(context)?.fullName}',
                                       hintText:
                                           Languages.of(context)?.fullNameHint),
-                                  // WidgetUtils.genericTextFiled(
-                                  //   context: context,
-                                  //   keyBoardType: TextInputType.name,
-                                  //   validationRules: ['required'],
-                                  //   controller: widget.controller!.lastNameController,
-                                  //   labelName: '${Languages.of(context)?.lastName}'
-                                  //       .toUpperCase(),
-                                  // ),
                                   WidgetUtils.genericTextFiled(
                                       context: context,
                                       keyBoardType: TextInputType.emailAddress,
@@ -341,8 +333,8 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                               .companyNameController,
                                           labelName:
                                               '${Languages.of(context)?.companyName}',
-                                          hintText: Languages.of(context)
-                                              ?.companyName),
+                                          hintText:
+                                              '${Languages.of(context)?.enter} ${Languages.of(context)?.companyName}'),
                                       // Company Email ID
                                       WidgetUtils.genericTextFiled(
                                           context: context,

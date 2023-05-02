@@ -40,27 +40,13 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
       rxStatus: widget.controller!.status,
       child: Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            backgroundColor: Theme.of(context).backgroundColor,
-            leading: Icon(
-              Icons.menu,
-              size: 30,
-              color: Colors.white,
-            ),
-            title: Container(
-              alignment: Alignment.centerLeft,
-              child: Image.asset(
-                ImageResource.rolox,
-                height: 20,
-              ),
-            ),
-          ),
           body: Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 20),
+                // Account Balance
                 Container(
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey, width: 0.15),
@@ -155,8 +141,7 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                 SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {
-                    print("onTapped");
-                    oldBodyWidget();
+
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -227,7 +212,11 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600),
                               ),
-                              SizedBox(height: 5),
+                              // SizedBox(height: 5),
+                              Divider(
+                                thickness: 1,
+                                color: Colors.white,
+                              ),
                               CustomText(
                                 text:
                                     '${Languages.of(context)?.transactionWorth}',
@@ -277,7 +266,6 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
     return ClipRRect(
       child: Stack(children: [
         Container(
-          // color: Colors.green,
           color: ColorResource.color0093FF,
           height: 100,
           width: 100,
@@ -321,6 +309,7 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                           fontWeight: FontWeight.w600),
                     ),
                     SizedBox(height: 10),
+                    Divider(color: Colors.white,),
                     CustomText(
                       text: '${Languages.of(context)?.transactionWorth}',
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
@@ -562,8 +551,6 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
         });
   }
 
-
-
 // switch (Widgets) { // Your Enum Value which you have passed
 // case InvoiceWidgets.Upcoming:
 // //Your validations for password;
@@ -575,5 +562,4 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
 // //Your validations for username
 // break;
 // }
-
 }

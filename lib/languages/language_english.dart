@@ -13,7 +13,7 @@ class LanguageEn extends Languages {
 
   String get alreadyAMember => 'Already a member';
 
-  String get mobileNumber => 'mobile number';
+  String get mobileNumber => 'Mobile Number';
 
   String get send => 'Send';
 
@@ -155,6 +155,8 @@ class LanguageEn extends Languages {
 
   String get invoiceNumber => 'Invoice number';
 
+  String get invoiceDueDate => 'Invoice Due Date';
+
   String get invoiceValueWithoutGST => 'Invoice Value without GST';
 
   String get hsnCode => 'HSN Code';
@@ -240,6 +242,48 @@ class LanguageEn extends Languages {
 
   String get profileScreenFreeContent =>
       "Please share a bit about your business to setup things better for you!";
+
+  String get optional => '(optional)';
+
+  String get brandNameHintText => 'Enter Your Business Name';
+
+  String get contactPersonNameHintText => 'Enter contact person name';
+
+  String get departmentNameHintText => 'Enter department name';
+
+  String get designationNameHintText => 'Enter designation name';
+
+  String get clientsEmailIdHintText => 'Your client\'s Email ID';
+
+  String get clientMobileNumberHintText => 'Your client\'s mobile number';
+
+  String get enterYourAddressHintText => 'Enter Your Address';
+
+  String get searchClientNameHintText => 'Search Client Name';
+
+  String get projectValueHintText => 'Enter your project value';
+
+  String get projectsEmailIDHintText => 'Your project\'s Email ID';
+
+  String get invoiceNameHintText => 'Your name for invoice for reference';
+
+  String get invoiceNoHintText => 'Your number for invoice for tracking';
+
+  String get valueHintText => 'Value in INR';
+
+  String get hsnCodeHintText => 'HSN Code';
+
+  String get accountNoHintText => 'Your account number';
+
+  String get accountIfscHintText => 'Your account\'s IFSC code';
+
+  String get addProfilePhoto => 'ADD PROFILE PHOTO';
+
+
+
+
+
+
 
 
 

@@ -334,23 +334,23 @@ class BusinessProfileScreenSmallState
                                       lableName:
                                           '${Languages.of(context)?.natureOfBusiness}',
                                       dropDownList: widget
-                                          .controller!.natureOfWork.obs.value,
+                                          .controller!.natureOfBusiness.obs.value,
                                       selectedValues: widget
-                                          .controller!.natureOfWorkValue.value,
+                                          .controller!.natureOfBusinessValue.value,
                                       onChanged: (value) {
                                         widget.controller!.updateValuesOnUI(
                                             value: value,
                                             variableName: widget
-                                                .controller!.natureOfWorkValue);
+                                                .controller!.natureOfBusinessValue);
                                       }),
                                   SizedBox(height: 10),
-                                  if (widget.controller!.natureOfWorkValue.value
+                                  if (widget.controller!.natureOfBusinessValue.value
                                           .toLowerCase() ==
                                       'other')
                                     WidgetUtils.genericTextFiled(
                                       context: context,
                                       controller: widget
-                                          .controller!.plsIfSpecifyController,
+                                          .controller!.plsIfSpecifyControllerForNatureOfBusiness,
                                       labelName:
                                           '${Languages.of(context)?.plsIfSpecify}',
                                       labelStyle: Theme.of(context)

@@ -34,4 +34,6 @@ class ImageResource {
   static const String businessTypeSvg = 'assets/svg/business_type.svg';
   static const String companyProfileImagePng = 'assets/png/company_profile_image.png';
   static const String companyImage = 'assets/png/company_image.png';
+  static const String contactAddIcon = 'assets/png/image_add.png';
+  static const String addPhotoIcon = 'assets/png/add_photo_icon.png';
 }

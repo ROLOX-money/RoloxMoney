@@ -88,21 +88,23 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                               ),
                               WidgetUtils.genericTextFiled(
                                 context: context,
+                                hintText:
+                                    '${Languages.of(context)?.enter} ${Languages.of(context)?.firstName}',
                                 controller:
                                     widget.controller!.firstNameController,
-                                labelName: '${Languages.of(context)?.firstName}'
-                                    .toUpperCase(),
+                                labelName:
+                                    '${Languages.of(context)?.firstName}',
                               ),
                               WidgetUtils.genericTextFiled(
                                 context: context,
+                                hintText:
+                                    '${Languages.of(context)?.enter} ${Languages.of(context)?.lastName}',
                                 controller:
                                     widget.controller!.lastNameController,
-                                labelName: '${Languages.of(context)?.lastName}'
-                                    .toUpperCase(),
+                                labelName: '${Languages.of(context)?.lastName}',
                               ),
                               CustomText(
-                                text: '${Languages.of(context)?.mobileNumber}'
-                                    .toUpperCase(),
+                                text: '${Languages.of(context)?.mobileNumber}',
                                 style: Theme.of(context)
                                     .textTheme
                                     .titleSmall!
@@ -110,13 +112,13 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                         color: ColorResource.colorE08AF4,
                                         fontWeight: FontWeight.w500),
                               ),
-                              const SizedBox(
-                                height: 5,
-                              ),
+                              const SizedBox(height: 5),
                               SizedBox(
                                 child: CustomTextField(
                                   widget.controller!.mobilNumberController.obs
                                       .value,
+                                  hintText:
+                                      '${Languages.of(context)?.enter} ${Languages.of(context)?.mobileNumber}',
                                   focusedBorder: Colors.grey,
                                   textColor: Colors.white,
                                   enableColor: Colors.grey,
@@ -188,33 +190,37 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                               ),
                               WidgetUtils.genericTextFiled(
                                 context: context,
+                                hintText:
+                                    '${Languages.of(context)?.emailIdHint}',
                                 controller: widget.controller!.emailController,
-                                labelName: '${Languages.of(context)?.emailID}'
-                                    .toUpperCase(),
+                                labelName: '${Languages.of(context)?.emailID}',
                               ),
                               WidgetUtils.genericTextFiled(
                                 context: context,
+                                hintText:
+                                    '${Languages.of(context)?.brandNameHintText}',
                                 controller:
                                     widget.controller!.businessNameController,
                                 labelName:
-                                    '${Languages.of(context)?.businessName}'
-                                        .toUpperCase(),
+                                    '${Languages.of(context)?.businessName}',
                               ),
                               WidgetUtils.genericTextFiled(
                                 context: context,
+                                hintText:
+                                    '${Languages.of(context)?.enter} ${Languages.of(context)?.accountNoHintText}',
                                 controller:
                                     widget.controller!.bankAccountController,
                                 labelName:
-                                    '${Languages.of(context)?.bankAccountNumber}'
-                                        .toUpperCase(),
+                                    '${Languages.of(context)?.bankAccountNumber}',
                               ),
                               WidgetUtils.genericTextFiled(
                                 context: context,
+                                hintText:
+                                    '${Languages.of(context)?.enter} ${Languages.of(context)?.accountIfscHintText}',
                                 controller:
                                     widget.controller!.bankIFSCController,
                                 labelName:
-                                    '${Languages.of(context)?.bankIFSCCode}'
-                                        .toUpperCase(),
+                                    '${Languages.of(context)?.bankIFSCCode}',
                               ),
                             ],
                           ),

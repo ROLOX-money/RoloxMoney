@@ -154,6 +154,8 @@ abstract class Languages {
 
   String get invoiceNumber;
 
+  String get invoiceDueDate;
+
   String get invoiceValueWithoutGST;
 
   String get hsnCode;
@@ -186,7 +188,7 @@ abstract class Languages {
 
   String get socialIdHint;
 
-  String get companyName ;
+  String get companyName;
 
   String get companyNameHint;
 
@@ -226,7 +228,7 @@ abstract class Languages {
 
   String get noOf;
 
-  String get  transactionWorth;
+  String get transactionWorth;
 
   String get paid;
 
@@ -240,4 +242,39 @@ abstract class Languages {
 
   String get profileScreenFreeContent;
 
+  String get optional;
+
+  String get brandNameHintText;
+
+  String get contactPersonNameHintText;
+
+  String get departmentNameHintText;
+
+  String get designationNameHintText;
+
+  String get clientsEmailIdHintText;
+
+  String get clientMobileNumberHintText;
+
+  String get enterYourAddressHintText;
+
+  String get searchClientNameHintText;
+
+  String get projectValueHintText;
+
+  String get projectsEmailIDHintText;
+
+  String get invoiceNameHintText;
+
+  String get invoiceNoHintText;
+
+  String get valueHintText;
+
+  String get hsnCodeHintText;
+
+  String get accountNoHintText;
+
+  String get accountIfscHintText;
+
+  String get addProfilePhoto;
 }

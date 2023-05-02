@@ -9,16 +9,18 @@ import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/custom_textfield.dart';
 
 abstract class WidgetUtils {
-  static Widget genericTextFiled(
-      {required BuildContext context,
-      required TextEditingController controller,
-      required String labelName,
-      List<String> validationRules = const [],
-      String? suffixImagePath,
-        String? hintText,
-      TextInputType? keyBoardType,
-      TextStyle? labelStyle,
-      }) {
+  static Widget genericTextFiled({
+    required BuildContext context,
+    required TextEditingController controller,
+    required String labelName,
+    List<String> validationRules = const [],
+    String? suffixImagePath,
+    String? hintText,
+    int? maxLines,
+    int? minLines,
+    TextInputType? keyBoardType,
+    TextStyle? labelStyle,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -27,8 +29,10 @@ abstract class WidgetUtils {
         ),
         CustomText(
           text: labelName,
-          style: labelStyle ?? Theme.of(context).textTheme.titleSmall!.copyWith(
-              color: ColorResource.colorE08AF4, fontWeight: FontWeight.w500),
+          style: labelStyle ??
+              Theme.of(context).textTheme.titleSmall!.copyWith(
+                  color: ColorResource.colorE08AF4,
+                  fontWeight: FontWeight.w500),
         ),
         const SizedBox(
           height: 5,
@@ -36,6 +40,8 @@ abstract class WidgetUtils {
         SizedBox(
           child: CustomTextField(
             controller.obs.value,
+            minLines: minLines,
+            maxLines: maxLines,
             hintText: hintText,
             focusedBorder: Colors.grey,
             textColor: Colors.white,
@@ -51,7 +57,7 @@ abstract class WidgetUtils {
             disableColor: Colors.red,
             keyBoardType: keyBoardType ?? TextInputType.name,
           ),
-          height:  70,
+          height: 70,
         ),
       ],
     );
