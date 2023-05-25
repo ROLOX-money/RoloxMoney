@@ -154,8 +154,18 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey, width: 0.15),
-                        color: ColorResource.color151515),
+                      border: Border.all(color: Colors.grey, width: 0.15),
+                      borderRadius: BorderRadius.circular(8),
+                      gradient: LinearGradient(
+                        colors: [
+                          ColorResource.color0093FF,
+                          ColorResource.color151515,
+                        ],
+                        stops: [0.2 / 6, 0.2 / 6],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                      ),
+                    ),
                     padding: EdgeInsets.all(15.0),
                     child: Theme(
                       data: Theme.of(context).copyWith(
@@ -222,9 +232,13 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                                         fontWeight: FontWeight.w600),
                               ),
                               // SizedBox(height: 5),
-                              Divider(
-                                thickness: 1,
-                                color: Colors.white,
+                              Container(
+                                height: 20,
+                                width: 120,
+                                child: Divider(
+                                  color: ColorResource.color272727,
+                                  thickness: 1.0,
+                                ),
                               ),
                               CustomText(
                                 text:
@@ -262,29 +276,30 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           /// fixme
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => HomeScreenDetail(
-                                    controller: widget.controller,
-                                    scaffoldKey: widget.scaffoldKey,
-                                    buttonNo: 2,
-                                  )));
+                                        controller: widget.controller,
+                                        scaffoldKey: widget.scaffoldKey,
+                                        buttonNo: 2,
+                                      )));
                         },
-                        child: paidCardWidget('${Languages.of(context)?.paid}')),
+                        child:
+                            paidCardWidget('${Languages.of(context)?.paid}')),
                     GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           /// fixme
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => HomeScreenDetail(
-                                    controller: widget.controller,
-                                    scaffoldKey: widget.scaffoldKey,
-                                    buttonNo: 3,
-                                  )));
+                                        controller: widget.controller,
+                                        scaffoldKey: widget.scaffoldKey,
+                                        buttonNo: 3,
+                                      )));
                         },
                         child: paidCardWidget('${Languages.of(context)?.due}'))
                   ],
@@ -296,75 +311,85 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
   }
 
   Widget paidCardWidget(String title) {
-    return ClipRRect(
-      child: Stack(children: [
-        Container(
-          color: ColorResource.color0093FF,
-          height: 100,
-          width: 100,
+    return Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey, width: 0.15),
+          borderRadius: BorderRadius.circular(8),
+          gradient: LinearGradient(
+            colors: [
+              (title == Languages.of(context)?.paid)
+                  ? ColorResource.color00D1B0
+                  : ColorResource.colorE08AF4,
+              ColorResource.color151515,
+            ],
+            stops: [0.2 / 6, 0.2 / 6],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
         ),
-        Container(
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey, width: 0.15),
-                color: ColorResource.color151515),
-            padding: EdgeInsets.all(8.0),
-            child: Theme(
-                data: Theme.of(context).copyWith(
-                    unselectedWidgetColor: Colors.grey,
-                    disabledColor: ColorResource.color00E94F),
-                child: Column(
-                  children: [
-                    SizedBox(height: 10),
-                    CustomText(
-                      text: title,
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
-                          height: 1.5,
-                          foreground: Paint()
-                            ..shader = ColorResource.linearGradient),
-                    ),
-                    SizedBox(height: 10),
-                    CustomText(
-                      text:
-                          '${Languages.of(context)?.noOf} ${Languages.of(context)?.invoices}',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: ColorResource.colorFFFFFF,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(height: 10),
-                    CustomText(
-                      text: '07',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: ColorResource.color00E94F,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(height: 10),
-                    Divider(
-                      color: Colors.white,
-                    ),
-                    CustomText(
-                      text: '${Languages.of(context)?.transactionWorth}',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: ColorResource.colorFFFFFF,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(height: 10),
-                    CustomText(
-                      text: '₹ 50000',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: ColorResource.color00E94F,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(height: 10),
-                  ],
-                ))),
-      ]),
-    );
+        padding: EdgeInsets.all(8.0),
+        child: Theme(
+            data: Theme.of(context).copyWith(
+                unselectedWidgetColor: Colors.grey,
+                disabledColor: ColorResource.color00E94F),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(height: 10),
+                CustomText(
+                  text: title,
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600,
+                      height: 1.5,
+                      foreground: Paint()
+                        ..shader = ColorResource.linearGradient),
+                ),
+                SizedBox(height: 10),
+                CustomText(
+                  text:
+                      '${Languages.of(context)?.noOf} ${Languages.of(context)?.invoices}',
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      color: ColorResource.colorFFFFFF,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600),
+                ),
+                SizedBox(height: 10),
+                CustomText(
+                  text: '07',
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      color: ColorResource.color00E94F,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600),
+                ),
+                SizedBox(height: 10),
+                Container(
+                  height: 20,
+                  width: 120,
+                  child: Divider(
+                    color: ColorResource.color272727,
+                    thickness: 1.0,
+                  ),
+                ),
+                SizedBox(height: 10),
+                CustomText(
+                  text: '${Languages.of(context)?.transactionWorth}',
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      color: ColorResource.colorFFFFFF,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600),
+                ),
+                SizedBox(height: 10),
+                CustomText(
+                  text: '₹ 50000',
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      color: ColorResource.color00E94F,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600),
+                ),
+                SizedBox(height: 10),
+              ],
+            )));
   }
 
 // switch (Widgets) { // Your Enum Value which you have passed
