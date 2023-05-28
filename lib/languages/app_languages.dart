@@ -277,4 +277,6 @@ abstract class Languages {
   String get accountIfscHintText;
 
   String get addProfilePhoto;
+
+  String get rolox;
 }

@@ -227,8 +227,13 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                       cardShape: 1,
                       isIcon: true,
                       onTap: () {
-                        if (widget.controller!.form.currentState!.validate())
-                          widget.controller!.triggerLogin();
+                        /// fixme
+                        // if (widget.controller!.form.currentState!.validate())
+                        //   widget.controller!.triggerLogin();
+                        widget.controller!.otpBottomSheet(
+                            mobileNumber:
+                                ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
+
                         // otpBottomSheet(
                         //     controller: widget.controller!,
                         //     mobileNumber:

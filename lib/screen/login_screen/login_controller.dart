@@ -48,7 +48,8 @@ class LoginController extends RoloxGetXController {
         // });
 
         Get.put(LoginProfileController());
-        Get.toNamed(LoginProfileScreen.routeName);
+        Get.offAndToNamed(LoginProfileScreen.routeName);
+        // Get.toNamed(LoginProfileScreen.routeName);
       }
     }
   }

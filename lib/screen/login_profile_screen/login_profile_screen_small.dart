@@ -364,7 +364,7 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                       // aadhaar Number
                                       WidgetUtils.genericTextFiled(
                                           context: context,
-                                          keyBoardType: TextInputType.name,
+                                          keyBoardType: TextInputType.number,
                                           validationRules: ['required'],
                                           controller: widget.controller!
                                               .aadhaarNumberController,

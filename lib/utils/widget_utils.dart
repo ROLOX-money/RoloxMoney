@@ -143,10 +143,30 @@ abstract class WidgetUtils {
                   Radius.circular(32.0),
                 ),
               ),
-              height: 460,
+              height: 500,
               width: MediaQuery.of(context).size.width,
               child: Column(
                 children: [
+                  MediaQuery.removePadding(
+                    removeTop: true,
+                    removeBottom: true,
+                    removeLeft: true,
+                    removeRight: true,
+                    context: context,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            icon: Icon(
+                              Icons.close,
+                              color: Colors.white,
+                            ))
+                      ],
+                    ),
+                  ),
                   Container(
                     alignment: Alignment.center,
                     // child: Image.asset(
@@ -163,7 +183,7 @@ abstract class WidgetUtils {
                   CustomText(
                     text: '${Languages.of(context)?.oopsAgency}',
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: ColorResource.colorFFFFFF,
+                        color: ColorResource.colorE08AF4,
                         fontSize: 16,
                         fontWeight: FontWeight.w500),
                   ),
@@ -173,7 +193,7 @@ abstract class WidgetUtils {
                   CustomText(
                     text: '${Languages.of(context)?.oopsAgencyMessage}',
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: ColorResource.colorE08AF4,
+                        color: ColorResource.colorFFFFFF,
                         fontSize: 14,
                         fontWeight: FontWeight.w400),
                   ),

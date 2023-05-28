@@ -279,6 +279,8 @@ class LanguageEn extends Languages {
 
   String get addProfilePhoto => 'ADD PROFILE PHOTO';
 
+  String get rolox => 'ROLOX';
+
 
 
 
