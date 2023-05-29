@@ -199,11 +199,12 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                                               fontWeight: FontWeight.w600),
                                     )
                                   ]),
-                              maxLines: 2,
+                              maxLines: 3,
                               softWrap: true,
                               textAlign: TextAlign.center,
                             ),
                           ),
+                          SizedBox(width: 5,),
                           Column(
                             children: [
                               CustomText(
@@ -286,6 +287,7 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                         },
                         child:
                             paidCardWidget('${Languages.of(context)?.paid}')),
+                    SizedBox(width: 5),
                     GestureDetector(
                         onTap: () {
                           /// fixme

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
+import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
 import 'package:roloxmoney/screen/login_profile_screen/login_profile_controller.dart';
 import 'package:roloxmoney/screen/login_profile_screen/login_profile_screen.dart';
 import 'package:roloxmoney/screen/welcome_screen/welcome_screen.dart';
@@ -48,7 +49,8 @@ class LoginController extends RoloxGetXController {
         // });
 
         Get.put(LoginProfileController());
-        Get.offAndToNamed(LoginProfileScreen.routeName);
+        // Get.offAndToNamed(LoginProfileScreen.routeName);
+        Get.offAndToNamed(DashboardScreen.routeName);
         // Get.toNamed(LoginProfileScreen.routeName);
       }
     }
