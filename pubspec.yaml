@@ -21,6 +21,9 @@ dependencies:
   pin_code_fields: ^7.4.0
   flutter_svg: ^1.1.4
   dio: ^5.0.1
+  altogic: ^1.0.6
+  shared_preferences: ^2.1.1
+  supabase_flutter: ^1.10.0
 
 #  firebase_auth: ^3.6.4
 #  firebase_auth:
