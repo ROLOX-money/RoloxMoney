@@ -1,3 +1,4 @@
+import 'package:altogic/altogic.dart';
 import 'package:dynamic_themes/dynamic_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,9 +22,11 @@ import 'package:roloxmoney/screen/profile_screen/profile_controller.dart';
 import 'package:roloxmoney/screen/projects_screen/add_project/add_project_controller.dart';
 import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
 import 'package:roloxmoney/screen/welcome_screen/welcome_screen_controller.dart';
+import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/RoloxKey.dart';
 import 'package:roloxmoney/utils/app_themes.dart';
 import 'package:roloxmoney/widget/rolox_money_core_widgets.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 /*Chinnadurai Viswanathan*/
 Future<void> main() async {
@@ -65,6 +68,7 @@ class RoloxMoneyAppState extends CoreWidgetsState {
   void initState() {
     RoloxKey.baseUrl = 'https://65.2.137.244:8080/';
     RoloxKey.header = {'content-Type': 'application/json'};
+
     super.initState();
   }
 

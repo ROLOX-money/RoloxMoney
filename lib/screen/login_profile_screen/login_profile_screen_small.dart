@@ -367,11 +367,10 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                           keyBoardType: TextInputType.number,
                                           validationRules: ['required'],
                                           controller: widget.controller!
-                                              .aadhaarNumberController,
-                                          labelName:
-                                              '${Languages.of(context)?.aadhaarNumber}',
+                                              .contactPersonNameController,
+                                          labelName: 'Contact person name',
                                           hintText:
-                                              '${Languages.of(context)?.aadhaarNumberHint}'),
+                                              'Enter the contact person name'),
                                       // GST Number
                                       WidgetUtils.genericTextFiled(
                                           context: context,
@@ -443,7 +442,7 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                           keyBoardType: TextInputType.name,
                                           validationRules: ['required'],
                                           controller: widget.controller!
-                                              .aadhaarNumberController,
+                                              .contactPersonNameController,
                                           labelName:
                                               '${Languages.of(context)?.aadhaarNumber}',
                                           hintText:
@@ -488,16 +487,10 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                               .validate()) {
                             if (widget.controller!.typOfBusiness.obs.value
                                     .value ==
-                                TypOfBusiness.business) {
-                              Get.put(BusinessProfileController());
-                              Get.toNamed(BusinessProfileScreen.routeName);
-                            } else if (widget.controller!.typOfBusiness.obs
-                                    .value.value ==
-                                TypOfBusiness.individual) {
-                              Get.put(IndividualProfileController());
-                              Get.toNamed(IndividualProfileScreen.routeName);
-                            } else {
+                                TypOfBusiness.agency) {
                               WidgetUtils.showAlertDialog(context: context);
+                            } else {
+                              widget.controller!.singUpNewUser();
                             }
                           }
                         },

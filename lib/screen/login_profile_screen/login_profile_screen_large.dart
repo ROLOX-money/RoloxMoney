@@ -315,14 +315,13 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                     // aadhaar Number
                                     WidgetUtils.genericTextFiled(
                                         context: context,
-                                        keyBoardType: TextInputType.number,
+                                        keyBoardType: TextInputType.text,
                                         validationRules: ['required'],
                                         controller: widget.controller!
-                                            .aadhaarNumberController,
-                                        labelName:
-                                            '${Languages.of(context)?.aadhaarNumber}',
+                                            .contactPersonNameController,
+                                        labelName: 'Contact person name',
                                         hintText:
-                                            '${Languages.of(context)?.aadhaarNumberHint}'),
+                                            'Enter the contact person name'),
                                     // GST Number
                                     WidgetUtils.genericTextFiled(
                                         context: context,
@@ -390,7 +389,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                         keyBoardType: TextInputType.name,
                                         validationRules: ['required'],
                                         controller: widget.controller!
-                                            .aadhaarNumberController,
+                                            .contactPersonNameController,
                                         labelName:
                                             '${Languages.of(context)?.aadhaarNumber}',
                                         hintText:

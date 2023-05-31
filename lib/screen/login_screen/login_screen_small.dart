@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/login_screen/login_controller.dart';
+import 'package:roloxmoney/utils/supa_base_control.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/widget/custom_button.dart';
@@ -226,13 +227,15 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                       context,
                       cardShape: 1,
                       isIcon: true,
-                      onTap: () {
+                      onTap: () async {
                         /// fixme
-                        // if (widget.controller!.form.currentState!.validate())
-                        //   widget.controller!.triggerLogin();
-                        widget.controller!.otpBottomSheet(
-                            mobileNumber:
-                                ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
+                        if (widget.controller!.form.currentState!.validate()) {
+                          widget.controller!.triggerLogin();
+
+                        }
+                        // widget.controller!.otpBottomSheet(
+                        //     mobileNumber:
+                        //         ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
 
                         // otpBottomSheet(
                         //     controller: widget.controller!,

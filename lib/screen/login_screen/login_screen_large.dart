@@ -275,10 +275,12 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                                     .validate() &&
                                 widget.controller!.acceptTermsAndCondition.obs
                                     .value.value) {
-                              otpAlertDialogue(
-                                  controller: widget.controller!,
-                                  mobileNumber:
-                                      ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
+
+
+                              // otpAlertDialogue(
+                              //     controller: widget.controller!,
+                              //     mobileNumber:
+                              //         ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
 
                               // otpBottomSheet(
                               //     controller: widget.controller!,
@@ -404,7 +406,7 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                   isIcon: true,
                   onTap: () {
                     Get.back();
-                    controller.navigateProfile();
+                    controller.otpVerification();
                   },
                 ),
                 SizedBox(

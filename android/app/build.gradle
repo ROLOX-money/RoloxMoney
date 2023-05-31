@@ -103,6 +103,7 @@ android {
     flavorDimensions "default"
     productFlavors {
         dev {
+            //com.rolox.money.dev
             applicationIdSuffix ".money.dev"
         }
         uat {
