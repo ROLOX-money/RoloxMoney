@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
+import 'package:roloxmoney/model/cleint_list_model.dart';
 import 'package:roloxmoney/model/project_model.dart';
 import 'package:roloxmoney/screen/clients_screen/clients_controller.dart';
 import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
@@ -49,12 +50,10 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  widget.controller!.projectInvoicesList.obs.value.value
-                              .length >
-                          0
+                  widget.controller!.clientList.obs.value.length > 0
                       ? Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                        child: Row(
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               CustomText(
@@ -79,31 +78,30 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                   textColor: ColorResource.black,
                                   fontSize: 14,
                                   onTap: () {
-                                    widget.controller!.navigateAddClientScreen();
+                                    widget.controller!
+                                        .navigateAddClientScreen();
                                   },
                                 ),
                               )
                             ],
                           ),
-                      )
+                        )
                       : SizedBox(),
                   SizedBox(
                     height: 15,
                   ),
-                  widget.controller!.projectInvoicesList.obs.value.value
-                              .length >
-                          0
+                  widget.controller!.clientList.obs.value.length > 0
                       ? ListView.separated(
                           separatorBuilder: (BuildContext context, int index) =>
                               Divider(
                                   height: 1, color: ColorResource.colorA0BCD0),
-                          itemCount: widget.controller!.projectInvoicesList.obs
-                              .value.value.length,
+                          itemCount:
+                              widget.controller!.clientList.obs.value.length,
                           shrinkWrap: true,
                           // physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
-                            ProjectModel projectModel = widget.controller!
-                                .projectInvoicesList.obs.value.value[index];
+                            ClientListModel clientListModel =
+                                widget.controller!.clientList.obs.value[index];
                             return Container(
                               color: ColorResource.color151515,
                               alignment: Alignment.centerLeft,
@@ -120,7 +118,10 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                     color: ColorResource.color381D4E,
                                   ),
                                   child: CustomText(
-                                    text: AppUtils.getInitials('Client Name')
+                                    // text: AppUtils.getInitials('Client Name')
+                                    //     .toString(),
+                                    text: AppUtils.getInitials(
+                                            clientListModel.companyName)
                                         .toString(),
                                     style: Theme.of(context)
                                         .textTheme
@@ -134,7 +135,7 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     CustomText(
-                                      text: 'Client Name',
+                                      text: clientListModel.companyName!,
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleSmall!
@@ -170,7 +171,7 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                         ),
                                         CustomText(
                                           text:
-                                              '${projectModel.noOfInvoice} ${Languages.of(context)!.projects}',
+                                              '${clientListModel.id} ${Languages.of(context)!.projects}',
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall!
@@ -208,7 +209,8 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                         //   width: 5,
                                         // ),
                                         CustomText(
-                                          text: '${projectModel.date}',
+                                          text:
+                                              '${clientListModel.companyName}',
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall!

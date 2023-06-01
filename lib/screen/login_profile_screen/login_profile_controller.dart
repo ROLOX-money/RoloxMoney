@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
+import 'package:roloxmoney/screen/login_screen/login_screen.dart';
 import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/RoloxKey.dart';
 import 'package:roloxmoney/utils/supa_base_control.dart';
@@ -27,7 +29,7 @@ class LoginProfileController extends GetxController with StateMixin {
     firstNameController.text = 'Chinnadurai';
     emailIDController.text = 'chinnadurai@gmail.com';
     companyNameController.text = 'Rolox Money';
-    panNumberController.text = 'BRYPC40090C';
+    panNumberController.text = 'BRYPC4090C';
     gstNumberController.text = '123445667687';
     contactPersonNameController.text = 'Viswanathan';
     socialId.text = 'socialId link';
@@ -47,6 +49,7 @@ class LoginProfileController extends GetxController with StateMixin {
           ? contactPersonNameController.text
           : firstNameController.text,
       'email': emailIDController.text,
+      'phoneVerfied': Get.previousRoute == LoginScreen.routeName ? true : false,
       'socialId': socialId.text,
       'phone': Get.arguments.toString().contains('+')
           ? Get.arguments.toString()
@@ -125,7 +128,11 @@ class LoginProfileController extends GetxController with StateMixin {
                                   'refrenceid': selectedCompanyResponse[0]
                                       ['id'],
                                 }, tableName: RoloxKey.supaBaseGSTTable)
-                                    .then((panCardInsertResponse) {});
+                                    .then((gstInsertResponse) {
+                                  if (gstInsertResponse) {
+                                    Get.offAllNamed(DashboardScreen.routeName);
+                                  }
+                                });
                               });
                             }
                           }

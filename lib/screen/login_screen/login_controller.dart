@@ -56,7 +56,8 @@ class LoginController extends RoloxGetXController {
                       Singleton.supabaseInstance.client.auth.currentUser?.phone)
               .then((value) {
             if (value is List && value.length == 0) {
-              Get.offAndToNamed(LoginProfileScreen.routeName);
+              Get.offAndToNamed(LoginProfileScreen.routeName,
+                  arguments: mobilNumberController.text);
             } else {
               Get.offAndToNamed(DashboardScreen.routeName,
                   arguments: mobilNumberController.text);

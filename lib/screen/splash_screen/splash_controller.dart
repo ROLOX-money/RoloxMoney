@@ -30,14 +30,12 @@ class SplashScreenController extends GetxController with StateMixin {
           SupaBaseController.toGetTheSelectedUser(
                   mobileNumber: initializeValue.client.auth.currentUser?.phone)
               .then((value) {
-            // if (value is List && value.length == 0) {
-            //   Get.offAndToNamed(LoginProfileScreen.routeName,
-            //       arguments: initializeValue.client.auth.currentUser?.phone);
-            // } else {
-            //   Get.offAndToNamed(DashboardScreen.routeName);
-            // }
-            Get.offAndToNamed(LoginProfileScreen.routeName,
-                arguments: initializeValue.client.auth.currentUser?.phone);
+            if (value is List && value.length == 0) {
+              Get.offAndToNamed(LoginProfileScreen.routeName,
+                  arguments: initializeValue.client.auth.currentUser?.phone);
+            } else {
+              Get.offAndToNamed(DashboardScreen.routeName);
+            }
           });
         } else {
           Get.offAndToNamed(LoginScreen.routeName);
