@@ -19,4 +19,8 @@ class RoloxKey {
   static late String supaBaseGSTTable = 'gstTable';
   static late String supaBasePANTable = 'panTable';
   static late String supaBaseCompanyTable = 'companyDB';
+  static late String supaBaseClientTable = 'companyDB';
+  static late String supaBaseProfileCompanyTable = 'ProfileCompany'; //client
+  static late String supaBaseUserToClientMap = 'userToClientMap';
+  static late String supaBaseAddresstable = 'addresstable';
 }

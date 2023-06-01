@@ -97,7 +97,6 @@ class SupaBaseController {
   static Future<bool> toInsert({required userData, required tableName}) async {
     debugPrint('toInsert data--> $userData');
     debugPrint('toInsert tableName--> $tableName');
-
     try {
       return await Singleton.supabaseInstance.client
           .from(tableName)
@@ -117,6 +116,32 @@ class SupaBaseController {
       }
 
       return false;
+    }
+  }
+
+  //Common search
+  static Future<List> toGetTheSelectedID(
+      {String? whatTypeOfValueYouWant,
+      required searchKey,
+      required searchValue,
+      required tableName}) async {
+    try {
+      return await Singleton.supabaseInstance.client
+          .from(tableName)
+          .select(whatTypeOfValueYouWant ?? '*')
+          .eq(searchKey, searchValue)
+          .then((listOfResponse) {
+        if (listOfResponse is List) {
+          return listOfResponse;
+        } else {
+          return [];
+        }
+      });
+    } catch (e) {
+      AppUtils.showErrorSnackBar(
+          Get.context!, 'Something went wrong. Please try again after sometime',
+          durations: 2000);
+      return [];
     }
   }
 
@@ -142,6 +167,25 @@ class SupaBaseController {
           Get.context!, 'Something went wrong. Please try again after sometime',
           durations: 2000);
       return false;
+    }
+  }
+
+  static Future<List> toGetTheClientList(
+      {required pageCount, required tableName}) async {
+    try {
+      return await Singleton.supabaseInstance.client
+          .from(tableName)
+          .select('*')
+          .limit(pageCount)
+          .then((clientListResponse) {
+        debugPrint('clientListResponse--> $clientListResponse');
+        return clientListResponse is List ? clientListResponse : [];
+      });
+    } catch (e) {
+      AppUtils.showErrorSnackBar(
+          Get.context!, 'Something went wrong. Please try again after sometime',
+          durations: 2000);
+      return [];
     }
   }
 }
