@@ -51,6 +51,7 @@ class AddClientController extends GetxController with StateMixin {
   }
 
   void createClient() {
+    change(null, status: RxStatus.loading());
     //First to check the GST/PAN (if company/client existing or not)
     SupaBaseController.toGetTheSelectedID(
             searchValue: gstNumberController.text,
@@ -71,13 +72,12 @@ class AddClientController extends GetxController with StateMixin {
                   userData: {
                     'dept': departmentController.text,
                     'designation': designationController.text,
-                    'phone': Singleton
-                        .supabaseInstance.client.auth.currentUser?.phone,
+                    'phone': mobileNumberController.text,
                     'companyRefrenceId': panCardListValue[0]['refrenceid']
                   }).then((insertResponse) {
                 if (insertResponse) {
                   SupaBaseController.toInsert(
-                      tableName: RoloxKey.supaBaseAddresstable,
+                      tableName: RoloxKey.supaBaseAddressTable,
                       userData: {
                         'address': fullAddressController.text,
                         'phone': mobileNumberController.text
@@ -98,8 +98,8 @@ class AddClientController extends GetxController with StateMixin {
                           SupaBaseController.toInsert(
                               tableName: RoloxKey.supaBaseUserToClientMap,
                               userData: {
-                                'userId': userResponseList[0]['id'],
-                                'clientId': panCardListValue[0]['refrenceid'],
+                                'userid': userResponseList[0]['id'],
+                                'companyId': panCardListValue[0]['refrenceid'],
                                 'profileType': panCardListValue[0]
                                     ['profiletype']
                               }).then((value) {
@@ -113,13 +113,21 @@ class AddClientController extends GetxController with StateMixin {
                                   durations: 5000);
                             }
                           });
+                        } else {
+                          change(null, status: RxStatus.success());
                         }
                       });
+                    }else{
+                      change(null, status: RxStatus.success());
                     }
                   });
+                }else{
+                  change(null, status: RxStatus.success());
                 }
               });
             } else {
+              change(null, status: RxStatus.success());
+
               AppUtils.showErrorSnackBar(
                   Get.context!, 'Todo Have to consider as freelancer',
                   durations: 5000);
@@ -129,6 +137,7 @@ class AddClientController extends GetxController with StateMixin {
             //Todo Have to insert in PAN table
             // Todo if freelancer mean -> have to take user Id to user PAN
             // Todo if company mean -> have to take company Id to user PAN
+            change(null, status: RxStatus.success());
 
             AppUtils.showErrorSnackBar(
                 Get.context!, 'Todo Have to insert in PAN table',
@@ -139,6 +148,8 @@ class AddClientController extends GetxController with StateMixin {
         //Todo Have to insert in GST table
         // Todo if freelancer mean -> have to take user Id to user GST
         // Todo if company mean -> have to take company Id to user GST
+        change(null, status: RxStatus.success());
+
         AppUtils.showErrorSnackBar(
             Get.context!, 'Todo Have to insert in GST table',
             durations: 5000);

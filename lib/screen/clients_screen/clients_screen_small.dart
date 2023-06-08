@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
-import 'package:roloxmoney/model/cleint_list_model.dart';
-import 'package:roloxmoney/model/project_model.dart';
 import 'package:roloxmoney/screen/clients_screen/clients_controller.dart';
-import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
-import 'package:roloxmoney/screen/template_screen/template_controller.dart';
+import 'package:roloxmoney/screen/clients_screen/entites/clinet_model.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
@@ -100,7 +97,7 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                           shrinkWrap: true,
                           // physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
-                            ClientListModel clientListModel =
+                            ClientModel clientModel =
                                 widget.controller!.clientList.obs.value[index];
                             return Container(
                               color: ColorResource.color151515,
@@ -121,7 +118,7 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                     // text: AppUtils.getInitials('Client Name')
                                     //     .toString(),
                                     text: AppUtils.getInitials(
-                                            clientListModel.companyName)
+                                            clientModel.companyDB!.companyName)
                                         .toString(),
                                     style: Theme.of(context)
                                         .textTheme
@@ -135,7 +132,7 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     CustomText(
-                                      text: clientListModel.companyName!,
+                                      text: clientModel.companyDB!.companyName!,
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleSmall!
@@ -171,7 +168,7 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                         ),
                                         CustomText(
                                           text:
-                                              '${clientListModel.id} ${Languages.of(context)!.projects}',
+                                              '${clientModel.companyDB!.companyName}',
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall!
@@ -210,7 +207,7 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                         // ),
                                         CustomText(
                                           text:
-                                              '${clientListModel.companyName}',
+                                              '${clientModel.companyDB!.companyName}',
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall!

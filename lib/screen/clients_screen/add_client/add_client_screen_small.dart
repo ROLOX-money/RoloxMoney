@@ -290,7 +290,7 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                               validationRules: ['required'],
                               hintText: Languages.of(context)
                                   ?.designationNameHintText,
-                              keyBoardType: TextInputType.phone,
+                              keyBoardType: TextInputType.text,
                               controller:
                                   widget.controller!.designationController,
                               labelName:
