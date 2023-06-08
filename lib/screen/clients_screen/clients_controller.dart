@@ -1,14 +1,9 @@
-import 'dart:async';
-import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:roloxmoney/model/cleint_list_model.dart';
-import 'package:roloxmoney/model/project_model.dart';
 import 'package:roloxmoney/screen/clients_screen/add_client/add_client_controller.dart';
 import 'package:roloxmoney/screen/clients_screen/add_client/add_client_screen.dart';
+import 'package:roloxmoney/screen/clients_screen/entites/clinet_model.dart';
+import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/RoloxKey.dart';
-import 'package:roloxmoney/utils/supa_base_control.dart';
 
 /*Chinnadurai Viswanathan*/
 class ClientsController extends GetxController with StateMixin {
@@ -17,29 +12,7 @@ class ClientsController extends GetxController with StateMixin {
   @override
   void onInit() async {
     change(null, status: RxStatus.loading());
-    // Future.delayed(const Duration(seconds: 5), () {
-    //   clientList.addAll([
-    //     ProjectModel(
-    //         amount: '25000',
-    //         projectName: 'Target InfoTech',
-    //         date: DateFormat('dd MMM yyyy').format(DateTime.now()),
-    //         noOfInvoice: 2),
-    //     ProjectModel(
-    //         amount: '25000',
-    //         projectName: 'Target InfoTech',
-    //         date: DateFormat('dd MMM yyyy').format(DateTime.now()),
-    //         noOfInvoice: 2),
-    //     ProjectModel(
-    //         amount: '25000',
-    //         projectName: 'Target InfoTech',
-    //         date: DateFormat('dd MMM yyyy').format(DateTime.now()),
-    //         noOfInvoice: 2),
-    //   ]);
-    //
-    // });
-    // change(clientList);
     super.onInit();
-
     toGetTheClientList();
   }
 
@@ -50,21 +23,25 @@ class ClientsController extends GetxController with StateMixin {
     });
   }
 
-  toGetTheClientList() {
+  toGetTheClientList() async {
     clientList.value = [];
-    SupaBaseController.toGetTheClientList(
-            pageCount: 1, tableName: RoloxKey.supaBaseClientTable)
-        .then((clientListResponse) {
-      if (clientListResponse.length > 0) {
-        clientListResponse.forEach((element) {
-          // debugPrint('tempValues--> ${element['companyName']}');
-          clientList.add(ClientListModel(
-              companyName: element['companyName'], typeOfbuisness: '1'));
+    try {
+      await Singleton.supabaseInstance.client
+          .from(RoloxKey.supaBaseUserToClientMap)
+          .select('''
+    companyId,
+    ${RoloxKey.supaBaseCompanyTable}!inner (
+      *
+    )
+  ''').then((value) {
+        value.forEach((element) {
+          clientList.add(ClientModel.fromJson(element));
         });
-        change(clientList, status: RxStatus.success());
-      } else {
-        change(null, status: RxStatus.empty());
-      }
-    });
+      });
+      change(clientList, status: RxStatus.success());
+    } catch (e) {
+      e.printError();
+      change(clientList.value = [], status: RxStatus.success());
+    }
   }
 }
