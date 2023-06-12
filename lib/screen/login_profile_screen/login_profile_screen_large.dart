@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/business_profile_screen/business_profile_controller.dart';
 import 'package:roloxmoney/screen/business_profile_screen/business_profile_screen.dart';
+import 'package:roloxmoney/screen/dashboard_screen/dashboard_controller.dart';
+import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
 import 'package:roloxmoney/screen/individual_profile_screen/individual_profile_controller.dart';
 import 'package:roloxmoney/screen/individual_profile_screen/individual_profile_screen.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
@@ -188,6 +190,8 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                   widget.controller!.businessToggle(
                                       value: TypOfBusiness.agency);
                                   WidgetUtils.showAlertDialog(context: context);
+                                  widget.controller!.businessToggle(
+                                      value: TypOfBusiness.business);
                                 },
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -232,7 +236,6 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                         ),
                       ),
                     ),
-
                     const SizedBox(height: 15),
                     // Forms filed
                     (widget.controller!.typOfBusiness.obs.value ==
@@ -312,11 +315,18 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                             '${Languages.of(context)?.panNumber}',
                                         hintText:
                                             '${Languages.of(context)?.panNumberHint}'),
-                                    // aadhaar Number
+                                    // aadhaar Numberƒ
                                     WidgetUtils.genericTextFiled(
                                         context: context,
-                                        keyBoardType: TextInputType.number,
-                                        validationRules: ['required'],
+                                        maximumWordCount: 14,
+                                        // keyBoardType: TextInputType.number,
+                                        validationRules: [
+                                          'required',
+                                          'number_only'
+                                        ],
+                                        // inputformaters: [
+                                        //   CustomAadhaarInputFormatter()
+                                        // ],
                                         controller: widget.controller!
                                             .aadhaarNumberController,
                                         labelName:
@@ -360,7 +370,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                         labelName:
                                             '${Languages.of(context)?.companyName}',
                                         hintText:
-                                            Languages.of(context)?.companyName),
+                                            '${Languages.of(context)?.enter} ${Languages.of(context)?.companyName}'),
                                     // Company Email ID
                                     WidgetUtils.genericTextFiled(
                                         context: context,
@@ -384,11 +394,18 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                             '${Languages.of(context)?.panNumber}',
                                         hintText:
                                             '${Languages.of(context)?.panNumberHint}'),
-                                    // aadhaar Number
+                                    // aadhaar Numberƒ
                                     WidgetUtils.genericTextFiled(
                                         context: context,
-                                        keyBoardType: TextInputType.name,
-                                        validationRules: ['required'],
+                                        maximumWordCount: 14,
+                                        // keyBoardType: TextInputType.number,
+                                        validationRules: [
+                                          'required',
+                                          'number_only'
+                                        ],
+                                        // inputformaters: [
+                                        //   CustomAadhaarInputFormatter()
+                                        // ],
                                         controller: widget.controller!
                                             .aadhaarNumberController,
                                         labelName:
@@ -418,7 +435,6 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                   ],
                                 ),
                               ),
-                    // : WidgetUtils.showAlertDialog(context: context),
                     const SizedBox(
                       height: 15,
                     ),
@@ -495,6 +511,8 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                       IconButton(
                           onPressed: () {
                             Get.back();
+                            widget.controller!
+                                .businessToggle(value: TypOfBusiness.business);
                           },
                           icon: Icon(
                             Icons.close,
@@ -539,7 +557,8 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                   textColor: ColorResource.black,
                   fontSize: 20,
                   onTap: () {
-                    Get.back();
+                    Get.put(DashboardController());
+                    Get.offAll(DashboardScreen());
                   },
                 ),
                 SizedBox(

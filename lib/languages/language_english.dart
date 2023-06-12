@@ -281,6 +281,8 @@ class LanguageEn extends Languages {
 
   String get rolox => 'ROLOX';
 
+  String get darkMode => 'Dark Mode';
+
 
 
 

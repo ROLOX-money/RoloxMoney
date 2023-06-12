@@ -40,6 +40,8 @@ class CustomTextField extends StatefulWidget {
   AutovalidateMode? autoValidateMode;
   int? maxLines;
   int? minLines;
+  void Function(String)? onChanged;
+
 
   CustomTextField(this.controller,
       {super.key,
@@ -75,7 +77,8 @@ class CustomTextField extends StatefulWidget {
       this.errorStyle,
       this.validationRules = const [],
       this.maxLines,
-      this.minLines});
+      this.minLines,
+      this.onChanged});
 
   @override
   CustomTextFieldState createState() => CustomTextFieldState();

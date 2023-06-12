@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
@@ -20,6 +21,10 @@ abstract class WidgetUtils {
     int? minLines,
     TextInputType? keyBoardType,
     TextStyle? labelStyle,
+    List<TextInputFormatter>? inputformaters,
+    Function? onEditing,
+    bool obscureText= false,
+    int? maximumWordCount
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,6 +46,7 @@ abstract class WidgetUtils {
           child: CustomTextField(
             controller.obs.value,
             minLines: minLines,
+            maximumWordCount: maximumWordCount,
             maxLines: maxLines,
             hintText: hintText,
             focusedBorder: Colors.grey,
@@ -48,6 +54,9 @@ abstract class WidgetUtils {
             enableColor: Colors.grey,
             validationRules: validationRules,
             borderColor: Colors.red,
+            inputformaters: inputformaters,
+            onEditing: onEditing,
+            obscureText: obscureText,
             suffixWidget: suffixImagePath != null
                 ? Padding(
                     padding: const EdgeInsets.all(8.0),

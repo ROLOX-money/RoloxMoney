@@ -1,8 +1,8 @@
-import 'dart:io';
+
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/secondary_button.dart';
 
@@ -147,5 +147,40 @@ class AppUtils {
         ),
       ),
     );
+  }
+}
+
+class CustomAadhaarInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    var text = newValue.text
+        .replaceAll(RegExp(r'\s'), '');
+    String formattedText = '';
+
+
+    // var buffer = new StringBuffer();
+    for (int i = 0; i < text.length; i += 4) {
+
+      if (i + 4 <= text.length) {
+        formattedText += text.substring(i, i + 4) + ' ';
+      } else {
+        formattedText += text.substring(i);
+      }
+    }
+
+    // buffer.write(text[i]);
+    // var nonZeroIndex = i + 1;
+    // if (nonZeroIndex % 4 == 0 && nonZeroIndex != text.length) {
+    //   buffer.write(
+    //       ' '); // Replace this with anything you want to put after each 4 numbers
+    // }
+    // }
+
+    // var string = buffer.toString();
+
+    return newValue.copyWith(
+        text: formattedText,
+        selection: new TextSelection.collapsed(offset: formattedText.length));
   }
 }

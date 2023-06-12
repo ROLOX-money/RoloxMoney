@@ -7,3 +7,5 @@ class DashboardNavigatorModel {
   DashboardNavigatorModel(
       {this.name, this.isSelected = false, this.icon, this.index});
 }
+
+

@@ -32,6 +32,7 @@ class ColorResource {
   static const Color color00D1B0 = Color(0xff00D1B0);
   static const Color color272727 = Color(0xff272727);
   static const Color color1B2023 = Color(0xff1B2023);
+  static const Color color1D452B = Color(0xff1D452B);
   static const Color black = Color(0xff222222);
   static const Color backgroundPatchGrey = Color.fromRGBO(248, 248, 250, 0.8);
   static const Color red = Color(0xffF92538);

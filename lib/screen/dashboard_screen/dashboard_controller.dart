@@ -1,11 +1,11 @@
 import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/model/dashboard_navigator_model.dart';
 import 'package:roloxmoney/screen/clients_screen/clients_controller.dart';
 import 'package:roloxmoney/screen/home_screen/home_controller.dart';
-import 'package:roloxmoney/screen/home_screen/home_screen.dart';
 import 'package:roloxmoney/screen/invoice_screen/invoice_controller.dart';
 import 'package:roloxmoney/screen/payment_screen/payment_controller.dart';
 import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
@@ -27,7 +27,12 @@ class DashboardController extends GetxController with StateMixin {
         icon: ImageResource.wallet, name: 'Payments', index: 4),
   ].obs;
 
+
+
+
+
   RxString selectedBottomButton = 'empty'.obs;
+  RxBool isDarkMode = true.obs;
 
   @override
   void onInit() async {
@@ -36,6 +41,7 @@ class DashboardController extends GetxController with StateMixin {
       // selectedBottomButton = 'Home'.obs;
       // change(selectedBottomButton);
     });
+
     super.onInit();
   }
 
@@ -52,4 +58,8 @@ class DashboardController extends GetxController with StateMixin {
     });
     change(selectedBottomButton);
   }
+
+
+
+
 }
