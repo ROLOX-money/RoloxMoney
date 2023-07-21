@@ -4,6 +4,7 @@ import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
+import 'package:roloxmoney/utils/rolox_autocomplete_textfiled.dart';
 import 'package:roloxmoney/widget/custom_button.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/custom_textfield.dart';
@@ -18,7 +19,9 @@ abstract class WidgetUtils {
     String? hintText,
     int? maxLines,
     int? minLines,
+    bool isReadOnly = false,
     TextInputType? keyBoardType,
+    Function()? onTab,
     TextStyle? labelStyle,
   }) {
     return Column(
@@ -42,9 +45,11 @@ abstract class WidgetUtils {
             controller.obs.value,
             minLines: minLines,
             maxLines: maxLines,
+            isReadOnly: isReadOnly,
             hintText: hintText,
             focusedBorder: Colors.grey,
             textColor: Colors.white,
+            onTapped: isReadOnly ? onTab : null,
             enableColor: Colors.grey,
             validationRules: validationRules,
             borderColor: Colors.red,
@@ -220,6 +225,74 @@ abstract class WidgetUtils {
           ),
         );
       },
+    );
+  }
+
+  static Widget genericAutoCompleteTextField(
+      {required textController,
+      required context,
+      required suggestions,
+      required labelName,
+      required hintText,
+      required Function(String) textSubmitted,
+      required Function(String) textChanged}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomText(
+          text: labelName,
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+              color: ColorResource.colorE08AF4, fontWeight: FontWeight.w500),
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        SimpleAutoCompleteTextField(
+            key: GlobalKey(),
+            decoration: InputDecoration(
+              filled: true,
+              hintText: hintText,
+              hintStyle: TextStyle(
+                  color: Colors.grey.shade600,
+                  fontFamily: 'Poppins-Medium',
+                  fontWeight: FontWeight.w400,
+                  fontStyle: FontStyle.normal,
+                  height: 1,
+                  fontSize: 14),
+              fillColor: ColorResource.color151515,
+              suffixIconConstraints:
+                  const BoxConstraints(minHeight: 18, minWidth: 18),
+              suffixIcon: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: AppUtils.setSVG(svgPath: ImageResource.searchSVG),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: BorderSide(color: Colors.grey, width: 0.25),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: BorderSide(width: 0.5),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: BorderSide(color: Colors.grey, width: 0.25),
+              ),
+              enabled: true,
+              disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: BorderSide(color: Colors.grey, width: 0.25),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: BorderSide(color: Colors.grey, width: 0.5),
+              ),
+            ),
+            controller: textController,
+            suggestions: suggestions,
+            textChanged: textChanged,
+            textSubmitted: textSubmitted),
+      ],
     );
   }
 }

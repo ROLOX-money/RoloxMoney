@@ -11,7 +11,8 @@ import 'package:roloxmoney/utils/supa_base_control.dart';
 /*Chinnadurai Viswanathan*/
 enum TypOfBusiness { individual, business, agency }
 
-class LoginProfileController extends GetxController with StateMixin {
+class LoginProfileController extends GetxController
+    with StateMixin, SupaBaseController {
   TextEditingController firstNameController = TextEditingController();
   TextEditingController emailIDController = TextEditingController();
   TextEditingController companyNameController = TextEditingController();
@@ -44,7 +45,7 @@ class LoginProfileController extends GetxController with StateMixin {
   }
 
   Future<void> singUpNewUser() async {
-    SupaBaseController.toInsert(userData: {
+    toInsert(userData: {
       'name': typOfBusiness.obs.value.value == TypOfBusiness.business
           ? contactPersonNameController.text
           : firstNameController.text,
@@ -91,7 +92,7 @@ class LoginProfileController extends GetxController with StateMixin {
                   .then((selectedUserResponse) {
                 if (selectedUserResponse is List) {
                   if (selectedUserResponse.length > 0) {
-                    SupaBaseController.toInsert(userData: {
+                    toInsert(userData: {
                       'companyName': companyNameController.text,
                       'userid': [selectedUserResponse[0]['id']],
                     }, tableName: RoloxKey.supaBaseCompanyTable)
@@ -103,7 +104,7 @@ class LoginProfileController extends GetxController with StateMixin {
                           if (selectedCompanyResponse is List) {
                             if (selectedCompanyResponse.length > 0) {
                               // to insert the PAN card after company creation
-                              SupaBaseController.toInsert(userData: {
+                              toInsert(userData: {
                                 'Pannumber': panNumberController.text,
                                 'profiletype': typOfBusiness.obs.value.value ==
                                         TypOfBusiness.individual
@@ -115,7 +116,7 @@ class LoginProfileController extends GetxController with StateMixin {
                                 'refrenceid': selectedCompanyResponse[0]['id'],
                               }, tableName: RoloxKey.supaBasePANTable)
                                   .then((panCardInsertResponse) {
-                                SupaBaseController.toInsert(userData: {
+                                toInsert(userData: {
                                   'gstNumber': gstNumberController.text,
                                   'profileType':
                                       typOfBusiness.obs.value.value ==

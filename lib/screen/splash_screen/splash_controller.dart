@@ -24,6 +24,8 @@ class SplashScreenController extends GetxController with StateMixin {
         url: RoloxKey.supaBaseClientEnvUrl,
         anonKey: RoloxKey.supaBaseClientClientKey,
       ).then((initializeValue) {
+        debugPrint(
+            'Supabase initialize---> ${initializeValue.client.auth.currentUser?.phone}');
         Singleton.supabaseInstance = initializeValue;
         if (initializeValue.client.auth.currentSession != null &&
             initializeValue.client.auth.currentUser != null) {
@@ -42,7 +44,8 @@ class SplashScreenController extends GetxController with StateMixin {
         }
       });
     } catch (e) {
-      initializeSupaBase();
+      debugPrint('exception--> $e');
+      // initializeSupaBase();
     }
   }
 }

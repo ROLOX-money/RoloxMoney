@@ -10,7 +10,8 @@ import 'package:roloxmoney/utils/supa_base_control.dart';
 /*Chinnadurai Viswanathan*/
 enum TypOfBusiness { individual, business }
 
-class AddClientController extends GetxController with StateMixin {
+class AddClientController extends GetxController
+    with StateMixin, SupaBaseController {
   TextEditingController brandNameController = TextEditingController();
   TextEditingController gstNumberController = TextEditingController();
   TextEditingController legalNameController = TextEditingController();
@@ -67,7 +68,7 @@ class AddClientController extends GetxController with StateMixin {
             .then((panCardListValue) {
           if (panCardListValue.length > 0) {
             if (typOfBusiness.obs.value == TypOfBusiness.business) {
-              SupaBaseController.toInsert(
+              toInsert(
                   tableName: RoloxKey.supaBaseProfileCompanyTable,
                   userData: {
                     'dept': departmentController.text,
@@ -76,12 +77,10 @@ class AddClientController extends GetxController with StateMixin {
                     'companyRefrenceId': panCardListValue[0]['refrenceid']
                   }).then((insertResponse) {
                 if (insertResponse) {
-                  SupaBaseController.toInsert(
-                      tableName: RoloxKey.supaBaseAddressTable,
-                      userData: {
-                        'address': fullAddressController.text,
-                        'phone': mobileNumberController.text
-                      }).then((addressInsertResponse) {
+                  toInsert(tableName: RoloxKey.supaBaseAddressTable, userData: {
+                    'address': fullAddressController.text,
+                    'phone': mobileNumberController.text
+                  }).then((addressInsertResponse) {
                     if (addressInsertResponse) {
                       SupaBaseController.toGetTheSelectedID(
                               searchValue: Singleton.supabaseInstance.client
@@ -95,7 +94,7 @@ class AddClientController extends GetxController with StateMixin {
                               searchKey: 'phone')
                           .then((userResponseList) {
                         if (userResponseList.isNotEmpty) {
-                          SupaBaseController.toInsert(
+                          toInsert(
                               tableName: RoloxKey.supaBaseUserToClientMap,
                               userData: {
                                 'userid': userResponseList[0]['id'],
@@ -117,11 +116,11 @@ class AddClientController extends GetxController with StateMixin {
                           change(null, status: RxStatus.success());
                         }
                       });
-                    }else{
+                    } else {
                       change(null, status: RxStatus.success());
                     }
                   });
-                }else{
+                } else {
                   change(null, status: RxStatus.success());
                 }
               });

@@ -76,6 +76,23 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                           SizedBox(
                             height: 10,
                           ),
+                          WidgetUtils.genericAutoCompleteTextField(
+                            textController:
+                                widget.controller!.projectNameController,
+                            context: context,
+                            hintText: Languages.of(context)?.brandNameHintText,
+                            suggestions: widget.controller!.projectList
+                                .map((item) => item.projectName!)
+                                .toList(),
+                            labelName: Languages.of(context)?.projectName,
+                            textSubmitted: (text) {
+                              widget.controller!
+                                  .toSetClientId(searchingText: text);
+                            },
+                            textChanged: (text) {
+                              widget.controller!.toSetClientId(isClear: true);
+                            },
+                          ),
                           WidgetUtils.genericTextFiled(
                             context: context,
                             validationRules: ['required'],
@@ -107,21 +124,15 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                           ),
                           WidgetUtils.genericTextFiled(
                             context: context,
-                            validationRules: ['required'],
-                            hintText: Languages.of(context)?.brandNameHintText,
-                            controller:
-                                widget.controller!.projectNameController,
-                            keyBoardType: TextInputType.emailAddress,
-                            suffixImagePath: ImageResource.searchSVG,
-                            labelName: '${Languages.of(context)?.projectName}',
-                          ),
-                          WidgetUtils.genericTextFiled(
-                            context: context,
                             hintText: "DD/MM/YYYY",
                             validationRules: ['required'],
                             controller:
                                 widget.controller!.invoiceDueDateController,
-                            keyBoardType: TextInputType.emailAddress,
+                            keyBoardType: TextInputType.datetime,
+                            isReadOnly: true,
+                            onTab: (){
+                              widget.controller!.toSelectDate();
+                            },
                             suffixImagePath: ImageResource.calendarSVG,
                             labelName:
                                 '${Languages.of(context)?.invoiceDueDate}',
@@ -163,7 +174,11 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                             onTap: () {
                               if (widget.controller!.form.currentState!
                                   .validate()) {
-                                Get.back();
+                                if(widget.controller!.projectId != null){
+
+                                }else{
+
+                                }
                               }
                             },
                           ),

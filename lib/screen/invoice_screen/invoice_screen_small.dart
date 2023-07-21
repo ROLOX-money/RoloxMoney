@@ -91,21 +91,19 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                   SizedBox(
                     height: 15,
                   ),
-                  widget.controller!.projectInvoicesList.obs.value.value
-                              .length >
-                          0
+                  widget.controller!.projectInvoicesList.obs.value.length > 0
                       ? ListView.separated(
                           separatorBuilder: (BuildContext context, int index) =>
                               Divider(
                                   height: 1,
                                   color: Theme.of(context).dividerColor),
-                          itemCount: widget.controller!.projectInvoicesList.obs
-                              .value.value.length,
+                          itemCount: widget
+                              .controller!.projectInvoicesList.obs.value.length,
                           shrinkWrap: true,
                           // physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
                             ProjectModel projectModel = widget.controller!
-                                .projectInvoicesList.obs.value.value[index];
+                                .projectInvoicesList.obs.value[index];
                             return Container(
                               color: ColorResource.color151515,
                               alignment: Alignment.centerLeft,

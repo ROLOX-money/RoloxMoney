@@ -23,7 +23,7 @@ dependencies:
   dio: ^5.0.1
   altogic: ^1.0.6
   shared_preferences: ^2.1.1
-  supabase_flutter: ^1.10.0
+  supabase_flutter: ^1.10.9
 
 #  firebase_auth: ^3.6.4
 #  firebase_auth:
