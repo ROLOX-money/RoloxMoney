@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_controller.dart';
+import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/utils/widget_utils.dart';
@@ -130,7 +131,7 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                                 widget.controller!.invoiceDueDateController,
                             keyBoardType: TextInputType.datetime,
                             isReadOnly: true,
-                            onTab: (){
+                            onTab: () {
                               widget.controller!.toSelectDate();
                             },
                             suffixImagePath: ImageResource.calendarSVG,
@@ -142,25 +143,25 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                             validationRules: ['required'],
                             hintText: Languages.of(context)?.hsnCodeHintText,
                             keyBoardType: TextInputType.phone,
-                            controller: widget.controller!.gstChargesController,
+                            controller: widget.controller!.hsnController,
                             labelName: '${Languages.of(context)?.hsnCode}',
                           ),
                           WidgetUtils.genericTextFiled(
                             context: context,
                             validationRules: ['required'],
-                            hintText: Languages.of(context)?.gstCharges,
+                            hintText: '${Languages.of(context)?.gstCharges} (Optional)',
                             keyBoardType: TextInputType.phone,
                             controller: widget.controller!.gstChargesController,
                             labelName: '${Languages.of(context)?.gstCharges}',
                           ),
-                          WidgetUtils.genericTextFiled(
-                            context: context,
-                            validationRules: ['required'],
-                            hintText: Languages.of(context)?.state,
-                            keyBoardType: TextInputType.phone,
-                            controller: widget.controller!.stateController,
-                            labelName: '${Languages.of(context)?.state}',
-                          ),
+                          // WidgetUtils.genericTextFiled(
+                          //   context: context,
+                          //   validationRules: ['required'],
+                          //   hintText: Languages.of(context)?.state,
+                          //   keyBoardType: TextInputType.text,
+                          //   controller: widget.controller!.stateController,
+                          //   labelName: '${Languages.of(context)?.state}',
+                          // ),
                           const SizedBox(
                             height: 15,
                           ),
@@ -174,10 +175,12 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                             onTap: () {
                               if (widget.controller!.form.currentState!
                                   .validate()) {
-                                if(widget.controller!.projectId != null){
-
-                                }else{
-
+                                if (widget.controller!.projectId != null) {
+                                  widget.controller!.toAddInvoice();
+                                } else {
+                                  AppUtils.showErrorSnackBar(context,
+                                      'Please select at least one project ',
+                                      durations: 2000);
                                 }
                               }
                             },

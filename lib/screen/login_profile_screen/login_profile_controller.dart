@@ -145,6 +145,8 @@ class LoginProfileController extends GetxController
               });
             }
           });
+        }else{
+          Get.offAllNamed(DashboardScreen.routeName);
         }
       }
     });
