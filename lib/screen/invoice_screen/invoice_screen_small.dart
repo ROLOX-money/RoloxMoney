@@ -42,7 +42,7 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
         backgroundColor: Colors.transparent,
         body: Container(
           child: ListView(
-            physics: NeverScrollableScrollPhysics(),
+            physics: ScrollPhysics(),
             children: [
               SizedBox(
                 height: 15,
@@ -99,6 +99,7 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                           itemCount:
                               widget.controller!.invoicesList.obs.value.length,
                           shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
                           // physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
                             Invoice invoice = widget
