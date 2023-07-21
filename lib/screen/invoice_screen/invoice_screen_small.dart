@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/model/project_model.dart';
 import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_screen.dart';
+import 'package:roloxmoney/screen/invoice_screen/entities/invoice_model.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
@@ -49,9 +50,7 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  widget.controller!.projectInvoicesList.obs.value.value
-                              .length >
-                          0
+                  widget.controller!.invoicesList.obs.value.length > 0
                       ? Container(
                           margin: EdgeInsets.symmetric(horizontal: 10),
                           child: Row(
@@ -91,19 +90,19 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                   SizedBox(
                     height: 15,
                   ),
-                  widget.controller!.projectInvoicesList.obs.value.length > 0
+                  widget.controller!.invoicesList.obs.value.length > 0
                       ? ListView.separated(
                           separatorBuilder: (BuildContext context, int index) =>
                               Divider(
                                   height: 1,
                                   color: Theme.of(context).dividerColor),
-                          itemCount: widget
-                              .controller!.projectInvoicesList.obs.value.length,
+                          itemCount:
+                              widget.controller!.invoicesList.obs.value.length,
                           shrinkWrap: true,
                           // physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
-                            ProjectModel projectModel = widget.controller!
-                                .projectInvoicesList.obs.value[index];
+                            Invoice invoice = widget
+                                .controller!.invoicesList.obs.value[index];
                             return Container(
                               color: ColorResource.color151515,
                               alignment: Alignment.centerLeft,
@@ -120,7 +119,7 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                     color: ColorResource.color381D4E,
                                   ),
                                   child: CustomText(
-                                    text: AppUtils.getInitials('Client Name')
+                                    text: AppUtils.getInitials(invoice.invoiceName)
                                         .toString(),
                                     style: Theme.of(context)
                                         .textTheme
@@ -135,7 +134,7 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                   children: [
                                     Text.rich(
                                       TextSpan(
-                                          text: 'Invoice Name',
+                                          text: 'Invoice No',
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall!
@@ -146,7 +145,8 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                                   fontWeight: FontWeight.w400),
                                           children: <InlineSpan>[
                                             TextSpan(
-                                              text: ' #123',
+                                              text:
+                                                  ' #${invoice.invoiceNumber}',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .titleSmall!
@@ -166,7 +166,7 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                       height: 5,
                                     ),
                                     CustomText(
-                                      text: '10000',
+                                      text: '${invoice.invoiceAmount ?? ''}',
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleSmall!
@@ -181,7 +181,7 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                     Row(
                                       children: [
                                         CustomText(
-                                          text: 'Project Name',
+                                          text: invoice.invoiceName ?? '',
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall!
@@ -215,7 +215,7 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                           width: 5,
                                         ),
                                         CustomText(
-                                          text: '${projectModel.date}',
+                                          text: '${invoice.dueDate}',
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall!

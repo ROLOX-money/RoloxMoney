@@ -69,6 +69,9 @@ class AppUtils {
       }
       for (int i = 0; i < numWords; i++) {
         initials += '${names[i][0]}';
+        if (i == 1) {
+          break;
+        }
       }
     } else {
       initials = name[0];
