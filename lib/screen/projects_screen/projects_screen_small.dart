@@ -40,7 +40,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: ListView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: ScrollPhysics(),
           children: [
             SizedBox(
               height: 15,
@@ -48,8 +48,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                widget.controller!.projectInvoicesList.obs.value.value.length >
-                        0
+                widget.controller!.projectInvoicesList.obs.value.length > 0
                     ? Container(
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         child: Row(
@@ -88,19 +87,18 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                 SizedBox(
                   height: 15,
                 ),
-                widget.controller!.projectInvoicesList.obs.value.value.length >
-                        0
+                widget.controller!.projectInvoicesList.obs.value.length > 0
                     ? ListView.separated(
                         separatorBuilder: (BuildContext context, int index) =>
                             Divider(
                                 height: 1, color: ColorResource.colorA0BCD0),
-                        itemCount: widget.controller!.projectInvoicesList.obs
-                            .value.value.length,
+                        itemCount: widget
+                            .controller!.projectInvoicesList.obs.value.length,
                         shrinkWrap: true,
-                        // physics: NeverScrollableScrollPhysics(),
+                        physics: NeverScrollableScrollPhysics(),
                         itemBuilder: (BuildContext context, int index) {
-                          ProjectModel projectModel = widget.controller!
-                              .projectInvoicesList.obs.value.value[index];
+                          ProjectModel projectModel = widget
+                              .controller!.projectInvoicesList.obs.value[index];
                           return Container(
                             color: ColorResource.color151515,
                             alignment: Alignment.centerLeft,
@@ -118,7 +116,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                 ),
                                 child: CustomText(
                                   text: AppUtils.getInitials(
-                                          projectModel.projectName)
+                                          projectModel.clientName)
                                       .toString(),
                                   style: Theme.of(context)
                                       .textTheme
@@ -132,7 +130,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomText(
-                                    text: '${projectModel.projectName}',
+                                    text: projectModel.clientName!,
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleSmall!
@@ -154,8 +152,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                         width: 5,
                                       ),
                                       CustomText(
-                                        text:
-                                            '${projectModel.noOfInvoice} ${Languages.of(context)!.projects}',
+                                        text: projectModel.projectName!,
                                         style: Theme.of(context)
                                             .textTheme
                                             .titleSmall!

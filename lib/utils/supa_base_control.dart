@@ -4,12 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:roloxmoney/screen/clients_screen/entites/clinet_model.dart';
+import 'package:roloxmoney/screen/invoice_screen/entities/project_model.dart';
 import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/RoloxKey.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class SupaBaseController {
+mixin SupaBaseController {
   static Future<bool> sendSignInCode({required mobileNumber}) async {
     try {
       await Singleton.supabaseInstance.client.auth
@@ -94,7 +96,7 @@ class SupaBaseController {
     }
   }
 
-  static Future<bool> toInsert({required userData, required tableName}) async {
+  Future<bool> toInsert({required userData, required tableName}) async {
     debugPrint('toInsert data--> $userData');
     debugPrint('toInsert tableName--> $tableName');
     try {
@@ -114,7 +116,6 @@ class SupaBaseController {
             'Something went wrong. Please try again after sometime',
             durations: 5000);
       }
-
       return false;
     }
   }
@@ -170,21 +171,46 @@ class SupaBaseController {
     }
   }
 
-  static Future<List> toGetTheClientList(
-      {required pageCount, required tableName}) async {
+  Future<List<ClientModel>> toGetTheClientList() async {
+    List<ClientModel> clientList = [];
     try {
-      return await Singleton.supabaseInstance.client
-          .from(tableName)
-          .select('*')
-          .limit(pageCount)
-          .then((clientListResponse) {
-        debugPrint('clientListResponse--> $clientListResponse');
-        return clientListResponse is List ? clientListResponse : [];
+      await Singleton.supabaseInstance.client
+          .from(RoloxKey.supaBaseUserToClientMap)
+          .select('''
+    companyId,
+    ${RoloxKey.supaBaseCompanyTable}!inner (
+      *
+    )
+  ''').then((value) {
+        value.forEach((element) {
+          clientList.add(ClientModel.fromJson(element));
+        });
+        debugPrint('clientListResponse--> $value');
       });
+      return clientList;
     } catch (e) {
-      AppUtils.showErrorSnackBar(
-          Get.context!, 'Something went wrong. Please try again after sometime',
-          durations: 2000);
+      e.printError();
+      return [];
+    }
+  }
+
+  Future<List<Project>> toGetTheProjectList() async {
+    List<Project> clientList = [];
+    try {
+      await Singleton.supabaseInstance.client
+          .from(RoloxKey.supaBaseProjectDb)
+          .select('*')
+          .eq('refrenceID',
+              Singleton.supabaseInstance.client.auth.currentUser!.id)
+          .then((value) {
+        value.forEach((element) {
+          clientList.add(Project.fromJson(element));
+        });
+        debugPrint('toGetTheProjectList--> ${jsonEncode(value)}');
+      });
+      return clientList;
+    } catch (e) {
+      e.printError();
       return [];
     }
   }
