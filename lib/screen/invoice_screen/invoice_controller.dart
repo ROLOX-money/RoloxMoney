@@ -1,11 +1,15 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:roloxmoney/model/project_model.dart';
+import 'package:roloxmoney/screen/clients_screen/entites/clinet_model.dart';
 import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_controller.dart';
 import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_screen.dart';
 import 'package:roloxmoney/screen/projects_screen/add_project/add_project_controller.dart';
 import 'package:roloxmoney/screen/projects_screen/add_project/add_project_screen.dart';
+import 'package:roloxmoney/singleton.dart';
+import 'package:roloxmoney/utils/RoloxKey.dart';
 
 /*Chinnadurai Viswanathan*/
 class InvoiceController extends GetxController with StateMixin {
@@ -14,28 +18,36 @@ class InvoiceController extends GetxController with StateMixin {
   @override
   void onInit() async {
     change(null, status: RxStatus.success());
-    Future.delayed(const Duration(seconds: 5), () {
-      projectInvoicesList.addAll([
-        ProjectModel(
-            amount: '25000',
-            projectName: 'Target InfoTech',
-            date: DateFormat('dd MMM yyyy').format(DateTime.now()),
-            noOfInvoice: 2),
-        ProjectModel(
-            amount: '25000',
-            projectName: 'Target InfoTech',
-            date: DateFormat('dd MMM yyyy').format(DateTime.now()),
-            noOfInvoice: 2),
-        ProjectModel(
-            amount: '25000',
-            projectName: 'Target InfoTech',
-            date: DateFormat('dd MMM yyyy').format(DateTime.now()),
-            noOfInvoice: 2),
-      ]);
-      change(projectInvoicesList);
-    });
-
+    toGetTheInvoiceList();
     super.onInit();
+  }
+
+  toGetTheInvoiceList() async {
+    change(null, status: RxStatus.loading());
+    projectInvoicesList.clear();
+    List<ClientModel> clientList = [];
+    try {
+      await Singleton.supabaseInstance.client
+          .from(RoloxKey.supaBaseUserToInvoiceTable)
+          .select('''
+    userid,
+    ${RoloxKey.supaBaseInvoiceTable}!inner (
+      *
+    )
+  ''').then((value) {
+        value.forEach((element) {
+          projectInvoicesList.add(ProjectModel(
+              amount: element['invoice']['invoiceValueWithoutGst'].toString(),
+              projectName: element['invoice']['invoiceName'],
+              date: element['invoice']['InvoiceDueDate'],
+              noOfInvoice: 1));
+        });
+      });
+      change(projectInvoicesList, status: RxStatus.success());
+    } catch (e) {
+      e.printError();
+      return [];
+    }
   }
 
   void navigateAddInvoiceScreen() {
