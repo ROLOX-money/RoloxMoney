@@ -1,182 +1,71 @@
-import 'dart:async';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:roloxmoney/languages/app_languages.dart';
-import 'package:roloxmoney/model/group_invoices_model.dart';
-import 'package:roloxmoney/model/invoice_model.dart';
-import 'package:roloxmoney/utils/color_resource.dart';
+import 'package:roloxmoney/screen/dashboard_screen/entities/dashboard_model.dart';
+import 'package:roloxmoney/singleton.dart';
+import 'package:roloxmoney/utils/RoloxKey.dart';
 
 /*Chinnadurai Viswanathan*/
 class HomeController extends GetxController with StateMixin {
-  RxList groupInvoicesList = [].obs;
-  RxList upcomingInvoicesList = [].obs;
-  RxList dueInvoicesList = [].obs;
-  RxList paidInvoicesList = [].obs;
+
+  RxList invoicesList = [].obs;
+  RxDouble paidTransaction = 0.0.obs;
+  RxDouble dueTransaction = 0.0.obs;
+  RxDouble upComingTransaction = 0.0.obs;
 
   @override
   void onInit() async {
     change(null, status: RxStatus.success());
-    Future.delayed(const Duration(seconds: 5), () {});
-    upcomingInvoicesList.addAll([
-      GroupInvoices(
-          boarderColor: ColorResource.colorE08AF4,
-          groupName: Languages.of(Get.context!)!.upcomingInvoices,
-          invoiceList: [
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateFormat('yyyy MM dd').format(DateTime.now()),
-                workName: 'Brochure Design'),
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-          ]),
-    ]);
-    dueInvoicesList.addAll([
-      GroupInvoices(
-          boarderColor: ColorResource.colorF27C6C,
-          groupName: Languages.of(Get.context!)!.dueInvoices,
-          invoiceList: [
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-          ])
-    ]);
-    paidInvoicesList.addAll([
-      GroupInvoices(
-          boarderColor: ColorResource.color4A89D1,
-          groupName: Languages.of(Get.context!)!.paidInvoices,
-          invoiceList: [
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-          ]),
-    ]);
-
-    groupInvoicesList.addAll([
-      GroupInvoices(
-          boarderColor: ColorResource.colorE08AF4,
-          groupName: Languages.of(Get.context!)!.upcomingInvoices,
-          invoiceList: [
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateFormat('yyyy MM dd').format(DateTime.now()),
-                workName: 'Brochure Design'),
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-          ]),
-      GroupInvoices(
-          boarderColor: ColorResource.colorF27C6C,
-          groupName: Languages.of(Get.context!)!.dueInvoices,
-          invoiceList: [
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-          ]),
-      GroupInvoices(
-          boarderColor: ColorResource.color4A89D1,
-          groupName: Languages.of(Get.context!)!.paidInvoices,
-          invoiceList: [
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-            InvoiceModel(
-                amount: '25000',
-                clientName: 'Target InfoTech',
-                date: DateTime.now().toString(),
-                workName: 'Brochure Design'),
-          ]),
-    ]);
-    change(groupInvoicesList);
+    toGetTheInvoiceList();
     super.onInit();
+  }
+
+  toGetTheInvoiceList() async {
+    change(null, status: RxStatus.loading());
+    try {
+      await Singleton.supabaseInstance.client
+          .from(RoloxKey.supaBaseUserToInvoiceTable)
+          .select('''
+    userid,
+    ${RoloxKey.supaBaseInvoiceTable}!inner (
+      *
+    )
+  ''').then((value) {
+        value.forEach((element) {
+          invoicesList.add(
+            DashBoardInvoice(
+                invoiceAmount: element['invoice']['invoiceValueWithoutGst'],
+                invoiceNumber: element['invoice']['invoiceNumber'],
+                invoiceName: element['invoice']['invoiceName'],
+                paid: element['invoice']['paid'],
+                dueDate: element['invoice']['InvoiceDueDate']),
+          );
+        });
+      });
+
+      invoicesList.obs.value.toList().forEach((element) {
+        DashBoardInvoice dashBoardInvoice = element as DashBoardInvoice;
+        if (DateFormat("dd/MM/yyyy")
+            .parse(dashBoardInvoice.dueDate!)
+            .isBefore(DateTime.now().add(Duration(days: 7)))) {
+          if (dashBoardInvoice.paid!) {
+            paidTransaction.value =
+                paidTransaction.value + dashBoardInvoice.invoiceAmount!;
+          } else {
+            dueTransaction.value =
+                dueTransaction.value + dashBoardInvoice.invoiceAmount!;
+          }
+        } else {
+          upComingTransaction.value =
+              upComingTransaction.value + dashBoardInvoice.invoiceAmount!;
+        }
+      });
+      change(upComingTransaction);
+      change(paidTransaction);
+      change(dueTransaction);
+      change(null, status: RxStatus.success());
+    } catch (e) {
+      e.printError();
+      return [];
+    }
   }
 }

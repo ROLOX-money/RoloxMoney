@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/home_screen/home_controller.dart';
 import 'package:roloxmoney/screen/home_screen/home_detail_screen.dart';
@@ -122,31 +123,44 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                 ),
                 SizedBox(height: 20),
                 // All Invoices
-                Row(children: [
-                  CustomText(
-                    text: '${Languages.of(context)?.allInvoices}',
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: ColorResource.colorFFFFFF,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  SizedBox(width: 10),
-                  Icon(
-                    Icons.arrow_forward,
-                    color: ColorResource.colorFFFFFF,
-                  ),
-                ]),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomeScreenDetail(
+                          controller: widget.controller,
+                          scaffoldKey: widget.scaffoldKey,
+                          invoiceType: InvoiceType.ALL,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Row(children: [
+                    CustomText(
+                      text: '${Languages.of(context)?.allInvoices}',
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          color: ColorResource.colorFFFFFF,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    SizedBox(width: 10),
+                    Icon(
+                      Icons.arrow_forward,
+                      color: ColorResource.colorFFFFFF,
+                    ),
+                  ]),
+                ),
                 SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {
-                    /// fixme
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => HomeScreenDetail(
                                   controller: widget.controller,
                                   scaffoldKey: widget.scaffoldKey,
-                                  buttonNo: 1,
+                                  invoiceType: InvoiceType.UPCOMING,
                                 )));
                   },
                   child: Container(
@@ -204,7 +218,9 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                               textAlign: TextAlign.center,
                             ),
                           ),
-                          SizedBox(width: 5,),
+                          SizedBox(
+                            width: 5,
+                          ),
                           Column(
                             children: [
                               CustomText(
@@ -219,8 +235,17 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                                         fontWeight: FontWeight.w600),
                               ),
                               SizedBox(height: 5),
+                              //p0.paid == isPaid
                               CustomText(
-                                text: '07',
+                                text: widget.controller!.invoicesList
+                                    .where((p0) =>
+                                        DateFormat("dd/MM/yyyy")
+                                            .parse(p0.dueDate!)
+                                            .isBefore(DateTime.now()
+                                                .add(Duration(days: 2))) &&
+                                        p0.paid == false)
+                                    .length
+                                    .toString(),
                                 style: Theme.of(context)
                                     .textTheme
                                     .titleSmall!
@@ -251,7 +276,8 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                               ),
                               SizedBox(height: 5),
                               CustomText(
-                                text: '₹ 50000',
+                                text:
+                                    '₹ ${widget.controller!.upComingTransaction.toStringAsFixed(2)}',
                                 style: Theme.of(context)
                                     .textTheme
                                     .titleSmall!
@@ -277,13 +303,15 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                         onTap: () {
                           /// fixme
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomeScreenDetail(
-                                        controller: widget.controller,
-                                        scaffoldKey: widget.scaffoldKey,
-                                        buttonNo: 2,
-                                      )));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomeScreenDetail(
+                                controller: widget.controller,
+                                scaffoldKey: widget.scaffoldKey,
+                                invoiceType: InvoiceType.PAID,
+                              ),
+                            ),
+                          );
                         },
                         child:
                             paidCardWidget('${Languages.of(context)?.paid}')),
@@ -297,10 +325,11 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                                   builder: (context) => HomeScreenDetail(
                                         controller: widget.controller,
                                         scaffoldKey: widget.scaffoldKey,
-                                        buttonNo: 3,
+                                        invoiceType: InvoiceType.DUE,
                                       )));
                         },
-                        child: paidCardWidget('${Languages.of(context)?.due}'))
+                        child: paidCardWidget('${Languages.of(context)?.due}',
+                            isPaid: false))
                   ],
                 )
               ],
@@ -309,7 +338,7 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
     );
   }
 
-  Widget paidCardWidget(String title) {
+  Widget paidCardWidget(String title, {bool isPaid = true}) {
     return Container(
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey, width: 0.15),
@@ -355,7 +384,8 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                 ),
                 SizedBox(height: 10),
                 CustomText(
-                  text: '07',
+                  text:
+                      '${widget.controller!.invoicesList.where((p0) => p0.paid == isPaid).length}',
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(
                       color: ColorResource.color00E94F,
                       fontSize: 18,
@@ -380,7 +410,8 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                 ),
                 SizedBox(height: 10),
                 CustomText(
-                  text: '₹ 50000',
+                  text:
+                      '₹ ${isPaid ? widget.controller!.paidTransaction.toStringAsFixed(2) : widget.controller!.dueTransaction.toStringAsFixed(2)}',
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(
                       color: ColorResource.color00E94F,
                       fontSize: 18,
