@@ -26,8 +26,7 @@ class ProjectsController extends GetxController with StateMixin {
     await Singleton.supabaseInstance.client
         .from(RoloxKey.supaBaseProjectDb)
         .select('*')
-        .eq('refrenceID',
-            Singleton.supabaseInstance.client.auth.currentUser!.id)
+        .eq('refrenceID',  Singleton.supabaseInstance.client.auth.currentUser?.id)
         .then((value) {
       if (value is List) {
         projectInvoicesList.value = [];

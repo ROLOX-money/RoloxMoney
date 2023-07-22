@@ -11,6 +11,7 @@ import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
 import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/RoloxKey.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
+import 'package:roloxmoney/utils/supa_base_control.dart';
 
 /*Chinnadurai Viswanathan*/
 class DashboardController extends GetxController with StateMixin {
@@ -32,10 +33,20 @@ class DashboardController extends GetxController with StateMixin {
 
   @override
   void onInit() async {
-    change(null, status: RxStatus.success());
-    Future.delayed(const Duration(seconds: 5), () {
-      // selectedBottomButton = 'Home'.obs;
-      // change(selectedBottomButton);
+    SupaBaseController.toGetTheSelectedUser(
+            mobileNumber: Singleton
+                    .supabaseInstance.client.auth.currentUser!.phone
+                    .toString()
+                    .contains('+')
+                ? Singleton.supabaseInstance.client.auth.currentUser!.phone
+                    .toString()
+                : '+${Singleton.supabaseInstance.client.auth.currentUser!.phone.toString()}')
+        .then((value) {
+      if (value is List && value.length > 0) {
+        // [{id: f3dc1e06-b065-467a-a6ed-c47224768dd5}]
+        Singleton.mobileUserId = value[0]['id'];
+        change(null, status: RxStatus.success());
+      }
     });
     super.onInit();
   }

@@ -28,23 +28,17 @@ class InvoiceController extends GetxController with StateMixin {
     ${RoloxKey.supaBaseInvoiceTable}!inner (
       *
     )
-  ''').then((value) {
-        value.forEach((element) {
-          debugPrint('element--$element');
-          /*     {userid: 206b8fc1-1c22-4f95-885d-3acbd964dc10,
-          invoice: {id: 16, created_at: 2023-07-21T08:19:13.375768+00:00,
-          invoiceName: Invoice for Photo work, invoiceNumber: 123456,
-          invoiceValueWithoutGst: 1234.56, InvoiceDueDate: 21/07/2023,
-
-          hsnCode: 123456, gstCharges: 0, projectId: 3, paid: false}}*/
-
-          invoicesList.add(Invoice(
-              invoiceAmount: element['invoice']['invoiceValueWithoutGst'],
-              invoiceNumber: element['invoice']['invoiceNumber'],
-              invoiceName: element['invoice']['invoiceName'],
-              dueDate: element['invoice']['InvoiceDueDate']));
-        });
-      });
+  ''')
+          .eq('userid', Singleton.mobileUserId)
+          .then((value) {
+            value.forEach((element) {
+              invoicesList.add(Invoice(
+                  invoiceAmount: element['invoice']['invoiceValueWithoutGst'],
+                  invoiceNumber: element['invoice']['invoiceNumber'],
+                  invoiceName: element['invoice']['invoiceName'],
+                  dueDate: element['invoice']['InvoiceDueDate']));
+            });
+          });
       change(invoicesList, status: RxStatus.success());
     } catch (e) {
       e.printError();
