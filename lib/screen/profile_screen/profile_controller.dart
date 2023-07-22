@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:roloxmoney/singleton.dart';
+import 'package:roloxmoney/utils/RoloxKey.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../login_profile_screen/login_profile_controller.dart';
 
@@ -8,14 +11,14 @@ enum ModelOfWork { fullTime, partTime }
 
 /*Chinnadurai Viswanathan*/
 class ProfileController extends GetxController with StateMixin {
-  TextEditingController lastNameController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController mobilNumberController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController businessNameController = TextEditingController();
   TextEditingController bankAccountController = TextEditingController();
   TextEditingController bankIFSCController = TextEditingController();
-
+  RxBool isFreelancer = false.obs;
+  RxBool isLogo = false.obs;
   final form = GlobalKey<FormState>();
   Rx<ModelOfWork> modelOfWork = ModelOfWork.fullTime.obs;
   RxList<String> roleDropDown = [
@@ -31,7 +34,6 @@ class ProfileController extends GetxController with StateMixin {
     'Other',
   ].obs;
   RxString natureOfWorkValue = 'Software'.obs;
-
 
   RxBool iDontHaveBusiness = true.obs;
 
@@ -56,8 +58,34 @@ class ProfileController extends GetxController with StateMixin {
 
   @override
   void onInit() async {
-    change(null, status: RxStatus.success());
-    Future.delayed(const Duration(seconds: 5), () {});
+    Singleton.supabaseInstance.client
+        .from(RoloxKey.supaBaseUserTable)
+        .select('*')
+        .eq('id', Singleton.mobileUserId)
+        .then((userResponse) {
+      firstNameController.text = userResponse[0]['name'];
+      emailController.text = userResponse[0]['email'];
+      isFreelancer.value = userResponse[0]['profiletype'] == 1;
+      mobilNumberController.text = userResponse[0]['phone']
+          .toString()
+          .substring(userResponse[0]['phone'].toString().contains('+91')
+              ? 3
+              : userResponse[0]['phone'].toString().contains('91')
+                  ? 2
+                  : userResponse[0]['phone'].toString().contains('1')
+                      ? 1
+                      : 0);
+
+      Singleton.supabaseInstance.client
+          .from(RoloxKey.supaBaseCompanyTable)
+          .select('companyName')
+          .eq('userid', [Singleton.mobileUserId]).then((value) {
+        if (value is List) {
+          businessNameController.text = value[0]['companyName'];
+        }
+      });
+      change(null, status: RxStatus.success());
+    });
     super.onInit();
   }
 

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:roloxmoney/screen/dashboard_screen/entities/dashboard_model.dart';
@@ -6,7 +7,6 @@ import 'package:roloxmoney/utils/RoloxKey.dart';
 
 /*Chinnadurai Viswanathan*/
 class HomeController extends GetxController with StateMixin {
-
   RxList invoicesList = [].obs;
   RxDouble paidTransaction = 0.0.obs;
   RxDouble dueTransaction = 0.0.obs;
@@ -29,18 +29,20 @@ class HomeController extends GetxController with StateMixin {
     ${RoloxKey.supaBaseInvoiceTable}!inner (
       *
     )
-  ''').then((value) {
-        value.forEach((element) {
-          invoicesList.add(
-            DashBoardInvoice(
-                invoiceAmount: element['invoice']['invoiceValueWithoutGst'],
-                invoiceNumber: element['invoice']['invoiceNumber'],
-                invoiceName: element['invoice']['invoiceName'],
-                paid: element['invoice']['paid'],
-                dueDate: element['invoice']['InvoiceDueDate']),
-          );
-        });
-      });
+  ''')
+          .eq('userid', Singleton.mobileUserId)
+          .then((value) {
+            value.forEach((element) {
+              invoicesList.add(
+                DashBoardInvoice(
+                    invoiceAmount: element['invoice']['invoiceValueWithoutGst'],
+                    invoiceNumber: element['invoice']['invoiceNumber'],
+                    invoiceName: element['invoice']['invoiceName'],
+                    paid: element['invoice']['paid'],
+                    dueDate: element['invoice']['InvoiceDueDate']),
+              );
+            });
+          });
 
       invoicesList.obs.value.toList().forEach((element) {
         DashBoardInvoice dashBoardInvoice = element as DashBoardInvoice;

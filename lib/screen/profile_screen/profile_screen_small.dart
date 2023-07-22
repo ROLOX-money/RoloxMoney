@@ -76,6 +76,54 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                       shadowColor: Colors.grey,
                       elevation: 0.75,
                     ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 0),
+                      child: Center(
+                        child: Stack(
+                          alignment: Alignment.bottomRight,
+                          fit: StackFit.passthrough,
+                          children: [
+                            if (widget.controller!.isFreelancer.value)
+                              Container(
+                                width: 200,
+                                height: 200,
+                                alignment: Alignment.center,
+                                child: widget.controller!.isLogo.value
+                                    ? CustomText(
+                                        text: 'Upload Company Logo',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall!
+                                            .copyWith(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                                height: 1.5,
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                foreground: Paint()
+                                                  ..shader = ColorResource
+                                                      .linearGradient),
+                                      )
+                                    : null,
+                                decoration: BoxDecoration(
+                                  image: !widget.controller!.isLogo.value
+                                      ? DecorationImage(
+                                          image: NetworkImage(
+                                              'https://www.shutterstock.com/shutterstock/photos/1395298487/display_1500/stock-photo-focused-woman-wearing-headphones-using-laptop-in-cafe-writing-notes-attractive-female-student-1395298487.jpg'),
+                                          fit: BoxFit.cover,
+                                        )
+                                      : null,
+                                  border: Border.all(
+                                    color: Colors.white,
+                                    width: 1.0, // Sets the border width
+                                  ),
+                                  borderRadius: BorderRadius.circular(360),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
                     Form(
                       key: widget.controller!.form,
                       child: Column(
@@ -98,16 +146,16 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                   labelName:
                                       '${Languages.of(context)?.firstName}',
                                 ),
-                                WidgetUtils.genericTextFiled(
-                                  context: context,
-                                  validationRules: ['required'],
-                                  hintText:
-                                      '${Languages.of(context)?.enter} ${Languages.of(context)?.lastName}',
-                                  controller:
-                                      widget.controller!.lastNameController,
-                                  labelName:
-                                      '${Languages.of(context)?.lastName}',
-                                ),
+                                // WidgetUtils.genericTextFiled(
+                                //   context: context,
+                                //   validationRules: ['required'],
+                                //   hintText:
+                                //       '${Languages.of(context)?.enter} ${Languages.of(context)?.lastName}',
+                                //   controller:
+                                //       widget.controller!.lastNameController,
+                                //   labelName:
+                                //       '${Languages.of(context)?.lastName}',
+                                // ),
                                 CustomText(
                                   text:
                                       '${Languages.of(context)?.mobileNumber}',
@@ -123,7 +171,10 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                   child: CustomTextField(
                                     widget.controller!.mobilNumberController.obs
                                         .value,
-                                    validationRules: ['required','mobile_number'],
+                                    validationRules: [
+                                      'required',
+                                      'mobile_number'
+                                    ],
                                     hintText:
                                         '${Languages.of(context)?.enter} ${Languages.of(context)?.mobileNumber}',
                                     focusedBorder: Colors.grey,
@@ -197,7 +248,7 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                 ),
                                 WidgetUtils.genericTextFiled(
                                   context: context,
-                                  validationRules: ['required','email'],
+                                  validationRules: ['required', 'email'],
                                   hintText:
                                       '${Languages.of(context)?.emailIdHint}',
                                   controller:

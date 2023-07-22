@@ -65,10 +65,11 @@ mixin SupaBaseController {
           .eq(
               'phone',
               Singleton.supabaseInstance.client.auth.currentUser!.phone!
-                      .contains('+')
+                      .contains('+91')
                   ? Singleton.supabaseInstance.client.auth.currentUser?.phone
                   : '+${Singleton.supabaseInstance.client.auth.currentUser?.phone}')
           .then((value) {
+        debugPrint('toGetTheSelectedUser response--> $value');
         return value;
       });
     } catch (e) {
@@ -105,6 +106,16 @@ mixin SupaBaseController {
           .insert(userData)
           .then((value) {
         debugPrint('toInsert response--> $value');
+        debugPrint(
+            'user phone--> ${Singleton.supabaseInstance.client.auth.currentUser?.phone}');
+        debugPrint(
+            'user id--> ${Singleton.supabaseInstance.client.auth.currentUser?.id}');
+        // if (value == null) {
+        //   AppUtils.showErrorSnackBar(Get.context!,
+        //       'Something went wrong..Please Please try again latter',
+        //       durations: 2000);
+        // }
+        // return value == null ? false : true;
         return true;
       });
     } catch (e) {
@@ -171,6 +182,31 @@ mixin SupaBaseController {
     }
   }
 
+  static Future<bool> toSearchGSTAvailability({required panNumber}) async {
+    try {
+      return await Singleton.supabaseInstance.client
+          .from(RoloxKey.supaBasePANTable)
+          .select('Pannumber')
+          .eq('Pannumber', panNumber)
+          .then((panAvailabilityResponse) {
+        if (panAvailabilityResponse is List) {
+          if (panAvailabilityResponse.length > 0) {
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      });
+    } catch (e) {
+      AppUtils.showErrorSnackBar(
+          Get.context!, 'Something went wrong. Please try again after sometime',
+          durations: 2000);
+      return false;
+    }
+  }
+
   Future<List<ClientModel>> toGetTheClientList() async {
     List<ClientModel> clientList = [];
     try {
@@ -181,12 +217,14 @@ mixin SupaBaseController {
     ${RoloxKey.supaBaseCompanyTable}!inner (
       *
     )
-  ''').then((value) {
-        value.forEach((element) {
-          clientList.add(ClientModel.fromJson(element));
-        });
-        debugPrint('clientListResponse--> $value');
-      });
+  ''')
+          .eq('userid', Singleton.mobileUserId)
+          .then((value) {
+            value.forEach((element) {
+              clientList.add(ClientModel.fromJson(element));
+            });
+            debugPrint('clientListResponse--> $value');
+          });
       return clientList;
     } catch (e) {
       e.printError();
