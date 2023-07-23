@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/invoice_screen/entities/invoice_model.dart';
-import 'package:roloxmoney/screen/pd_view/pdf_view.dart';
+import 'package:roloxmoney/screen/pd_view/pdf_screen.dart';
+import 'package:roloxmoney/screen/pd_view/pdf_screen_small.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
@@ -245,8 +246,7 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                         textColor: ColorResource.color00E94F,
                                         fontSize: 14,
                                         onTap: () {
-                                          Get.toNamed(
-                                              PDFViewerCachedFromUrl.routeName);
+                                          Get.toNamed(PDFScreen.routeName);
                                         },
                                       ),
                                     )
