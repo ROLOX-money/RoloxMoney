@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'package:roloxmoney/screen/login_profile_screen/login_profile_screen.dart
 import 'package:roloxmoney/screen/welcome_screen/welcome_screen.dart';
 import 'package:roloxmoney/screen/welcome_screen/welcome_screen_controller.dart';
 import 'package:roloxmoney/singleton.dart';
+import 'package:roloxmoney/utils/RoloxKey.dart';
 import 'package:roloxmoney/utils/supa_base_control.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
@@ -22,7 +24,7 @@ import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 /*Chinnadurai Viswanathan*/
 
-class LoginController extends RoloxGetXController {
+class LoginController extends RoloxGetXController with SupaBaseController {
   //65.2.137.244:8080/login/9820557101 => for OTP
   //65.2.137.244:8080/user/9820557101 => to check if user exist
   //65.2.137.244:8080/user/api/registration
@@ -59,8 +61,22 @@ class LoginController extends RoloxGetXController {
               Get.offAndToNamed(LoginProfileScreen.routeName,
                   arguments: mobilNumberController.text);
             } else {
-              Get.offAndToNamed(DashboardScreen.routeName,
-                  arguments: mobilNumberController.text);
+              FirebaseMessaging.instance.getToken().then((fcmTokenValue) {
+                toInsert(userData: {
+                  'userId': value[0]['id'],
+                  'fcmToken': fcmTokenValue
+                }, tableName: RoloxKey.supaBaseFCMTokenTable)
+                    .then((supaBaseFCMTokenTableResponse) {
+                  if (supaBaseFCMTokenTableResponse) {
+                    Get.offAndToNamed(DashboardScreen.routeName,
+                        arguments: mobilNumberController.text);
+                  } else {
+                    AppUtils.showErrorSnackBar(Get.context!,
+                        'Something went wrong..Please Please try again latter',
+                        durations: 2000);
+                  }
+                });
+              });
             }
           });
         } else {

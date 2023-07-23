@@ -110,7 +110,7 @@ android {
             applicationIdSuffix ".money.uat"
         }
         prod {
-            applicationIdSuffix ".money"
+            applicationIdSuffix ".money.dev"
         }
     }
 }

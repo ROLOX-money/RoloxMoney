@@ -256,16 +256,17 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                   labelName:
                                       '${Languages.of(context)?.emailID}',
                                 ),
-                                WidgetUtils.genericTextFiled(
-                                  context: context,
-                                  validationRules: ['required'],
-                                  hintText:
-                                      '${Languages.of(context)?.brandNameHintText}',
-                                  controller:
-                                      widget.controller!.businessNameController,
-                                  labelName:
-                                      '${Languages.of(context)?.businessName}',
-                                ),
+                                if (widget.controller!.isFreelancer.value)
+                                  WidgetUtils.genericTextFiled(
+                                    context: context,
+                                    validationRules: ['required'],
+                                    hintText:
+                                        '${Languages.of(context)?.brandNameHintText}',
+                                    controller: widget
+                                        .controller!.businessNameController,
+                                    labelName:
+                                        '${Languages.of(context)?.businessName}',
+                                  ),
                                 WidgetUtils.genericTextFiled(
                                   context: context,
                                   validationRules: ['required'],
