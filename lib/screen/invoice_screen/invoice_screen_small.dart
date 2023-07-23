@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
-import 'package:roloxmoney/model/project_model.dart';
-import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_screen.dart';
 import 'package:roloxmoney/screen/invoice_screen/entities/invoice_model.dart';
+import 'package:roloxmoney/screen/pd_view/pdf_view.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
@@ -120,7 +119,8 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                     color: ColorResource.color381D4E,
                                   ),
                                   child: CustomText(
-                                    text: AppUtils.getInitials(invoice.invoiceName)
+                                    text: AppUtils.getInitials(
+                                            invoice.invoiceName)
                                         .toString(),
                                     style: Theme.of(context)
                                         .textTheme
@@ -244,7 +244,10 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                         fontWeight: FontWeight.w500,
                                         textColor: ColorResource.color00E94F,
                                         fontSize: 14,
-                                        onTap: () {},
+                                        onTap: () {
+                                          Get.toNamed(
+                                              PDFViewerCachedFromUrl.routeName);
+                                        },
                                       ),
                                     )
                                   ],

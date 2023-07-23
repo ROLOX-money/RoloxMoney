@@ -8,6 +8,7 @@ import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_screen.
 import 'package:roloxmoney/screen/login_profile_screen/login_profile_screen.dart';
 import 'package:roloxmoney/screen/login_screen/login_screen.dart';
 import 'package:roloxmoney/screen/payment_screen/add_bank_account/add_bank_account_screen.dart';
+import 'package:roloxmoney/screen/pd_view/pdf_view.dart';
 import 'package:roloxmoney/screen/profile_screen/profile_screen.dart';
 import 'package:roloxmoney/screen/projects_screen/add_project/add_project_screen.dart';
 import 'package:roloxmoney/screen/splash_screen/splash_screen.dart';
@@ -36,5 +37,6 @@ class AppRoutes {
         page: () => AddBankAccountScreen()),
     GetPage(name: ProfileScreen.routeName, page: () => ProfileScreen()),
     GetPage(name: BankListScreen.routeName, page: () => BankListScreen()),
+    GetPage(name: PDFViewerCachedFromUrl.routeName, page: () => PDFViewerCachedFromUrl()),
   ];
 }

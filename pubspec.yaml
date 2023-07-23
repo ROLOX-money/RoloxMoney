@@ -24,6 +24,9 @@ dependencies:
   altogic: ^1.0.6
   shared_preferences: ^2.1.1
   supabase_flutter: ^1.10.9
+  firebase_messaging: ^14.6.5
+  firebase_core: ^2.15.0
+  flutter_cached_pdfview: ^0.4.2
 
 #  firebase_auth: ^3.6.4
 #  firebase_auth:

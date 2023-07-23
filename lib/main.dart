@@ -1,4 +1,6 @@
 import 'package:dynamic_themes/dynamic_themes.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -27,6 +29,7 @@ import 'package:roloxmoney/widget/rolox_money_core_widgets.dart';
 /*Chinnadurai Viswanathan*/
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   Get.put(LoginController());
   Get.put(LoginProfileController());
   Get.lazyPut(() => DashboardController());

@@ -48,11 +48,11 @@ class DashboardScreenSmallState extends State<DashboardScreenSmall> {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           backgroundColor: Theme.of(context).backgroundColor,
-          leading: Icon(
-            Icons.menu,
-            size: 30,
-            color: Colors.white,
-          ),
+          // leading: Icon(
+          //   Icons.menu,
+          //   size: 30,
+          //   color: Colors.white,
+          // ),
           title: Container(
             alignment: Alignment.centerLeft,
             child: Image.asset(
