@@ -242,7 +242,7 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                                         DateFormat("dd/MM/yyyy")
                                             .parse(p0.dueDate!)
                                             .isBefore(DateTime.now()
-                                                .add(Duration(days: 2))) &&
+                                                .add(Duration(days: 7))) &&
                                         p0.paid == false)
                                     .length
                                     .toString(),

@@ -46,20 +46,23 @@ class HomeController extends GetxController with StateMixin {
 
       invoicesList.obs.value.toList().forEach((element) {
         DashBoardInvoice dashBoardInvoice = element as DashBoardInvoice;
-        if (DateFormat("dd/MM/yyyy")
-            .parse(dashBoardInvoice.dueDate!)
-            .isBefore(DateTime.now().add(Duration(days: 7)))) {
-          if (dashBoardInvoice.paid!) {
-            paidTransaction.value =
-                paidTransaction.value + dashBoardInvoice.invoiceAmount!;
-          } else {
-            dueTransaction.value =
-                dueTransaction.value + dashBoardInvoice.invoiceAmount!;
-          }
+
+        if (dashBoardInvoice.paid!) {
+          paidTransaction.value =
+              paidTransaction.value + dashBoardInvoice.invoiceAmount!;
         } else {
+          dueTransaction.value =
+              dueTransaction.value + dashBoardInvoice.invoiceAmount!;
+        }
+        if (DateFormat("dd/MM/yyyy").parse(dashBoardInvoice.dueDate!).isBefore(
+                  DateTime.now().add(
+                    Duration(days: 7),
+                  ),
+                ) &&
+            element.paid == false) {
           upComingTransaction.value =
               upComingTransaction.value + dashBoardInvoice.invoiceAmount!;
-        }
+        } else {}
       });
       change(upComingTransaction);
       change(paidTransaction);
