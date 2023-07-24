@@ -53,7 +53,7 @@ class DashboardController extends GetxController
     super.onInit();
   }
 
-  void bottomNavigation({required String selectedBottom}) {
+  Future<void> bottomNavigation({required String selectedBottom}) async {
     Get.lazyPut(() => HomeController());
     Get.lazyPut(() => ProjectsController());
     Get.lazyPut(() => ClientsController());
