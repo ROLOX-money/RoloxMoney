@@ -122,7 +122,7 @@ class ProfileController extends GetxController with StateMixin {
       var request = http.MultipartRequest(
         'PUT',
         Uri.parse(
-            'https://2bcgkzypx4.execute-api.ap-south-1.amazonaws.com/dev/logo.vm.rstk.in/${Singleton.mobileUserId}.${file.path.split('.').last}'),
+            '${Singleton.imageUploadURL + Singleton.mobileUserId}.${file.path.split('.').last}'),
       );
       request.files.add(
           await http.MultipartFile.fromPath(Singleton.mobileUserId, file.path));
