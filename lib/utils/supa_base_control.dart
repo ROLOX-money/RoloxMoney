@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
@@ -110,13 +111,36 @@ mixin SupaBaseController {
             'user phone--> ${Singleton.supabaseInstance.client.auth.currentUser?.phone}');
         debugPrint(
             'user id--> ${Singleton.supabaseInstance.client.auth.currentUser?.id}');
-        // if (value == null) {
-        //   AppUtils.showErrorSnackBar(Get.context!,
-        //       'Something went wrong..Please Please try again latter',
-        //       durations: 2000);
-        // }
-        // return value == null ? false : true;
         return true;
+      });
+    } catch (e) {
+      if (e is PostgrestException) {
+        AppUtils.showErrorSnackBar(Get.context!, e.message, durations: 5000);
+      } else {
+        AppUtils.showErrorSnackBar(Get.context!,
+            'Something went wrong. Please try again after sometime',
+            durations: 5000);
+      }
+      return false;
+    }
+  }
+
+  Future<bool> toInsertFCM({required String userID}) async {
+    try {
+      return FirebaseMessaging.instance.getToken().then((fcmTokenValue) async {
+        return await Singleton.supabaseInstance.client
+            .from(RoloxKey.supaBaseFCMTokenTable)
+            .update({'fcmToken': fcmTokenValue})
+            .eq(
+              'userId',
+              userID,
+            )
+            .then((value) {
+              debugPrint('toInsert fcmToken--> $fcmTokenValue');
+              debugPrint('toInsert response--> $value');
+              debugPrint('toInsert userID--> $userID');
+              return true;
+            });
       });
     } catch (e) {
       debugPrint('exception--> $e');

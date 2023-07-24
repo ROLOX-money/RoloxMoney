@@ -61,21 +61,15 @@ class LoginController extends RoloxGetXController with SupaBaseController {
               Get.offAndToNamed(LoginProfileScreen.routeName,
                   arguments: mobilNumberController.text);
             } else {
-              FirebaseMessaging.instance.getToken().then((fcmTokenValue) {
-                toInsert(userData: {
-                  'userId': value[0]['id'],
-                  'fcmToken': fcmTokenValue
-                }, tableName: RoloxKey.supaBaseFCMTokenTable)
-                    .then((supaBaseFCMTokenTableResponse) {
-                  if (supaBaseFCMTokenTableResponse) {
-                    Get.offAndToNamed(DashboardScreen.routeName,
-                        arguments: mobilNumberController.text);
-                  } else {
-                    AppUtils.showErrorSnackBar(Get.context!,
-                        'Something went wrong..Please Please try again latter',
-                        durations: 2000);
-                  }
-                });
+              toInsertFCM(userID: value[0]['id']).then((fcmTokenValue) {
+                if (fcmTokenValue) {
+                  Get.offAndToNamed(DashboardScreen.routeName,
+                      arguments: mobilNumberController.text);
+                } else {
+                  AppUtils.showErrorSnackBar(Get.context!,
+                      'Something went wrong..Please Please try again latter',
+                      durations: 2000);
+                }
               });
             }
           });

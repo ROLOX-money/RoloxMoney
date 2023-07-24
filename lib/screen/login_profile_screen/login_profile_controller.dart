@@ -108,87 +108,77 @@ class LoginProfileController extends GetxController
               .then((selectedUserResponse) {
             if (selectedUserResponse is List) {
               if (selectedUserResponse.length > 0) {
-                FirebaseMessaging.instance.getToken().then((fcmTokenValue) {
-                  toInsert(userData: {
-                    'userId': selectedUserResponse[0]['id'],
-                    'fcmToken': fcmTokenValue
-                  }, tableName: RoloxKey.supaBaseFCMTokenTable)
-                      .then((supaBaseFCMTokenTableResponse) {
-                    if (supaBaseFCMTokenTableResponse) {
-                      if (typOfBusiness.value == TypOfBusiness.business) {
-                        toInsert(userData: {
-                          'companyName': companyNameController.text,
-                          'userid': [selectedUserResponse[0]['id']],
-                        }, tableName: RoloxKey.supaBaseCompanyTable)
-                            .then((insertResponse) {
-                          if (insertResponse) {
-                            SupaBaseController.toGetTheSelectedCompany(
-                                    companyName: companyNameController.text)
-                                .then((selectedCompanyResponse) {
-                              if (selectedCompanyResponse is List) {
-                                if (selectedCompanyResponse.length > 0) {
+                toInsertFCM(userID: selectedUserResponse[0]['id'])
+                    .then((fcmTokenValue) {
+                  if (fcmTokenValue) {
+                    if (typOfBusiness.value == TypOfBusiness.business) {
+                      toInsert(userData: {
+                        'companyName': companyNameController.text,
+                        'userid': [selectedUserResponse[0]['id']],
+                      }, tableName: RoloxKey.supaBaseCompanyTable)
+                          .then((insertResponse) {
+                        if (insertResponse) {
+                          SupaBaseController.toGetTheSelectedCompany(
+                                  companyName: companyNameController.text)
+                              .then((selectedCompanyResponse) {
+                            if (selectedCompanyResponse is List) {
+                              if (selectedCompanyResponse.length > 0) {
+                                toInsert(userData: {
+                                  'Pannumber': panNumberController.text,
+                                  'profiletype':
+                                      typOfBusiness.obs.value.value ==
+                                              TypOfBusiness.business
+                                          ? '2'
+                                          : '3',
+                                  'refrenceid': selectedCompanyResponse[0]
+                                      ['id'],
+                                }, tableName: RoloxKey.supaBasePANTable)
+                                    .then((panCardInsertResponse) {
                                   toInsert(userData: {
-                                    'Pannumber': panNumberController.text,
-                                    'profiletype':
+                                    'gstNumber': gstNumberController.text,
+                                    'profileType':
                                         typOfBusiness.obs.value.value ==
                                                 TypOfBusiness.business
                                             ? '2'
                                             : '3',
                                     'refrenceid': selectedCompanyResponse[0]
                                         ['id'],
-                                  }, tableName: RoloxKey.supaBasePANTable)
-                                      .then((panCardInsertResponse) {
-                                    toInsert(userData: {
-                                      'gstNumber': gstNumberController.text,
-                                      'profileType':
-                                          typOfBusiness.obs.value.value ==
-                                                  TypOfBusiness.business
-                                              ? '2'
-                                              : '3',
-                                      'refrenceid': selectedCompanyResponse[0]
-                                          ['id'],
-                                    }, tableName: RoloxKey.supaBaseGSTTable)
-                                        .then((gstInsertResponse) {
-                                      if (gstInsertResponse) {
-                                        Get.offAllNamed(
-                                            DashboardScreen.routeName);
-                                      } else {
-                                        change(null,
-                                            status: RxStatus.success());
-                                        AppUtils.showErrorSnackBar(Get.context!,
-                                            'Something went wrong..Please Please try again latter',
-                                            durations: 2000);
-                                      }
-                                    });
+                                  }, tableName: RoloxKey.supaBaseGSTTable)
+                                      .then((gstInsertResponse) {
+                                    if (gstInsertResponse) {
+                                      Get.offAllNamed(
+                                          DashboardScreen.routeName);
+                                    } else {
+                                      change(null, status: RxStatus.success());
+                                      AppUtils.showErrorSnackBar(Get.context!,
+                                          'Something went wrong..Please Please try again latter',
+                                          durations: 2000);
+                                    }
                                   });
-                                } else {
-                                  change(null, status: RxStatus.success());
-                                  AppUtils.showErrorSnackBar(Get.context!,
-                                      'Something went wrong..Please Please try again latter',
-                                      durations: 2000);
-                                }
+                                });
                               } else {
                                 change(null, status: RxStatus.success());
                                 AppUtils.showErrorSnackBar(Get.context!,
                                     'Something went wrong..Please Please try again latter',
                                     durations: 2000);
                               }
-                            });
-                          } else {
-                            change(null, status: RxStatus.success());
-                          }
-                        });
-                      } else {
-                        Get.offAllNamed(DashboardScreen.routeName);
-                      }
+                            } else {
+                              change(null, status: RxStatus.success());
+                              AppUtils.showErrorSnackBar(Get.context!,
+                                  'Something went wrong..Please Please try again latter',
+                                  durations: 2000);
+                            }
+                          });
+                        } else {
+                          change(null, status: RxStatus.success());
+                        }
+                      });
                     } else {
-                      change(null, status: RxStatus.success());
-                      AppUtils.showErrorSnackBar(Get.context!,
-                          'Something went wrong. Please try again after sometime',
-                          durations: 2000);
-                      change(null, status: RxStatus.success());
+                      Get.offAllNamed(DashboardScreen.routeName);
                     }
-                  });
+                  } else {
+                    change(null, status: RxStatus.success());
+                  }
                 });
               } else {
                 change(null, status: RxStatus.success());
