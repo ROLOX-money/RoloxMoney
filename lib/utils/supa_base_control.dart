@@ -131,10 +131,6 @@ mixin SupaBaseController {
         return await Singleton.supabaseInstance.client
             .from(RoloxKey.supaBaseFCMTokenTable)
             .update({'fcmToken': fcmTokenValue})
-            // .insert({
-            //   'fcmToken': fcmTokenValue,
-            //   'userId': userID,
-            // })
             .eq(
               'userId',
               userID,
