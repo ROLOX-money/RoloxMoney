@@ -17,12 +17,13 @@ class AddClientController extends GetxController
   TextEditingController legalNameController = TextEditingController();
   TextEditingController emailIDController = TextEditingController();
   TextEditingController mobileNumberController = TextEditingController();
-  TextEditingController fullAddressController = TextEditingController();
   TextEditingController panNoController = TextEditingController();
   TextEditingController contactPersonController = TextEditingController();
   TextEditingController departmentController = TextEditingController();
   TextEditingController designationController = TextEditingController();
-
+  TextEditingController address1 = TextEditingController();
+  TextEditingController address2 = TextEditingController();
+  TextEditingController pinCode = TextEditingController();
   Rx<TypOfBusiness> typOfBusiness = TypOfBusiness.business.obs;
   final form = GlobalKey<FormState>();
 
@@ -39,10 +40,12 @@ class AddClientController extends GetxController
       emailIDController.text = 'chinnaduraiv@live.in';
       mobileNumberController.text = '+919585313659';
       contactPersonController.text = 'Chinnadurai Viswanathan';
-      fullAddressController.text = 'Rolox Money, No:123, Mumbai';
       panNoController.text = 'BRYPC4090C';
       departmentController.text = 'Software Development';
       designationController.text = 'Software Developer';
+      address1.text = 'No:2/41, North Street';
+      address2.text = 'S.Ohaiyur, Kallakurichi';
+      pinCode.text = '606204';
     }
   }
 
@@ -53,105 +56,144 @@ class AddClientController extends GetxController
 
   void createClient() {
     change(null, status: RxStatus.loading());
-    //First to check the GST/PAN (if company/client existing or not)
     SupaBaseController.toGetTheSelectedID(
-            searchValue: gstNumberController.text,
-            tableName: RoloxKey.supaBaseGSTTable,
-            searchKey: 'gstNumber',
-            whatTypeOfValueYouWant: 'refrenceid')
-        .then((gstListValue) {
-      if (gstListValue.length > 0) {
+      searchValue: gstNumberController.text,
+      tableName: RoloxKey.supaBaseGSTTable,
+      searchKey: 'gstNumber',
+    ).then((gstListValue) {
+      if (gstListValue.isEmpty) {
         SupaBaseController.toGetTheSelectedID(
                 searchValue: panNoController.text,
                 tableName: RoloxKey.supaBasePANTable,
                 searchKey: 'Pannumber')
             .then((panCardListValue) {
-          if (panCardListValue.length > 0) {
-            if (typOfBusiness.obs.value == TypOfBusiness.business) {
-              toInsert(
-                  tableName: RoloxKey.supaBaseProfileCompanyTable,
-                  userData: {
-                    'dept': departmentController.text,
-                    'designation': designationController.text,
-                    'phone': mobileNumberController.text,
-                    'companyRefrenceId': panCardListValue[0]['refrenceid']
-                  }).then((insertResponse) {
-                if (insertResponse) {
-                  toInsert(tableName: RoloxKey.supaBaseAddressTable, userData: {
-                    'address': fullAddressController.text,
-                    'phone': mobileNumberController.text
-                  }).then((addressInsertResponse) {
-                    if (addressInsertResponse) {
-                      SupaBaseController.toGetTheSelectedID(
-                              searchValue: Singleton.supabaseInstance.client
-                                      .auth.currentUser!.phone!
-                                      .contains('+')
-                                  ? Singleton.supabaseInstance.client.auth
-                                      .currentUser?.phone
-                                  : '+${Singleton.supabaseInstance.client.auth.currentUser?.phone}',
-                              tableName: RoloxKey.supaBaseUserTable,
-                              whatTypeOfValueYouWant: 'id',
-                              searchKey: 'phone')
-                          .then((userResponseList) {
-                        if (userResponseList.isNotEmpty) {
-                          toInsert(
-                              tableName: RoloxKey.supaBaseUserToClientMap,
-                              userData: {
-                                'userid': userResponseList[0]['id'],
-                                'companyId': panCardListValue[0]['refrenceid'],
-                                'profileType': panCardListValue[0]
-                                    ['profiletype']
-                              }).then((value) {
-                            if (value) {
-                              AppUtils.showSnackBar(Get.context!,
-                                  'Successfully added client with your profile');
-                              Get.back(result: true);
-                            } else {
-                              AppUtils.showErrorSnackBar(Get.context!,
-                                  'Something went wrong. Please try again after sometime',
-                                  durations: 5000);
-                            }
-                          });
-                        } else {
-                          change(null, status: RxStatus.success());
-                        }
-                      });
-                    } else {
-                      change(null, status: RxStatus.success());
-                    }
-                  });
-                } else {
-                  change(null, status: RxStatus.success());
-                }
+          if (panCardListValue.isEmpty) {
+            //Todo Have to check phone already exist or not
+            toInsert(userData: {
+              'companyName': brandNameController.text,
+              'typeOfbuisness':
+                  typOfBusiness.value == TypOfBusiness.business ? 2 : 1,
+              'userid': [Singleton.mobileUserId],
+            }, tableName: RoloxKey.supaBaseCompanyTable)
+                .then((value) {
+              SupaBaseController.toGetTheSelectedCompany(
+                      companyName: brandNameController.text)
+                  .then((companyDetails) {
+                toInsert(
+                    tableName: RoloxKey.supaBaseProfileCompanyTable,
+                    userData: {
+                      'dept': departmentController.text,
+                      'designation': designationController.text,
+                      'phone': mobileNumberController.text,
+                      'companyRefrenceId': companyDetails[0]['id']
+                    }).then((insertResponse) {
+                  if (insertResponse) {
+                    toInsert(
+                        tableName: RoloxKey.supaBaseAddressTable,
+                        userData: {
+                          'phone': mobileNumberController.text,
+                          'address_1': address1.text,
+                          'address_2': address2.text,
+                          'pinCode': pinCode.text,
+                        }).then((addressInsertResponse) {
+                      if (addressInsertResponse) {
+                        SupaBaseController.toGetTheSelectedID(
+                                searchValue: Singleton.supabaseInstance.client
+                                        .auth.currentUser!.phone!
+                                        .contains('+')
+                                    ? Singleton.supabaseInstance.client.auth
+                                        .currentUser?.phone
+                                    : '+${Singleton.supabaseInstance.client.auth.currentUser?.phone}',
+                                tableName: RoloxKey.supaBaseUserTable,
+                                whatTypeOfValueYouWant: 'id',
+                                searchKey: 'phone')
+                            .then((userResponseList) {
+                          if (userResponseList.isNotEmpty) {
+                            //PAN Insert & GEST Insert
+                            toInsert(
+                                tableName: RoloxKey.supaBasePANTable,
+                                userData: {
+                                  'Pannumber': panNoController.text,
+                                  'refrenceid': userResponseList[0]['id'],
+                                  'profiletype': typOfBusiness.value ==
+                                          TypOfBusiness.business
+                                      ? 2
+                                      : 1,
+                                }).then((value) {
+                              toInsert(
+                                  tableName: RoloxKey.supaBaseGSTTable,
+                                  userData: {
+                                    'gstNumber': gstNumberController.text,
+                                    'refrenceid': userResponseList[0]['id'],
+                                    'profiletype': typOfBusiness.value ==
+                                            TypOfBusiness.business
+                                        ? 2
+                                        : 1,
+                                  }).then((value) {
+                                SupaBaseController.toGetTheSelectedID(
+                                        searchValue: brandNameController.text,
+                                        tableName:
+                                            RoloxKey.supaBaseCompanyTable,
+                                        whatTypeOfValueYouWant: 'id',
+                                        searchKey: 'gstNumber')
+                                    .then((companyResponseList) {
+                                  if (companyResponseList.isNotEmpty) {
+                                    toInsert(
+                                        tableName:
+                                            RoloxKey.supaBaseUserToClientMap,
+                                        userData: {
+                                          'userid': userResponseList[0]['id'],
+                                          'companyId': companyResponseList[0]
+                                              ['id'], //Todo
+                                          'profileType': typOfBusiness.value ==
+                                                  TypOfBusiness.business
+                                              ? 2
+                                              : 1
+                                        }).then((value) {
+                                      if (value) {
+                                        AppUtils.showSnackBar(Get.context!,
+                                            'Successfully added client with your profile');
+                                        Get.back(result: true);
+                                      } else {
+                                        AppUtils.showErrorSnackBar(Get.context!,
+                                            'Something went wrong. Please try again after sometime',
+                                            durations: 5000);
+                                      }
+                                    });
+                                  } else {
+                                    change(null, status: RxStatus.success());
+                                    AppUtils.showErrorSnackBar(Get.context!,
+                                        'We are facing problem with finding your GST... Please try again',
+                                        durations: 10000);
+                                  }
+                                });
+                              });
+                            });
+                          } else {
+                            change(null, status: RxStatus.success());
+                          }
+                        });
+                      } else {
+                        change(null, status: RxStatus.success());
+                      }
+                    });
+                  } else {
+                    change(null, status: RxStatus.success());
+                  }
+                });
               });
-            } else {
-              change(null, status: RxStatus.success());
-
-              AppUtils.showErrorSnackBar(
-                  Get.context!, 'Todo Have to consider as freelancer',
-                  durations: 5000);
-              //Todo Have to consider as freelancer
-            }
+            });
           } else {
-            //Todo Have to insert in PAN table
-            // Todo if freelancer mean -> have to take user Id to user PAN
-            // Todo if company mean -> have to take company Id to user PAN
-            change(null, status: RxStatus.success());
-
             AppUtils.showErrorSnackBar(
-                Get.context!, 'Todo Have to insert in PAN table',
-                durations: 5000);
+                Get.context!, 'This PAN already mapped with another client',
+                durations: 10000);
           }
         });
       } else {
-        //Todo Have to insert in GST table
-        // Todo if freelancer mean -> have to take user Id to user GST
-        // Todo if company mean -> have to take company Id to user GST
         change(null, status: RxStatus.success());
-
         AppUtils.showErrorSnackBar(
-            Get.context!, 'Todo Have to insert in GST table',
-            durations: 5000);
+            Get.context!, 'This GST already mapped with another client',
+            durations: 10000);
       }
     });
   }

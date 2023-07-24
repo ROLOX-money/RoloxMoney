@@ -315,9 +315,9 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                       controller:
                                       widget.controller!.address1,
                                       labelName:
-                                      '${Languages.of(context)?.fullAddress}',
+                                      '${Languages.of(context)?.address1}',
                                       hintText:
-                                      '${Languages.of(context)?.fullAddress}'),
+                                      '${Languages.of(context)?.address1}'),
 
                                   WidgetUtils.genericTextFiled(
                                       context: context,
@@ -326,9 +326,9 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                       controller:
                                       widget.controller!.address2,
                                       labelName:
-                                      '${Languages.of(context)?.fullAddress}',
+                                      '${Languages.of(context)?.address2}',
                                       hintText:
-                                      '${Languages.of(context)?.fullAddress}'),
+                                      '${Languages.of(context)?.address2}'),
 
                                   WidgetUtils.genericTextFiled(
                                       context: context,

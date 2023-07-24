@@ -282,7 +282,7 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                                 labelName:
                                     '${Languages.of(context)?.department}'),
 
-                        if (widget.controller!.typOfBusiness.obs.value ==
+                        if (widget.controller!.typOfBusiness.value ==
                             TypOfBusiness.business)
                           // Designation
                           WidgetUtils.genericTextFiled(
@@ -295,18 +295,38 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                                   widget.controller!.designationController,
                               labelName:
                                   '${Languages.of(context)?.designation}'),
-
-                        // Full Address
                         WidgetUtils.genericTextFiled(
                             context: context,
+                            keyBoardType: TextInputType.name,
                             validationRules: ['required'],
-                            hintText:
-                                Languages.of(context)?.enterYourAddressHintText,
-                            keyBoardType: TextInputType.streetAddress,
                             controller:
-                                widget.controller!.fullAddressController,
-                            labelName: '${Languages.of(context)?.fullAddress}',
-                            maxLines: 10),
+                            widget.controller!.address1,
+                            labelName:
+                            '${Languages.of(context)?.address1}',
+                            hintText:
+                            '${Languages.of(context)?.address1}'),
+
+                        WidgetUtils.genericTextFiled(
+                            context: context,
+                            keyBoardType: TextInputType.name,
+                            validationRules: ['required'],
+                            controller:
+                            widget.controller!.address2,
+                            labelName:
+                            '${Languages.of(context)?.address2}',
+                            hintText:
+                            '${Languages.of(context)?.address2}'),
+
+                        WidgetUtils.genericTextFiled(
+                            context: context,
+                            keyBoardType: TextInputType.number,
+                            validationRules: ['required'],
+                            controller:
+                            widget.controller!.pinCode,
+                            labelName:
+                            '${Languages.of(context)?.pincode}',
+                            hintText:
+                            '${Languages.of(context)?.pincode}'),
                         const SizedBox(
                           height: 15,
                         ),
