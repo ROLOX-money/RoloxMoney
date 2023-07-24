@@ -204,9 +204,11 @@ class LanguageEn extends Languages {
 
   String get congratulations => 'Congratulations!';
 
-  String get accountCreatedSuccessfully => 'Your Rolox account has been created successfully';
+  String get accountCreatedSuccessfully =>
+      'Your Rolox account has been created successfully';
 
-  String get accountCreatedScreenContent => 'Banking for Creators, Influencers, Freelancers, Gig, Solopreneurs, Small Business, Brands, Agencies';
+  String get accountCreatedScreenContent =>
+      'Banking for Creators, Influencers, Freelancers, Gig, Solopreneurs, Small Business, Brands, Agencies';
 
   String get letsExplore => 'Lets Explore';
 
@@ -216,7 +218,8 @@ class LanguageEn extends Languages {
 
   String get plsIfSpecify => 'Pls Specify if others';
 
-  String get profileSecondPageContent => 'Please share a bit about your setup to get your dashboard up and running!';
+  String get profileSecondPageContent =>
+      'Please share a bit about your setup to get your dashboard up and running!';
 
   String get accountBalance => 'Account Balance';
 
@@ -281,12 +284,7 @@ class LanguageEn extends Languages {
 
   String get rolox => 'ROLOX';
 
+  String get address1 => 'Address 1';
 
-
-
-
-
-
-
-
+  String get address2 => 'Address 2';
 }

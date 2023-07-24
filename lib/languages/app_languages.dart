@@ -279,4 +279,8 @@ abstract class Languages {
   String get addProfilePhoto;
 
   String get rolox;
+
+  String get address1;
+
+  String get address2;
 }

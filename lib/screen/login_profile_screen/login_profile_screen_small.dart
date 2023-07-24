@@ -307,6 +307,40 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                           '${Languages.of(context)?.emailID}',
                                       hintText:
                                           Languages.of(context)?.emailIdHint),
+
+                                  WidgetUtils.genericTextFiled(
+                                      context: context,
+                                      keyBoardType: TextInputType.name,
+                                      validationRules: ['required'],
+                                      controller:
+                                      widget.controller!.address1,
+                                      labelName:
+                                      '${Languages.of(context)?.fullAddress}',
+                                      hintText:
+                                      '${Languages.of(context)?.fullAddress}'),
+
+                                  WidgetUtils.genericTextFiled(
+                                      context: context,
+                                      keyBoardType: TextInputType.name,
+                                      validationRules: ['required'],
+                                      controller:
+                                      widget.controller!.address2,
+                                      labelName:
+                                      '${Languages.of(context)?.fullAddress}',
+                                      hintText:
+                                      '${Languages.of(context)?.fullAddress}'),
+
+                                  WidgetUtils.genericTextFiled(
+                                      context: context,
+                                      keyBoardType: TextInputType.number,
+                                      validationRules: ['required'],
+                                      controller:
+                                      widget.controller!.pinCode,
+                                      labelName:
+                                      '${Languages.of(context)?.pincode}',
+                                      hintText:
+                                      '${Languages.of(context)?.pincode}'),
+
                                   WidgetUtils.genericTextFiled(
                                       context: context,
                                       keyBoardType: TextInputType.name,
@@ -382,6 +416,39 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                               '${Languages.of(context)?.gstNumber}',
                                           hintText:
                                               '${Languages.of(context)?.gstNumberHint}'),
+
+                                      WidgetUtils.genericTextFiled(
+                                          context: context,
+                                          keyBoardType: TextInputType.name,
+                                          validationRules: ['required'],
+                                          controller:
+                                              widget.controller!.address1,
+                                          labelName:
+                                              '${Languages.of(context)?.fullAddress}',
+                                          hintText:
+                                              '${Languages.of(context)?.fullAddress}'),
+
+                                      WidgetUtils.genericTextFiled(
+                                          context: context,
+                                          keyBoardType: TextInputType.name,
+                                          validationRules: ['required'],
+                                          controller:
+                                              widget.controller!.address2,
+                                          labelName:
+                                              '${Languages.of(context)?.fullAddress}',
+                                          hintText:
+                                              '${Languages.of(context)?.fullAddress}'),
+
+                                      WidgetUtils.genericTextFiled(
+                                          context: context,
+                                          keyBoardType: TextInputType.number,
+                                          validationRules: ['required'],
+                                          controller:
+                                              widget.controller!.pinCode,
+                                          labelName:
+                                              '${Languages.of(context)?.pincode}',
+                                          hintText:
+                                              '${Languages.of(context)?.pincode}'),
                                       // social id
                                       WidgetUtils.genericTextFiled(
                                           context: context,
