@@ -14,7 +14,8 @@ import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/utils/supa_base_control.dart';
 
 /*Chinnadurai Viswanathan*/
-class DashboardController extends GetxController with StateMixin {
+class DashboardController extends GetxController
+    with StateMixin, SupaBaseController {
   Rx<PageController> pageController = PageController().obs;
 
   RxList<DashboardNavigatorModel>? dashboardNavigatorModelList = [
@@ -41,13 +42,14 @@ class DashboardController extends GetxController with StateMixin {
                 ? Singleton.supabaseInstance.client.auth.currentUser!.phone
                     .toString()
                 : '+${Singleton.supabaseInstance.client.auth.currentUser!.phone.toString()}')
-        .then((value) {
+        .then((value) async {
       if (value is List && value.length > 0) {
-        // [{id: f3dc1e06-b065-467a-a6ed-c47224768dd5}]
         Singleton.mobileUserId = value[0]['id'];
+        await toInsertFCM(userID: value[0]['id']);
         change(null, status: RxStatus.success());
       }
     });
+
     super.onInit();
   }
 
