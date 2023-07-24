@@ -83,8 +83,12 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                           alignment: Alignment.bottomRight,
                           fit: StackFit.passthrough,
                           children: [
-                            if (widget.controller!.isFreelancer.value)
-                              Container(
+                            // if (widget.controller!.isFreelancer.value)
+                            GestureDetector(
+                              onTap: () {
+                                widget.controller!.filePicker();
+                              },
+                              child: Container(
                                 width: 200,
                                 height: 200,
                                 alignment: Alignment.center,
@@ -120,6 +124,7 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                   borderRadius: BorderRadius.circular(360),
                                 ),
                               ),
+                            ),
                           ],
                         ),
                       ),

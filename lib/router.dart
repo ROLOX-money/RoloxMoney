@@ -16,9 +16,9 @@ import 'package:roloxmoney/screen/splash_screen/splash_screen.dart';
 /*Chinnadurai Viswanathan*/
 class AppRoutes {
   static List<GetPage<dynamic>>? routes = [
-    // GetPage(name: '/', page: () => SplashScreen()),
-    // GetPage(name: PDFScreen.routeName, page: () => PDFScreen()),
-    GetPage(name: '/', page: () => PDFScreen()),
+    GetPage(name: '/', page: () => SplashScreen()),
+    GetPage(name: PDFScreen.routeName, page: () => PDFScreen()),
+    // GetPage(name: '/', page: () => PDFScreen()),
     // GetPage(name: '/', page: () => HomeScreen()),
     GetPage(name: LoginScreen.routeName, page: () => LoginScreen()),
 

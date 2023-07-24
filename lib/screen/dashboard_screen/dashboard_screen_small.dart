@@ -33,7 +33,6 @@ class DashboardScreenSmall extends StatefulWidget {
 }
 
 class DashboardScreenSmallState extends State<DashboardScreenSmall> {
-
   @override
   void initState() {
     super.initState();
@@ -176,8 +175,10 @@ class DashboardScreenSmallState extends State<DashboardScreenSmall> {
                       textColor: ColorResource.black,
                       fontSize: 20,
                       onTap: () {
-                        Get.put(AddInvoiceController());
-                        Get.toNamed(AddInvoiceScreen.routeName);
+                        // Get.put(AddInvoiceController());
+                        // Get.toNamed(AddInvoiceScreen.routeName);
+                        widget.controller!
+                            .bottomNavigation(selectedBottom: 'Home');
                       },
                     ),
                   )

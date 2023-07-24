@@ -1,8 +1,12 @@
 import 'dart:async';
+import 'dart:io';
+import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/RoloxKey.dart';
+import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../login_profile_screen/login_profile_controller.dart';
@@ -80,13 +84,66 @@ class ProfileController extends GetxController with StateMixin {
           .from(RoloxKey.supaBaseCompanyTable)
           .select('companyName')
           .eq('userid', [Singleton.mobileUserId]).then((value) {
-        if (value is List) {
-          businessNameController.text = value[0]['companyName'];
+        if (value is List && value.isNotEmpty) {
+          businessNameController.text = value[0]['companyName'] ?? '';
         }
       });
       change(null, status: RxStatus.success());
     });
     super.onInit();
+  }
+
+  filePickerDialog() async {
+    await ImagePicker().pickImage(source: ImageSource.gallery).then((value) {
+      uploadFile(filePath: value!.path);
+    });
+  }
+
+  Future<void> filePicker() async {
+    // if (await Permission.storage.isGranted) {
+    //   filePickerDialog();
+    // } else {
+    //   await Permission.storage.request().then((status) {
+    //     if (status.isGranted) {
+    //       filePickerDialog();
+    //     } else {
+    //       filePicker();
+    //     }
+    //   });
+    // }
+    filePickerDialog();
+  }
+
+  Future<void> uploadFile({required String filePath}) async {
+    change(null, status: RxStatus.loading());
+    debugPrint('file values--> $filePath');
+    try {
+      File file = File(filePath);
+      var request = http.MultipartRequest(
+        'PUT',
+        Uri.parse(
+            'https://2bcgkzypx4.execute-api.ap-south-1.amazonaws.com/dev/logo.vm.rstk.in/${Singleton.mobileUserId}.${file.path.split('.').last}'),
+      );
+      request.files.add(
+          await http.MultipartFile.fromPath(Singleton.mobileUserId, file.path));
+      try {
+        await request.send().then((response) async {
+          String responseString = await response.stream.bytesToString();
+          debugPrint('File uploaded successfully. Response: $responseString');
+          AppUtils.showSnackBar(Get.context!, 'File uploaded successfully');
+        });
+      } catch (e) {
+        AppUtils.showErrorSnackBar(
+            Get.context!, 'Error file convert into MultipartRequest',
+            durations: 5000);
+      }
+    } catch (e) {
+      AppUtils.showErrorSnackBar(
+          Get.context!, 'Error file convert into MultipartRequest',
+          durations: 5000);
+      debugPrint('Error file convert into MultipartRequest: $e');
+    }
+    change(null, status: RxStatus.success());
   }
 
   void updateValuesOnUI({String? value, RxString? variableName}) {
