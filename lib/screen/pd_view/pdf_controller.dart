@@ -7,14 +7,12 @@ import 'package:internet_file/storage_io.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:share_plus/share_plus.dart';
 
 /*Chinnadurai Viswanathan*/
 class PDFController extends GetxController with StateMixin {
-  RxString url =
-      'https://339rrq5qm1.execute-api.ap-south-1.amazonaws.com/download/invoices.vm.rstk.in/1/out.pdf'
-          .obs;
   RxMap apiKey = {'x-api-key': 'WiToRbqXh44fTzRn0RhQe3qoLTPplOwA7GUywDA0'}.obs;
 
   @override
@@ -29,14 +27,13 @@ class PDFController extends GetxController with StateMixin {
     Dio dio = Dio();
     try {
       var response = await dio.get(
-        url.value,
+        Singleton.invoiceDownloadURL,
         options: Options(
             responseType: ResponseType.bytes,
-            headers: {'x-api-key': 'WiToRbqXh44fTzRn0RhQe3qoLTPplOwA7GUywDA0'}),
+            headers: Singleton.imageUploadHeaders),
       );
       Directory appDocDir = await getApplicationDocumentsDirectory();
       var appExDocDir = await getExternalStorageDirectory();
-
 
       // Get the platform-specific download directory.
       var directory = await getApplicationDocumentsDirectory();
