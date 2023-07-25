@@ -102,7 +102,6 @@ class HomeController extends GetxController with StateMixin {
                 workName: 'Brochure Design'),
           ]),
     ]);
-
     groupInvoicesList.addAll([
       GroupInvoices(
           boarderColor: ColorResource.colorE08AF4,

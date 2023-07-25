@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../login_profile_screen/login_profile_controller.dart';
 
 enum ModelOfWork { fullTime, partTime }
 
@@ -36,7 +35,7 @@ class BusinessProfileController extends GetxController with StateMixin {
     'Software',
     'Driver',
     'Auditor',
-    'Other',
+    'Others',
   ].obs;
   RxString natureOfBusinessValue = 'Software'.obs;
 

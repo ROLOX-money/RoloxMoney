@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:roloxmoney/screen/clients_screen/add_client/add_client_controller.dart';
-import 'package:roloxmoney/screen/clients_screen/add_client/add_client_screen_small.dart';
 import 'package:roloxmoney/screen/projects_screen/add_project/add_project_controller.dart';
+import 'package:roloxmoney/screen/projects_screen/add_project/add_project_large_screen.dart';
 import 'package:roloxmoney/screen/projects_screen/add_project/add_project_screen_small.dart';
 import 'package:roloxmoney/widget/responsive_widget.dart';
 
@@ -30,7 +29,7 @@ class AddProjectScreenState extends State<AddProjectScreen> {
       assignId: true,
       builder: (controller) {
         return ResponsiveWidget(
-          largeScreen: AddProjectScreenSmall(
+          largeScreen: AddProjectLargeScreen(
               controller: controller, scaffoldKey: widget.scaffoldKey),
           mediumScreen: AddProjectScreenSmall(
               controller: controller, scaffoldKey: widget.scaffoldKey),

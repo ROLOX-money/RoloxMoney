@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/screen/bank_list_screen/bank_list_controller.dart';
+import 'package:roloxmoney/screen/bank_list_screen/bank_list_screen_large.dart';
 import 'package:roloxmoney/screen/bank_list_screen/bank_list_screen_small.dart';
-import 'package:roloxmoney/screen/template_screen/template_controller.dart';
-import 'package:roloxmoney/screen/template_screen/template_screen_small.dart';
 import 'package:roloxmoney/widget/responsive_widget.dart';
 
 /*Chinnadurai Viswanathan*/
@@ -30,7 +29,7 @@ class BankListScreenState extends State<BankListScreen> {
       assignId: true,
       builder: (controller) {
         return ResponsiveWidget(
-          largeScreen: BankListScreenSmall(
+          largeScreen: BankListLargeScreen(
               controller: controller, scaffoldKey: widget.scaffoldKey),
           mediumScreen: BankListScreenSmall(
               controller: controller, scaffoldKey: widget.scaffoldKey),

@@ -41,23 +41,24 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
       rxStatus: widget.controller!.status,
       child: Scaffold(
         appBar: AppBar(
-          centerTitle: false,
-          backgroundColor: Theme.of(context).backgroundColor,
-          title: CustomText(
-            text: '${Languages.of(context)?.rolox}',
-            style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                color: ColorResource.colorFFFFFF,
-                fontSize: 34,
-                fontWeight: FontWeight.w900),
-          ),
-          shadowColor: Colors.grey,
-          elevation: 0.75,
-        ),
+            centerTitle: false,
+            backgroundColor: Theme.of(context).backgroundColor,
+            title: Container(
+              padding: const EdgeInsets.only(left: 8.0, top: 20),
+              child: Image.asset(
+                ImageResource.rolox,
+                height: 30,
+              ),
+            ),
+            shadowColor: Colors.grey,
+            elevation: 0.0),
         body: Center(
           child: Container(
             width: MediaQuery.of(context).size.width / 2,
             height: MediaQuery.of(context).size.height / 1.2,
-            decoration: BoxDecoration(color: ColorResource.color1B2023),
+            decoration: BoxDecoration(
+                color: ColorResource.color1B2023,
+                borderRadius: BorderRadius.circular(24)),
             alignment: Alignment.topLeft,
             child: SingleChildScrollView(
               child: Padding(
@@ -86,6 +87,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                             fontSize: 18,
                             fontWeight: FontWeight.w600),
                       ),
+                      elevation: 0,
                     ),
                     SizedBox(height: 10),
                     // Profile page Content
@@ -96,30 +98,30 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                           fontSize: 16,
                           fontWeight: FontWeight.w400),
                     ),
-                    const SizedBox(height: 15),
+                    const SizedBox(height: 30),
                     // Type of Business
                     Container(
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.grey, width: 0.25),
                           color: ColorResource.color151515),
-                      padding: EdgeInsets.all(10.0),
+                      padding: EdgeInsets.only(top: 10, bottom: 10),
                       child: Theme(
                         data: Theme.of(context).copyWith(
                             unselectedWidgetColor: Colors.grey,
                             disabledColor: ColorResource.color00E94F),
                         child: ListTile(
                           title: CustomText(
-                            text: '${Languages.of(context)?.typeOfBusiness}'
-                                .toUpperCase(),
+                            text: '${Languages.of(context)?.typeOfBusiness}',
                             style: Theme.of(context)
                                 .textTheme
                                 .titleSmall!
                                 .copyWith(
-                                    color: ColorResource.colorFFFFFF,
+                                    color: ColorResource.colorE08AF4,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600),
                           ),
                           subtitle: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               GestureDetector(
                                 onTap: () {
@@ -153,6 +155,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                   ],
                                 ),
                               ),
+                              SizedBox(width: 30),
                               GestureDetector(
                                 onTap: () {
                                   widget.controller!.businessToggle(
@@ -185,6 +188,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                   ],
                                 ),
                               ),
+                              SizedBox(width: 30),
                               GestureDetector(
                                 onTap: () {
                                   widget.controller!.businessToggle(
@@ -481,46 +485,40 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Theme.of(context).backgroundColor,
-          insetPadding: EdgeInsets.all(5),
-          content: Container(
-            padding: EdgeInsets.only(left: 20, right: 20),
-            decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              border: Border.all(color: Colors.grey),
-              color: Theme.of(context).backgroundColor,
-              borderRadius: BorderRadius.all(
-                Radius.circular(32.0),
-              ),
+          insetPadding: EdgeInsets.symmetric(horizontal: 450),
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color: Colors.grey, width: 2),
+            borderRadius: BorderRadius.circular(30),
+          ),
+          title: MediaQuery.removePadding(
+            removeTop: true,
+            removeBottom: true,
+            removeLeft: true,
+            removeRight: true,
+            context: context,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                    onPressed: () {
+                      Get.back();
+                      widget.controller!
+                          .businessToggle(value: TypOfBusiness.business);
+                    },
+                    icon: Icon(
+                      Icons.close,
+                      color: Colors.white,
+                    ))
+              ],
             ),
-            height: 500,
-            width: MediaQuery.of(context).size.width / 3,
+          ),
+          content: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 50),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                MediaQuery.removePadding(
-                  removeTop: true,
-                  removeBottom: true,
-                  removeLeft: true,
-                  removeRight: true,
-                  context: context,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            Get.back();
-                            widget.controller!
-                                .businessToggle(value: TypOfBusiness.business);
-                          },
-                          icon: Icon(
-                            Icons.close,
-                            color: Colors.white,
-                          ))
-                    ],
-                  ),
-                ),
                 Container(
                   alignment: Alignment.center,
                   child: Image.asset(

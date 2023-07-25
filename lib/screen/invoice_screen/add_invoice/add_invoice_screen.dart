@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:roloxmoney/screen/clients_screen/add_client/add_client_controller.dart';
-import 'package:roloxmoney/screen/clients_screen/add_client/add_client_screen_small.dart';
 import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_controller.dart';
+import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_screen_large.dart';
 import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_screen_small.dart';
-import 'package:roloxmoney/screen/projects_screen/add_project/add_project_controller.dart';
-import 'package:roloxmoney/screen/projects_screen/add_project/add_project_screen_small.dart';
 import 'package:roloxmoney/widget/responsive_widget.dart';
 
 /*Chinnadurai Viswanathan*/
@@ -32,7 +29,7 @@ class AddInvoiceScreenState extends State<AddInvoiceScreen> {
       assignId: true,
       builder: (controller) {
         return ResponsiveWidget(
-          largeScreen: AddInvoiceScreenSmall(
+          largeScreen: AddInvoiceScreenLarge(
               controller: controller, scaffoldKey: widget.scaffoldKey),
           mediumScreen: AddInvoiceScreenSmall(
               controller: controller, scaffoldKey: widget.scaffoldKey),

@@ -283,10 +283,9 @@ class LanguageEn extends Languages {
 
   String get darkMode => 'Dark Mode';
 
+  String get projectLink => "Project Link";
 
-
-
-
+  String get projectLinkHint => "Enter your Project Link Here";
 
 
 

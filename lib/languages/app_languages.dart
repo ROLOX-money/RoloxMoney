@@ -281,4 +281,8 @@ abstract class Languages {
   String get rolox;
 
   String get darkMode;
+
+  String get projectLink;
+
+  String get projectLinkHint;
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/screen/home_screen/home_controller.dart';
+import 'package:roloxmoney/screen/home_screen/home_screen_medium.dart';
 import 'package:roloxmoney/screen/home_screen/home_screen_small.dart';
 import 'package:roloxmoney/widget/responsive_widget.dart';
 
@@ -32,7 +33,7 @@ class HomeScreenState extends State<HomeScreen> {
         return ResponsiveWidget(
           largeScreen: HomeScreenLarge(
               controller: controller, scaffoldKey: widget.scaffoldKey),
-          mediumScreen: HomeScreenSmall(
+          mediumScreen: HomeScreenMedium(
               controller: controller, scaffoldKey: widget.scaffoldKey),
           smallScreen: HomeScreenSmall(
               controller: controller, scaffoldKey: widget.scaffoldKey),

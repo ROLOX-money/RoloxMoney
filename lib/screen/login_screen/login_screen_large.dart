@@ -97,8 +97,12 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
               ),
             ),
             Container(
-                color: ColorResource.color383838,
                 width: MediaQuery.of(context).size.width / 2,
+                decoration: BoxDecoration(
+                    color: ColorResource.color383838,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(24),
+                        bottomLeft: Radius.circular(24))),
                 // padding: EdgeInsets.only(top: 60, left: 60, right: 60),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 100),
@@ -139,7 +143,7 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                                   disableColor: Colors.red,
                                   keyBoardType: TextInputType.phone,
                                   prefixIcon: Container(
-                                    width: 150,
+                                    width: 120,
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Row(
@@ -185,7 +189,7 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                                           ),
                                           VerticalDivider(
                                             thickness: 1,
-                                            color: ColorResource.colorDDDDDD,
+                                            color: ColorResource.color383838,
                                             indent: 15,
                                             endIndent: 15,
                                           )
@@ -330,7 +334,7 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                 SizedBox(height: 20),
                 CustomText(
                   text:
-                      '${Languages.of(context)?.enter} 4 ${Languages.of(context)?.digit} ${Languages.of(context)?.otp}',
+                      '${Languages.of(context)?.enter} 6 ${Languages.of(context)?.digit} ${Languages.of(context)?.otp}',
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(
                       color: ColorResource.colorFFFFFF,
                       fontSize: 18,

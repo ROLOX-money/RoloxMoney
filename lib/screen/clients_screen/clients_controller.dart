@@ -32,7 +32,6 @@ class ClientsController extends GetxController with StateMixin {
       ]);
       change(projectInvoicesList);
     });
-
     super.onInit();
   }
 

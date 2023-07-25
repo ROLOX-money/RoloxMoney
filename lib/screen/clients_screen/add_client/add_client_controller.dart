@@ -19,6 +19,7 @@ class AddClientController extends GetxController with StateMixin {
   TextEditingController designationController = TextEditingController();
 
   Rx<TypOfBusiness> typOfBusiness = TypOfBusiness.business.obs;
+  RxBool iDontHaveBusiness = true.obs;
   final form = GlobalKey<FormState>();
 
   @override
@@ -32,5 +33,10 @@ class AddClientController extends GetxController with StateMixin {
   void businessToggle({TypOfBusiness? value}) {
     typOfBusiness = value!.obs;
     change(typOfBusiness);
+  }
+
+  void noBusinessCheckBox({bool? values}) {
+    iDontHaveBusiness = values!.obs;
+    change(iDontHaveBusiness);
   }
 }
