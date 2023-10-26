@@ -81,7 +81,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                 bottom: BorderSide(color: Colors.white, width: 2),
                 right: BorderSide(color: Colors.white, width: 2),
               ),
-              color: ColorResource.color00E94F),
+              color: Colors.black),
           padding: const EdgeInsets.all(0.0),
           child: Flex(
             direction: widget.axis,
@@ -94,9 +94,9 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                   child: Text(
                     widget.text.toString(),
                     textAlign: widget.textAlign,
-                    style: Theme.of(context).textTheme.button!.copyWith(
+                    style: Theme.of(context).textTheme.displayMedium!.copyWith(
                         fontSize: widget.fontSize,
-                        color: widget.textColor.withOpacity(1),
+                        color: Colors.white,
                         fontWeight: FontWeight.w600),
                     maxLines: widget.maxLines,
                     overflow:
@@ -109,6 +109,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                   child: Image.asset(
                     ImageResource.buttonArrow,
                     width: 20,
+                    color: Colors.white,
                     height: 10,
                   ),
                 ),
