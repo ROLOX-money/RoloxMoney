@@ -10,22 +10,22 @@ import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/custom_textfield.dart';
 
 abstract class WidgetUtils {
-  static Widget genericTextFiled({
-    required BuildContext context,
-    required TextEditingController controller,
-    required String labelName,
-    List<String> validationRules = const [],
-    String? suffixImagePath,
-    String? hintText,
-    int? maxLines,
-    int? minLines,
-    TextInputType? keyBoardType,
-    TextStyle? labelStyle,
-    List<TextInputFormatter>? inputformaters,
-    Function? onEditing,
-    bool obscureText= false,
-    int? maximumWordCount
-  }) {
+  static Widget genericTextFiled(
+      {required BuildContext context,
+      required TextEditingController controller,
+      required String labelName,
+      List<String> validationRules = const [],
+      String? suffixImagePath,
+      String? hintText,
+      int? maxLines,
+      int? minLines,
+      TextInputType? keyBoardType,
+      TextStyle? labelStyle,
+      List<TextInputFormatter>? inputformaters,
+      Function? onEditing,
+      bool obscureText = false,
+      int? maximumWordCount,
+      double? height}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -35,9 +35,10 @@ abstract class WidgetUtils {
         CustomText(
           text: labelName,
           style: labelStyle ??
-              Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ColorResource.colorE08AF4,
-                  fontWeight: FontWeight.w500),
+              Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(fontWeight: FontWeight.w500),
         ),
         const SizedBox(
           height: 5,
@@ -49,9 +50,9 @@ abstract class WidgetUtils {
             maximumWordCount: maximumWordCount,
             maxLines: maxLines,
             hintText: hintText,
-            focusedBorder: Colors.grey,
-            textColor: Colors.white,
-            enableColor: Colors.grey,
+            // focusedBorder: Colors.grey,
+            // textColor: Colors.white,
+            // enableColor: Colors.grey,
             validationRules: validationRules,
             borderColor: Colors.red,
             inputformaters: inputformaters,
@@ -66,7 +67,7 @@ abstract class WidgetUtils {
             disableColor: Colors.red,
             keyBoardType: keyBoardType ?? TextInputType.name,
           ),
-          height: 70,
+          height: height ?? 70,
         ),
       ],
     );
@@ -83,10 +84,10 @@ abstract class WidgetUtils {
       children: [
         CustomText(
           text: lableName,
-          style: Theme.of(context).textTheme.titleSmall!.copyWith(
-              color: ColorResource.colorE08AF4,
-              fontSize: 14,
-              fontWeight: FontWeight.w500),
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium!
+              .copyWith(fontSize: 14, fontWeight: FontWeight.w500),
         ),
         SizedBox(
           height: 10,
@@ -97,29 +98,30 @@ abstract class WidgetUtils {
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
             border: Border.all(color: Colors.grey, width: 0.25),
-            color: ColorResource.color151515,
+            boxShadow: ColorResource.boxShadow,
+            color: Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.all(Radius.circular(5.0)),
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
               value: selectedValues,
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ColorResource.colorE08AF4,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                   fontSize: 18,
                   fontWeight: FontWeight.w500),
               borderRadius: BorderRadius.all(
                 Radius.circular(5.0),
               ),
-              dropdownColor: ColorResource.color151515,
+              dropdownColor: Theme.of(context).scaffoldBackgroundColor,
               items: dropDownList.map((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: CustomText(
                     text: value,
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: ColorResource.colorFFFFFF,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500),
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleSmall!
+                        .copyWith(fontSize: 16, fontWeight: FontWeight.w400),
                   ),
                 );
               }).toList(),

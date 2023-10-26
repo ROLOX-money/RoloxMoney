@@ -7,6 +7,7 @@ import 'package:roloxmoney/screen/dashboard_screen/dashboard_controller.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
 import 'package:roloxmoney/screen/individual_profile_screen/individual_profile_controller.dart';
 import 'package:roloxmoney/screen/individual_profile_screen/individual_profile_screen.dart';
+import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/utils/widget_utils.dart';
@@ -40,6 +41,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
     return RoloxMoneyWidgetState(
       rxStatus: widget.controller!.status,
       child: Scaffold(
+
         appBar: AppBar(
             centerTitle: false,
             backgroundColor: Theme.of(context).backgroundColor,
@@ -50,6 +52,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                 height: 30,
               ),
             ),
+            automaticallyImplyLeading: false,
             shadowColor: Colors.grey,
             elevation: 0.0),
         body: Center(
@@ -57,25 +60,27 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
             width: MediaQuery.of(context).size.width / 2,
             height: MediaQuery.of(context).size.height / 1.2,
             decoration: BoxDecoration(
-                color: ColorResource.color1B2023,
+                color: Theme.of(context).scaffoldBackgroundColor,
                 borderRadius: BorderRadius.circular(24)),
             alignment: Alignment.topLeft,
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(30),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppBar(
-                      backgroundColor: ColorResource.color1B2023,
+                      leadingWidth: 25,
+                      backgroundColor:
+                          Theme.of(context).scaffoldBackgroundColor,
                       leading: GestureDetector(
                         onTap: () {
                           Get.back();
                         },
                         child: Icon(
                           Icons.arrow_back_sharp,
-                          size: 30,
-                          color: Colors.white,
+                          size: 25,
+                          color: Theme.of(context).textTheme.titleSmall!.color,
                         ),
                       ),
                       centerTitle: false,
@@ -83,9 +88,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                         text:
                             '${Languages.of(context)?.profile} ${Languages.of(context)?.page}',
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: ColorResource.colorFFFFFF,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600),
+                            fontSize: 20, fontWeight: FontWeight.w600),
                       ),
                       elevation: 0,
                     ),
@@ -93,32 +96,32 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                     // Profile page Content
                     CustomText(
                       text: '${Languages.of(context)?.profilePageContent}',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: ColorResource.colorFFFFFF,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall!
+                          .copyWith(fontSize: 16, fontWeight: FontWeight.w400),
                     ),
                     const SizedBox(height: 30),
                     // Type of Business
                     Container(
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey, width: 0.25),
-                          color: ColorResource.color151515),
+                          boxShadow: ColorResource.boxShadow,
+                          border: Border.all(width: 0.25)),
                       padding: EdgeInsets.only(top: 10, bottom: 10),
                       child: Theme(
                         data: Theme.of(context).copyWith(
-                            unselectedWidgetColor: Colors.grey,
-                            disabledColor: ColorResource.color00E94F),
+                            unselectedWidgetColor:
+                                Theme.of(context).scaffoldBackgroundColor,
+                            disabledColor:
+                                Theme.of(context).scaffoldBackgroundColor),
                         child: ListTile(
                           title: CustomText(
                             text: '${Languages.of(context)?.typeOfBusiness}',
                             style: Theme.of(context)
                                 .textTheme
-                                .titleSmall!
+                                .titleMedium!
                                 .copyWith(
-                                    color: ColorResource.colorE08AF4,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600),
+                                    fontSize: 14, fontWeight: FontWeight.w600),
                           ),
                           subtitle: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -135,7 +138,8 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                       value: TypOfBusiness.individual,
                                       groupValue: widget.controller!
                                           .typOfBusiness.obs.value.value,
-                                      activeColor: ColorResource.color00E94F,
+                                      activeColor:
+                                          Theme.of(context).primaryColor,
                                       onChanged: (TypOfBusiness? value) {
                                         widget.controller!.businessToggle(
                                             value: TypOfBusiness.individual);
@@ -148,9 +152,8 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                           .textTheme
                                           .titleSmall!
                                           .copyWith(
-                                              color: ColorResource.colorFFFFFF,
                                               fontSize: 16,
-                                              fontWeight: FontWeight.w600),
+                                              fontWeight: FontWeight.w300),
                                     )
                                   ],
                                 ),
@@ -168,7 +171,8 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                       value: TypOfBusiness.business,
                                       groupValue: widget.controller!
                                           .typOfBusiness.obs.value.value,
-                                      activeColor: ColorResource.color00E94F,
+                                      activeColor:
+                                          Theme.of(context).primaryColor,
                                       onChanged: (TypOfBusiness? value) {
                                         widget.controller!.businessToggle(
                                             value: TypOfBusiness.business);
@@ -181,9 +185,8 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                           .textTheme
                                           .titleSmall!
                                           .copyWith(
-                                              color: ColorResource.colorFFFFFF,
                                               fontSize: 16,
-                                              fontWeight: FontWeight.w600),
+                                              fontWeight: FontWeight.w300),
                                     )
                                   ],
                                 ),
@@ -204,7 +207,8 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                       value: TypOfBusiness.agency,
                                       groupValue: widget.controller!
                                           .typOfBusiness.obs.value.value,
-                                      activeColor: ColorResource.color00E94F,
+                                      activeColor:
+                                          Theme.of(context).primaryColor,
                                       onChanged: (TypOfBusiness? value) {
                                         widget.controller!.businessToggle(
                                             value: TypOfBusiness.agency);
@@ -217,9 +221,8 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                           .textTheme
                                           .titleSmall!
                                           .copyWith(
-                                              color: ColorResource.colorFFFFFF,
                                               fontSize: 16,
-                                              fontWeight: FontWeight.w600),
+                                              fontWeight: FontWeight.w300),
                                     )
                                   ],
                                 ),
@@ -398,18 +401,18 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                             '${Languages.of(context)?.panNumber}',
                                         hintText:
                                             '${Languages.of(context)?.panNumberHint}'),
-                                    // aadhaar Numberƒ
+                                    // aadhaar Number
                                     WidgetUtils.genericTextFiled(
                                         context: context,
                                         maximumWordCount: 14,
-                                        // keyBoardType: TextInputType.number,
+                                        keyBoardType: TextInputType.number,
                                         validationRules: [
                                           'required',
                                           'number_only'
                                         ],
-                                        // inputformaters: [
-                                        //   CustomAadhaarInputFormatter()
-                                        // ],
+                                        inputformaters: [
+                                          CustomAadhaarInputFormatter()
+                                        ],
                                         controller: widget.controller!
                                             .aadhaarNumberController,
                                         labelName:
@@ -447,7 +450,6 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                       context,
                       cardShape: 1,
                       isIcon: true,
-                      textColor: ColorResource.black,
                       fontSize: 20,
                       onTap: () {
                         if (widget.controller!.form.currentState!.validate()) {
@@ -474,6 +476,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
           ),
         ),
         backgroundColor: Theme.of(context).backgroundColor,
+
       ),
     );
   }
@@ -484,10 +487,10 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Theme.of(context).backgroundColor,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           insetPadding: EdgeInsets.symmetric(horizontal: 450),
           shape: RoundedRectangleBorder(
-            side: BorderSide(color: Colors.grey, width: 2),
+            side: BorderSide(color: ColorResource.borderColor, width: 2),
             borderRadius: BorderRadius.circular(30),
           ),
           title: MediaQuery.removePadding(
@@ -507,7 +510,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                     },
                     icon: Icon(
                       Icons.close,
-                      color: Colors.white,
+                      color: ColorResource.closeIconColor,
                     ))
               ],
             ),
@@ -527,22 +530,23 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                     width: 160,
                   ),
                 ),
+                SizedBox(height: 20),
                 CustomText(
                   text: '${Languages.of(context)?.oopsAgency}',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: ColorResource.colorE08AF4,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium!
+                      .copyWith(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
                 SizedBox(height: 10),
                 CustomText(
                   text: '${Languages.of(context)?.oopsAgencyMessage}',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: ColorResource.colorFFFFFF,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall!
+                      .copyWith(fontSize: 14, fontWeight: FontWeight.w400),
                 ),
                 SizedBox(
                   height: 20,
@@ -552,7 +556,6 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                   context,
                   cardShape: 1,
                   isIcon: true,
-                  textColor: ColorResource.black,
                   fontSize: 20,
                   onTap: () {
                     Get.put(DashboardController());

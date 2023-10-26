@@ -6,6 +6,8 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/login_profile_screen/login_profile_controller.dart';
 import 'package:roloxmoney/screen/login_profile_screen/login_profile_screen.dart';
+import 'package:roloxmoney/screen/welcome_screen/welcome_screen.dart';
+import 'package:roloxmoney/screen/welcome_screen/welcome_screen_controller.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/http_url.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
@@ -36,19 +38,20 @@ class LoginController extends RoloxGetXController {
   }
 
   void navigateProfile() {
-    if (otpController.text.length == 6) {
-      if (otpController.text.length == 6) {
+    if (otpController.text.length == 4) {
+      if (otpController.text.length == 4) {
         // Future.delayed(const Duration(seconds: 5), () {
-        //   Get.put(WelcomeController());
-        //   Get.toNamed(WelcomeScreen.routeName);
+        Get.put(WelcomeController());
+        Get.toNamed(WelcomeScreen.routeName);
         // });
 
-        Get.put(LoginProfileController());
-        Get.offAndToNamed(LoginProfileScreen.routeName);
+        // Get.put(LoginProfileController());
+        // Get.offAndToNamed(LoginProfileScreen.routeName);
         // Get.toNamed(LoginProfileScreen.routeName);
       }
     }
   }
+
   void noAgreeTermsAndConditionCheckBox({bool? values}) {
     acceptTermsAndCondition = values!.obs;
     change(acceptTermsAndCondition);
@@ -57,9 +60,9 @@ class LoginController extends RoloxGetXController {
   Future<void> triggerLogin() async {
     change(null, status: RxStatus.loading());
     await apiRequest(
-        requestType: APIRequestType.get,
-        urlString:
-        HTTPUrl.loginURL(mobileNumber: mobilNumberController.text))
+            requestType: APIRequestType.get,
+            urlString:
+                HTTPUrl.loginURL(mobileNumber: mobilNumberController.text))
         .then((value) {
       if (value['success']) {
         otpBottomSheet(
@@ -89,16 +92,11 @@ class LoginController extends RoloxGetXController {
         builder: (builder) {
           return Padding(
             padding: EdgeInsets.only(
-                bottom: MediaQuery
-                    .of(Get.context!)
-                    .viewInsets
-                    .bottom),
+                bottom: MediaQuery.of(Get.context!).viewInsets.bottom),
             child: Container(
               margin: EdgeInsets.only(top: 0.5),
               decoration: BoxDecoration(
-                color: Theme
-                    .of(Get.context!)
-                    .backgroundColor,
+                color: Theme.of(Get.context!).backgroundColor,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(22),
                   topRight: Radius.circular(22),
@@ -123,21 +121,14 @@ class LoginController extends RoloxGetXController {
                   ),
                   CustomText(
                     text:
-                    '${Languages
-                        .of(Get.context!)
-                        ?.enter} 4 ${Languages
-                        .of(Get.context!)
-                        ?.digit} ${Languages
-                        .of(Get.context!)
-                        ?.otp}',
-                    style: Theme
-                        .of(Get.context!)
+                        '${Languages.of(Get.context!)?.enter} 4 ${Languages.of(Get.context!)?.digit} ${Languages.of(Get.context!)?.otp}',
+                    style: Theme.of(Get.context!)
                         .textTheme
                         .titleSmall!
                         .copyWith(
-                        color: ColorResource.colorFFFFFF,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600),
+                            color: ColorResource.colorFFFFFF,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600),
                   ),
                   SizedBox(
                     height: 15,
@@ -147,28 +138,24 @@ class LoginController extends RoloxGetXController {
                     children: [
                       CustomText(
                         text:
-                        '${Languages
-                            .of(Get.context!)
-                            ?.sentOTPToRegisteredMobile}',
-                        style: Theme
-                            .of(Get.context!)
+                            '${Languages.of(Get.context!)?.sentOTPToRegisteredMobile}',
+                        style: Theme.of(Get.context!)
                             .textTheme
                             .titleSmall!
                             .copyWith(
-                            color: ColorResource.colorFFFFFF,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
+                                color: ColorResource.colorFFFFFF,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400),
                       ),
                       CustomText(
                         text: ' +91 $mobileNumber',
-                        style: Theme
-                            .of(Get.context!)
+                        style: Theme.of(Get.context!)
                             .textTheme
                             .titleSmall!
                             .copyWith(
-                            color: ColorResource.colorE08AF4,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
+                                color: ColorResource.colorE08AF4,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400),
                       ),
                     ],
                   ),
@@ -184,46 +171,27 @@ class LoginController extends RoloxGetXController {
                       cursorWidth: 1,
                       cursorColor: ColorResource.colorFFFFFF,
                       pinTheme: PinTheme(
-                          disabledColor: Theme
-                              .of(Get.context!)
-                              .backgroundColor,
+                          disabledColor: Theme.of(Get.context!).backgroundColor,
                           shape: PinCodeFieldShape.circle,
                           borderRadius: BorderRadius.circular(5),
                           fieldHeight: 50,
                           fieldWidth: 50,
                           inactiveFillColor:
-                          Theme
-                              .of(Get.context!)
-                              .backgroundColor,
+                              Theme.of(Get.context!).backgroundColor,
                           activeFillColor:
-                          Theme
-                              .of(Get.context!)
-                              .backgroundColor,
+                              Theme.of(Get.context!).backgroundColor,
                           borderWidth: 6,
                           errorBorderColor: Colors.red,
-                          activeColor: Theme
-                              .of(Get.context!)
-                              .backgroundColor,
-                          selectedColor: Theme
-                              .of(Get.context!)
-                              .backgroundColor,
+                          activeColor: Theme.of(Get.context!).backgroundColor,
+                          selectedColor: Theme.of(Get.context!).backgroundColor,
                           selectedFillColor:
-                          Theme
-                              .of(Get.context!)
-                              .backgroundColor,
+                              Theme.of(Get.context!).backgroundColor,
                           inactiveColor:
-                          Theme
-                              .of(Get.context!)
-                              .backgroundColor),
+                              Theme.of(Get.context!).backgroundColor),
                       enableActiveFill: true,
-                      backgroundColor: Theme
-                          .of(Get.context!)
-                          .backgroundColor,
+                      backgroundColor: Theme.of(Get.context!).backgroundColor,
                       controller: otpController,
-                      textStyle: Theme
-                          .of(Get.context!)
-                          .textTheme
-                          .titleMedium,
+                      textStyle: Theme.of(Get.context!).textTheme.titleMedium,
                       keyboardType: TextInputType.number,
                       boxShadows: const [
                         BoxShadow(
@@ -244,7 +212,6 @@ class LoginController extends RoloxGetXController {
                     cardShape: 1,
                     isIcon: true,
                     onTap: () {
-
                       ///fixme
                       // debugPrint('otpController.text--> ${otpController.text}');
                       // debugPrint('otpString--> $otpString');
@@ -266,17 +233,14 @@ class LoginController extends RoloxGetXController {
                     height: 25,
                   ),
                   CustomText(
-                    text: '${Languages
-                        .of(Get.context!)
-                        ?.resendIN} 0:45',
-                    style: Theme
-                        .of(Get.context!)
+                    text: '${Languages.of(Get.context!)?.resendIN} 0:45',
+                    style: Theme.of(Get.context!)
                         .textTheme
                         .titleSmall!
                         .copyWith(
-                        color: ColorResource.colorFFFFFF,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
+                            color: ColorResource.colorFFFFFF,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400),
                   ),
                 ],
               ),
@@ -284,5 +248,4 @@ class LoginController extends RoloxGetXController {
           );
         });
   }
-
 }

@@ -42,7 +42,7 @@ class PrimaryButton extends StatefulWidget {
       this.font = Font.poppinsRegular,
       this.textAlign = TextAlign.left,
       this.onTap,
-      this.textColor = ColorResource.color0D0D0D,
+      this.textColor = ColorResource.buttonTextColor,
       this.fontSize = FontSize.fourteen,
       this.isUnderLine = false,
       this.isLeading = false,
@@ -78,10 +78,10 @@ class _PrimaryButtonState extends State<PrimaryButton> {
         child: Container(
           decoration: BoxDecoration(
               border: Border(
-                bottom: BorderSide(color: Colors.white, width: 2),
-                right: BorderSide(color: Colors.white, width: 2),
+                bottom: BorderSide(color: ColorResource.buttonColor, width: 2),
+                right: BorderSide(color: ColorResource.buttonColor, width: 2),
               ),
-              color: ColorResource.color00E94F),
+              color: ColorResource.buttonColor),
           padding: const EdgeInsets.all(0.0),
           child: Flex(
             direction: widget.axis,
@@ -110,6 +110,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                     ImageResource.buttonArrow,
                     width: 20,
                     height: 10,
+                    color: ColorResource.buttonTextColor,
                   ),
                 ),
               if (widget.isTrailing) widget.trailingWidget

@@ -51,6 +51,7 @@ class _IndividualProfileScreenLargeState
                   height: 30,
                 ),
               ),
+              automaticallyImplyLeading: false,
               shadowColor: Colors.grey,
               elevation: 0.0),
           body: Center(
@@ -59,7 +60,7 @@ class _IndividualProfileScreenLargeState
               height: MediaQuery.of(context).size.height / 1.2,
               padding: EdgeInsets.all(12),
               decoration: BoxDecoration(
-                  color: ColorResource.color1B2023,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                   borderRadius: BorderRadius.all(Radius.circular(24))),
               alignment: Alignment.topLeft,
               child: ListView(
@@ -67,7 +68,7 @@ class _IndividualProfileScreenLargeState
                 // physics: NeverScrollableScrollPhysics(),
                 children: [
                   AppBar(
-                    backgroundColor: ColorResource.color1B2023,
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                     leading: GestureDetector(
                       onTap: () {
                         Get.back();
@@ -75,7 +76,6 @@ class _IndividualProfileScreenLargeState
                       child: Icon(
                         Icons.arrow_back_sharp,
                         size: 30,
-                        color: Colors.white,
                       ),
                     ),
                     centerTitle: false,
@@ -83,9 +83,7 @@ class _IndividualProfileScreenLargeState
                         text:
                             '${Languages.of(context)?.profile} ${Languages.of(context)?.page} ',
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: ColorResource.colorFFFFFF,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600),
+                            fontSize: 20, fontWeight: FontWeight.w600),
                         children: <InlineSpan>[
                           TextSpan(
                             text: '(${Languages.of(context)?.individual})',
@@ -93,9 +91,7 @@ class _IndividualProfileScreenLargeState
                                 .textTheme
                                 .titleSmall!
                                 .copyWith(
-                                    color: ColorResource.color00E94F,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600),
+                                    fontSize: 20, fontWeight: FontWeight.w600),
                           )
                         ])),
                     shadowColor: Colors.grey,
@@ -109,9 +105,9 @@ class _IndividualProfileScreenLargeState
                       width: MediaQuery.of(context).size.width / 5,
                       currentStep:
                           widget.controller!.currentStep.obs.value.value,
-                      stepCompleteColor: Colors.blue,
-                      currentStepColor: Color(0xffdbecff),
-                      inactiveColor: Color(0xffbababa),
+                      stepCompleteColor: ColorResource.red,
+                      currentStepColor: ColorResource.stepperColor,
+                      inactiveColor: ColorResource.stepperLineColor,
                       lineWidth: 1,
                     ),
                   ),
@@ -133,7 +129,6 @@ class _IndividualProfileScreenLargeState
                       context,
                       cardShape: 1,
                       isIcon: true,
-                      textColor: ColorResource.black,
                       fontSize: 20,
                       onTap: () {
                         if (widget.controller!.form.currentState!.validate()) {
@@ -166,13 +161,14 @@ class _IndividualProfileScreenLargeState
       shrinkWrap: true,
       children: [
         SizedBox(height: 30),
-        Center(
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: CustomText(
             text: '${Languages.of(context)?.profileScreenFreeContent}',
-            style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                color: ColorResource.colorFFFFFF,
-                fontSize: 16,
-                fontWeight: FontWeight.w400),
+            style: Theme.of(context)
+                .textTheme
+                .titleSmall!
+                .copyWith(fontSize: 16, fontWeight: FontWeight.w400),
           ),
         ),
         SizedBox(height: 20),
@@ -183,25 +179,35 @@ class _IndividualProfileScreenLargeState
               height: 120,
               width: 120,
               decoration: BoxDecoration(
-                  color: ColorResource.black,
+                  color: ColorResource.photoBackgroundColor,
                   borderRadius: BorderRadius.circular(60)),
               child: Stack(children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 30),
+                  child: Image.asset(
+                    ImageResource.contactAddIcon,
+                    height: 300,
+                    width: 300,
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                  ),
+                ),
                 Center(
-                    child: Image.asset(
-                  ImageResource.contactAddIcon,
-                )),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(ImageResource.addPhotoIcon,
-                        height: 30, width: 30),
-                    SizedBox(height: 10),
-                    Text(
-                      Languages.of(context)!.addProfilePhoto,
-                      style: TextStyle(color: Colors.white),
-                      textAlign: TextAlign.center,
-                    )
-                  ],
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(ImageResource.addPhotoIcon,
+                          color: Theme.of(context).textTheme.titleMedium!.color,
+                          height: 30,
+                          width: 30),
+                      SizedBox(height: 10),
+                      CustomText(
+                        text: '${Languages.of(context)?.addProfilePhoto}',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                            fontSize: 12, fontWeight: FontWeight.w500),
+                      ),
+                    ],
+                  ),
                 ),
               ]),
             ),
@@ -211,14 +217,13 @@ class _IndividualProfileScreenLargeState
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-              mainAxisSize: MainAxisSize.min,
+              // mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // mode of work
                 WidgetUtils.dropDown(
                     context: context,
-                    lableName:
-                        '${Languages.of(context)?.modelOfWork}'.toLowerCase(),
+                    lableName: '${Languages.of(context)?.modeOfWork}',
                     dropDownList: widget.controller!.modelOfWork.obs.value,
                     selectedValues: widget.controller!.modelOfWorkValue.value,
                     onChanged: (value) {
@@ -251,11 +256,8 @@ class _IndividualProfileScreenLargeState
                     labelName: '${Languages.of(context)?.plsIfSpecify}',
                     labelStyle: Theme.of(context)
                         .textTheme
-                        .titleSmall!
-                        .copyWith(
-                            color: ColorResource.colorE08AF4,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500),
+                        .titleMedium!
+                        .copyWith(fontSize: 14, fontWeight: FontWeight.w500),
                   ),
                 // nature of work
                 WidgetUtils.dropDown(
@@ -269,7 +271,8 @@ class _IndividualProfileScreenLargeState
                           variableName: widget.controller!.natureOfWorkValue);
                     }),
                 SizedBox(height: 10),
-                if (widget.controller!.natureOfWorkValue.value == 'other')
+                if (widget.controller!.natureOfWorkValue.value.toLowerCase() ==
+                    'other')
                   WidgetUtils.genericTextFiled(
                     context: context,
                     validationRules: ['required'],
@@ -279,32 +282,29 @@ class _IndividualProfileScreenLargeState
                     labelStyle: Theme.of(context)
                         .textTheme
                         .titleSmall!
-                        .copyWith(
-                            color: ColorResource.colorE08AF4,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500),
+                        .copyWith(fontSize: 14, fontWeight: FontWeight.w500),
                   ),
                 // mobile no
                 CustomText(
                   text: '${Languages.of(context)?.mobileNumber}',
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: ColorResource.colorE08AF4,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium!
+                      .copyWith(fontSize: 14, fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(height: 5),
                 SizedBox(
                   child: CustomTextField(
                     widget.controller!.mobilNumberController.obs.value,
                     focusedBorder: Colors.grey,
-                    textColor: Colors.white,
+                    validatorCallBack: (bool value) {},
                     enableColor: Colors.grey,
                     borderColor: Colors.red,
+                    validationRules: ['required', 'mobile_number'],
                     disableColor: Colors.red,
                     keyBoardType: TextInputType.phone,
-                    validationRules: ['required'],
                     prefixIcon: Container(
-                      width: 100,
+                      width: 120,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
@@ -316,12 +316,11 @@ class _IndividualProfileScreenLargeState
                                   // Splash color
                                   onTap: () {},
                                   child: SizedBox(
-                                    width: 22,
-                                    height: 22,
+                                    width: 32,
+                                    height: 32,
                                     child: Image.network(
-                                      'https://think360studio-media.s3.ap-south-1.amazonaws.com/download/india-flag-2021-wallpaper-1.png',
-                                      fit: BoxFit.fill,
-                                    ),
+                                        'https://cdn.pixabay.com/photo/2020/07/04/08/24/india-5368684__340.jpg',
+                                        fit: BoxFit.cover),
                                   ),
                                 ),
                               ),
@@ -331,7 +330,7 @@ class _IndividualProfileScreenLargeState
                               text: '+91',
                               style: Theme.of(context)
                                   .textTheme
-                                  .titleSmall!
+                                  .titleMedium!
                                   .copyWith(
                                       color: Theme.of(context)
                                           .textTheme
@@ -348,13 +347,10 @@ class _IndividualProfileScreenLargeState
                                   .titleMedium!
                                   .color,
                             ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Container(
-                              width: 0.40,
-                              height: 20,
-                              color: ColorResource.colorDDDDDD,
+                            VerticalDivider(
+                              thickness: 1,
+                              indent: 15,
+                              endIndent: 15,
                             )
                           ],
                         ),
@@ -378,10 +374,10 @@ class _IndividualProfileScreenLargeState
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             CustomText(
               text: '${Languages.of(context)?.profileSecondPageContent}',
-              style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ColorResource.colorFFFFFF,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400),
+              style: Theme.of(context)
+                  .textTheme
+                  .titleSmall!
+                  .copyWith(fontSize: 16, fontWeight: FontWeight.w400),
             ),
             SizedBox(height: 20),
             // PAN No
@@ -390,10 +386,10 @@ class _IndividualProfileScreenLargeState
               validationRules: ['required'],
               controller: widget.controller!.panNumberController,
               labelName: '${Languages.of(context)?.panNumber}',
-              labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ColorResource.colorE08AF4,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500),
+              labelStyle: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(fontSize: 14, fontWeight: FontWeight.w500),
             ),
             // I have GST no
             ListTile(
@@ -402,12 +398,13 @@ class _IndividualProfileScreenLargeState
               dense: true,
               leading: Theme(
                 data: Theme.of(context).copyWith(
-                  unselectedWidgetColor: ColorResource.color00E94F,
+                  unselectedWidgetColor:
+                      Theme.of(context).unselectedWidgetColor,
                 ),
                 child: Checkbox(
                   value: widget.controller!.iDontHaveBusiness.obs.value.value,
-                  activeColor: Colors.blue,
-                  checkColor: ColorResource.color151515,
+                  activeColor: Theme.of(context).primaryColor,
+                  checkColor: Theme.of(context).scaffoldBackgroundColor,
                   onChanged: (value) {
                     widget.controller!.noBusinessCheckBox(values: value);
                   },
@@ -415,10 +412,10 @@ class _IndividualProfileScreenLargeState
               ),
               title: CustomText(
                 text: '${Languages.of(context)?.iHaveAGSTNumber}',
-                style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: ColorResource.colorFFFFFF,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall!
+                    .copyWith(fontSize: 16, fontWeight: FontWeight.w400),
               ),
             ),
             WidgetUtils.genericTextFiled(
@@ -426,24 +423,25 @@ class _IndividualProfileScreenLargeState
               validationRules: ['required'],
               controller: widget.controller!.gstController,
               labelName: '${Languages.of(context)?.gstNumber}',
-              labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ColorResource.colorE08AF4,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500),
+              labelStyle: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(fontSize: 14, fontWeight: FontWeight.w500),
             ),
             SizedBox(height: 5),
             // Full Address
             WidgetUtils.genericTextFiled(
+              height: 150,
               context: context,
               maxLines: 20,
               minLines: 10,
               validationRules: ['required'],
               controller: widget.controller!.addressController,
               labelName: '${Languages.of(context)?.fullAddress}',
-              labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ColorResource.colorE08AF4,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500),
+              labelStyle: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(fontSize: 14, fontWeight: FontWeight.w500),
             ),
             SizedBox(height: 5),
             // PinCode
@@ -452,10 +450,10 @@ class _IndividualProfileScreenLargeState
                 validationRules: ['required'],
                 controller: widget.controller!.pincodeController,
                 labelName: '${Languages.of(context)?.pincode}',
-                labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: ColorResource.colorE08AF4,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500),
+                labelStyle: Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .copyWith(fontSize: 14, fontWeight: FontWeight.w500),
                 keyBoardType: TextInputType.number),
             SizedBox(height: 5),
             // type of address

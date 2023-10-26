@@ -42,7 +42,6 @@ class CustomTextField extends StatefulWidget {
   int? minLines;
   void Function(String)? onChanged;
 
-
   CustomTextField(this.controller,
       {super.key,
       this.hintText,
@@ -54,11 +53,11 @@ class CustomTextField extends StatefulWidget {
       this.isReadOnly = false,
       this.maximumWordCount,
       this.titleColor,
-      this.textColor = ColorResource.colorFFFFFF,
-      this.borderColor = Colors.grey,
-      this.enableColor = Colors.grey,
-      this.disableColor = Colors.grey,
-      this.focusedBorder = Colors.grey,
+      this.textColor = ColorResource.textColor,
+      this.borderColor = ColorResource.backgroundColor,
+      this.enableColor = ColorResource.backgroundColor,
+      this.disableColor = ColorResource.backgroundColor,
+      this.focusedBorder = ColorResource.backgroundColor,
       this.isHighlighted = false,
       this.highlightColor,
       this.focusNode,
@@ -156,7 +155,7 @@ class CustomTextFieldState extends State<CustomTextField> {
       decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.never,
         prefix: widget.prefixWidget,
-        fillColor: ColorResource.color151515,
+        fillColor: ColorResource.buttonTextColor,
         filled: true,
         labelText: widget.hintText,
         hintText: widget.hintText,
@@ -169,7 +168,7 @@ class CustomTextFieldState extends State<CustomTextField> {
         prefixIcon: widget.prefixIcon,
         hintStyle: widget.hintStyle ??
             TextStyle(
-                color: ColorResource.color0D0D0D,
+                color: ColorResource.hintTextColor,
                 fontFamily: 'Poppins-Medium',
                 fontWeight: FontWeight.w400,
                 fontStyle: FontStyle.normal,
@@ -180,8 +179,8 @@ class CustomTextFieldState extends State<CustomTextField> {
                 .textTheme
                 .subtitle1!
                 .copyWith(color: Colors.red, height: 0.5),
-        counterStyle: const TextStyle(
-            color: ColorResource.colorFFFFFF,
+        counterStyle: TextStyle(
+            color: ColorResource.hintTextColor,
             fontFamily: 'Poppins-Medium',
             fontWeight: FontWeight.normal,
             fontStyle: FontStyle.normal,
@@ -191,7 +190,9 @@ class CustomTextFieldState extends State<CustomTextField> {
         labelStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
             color: (widget.focusNode != null && widget.focusNode!.hasFocus)
                 ? ColorResource.colorF58220
-                : ColorResource.colorFFFFFF.withOpacity(0.4)),
+                : ColorResource.hintTextColor.withOpacity(0.4),
+            fontSize: 14,
+            fontWeight: FontWeight.w400),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(color: widget.focusedBorder!, width: 0.25),

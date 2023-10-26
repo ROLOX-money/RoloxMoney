@@ -3,6 +3,53 @@ import 'package:flutter/material.dart';
 /*Chinnadurai Viswanathan*/
 
 class ColorResource {
+  static const Color primaryColor = Color(0xffEC008C);
+  static const Color textColor = Color(0xff181B28);
+  static const Color buttonColor = Color(0xff000000);
+  static const Color buttonTextColor = Color(0xffFFFFFF);
+  static const Color backgroundColor = Color(0xffE8E8E8);
+  static const Color dividerColor = Color(0xffA9A9A9);
+  static const Color textSecondaryColor = Color(0xff60616B);
+  static const Color hintTextColor = Color(0xffA0A1A9);
+  static const Color borderColor = Color(0xff333333);
+  static const Color closeIconColor = Color(0xffAAAAAA);
+  static const Color stepperColor = Color(0xffF58220);
+  static const Color stepperLineColor = Color(0xffE2E2E2);
+  static const Color photoBackgroundColor = Color(0xffF5F5F5);
+
+  static List<BoxShadow> boxShadow = [
+    BoxShadow(
+        color: Color(0xffF2F2F2).withOpacity(0.50),
+        blurRadius: 3,
+        spreadRadius: 0,
+        offset: Offset(1, 1)),
+    BoxShadow(
+        color: Color(0xffF2F2F2).withOpacity(0.30),
+        blurRadius: 2,
+        spreadRadius: 0,
+        offset: Offset(-1, -1)),
+    BoxShadow(
+        color: Color(0xff6868F2).withOpacity(0.13),
+        blurRadius: 2,
+        spreadRadius: 0,
+        offset: Offset(1, -1)),
+    BoxShadow(
+        color: Color(0xffF2F2F2).withOpacity(0.20),
+        blurRadius: 2,
+        spreadRadius: 0,
+        offset: Offset(-1, 1)),
+    BoxShadow(
+        color: Color(0xffF2F2F2).withOpacity(0.50),
+        blurRadius: 2,
+        spreadRadius: 0,
+        offset: Offset(-1, -1)),
+    BoxShadow(
+        color: Color(0xffD8D8D8).withOpacity(0.50),
+        blurRadius: 2,
+        spreadRadius: 0,
+        offset: Offset(1, 1)),
+  ];
+
   //welcome screen
   static const Color colorF58220 = Color(0xffF58220);
   static const Color color020e36 = Color(0xff020e36);
@@ -36,7 +83,7 @@ class ColorResource {
   static const Color black = Color(0xff222222);
   static const Color backgroundPatchGrey = Color.fromRGBO(248, 248, 250, 0.8);
   static const Color red = Color(0xffF92538);
-  static  Shader linearGradient = LinearGradient(
+  static Shader linearGradient = LinearGradient(
     colors: <Color>[
       Color(0xff5F8CFF),
       Color(0xffA689FF),
@@ -46,6 +93,13 @@ class ColorResource {
       Color(0xff00EC2D)
     ],
   ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
+  static Shader newLinearGradient = LinearGradient(
+    colors: <Color>[
+      Color(0xffF58220),
+      Color(0xffFDB714),
+      Color(0xffEC008C),
+    ],
+  ).createShader(Rect.fromLTWH(0.0, 0.0, 0.0, 0.0));
 }
 
 //#E08AF4

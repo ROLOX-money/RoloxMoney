@@ -134,22 +134,26 @@ ThemeData lightThemeBase = ThemeData.light();
 ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     visualDensity: const VisualDensity(vertical: 0.5, horizontal: 0.5),
-    primaryColor: const Color(0xffEDD5B3),
+    primaryColor: ColorResource.primaryColor,
     primaryColorLight: const Color(0x1aF5E0C3),
     primaryColorDark: const Color(0xff936F3E),
     canvasColor: const Color(0xffE09E45),
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: ColorResource.buttonTextColor,
+    unselectedWidgetColor: ColorResource.primaryColor,
     bottomAppBarColor: const Color(0xff6D42CE),
-    backgroundColor: Colors.black,
+    backgroundColor: ColorResource.backgroundColor,
+    buttonTheme: ButtonThemeData(
+        buttonColor: ColorResource.buttonColor,
+        textTheme: ButtonTextTheme.primary),
     // buttonColor: const Color(0xff00E94F,
     cardColor: const Color(0xaaF5E0C3),
-    dividerColor: const Color(0x1f6D42CE),
-    focusColor: const Color(0x1aF5E0C3),
+    dividerColor: ColorResource.dividerColor,
+    focusColor: ColorResource.primaryColor,
     textTheme: AppThemes().basicTextTheme(lightThemeBase.textTheme).copyWith(
           subtitle1: lightThemeBase.textTheme.subtitle1!.copyWith(
               fontFamily: 'Poppins-Medium',
               fontSize: 16.0,
-              color: Colors.white,
+              color: ColorResource.textColor,
               fontWeight: FontWeight.w400),
           // titleLarge: lightThemeBase.textTheme.subtitle1!.copyWith(
           //     fontFamily: 'Poppins-Medium',
@@ -159,7 +163,7 @@ ThemeData lightTheme = ThemeData(
           button: lightThemeBase.textTheme.button!.copyWith(
               fontFamily: 'Poppins-Medium',
               fontSize: 16.0,
-              color: Colors.white,
+              color: ColorResource.textColor,
               fontWeight: FontWeight.w400),
         ),
     colorScheme: ColorScheme.fromSwatch(

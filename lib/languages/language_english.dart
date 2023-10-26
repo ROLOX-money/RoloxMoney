@@ -3,7 +3,7 @@ import 'package:roloxmoney/languages/app_languages.dart';
 
 class LanguageEn extends Languages {
   @override
-  String get appName => 'Rolox Money';
+  String get appName => 'Means Money';
 
   String get notAMember => 'Not a member';
 
@@ -89,9 +89,9 @@ class LanguageEn extends Languages {
 
   String get businessName => 'Business Name';
 
-  String get welcomeToRolox => 'Welcome to rolox!';
+  String get welcomeToRolox => 'Welcome to Means!';
 
-  String get welcomeNote => 'Manage your business \nwith';
+  String get welcomeNote => 'Manage your business with';
 
   String get professionalInvoice => 'professional invoices';
 
@@ -180,7 +180,7 @@ class LanguageEn extends Languages {
 
   String get agree => 'I agree to the ';
 
-  String get roloxTermsAndCondition => 'Rolox Terms & Conditions';
+  String get roloxTermsAndCondition => 'Means Terms & Conditions';
 
   String get fullName => 'Full Name';
 
@@ -204,9 +204,11 @@ class LanguageEn extends Languages {
 
   String get congratulations => 'Congratulations!';
 
-  String get accountCreatedSuccessfully => 'Your Rolox account has been created successfully';
+  String get accountCreatedSuccessfully =>
+      'Your Means account has been created successfully';
 
-  String get accountCreatedScreenContent => 'Banking for Creators, Influencers, Freelancers, Gig, Solopreneurs, Small Business, Brands, Agencies';
+  String get accountCreatedScreenContent =>
+      'Invoice & Payments for Creators, Influencers,\n Freelancers, Gig, Solopreneurs, Agencies, Media,\n Brands, Startups, Small Business';
 
   String get letsExplore => 'Lets Explore';
 
@@ -216,7 +218,8 @@ class LanguageEn extends Languages {
 
   String get plsIfSpecify => 'Pls Specify if others';
 
-  String get profileSecondPageContent => 'Please share a bit about your setup to get your dashboard up and running!';
+  String get profileSecondPageContent =>
+      'Please share a bit about your setup to get your dashboard up and running!';
 
   String get accountBalance => 'Account Balance';
 
@@ -277,17 +280,13 @@ class LanguageEn extends Languages {
 
   String get accountIfscHintText => 'Your account\'s IFSC code';
 
-  String get addProfilePhoto => 'ADD PROFILE PHOTO';
+  String get addProfilePhoto => 'ADD PROFILE\n PHOTO';
 
-  String get rolox => 'ROLOX';
+  String get rolox => 'Means';
 
   String get darkMode => 'Dark Mode';
 
   String get projectLink => "Project Link";
 
   String get projectLinkHint => "Enter your Project Link Here";
-
-
-
-
 }
