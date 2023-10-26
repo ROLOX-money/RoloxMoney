@@ -146,14 +146,14 @@ class CustomTextFieldState extends State<CustomTextField> {
       keyboardType: widget.keyBoardType,
       cursorHeight: 20,
       focusNode: widget.focusNode,
-      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+      style: Theme.of(context).textTheme.titleMedium!.copyWith(
           color: (widget.focusNode != null && widget.focusNode!.hasFocus)
               ? widget.focusTextColor
               : widget.textColor),
       decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.never,
         prefix: widget.prefixWidget,
-        fillColor: ColorResource.color151515,
+        fillColor: Colors.white,
         filled: true,
         labelText: widget.hintText,
         hintText: widget.hintText,
@@ -166,7 +166,7 @@ class CustomTextFieldState extends State<CustomTextField> {
         prefixIcon: widget.prefixIcon,
         hintStyle: widget.hintStyle ??
             TextStyle(
-                color: ColorResource.color0D0D0D,
+                color: Colors.black,
                 fontFamily: 'Poppins-Medium',
                 fontWeight: FontWeight.w400,
                 fontStyle: FontStyle.normal,
@@ -175,20 +175,20 @@ class CustomTextFieldState extends State<CustomTextField> {
         errorStyle: widget.errorStyle ??
             Theme.of(context)
                 .textTheme
-                .subtitle1!
+                .titleMedium!
                 .copyWith(color: Colors.red, height: 0.5),
         counterStyle: const TextStyle(
-            color: ColorResource.colorFFFFFF,
+            color: Colors.black,
             fontFamily: 'Poppins-Medium',
             fontWeight: FontWeight.normal,
             fontStyle: FontStyle.normal,
             height: 1,
             fontSize: 12),
         // errorText: validatePassword(widget.controller.text.trim()),
-        labelStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
+        labelStyle: Theme.of(context).textTheme.displayMedium!.copyWith(
             color: (widget.focusNode != null && widget.focusNode!.hasFocus)
-                ? ColorResource.colorF58220
-                : ColorResource.colorFFFFFF.withOpacity(0.4)),
+                ? Colors.black
+                : Colors.black.withOpacity(0.4)),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(color: widget.focusedBorder!, width: 0.25),
