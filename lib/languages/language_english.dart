@@ -87,7 +87,7 @@ class LanguageEn extends Languages {
 
   String get businessName => 'Business Name';
 
-  String get welcomeToRolox => 'Welcome to rolox!';
+  String get welcomeToMean => 'Welcome to Means!';
 
   String get welcomeNote => 'Manage your business with';
 

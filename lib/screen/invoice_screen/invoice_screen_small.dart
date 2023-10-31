@@ -63,7 +63,7 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                     .textTheme
                                     .titleSmall!
                                     .copyWith(
-                                        color: ColorResource.colorE08AF4,
+                                        color: ColorResource.colorEC008C,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500),
                               ),
@@ -127,7 +127,7 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                         .textTheme
                                         .bodyText1!
                                         .copyWith(
-                                            color: ColorResource.colorE08AF4,
+                                            color: ColorResource.colorEC008C,
                                             fontWeight: FontWeight.w700),
                                   ),
                                 ),
