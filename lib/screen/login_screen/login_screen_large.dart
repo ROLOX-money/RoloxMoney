@@ -54,9 +54,9 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                   Padding(
                     padding: const EdgeInsets.only(top: 100, bottom: 10),
                     child: CustomText(
-                      text: '${Languages.of(context)?.welcomeToRolox}',
+                      text: '${Languages.of(context)?.welcomeToMean}',
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: ColorResource.colorE08AF4,
+                          color: ColorResource.colorEC008C,
                           fontWeight: FontWeight.w500),
                     ),
                   ),
@@ -115,7 +115,7 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                                 .textTheme
                                 .titleMedium!
                                 .copyWith(
-                                    color: ColorResource.colorE08AF4,
+                                    color: ColorResource.colorEC008C,
                                     fontWeight: FontWeight.w500),
                           ),
                         ),
@@ -353,7 +353,7 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                     CustomText(
                       text: '$mobileNumber',
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: ColorResource.colorE08AF4,
+                          color: ColorResource.colorEC008C,
                           fontSize: 14,
                           fontWeight: FontWeight.w400),
                     ),

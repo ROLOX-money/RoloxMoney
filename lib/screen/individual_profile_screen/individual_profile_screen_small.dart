@@ -241,7 +241,7 @@ class IndividualProfileScreenSmallState
                           .textTheme
                           .titleSmall!
                           .copyWith(
-                              color: ColorResource.colorE08AF4,
+                              color: ColorResource.colorEC008C,
                               fontSize: 14,
                               fontWeight: FontWeight.w500),
                     ),
@@ -271,7 +271,7 @@ class IndividualProfileScreenSmallState
                           .textTheme
                           .titleSmall!
                           .copyWith(
-                              color: ColorResource.colorE08AF4,
+                              color: ColorResource.colorEC008C,
                               fontSize: 14,
                               fontWeight: FontWeight.w500),
                     ),
@@ -279,7 +279,7 @@ class IndividualProfileScreenSmallState
                   CustomText(
                     text: '${Languages.of(context)?.mobileNumber}',
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: ColorResource.colorE08AF4,
+                        color: ColorResource.colorEC008C,
                         fontSize: 14,
                         fontWeight: FontWeight.w500),
                   ),
@@ -385,7 +385,7 @@ class IndividualProfileScreenSmallState
               controller: widget.controller!.panNumberController,
               labelName: '${Languages.of(context)?.panNumber}',
               labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ColorResource.colorE08AF4,
+                  color: ColorResource.colorEC008C,
                   fontSize: 14,
                   fontWeight: FontWeight.w500),
             ),
@@ -421,7 +421,7 @@ class IndividualProfileScreenSmallState
               controller: widget.controller!.gstController,
               labelName: '${Languages.of(context)?.gstNumber}',
               labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ColorResource.colorE08AF4,
+                  color: ColorResource.colorEC008C,
                   fontSize: 14,
                   fontWeight: FontWeight.w500),
             ),
@@ -435,7 +435,7 @@ class IndividualProfileScreenSmallState
               controller: widget.controller!.addressController,
               labelName: '${Languages.of(context)?.fullAddress}',
               labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ColorResource.colorE08AF4,
+                  color: ColorResource.colorEC008C,
                   fontSize: 14,
                   fontWeight: FontWeight.w500),
             ),
@@ -447,7 +447,7 @@ class IndividualProfileScreenSmallState
                 controller: widget.controller!.pincodeController,
                 labelName: '${Languages.of(context)?.pincode}',
                 labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: ColorResource.colorE08AF4,
+                    color: ColorResource.colorEC008C,
                     fontSize: 14,
                     fontWeight: FontWeight.w500),
                 keyBoardType: TextInputType.number),

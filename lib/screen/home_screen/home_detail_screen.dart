@@ -198,7 +198,7 @@ class _HomeScreenDetailState extends State<HomeScreenDetail> {
                                             .bodyText1!
                                             .copyWith(
                                                 color:
-                                                    ColorResource.colorE08AF4,
+                                                    ColorResource.colorEC008C,
                                                 fontWeight: FontWeight.w700),
                                       ),
                                     ),

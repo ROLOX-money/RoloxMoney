@@ -157,7 +157,7 @@ class BusinessProfileScreenSmallState
                                                 .titleSmall!
                                                 .copyWith(
                                                     color: ColorResource
-                                                        .colorE08AF4,
+                                                        .colorEC008C,
                                                     fontSize: 14,
                                                     fontWeight:
                                                         FontWeight.w600),
@@ -322,7 +322,7 @@ class BusinessProfileScreenSmallState
                                             .titleSmall!
                                             .copyWith(
                                                 color:
-                                                    ColorResource.colorE08AF4,
+                                                    ColorResource.colorEC008C,
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w500),
                                       ),
@@ -357,7 +357,7 @@ class BusinessProfileScreenSmallState
                                           .textTheme
                                           .titleSmall!
                                           .copyWith(
-                                              color: ColorResource.colorE08AF4,
+                                              color: ColorResource.colorEC008C,
                                               fontSize: 14,
                                               fontWeight: FontWeight.w500),
                                     ),
@@ -390,7 +390,7 @@ class BusinessProfileScreenSmallState
                                           .textTheme
                                           .titleSmall!
                                           .copyWith(
-                                              color: ColorResource.colorE08AF4,
+                                              color: ColorResource.colorEC008C,
                                               fontSize: 14,
                                               fontWeight: FontWeight.w500),
                                     ),
@@ -460,7 +460,7 @@ class BusinessProfileScreenSmallState
                                         .textTheme
                                         .titleSmall!
                                         .copyWith(
-                                        color: ColorResource.colorE08AF4,
+                                        color: ColorResource.colorEC008C,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500),
 
@@ -549,7 +549,7 @@ class BusinessProfileScreenSmallState
                                         .textTheme
                                         .titleSmall!
                                         .copyWith(
-                                            color: ColorResource.colorE08AF4,
+                                            color: ColorResource.colorEC008C,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w500),
                                   ),

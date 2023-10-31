@@ -217,7 +217,6 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                                 ..onTap = () {
                                   debugPrint(
                                       "onTap of Terms and condition screen");
-
                                   ///fixme
                                   // need to navigate the terms and condition Screen
                                 },

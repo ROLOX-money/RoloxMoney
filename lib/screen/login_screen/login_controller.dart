@@ -88,13 +88,14 @@ class LoginController extends RoloxGetXController with SupaBaseController {
 
   Future<void> triggerLogin() async {
     change(null, status: RxStatus.loading());
-    await SupaBaseController.sendSignInCode(
+    /*await SupaBaseController.sendSignInCode(
             mobileNumber: '+91${mobilNumberController.text}')
         .then((value) {
       if (value) {
         otpBottomSheet(mobileNumber: '${mobilNumberController.text}');
       }
-    });
+    });*/
+    otpBottomSheet(mobileNumber: '${mobilNumberController.text}');
     change(null, status: RxStatus.success());
   }
 
@@ -175,7 +176,7 @@ class LoginController extends RoloxGetXController with SupaBaseController {
                               .textTheme
                               .titleSmall!
                               .copyWith(
-                                  color: ColorResource.colorE08AF4,
+                                  color: ColorResource.colorEC008C,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400),
                         ),

@@ -41,6 +41,7 @@ class ImageResource {
   static const String addPhotoIcon = 'assets/png/add_photo_icon.png';
   static const String paidIcon = 'assets/png/paid.png';
   static const String welcomePNG = 'assets/png/welcome.png';
+  static const String meansPNG = 'assets/png/means.png';
   static const String welcome = 'assets/svg/welcome.svg';
   static const String means = 'assets/svg/means.svg';
 }

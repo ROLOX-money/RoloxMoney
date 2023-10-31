@@ -168,7 +168,7 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                       .textTheme
                                       .titleSmall!
                                       .copyWith(
-                                          color: ColorResource.colorE08AF4,
+                                          color: ColorResource.colorEC008C,
                                           fontWeight: FontWeight.w500),
                                 ),
                                 const SizedBox(height: 5),

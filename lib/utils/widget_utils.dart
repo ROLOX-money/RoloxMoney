@@ -34,7 +34,7 @@ abstract class WidgetUtils {
           text: labelName,
           style: labelStyle ??
               Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ColorResource.colorE08AF4,
+                  color: ColorResource.colorEC008C,
                   fontWeight: FontWeight.w500),
         ),
         const SizedBox(
@@ -80,7 +80,7 @@ abstract class WidgetUtils {
         CustomText(
           text: lableName,
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
-              color: ColorResource.colorE08AF4,
+              color: ColorResource.colorEC008C,
               fontSize: 14,
               fontWeight: FontWeight.w500),
         ),
@@ -100,7 +100,7 @@ abstract class WidgetUtils {
             child: DropdownButton<String>(
               value: selectedValues,
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ColorResource.colorE08AF4,
+                  color: ColorResource.colorEC008C,
                   fontSize: 18,
                   fontWeight: FontWeight.w500),
               borderRadius: BorderRadius.all(
@@ -188,7 +188,7 @@ abstract class WidgetUtils {
                   CustomText(
                     text: '${Languages.of(context)?.oopsAgency}',
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: ColorResource.colorE08AF4,
+                        color: ColorResource.colorEC008C,
                         fontSize: 16,
                         fontWeight: FontWeight.w500),
                   ),
@@ -242,7 +242,7 @@ abstract class WidgetUtils {
         CustomText(
           text: labelName,
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
-              color: ColorResource.colorE08AF4, fontWeight: FontWeight.w500),
+              color: ColorResource.colorEC008C, fontWeight: FontWeight.w500),
         ),
         const SizedBox(
           height: 5,

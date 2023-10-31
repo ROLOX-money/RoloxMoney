@@ -61,7 +61,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                   .textTheme
                                   .titleSmall!
                                   .copyWith(
-                                      color: ColorResource.colorE08AF4,
+                                      color: ColorResource.colorEC008C,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500),
                             ),

@@ -77,10 +77,10 @@ class _PrimaryButtonState extends State<PrimaryButton> {
         height: 56,
         child: Container(
           decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: Colors.white, width: 2),
-                right: BorderSide(color: Colors.white, width: 2),
-              ),
+              // border: Border(
+              //   bottom: BorderSide(color: Colors.white, width: 2),
+              //   right: BorderSide(color: Colors.white, width: 2),
+              // ),
               color: Colors.black),
           padding: const EdgeInsets.all(0.0),
           child: Flex(

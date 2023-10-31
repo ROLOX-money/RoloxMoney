@@ -514,7 +514,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                   text: '${Languages.of(context)?.oopsAgency}',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: ColorResource.colorE08AF4,
+                      color: ColorResource.colorEC008C,
                       fontSize: 16,
                       fontWeight: FontWeight.w500),
                 ),

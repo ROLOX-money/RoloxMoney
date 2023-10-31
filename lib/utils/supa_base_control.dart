@@ -19,11 +19,13 @@ mixin SupaBaseController {
           .signInWithOtp(phone: mobileNumber);
       return true;
     } catch (e) {
+      debugPrint('Exception--> $e');
       try {
         AuthException authException = e as AuthException;
         AppUtils.showErrorSnackBar(Get.context!, authException.message,
             durations: 5000);
       } catch (e) {
+        debugPrint('Exception--> $e');
         AppUtils.showErrorSnackBar(Get.context!,
             'Something went wrong. Please try again after sometime',
             durations: 2000);

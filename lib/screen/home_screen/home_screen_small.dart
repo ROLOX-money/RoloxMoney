@@ -6,6 +6,7 @@ import 'package:roloxmoney/screen/home_screen/home_controller.dart';
 import 'package:roloxmoney/screen/home_screen/home_detail_screen.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
+import 'package:roloxmoney/widget/custom_button.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/rolox_money_widget.dart';
 import 'package:roloxmoney/widget/secondary_button.dart';
@@ -38,7 +39,7 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
     return RoloxMoneyWidgetState(
       rxStatus: widget.controller!.status,
       child: Scaffold(
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.white,
           body: Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Column(
@@ -46,15 +47,15 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
               children: [
                 SizedBox(height: 20),
                 // Account Balance
-                Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey, width: 0.15),
-                      color: ColorResource.color151515),
-                  padding: EdgeInsets.all(15.0),
-                  child: Theme(
-                    data: Theme.of(context).copyWith(
-                        unselectedWidgetColor: Colors.grey,
-                        disabledColor: ColorResource.color00E94F),
+                Card(
+                  // decoration: BoxDecoration(
+                  //     border: Border.all(color: Colors.grey, width: 0.15),
+                  //     color: Colors.white),
+                  // padding: EdgeInsets.all(15.0),
+                  elevation: 10,
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Row(
                       children: [
                         Container(
@@ -73,7 +74,7 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                                   .textTheme
                                   .titleSmall!
                                   .copyWith(
-                                      color: ColorResource.colorFFFFFF,
+                                      color: ColorResource.colorA0A1A9,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w400),
                             ),
@@ -89,7 +90,7 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                                         .textTheme
                                         .titleSmall!
                                         .copyWith(
-                                            color: ColorResource.color00E94F,
+                                            color: ColorResource.color000000,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600),
                                   ),
@@ -111,8 +112,9 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                           child: SecondaryButton(
                             '${Languages.of(context)!.withdraw}',
                             context,
-                            textColor: ColorResource.color00E94F,
-                            fontSize: 20,
+                            backgroundColor: ColorResource.colorF5F5F5,
+                            textColor: ColorResource.color0D0D0D,
+                            fontSize: 16,
                             onTap: () {},
                           ),
                         )
@@ -140,14 +142,14 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                     CustomText(
                       text: '${Languages.of(context)?.allInvoices}',
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: ColorResource.colorFFFFFF,
+                          color: ColorResource.color000000,
                           fontSize: 18,
                           fontWeight: FontWeight.w600),
                     ),
                     SizedBox(width: 10),
                     Icon(
                       Icons.arrow_forward,
-                      color: ColorResource.colorFFFFFF,
+                      color: ColorResource.color000000,
                     ),
                   ]),
                 ),
@@ -163,25 +165,26 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                                   invoiceType: InvoiceType.UPCOMING,
                                 )));
                   },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey, width: 0.15),
+                  child: Card(
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
-                      gradient: LinearGradient(
-                        colors: [
-                          ColorResource.color0093FF,
-                          ColorResource.color151515,
-                        ],
-                        stops: [0.2 / 6, 0.2 / 6],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
                     ),
-                    padding: EdgeInsets.all(15.0),
-                    child: Theme(
-                      data: Theme.of(context).copyWith(
-                          unselectedWidgetColor: Colors.grey,
-                          disabledColor: ColorResource.color00E94F),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey, width: 0.15),
+                          borderRadius: BorderRadius.circular(8),
+                          gradient: LinearGradient(
+                            colors: [
+                              ColorResource.colorEC008C,
+                              ColorResource.colorFFFFFF,
+                            ],
+                            stops: [0.2 / 6, 0.2 / 6],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                          ),
+                          color: ColorResource.colorFFFFFF),
+                      padding: EdgeInsets.all(15.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -194,26 +197,25 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                                       .textTheme
                                       .titleSmall!
                                       .copyWith(
-                                          fontSize: 24,
+                                          fontSize: 17,
                                           fontWeight: FontWeight.w600,
                                           height: 1.5,
-                                          foreground: Paint()
-                                            ..shader =
-                                                ColorResource.linearGradient),
+                                          color: ColorResource.color000000),
                                   children: [
                                     TextSpan(
                                       text:
-                                          '${Languages.of(context)?.inNext1Week}',
+                                          '\n${Languages.of(context)?.inNext1Week}',
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleSmall!
                                           .copyWith(
-                                              color: ColorResource.colorFFFFFF,
-                                              fontSize: 24,
+                                              color: ColorResource.colorA0A1A9,
+                                              height: 1.5,
+                                              fontSize: 15,
                                               fontWeight: FontWeight.w600),
                                     )
                                   ]),
-                              maxLines: 3,
+                              maxLines: 2,
                               softWrap: true,
                               textAlign: TextAlign.center,
                             ),
@@ -230,7 +232,7 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                                     .textTheme
                                     .titleSmall!
                                     .copyWith(
-                                        color: ColorResource.colorFFFFFF,
+                                        color: ColorResource.colorA0A1A9,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600),
                               ),
@@ -250,7 +252,7 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                                     .textTheme
                                     .titleSmall!
                                     .copyWith(
-                                        color: ColorResource.color00E94F,
+                                        color: ColorResource.color000000,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600),
                               ),
@@ -259,8 +261,8 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                                 height: 20,
                                 width: 120,
                                 child: Divider(
-                                  color: ColorResource.color272727,
-                                  thickness: 1.0,
+                                  color: ColorResource.colorA0A1A9,
+                                  thickness: 0.5,
                                 ),
                               ),
                               CustomText(
@@ -270,7 +272,7 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                                     .textTheme
                                     .titleSmall!
                                     .copyWith(
-                                        color: ColorResource.colorFFFFFF,
+                                        color: ColorResource.colorA0A1A9,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600),
                               ),
@@ -282,7 +284,7 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                                     .textTheme
                                     .titleSmall!
                                     .copyWith(
-                                        color: ColorResource.color00E94F,
+                                        color: ColorResource.color000000,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600),
                               ),
@@ -339,87 +341,94 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
   }
 
   Widget paidCardWidget(String title, {bool isPaid = true}) {
-    return Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey, width: 0.15),
-          borderRadius: BorderRadius.circular(8),
-          gradient: LinearGradient(
-            colors: [
-              (title == Languages.of(context)?.paid)
-                  ? ColorResource.color00D1B0
-                  : ColorResource.colorE08AF4,
-              ColorResource.color151515,
-            ],
-            stops: [0.2 / 6, 0.2 / 6],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        padding: EdgeInsets.all(8.0),
-        child: Theme(
-            data: Theme.of(context).copyWith(
-                unselectedWidgetColor: Colors.grey,
-                disabledColor: ColorResource.color00E94F),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(height: 10),
-                CustomText(
-                  text: title,
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                      height: 1.5,
-                      foreground: Paint()
-                        ..shader = ColorResource.linearGradient),
-                ),
-                SizedBox(height: 10),
-                CustomText(
-                  text:
-                      '${Languages.of(context)?.noOf} ${Languages.of(context)?.invoices}',
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: ColorResource.colorFFFFFF,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600),
-                ),
-                SizedBox(height: 10),
-                CustomText(
-                  text:
-                      '${widget.controller!.invoicesList.where((p0) => p0.paid == isPaid).length}',
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: ColorResource.color00E94F,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600),
-                ),
-                SizedBox(height: 10),
-                Container(
-                  height: 20,
-                  width: 120,
-                  child: Divider(
-                    color: ColorResource.color272727,
-                    thickness: 1.0,
-                  ),
-                ),
-                SizedBox(height: 10),
-                CustomText(
-                  text: '${Languages.of(context)?.transactionWorth}',
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: ColorResource.colorFFFFFF,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600),
-                ),
-                SizedBox(height: 10),
-                CustomText(
-                  text:
-                      '₹ ${isPaid ? widget.controller!.paidTransaction.toStringAsFixed(2) : widget.controller!.dueTransaction.toStringAsFixed(2)}',
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: ColorResource.color00E94F,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600),
-                ),
-                SizedBox(height: 10),
+    return Card(
+      elevation: 10,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      // shadowColor:
+      //     isPaid ? ColorResource.color5AB570 : ColorResource.colorF58220,
+      child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey, width: 0.15),
+            borderRadius: BorderRadius.circular(8),
+            gradient: LinearGradient(
+              colors: [
+                (title == Languages.of(context)?.paid)
+                    ? ColorResource.color5AB570
+                    : ColorResource.colorF58220,
+                ColorResource.colorFFFFFF,
               ],
-            )));
+              stops: [0.2 / 6, 0.2 / 6],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          padding: EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(height: 10),
+              CustomText(
+                text: title,
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w600,
+                    height: 1.5,
+                    color: ColorResource.color000000),
+              ),
+              SizedBox(height: 10),
+              CustomText(
+                text:
+                    '${Languages.of(context)?.noOf} ${Languages.of(context)?.invoices}',
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: ColorResource.colorA0A1A9,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600),
+              ),
+              SizedBox(height: 10),
+              CustomText(
+                text:
+                    '${widget.controller!.invoicesList.where((p0) => p0.paid == isPaid).length}',
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: isPaid
+                        ? ColorResource.color000000
+                        : ColorResource.colorF58220,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600),
+              ),
+              SizedBox(height: 10),
+              Container(
+                height: 20,
+                width: 120,
+                child: Divider(
+                  color: ColorResource.colorA0A1A9,
+                  thickness: 0.5,
+                ),
+              ),
+              SizedBox(height: 10),
+              CustomText(
+                text: '${Languages.of(context)?.transactionWorth}',
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: ColorResource.colorA0A1A9,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600),
+              ),
+              SizedBox(height: 10),
+              CustomText(
+                text:
+                    '₹ ${isPaid ? widget.controller!.paidTransaction.toStringAsFixed(2) : widget.controller!.dueTransaction.toStringAsFixed(2)}',
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: isPaid
+                        ? ColorResource.color000000
+                        : ColorResource.colorF58220,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w600),
+              ),
+              SizedBox(height: 10),
+            ],
+          )),
+    );
   }
 
 // switch (Widgets) { // Your Enum Value which you have passed
