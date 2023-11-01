@@ -61,7 +61,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                   .textTheme
                                   .titleSmall!
                                   .copyWith(
-                                      color: ColorResource.colorEC008C,
+                                      color: ColorResource.color000000,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500),
                             ),
@@ -71,9 +71,9 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                               child: SecondaryButton(
                                 '${Languages.of(context)!.addProject}',
                                 context,
-                                backgroundColor: ColorResource.color00E94F,
+                                backgroundColor: ColorResource.color000000,
                                 fontWeight: FontWeight.w500,
-                                textColor: ColorResource.black,
+                                textColor: ColorResource.colorFFFFFF,
                                 fontSize: 14,
                                 onTap: () {
                                   widget.controller!.navigateAddProjectScreen();
@@ -91,7 +91,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                     ? ListView.separated(
                         separatorBuilder: (BuildContext context, int index) =>
                             Divider(
-                                height: 1, color: ColorResource.colorA0BCD0),
+                                height: 1, color: ColorResource.color181B28),
                         itemCount: widget
                             .controller!.projectInvoicesList.obs.value.length,
                         shrinkWrap: true,
@@ -100,7 +100,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                           ProjectModel projectModel = widget
                               .controller!.projectInvoicesList.obs.value[index];
                           return Container(
-                            color: ColorResource.color151515,
+                            color: ColorResource.colorFFFFFF,
                             alignment: Alignment.centerLeft,
                             padding: EdgeInsets.symmetric(vertical: 20),
                             child: ListTile(
@@ -120,7 +120,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                       .toString(),
                                   style: Theme.of(context)
                                       .textTheme
-                                      .bodyText1!
+                                      .titleMedium!
                                       .copyWith(
                                           color: ColorResource.colorA0BCD0,
                                           fontWeight: FontWeight.w700),
@@ -135,8 +135,8 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                         .textTheme
                                         .titleSmall!
                                         .copyWith(
-                                            color: ColorResource.colorFFFFFF,
-                                            fontSize: 16,
+                                            color: ColorResource.color000000,
+                                            fontSize: 15,
                                             fontWeight: FontWeight.w500),
                                   ),
                                   SizedBox(
@@ -158,7 +158,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                             .titleSmall!
                                             .copyWith(
                                                 color:
-                                                    ColorResource.colorA0BCD0,
+                                                    ColorResource.colorA0A1A9,
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w400),
                                       ),
@@ -169,7 +169,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                         height: 5,
                                         width: 5,
                                         decoration: BoxDecoration(
-                                          color: ColorResource.colorA0BCD0,
+                                          color: ColorResource.colorA0A1A9,
                                           borderRadius: BorderRadius.only(
                                               topRight: Radius.circular(40.0),
                                               bottomRight:
@@ -196,7 +196,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                             .titleSmall!
                                             .copyWith(
                                                 color:
-                                                    ColorResource.colorA0BCD0,
+                                                    ColorResource.colorA0A1A9,
                                                 overflow: TextOverflow.fade,
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w400),
@@ -216,7 +216,8 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                       '${Languages.of(context)!.viewMore}',
                                       context,
                                       fontWeight: FontWeight.w500,
-                                      textColor: ColorResource.color00E94F,
+                                      backgroundColor: ColorResource.colorF5F5F5,
+                                      textColor: ColorResource.color181B28,
                                       fontSize: 14,
                                       onTap: () {},
                                     ),
