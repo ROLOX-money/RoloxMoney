@@ -38,17 +38,21 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
       child: Scaffold(
         body: Container(
           alignment: Alignment.topLeft,
+          color: Colors.white,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppBar(
-                  backgroundColor: Theme.of(context).backgroundColor,
+                  backgroundColor: Theme.of(context)
+                      .appBarTheme
+                      .copyWith(backgroundColor: ColorResource.colorFFFFFF)
+                      .backgroundColor,
                   leading: IconButton(
                     icon: Icon(
                       Icons.arrow_back_sharp,
                       size: 30,
-                      color: Colors.white,
+                      color: ColorResource.color000000,
                     ),
                     onPressed: () {
                       Get.back();
@@ -58,8 +62,8 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                   title: CustomText(
                     text: '${Languages.of(context)?.addClient}',
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: ColorResource.colorFFFFFF,
-                        fontSize: 21,
+                        color: ColorResource.color000000,
+                        fontSize: 18,
                         fontWeight: FontWeight.w600),
                   ),
                   shadowColor: Colors.grey,
@@ -73,16 +77,18 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Type of Business
-                        Container(
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: Colors.grey, width: 0.25),
-                              color: ColorResource.color151515),
-                          padding: EdgeInsets.all(10.0),
-                          child: Theme(
-                            data: Theme.of(context).copyWith(
-                                unselectedWidgetColor: Colors.grey,
-                                disabledColor: ColorResource.color00E94F),
+                        Card(
+                          elevation: 10,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.grey, width: 0.25),
+                                borderRadius: BorderRadius.circular(8),
+                                color: ColorResource.colorFFFFFF),
+                            padding: EdgeInsets.all(10.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -100,42 +106,35 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                                 ),
                                 Column(
                                   children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        widget.controller!.businessToggle(
-                                            value: TypOfBusiness.individual);
-                                      },
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Radio(
-                                            value: TypOfBusiness.individual,
-                                            groupValue: widget.controller!
-                                                .typOfBusiness.obs.value.value,
-                                            activeColor:
-                                                ColorResource.color00E94F,
-                                            onChanged: (TypOfBusiness? value) {
-                                              widget.controller!.businessToggle(
-                                                  value:
-                                                      TypOfBusiness.individual);
-                                            },
-                                          ),
-                                          CustomText(
-                                            text:
-                                                '${Languages.of(context)?.individual}',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleSmall!
-                                                .copyWith(
-                                                    color: ColorResource
-                                                        .colorFFFFFF,
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.w600),
-                                          )
-                                        ],
-                                      ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Radio(
+                                          value: TypOfBusiness.individual,
+                                          groupValue: widget.controller!
+                                              .typOfBusiness.obs.value.value,
+                                          activeColor:
+                                              ColorResource.colorEC008C,
+                                          onChanged: (TypOfBusiness? value) {
+                                            widget.controller!.businessToggle(
+                                                value:
+                                                    TypOfBusiness.individual);
+                                          },
+                                        ),
+                                        CustomText(
+                                          text:
+                                              '${Languages.of(context)?.individual}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleSmall!
+                                              .copyWith(
+                                                  color:
+                                                      ColorResource.color181B28,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600),
+                                        )
+                                      ],
                                     ),
                                     GestureDetector(
                                       onTap: () {
@@ -151,7 +150,7 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                                             groupValue: widget.controller!
                                                 .typOfBusiness.obs.value.value,
                                             activeColor:
-                                                ColorResource.color00E94F,
+                                                ColorResource.colorEC008C,
                                             onChanged: (TypOfBusiness? value) {
                                               widget.controller!.businessToggle(
                                                   value:
@@ -166,7 +165,7 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                                                 .titleSmall!
                                                 .copyWith(
                                                     color: ColorResource
-                                                        .colorFFFFFF,
+                                                        .color181B28,
                                                     fontSize: 16,
                                                     fontWeight:
                                                         FontWeight.w600),
@@ -199,6 +198,49 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                                   ? '${Languages.of(context)?.brandName}'
                                   : '${Languages.of(context)?.fullName}',
                         ),
+
+                        // Legal Name
+                        if (widget.controller!.typOfBusiness.obs.value ==
+                            TypOfBusiness.business)
+                          WidgetUtils.genericTextFiled(
+                            context: context,
+                            validationRules: ['required'],
+                            keyBoardType: TextInputType.name,
+                            hintText: Languages.of(context)?.companyNameHint,
+                            controller: widget.controller!.legalNameController,
+                            labelName:
+                                '${Languages.of(context)?.business}  ${Languages.of(context)?.legalName}',
+                          ),
+
+                        MediaQuery.removePadding(
+                          context: context, removeBottom: true,removeTop: true,
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            horizontalTitleGap: 0,
+                             dense: true,
+                             minVerticalPadding: 0.0,
+                            title: CustomText(
+                              text: Languages.of(context)!.iHaveAGSTNumber,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(
+                                  fontSize: 13,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            leading: Checkbox(
+                              value: widget.controller!.gstNumber.obs
+                                  .value.value,
+                              activeColor: Colors.pinkAccent,
+                              checkColor: Colors.white,
+                              onChanged: (value) {
+                                widget.controller!.gstNumberCheckBox(
+                                    values: value);
+                              },
+                            ),
+                          ),
+                        ),
                         //  GST No
                         WidgetUtils.genericTextFiled(
                           context: context,
@@ -215,29 +257,43 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                           controller: widget.controller!.panNoController,
                           labelName: '${Languages.of(context)?.panNumber}',
                         ),
-                        // Mobile No
                         WidgetUtils.genericTextFiled(
-                            context: context,
-                            validationRules: ['required', 'mobile_number'],
-                            hintText: Languages.of(context)
-                                ?.clientMobileNumberHintText,
-                            keyBoardType: TextInputType.phone,
-                            controller:
-                                widget.controller!.mobileNumberController,
-                            labelName:
-                                '${Languages.of(context)?.mobileNumber}'),
-                        // Legal Name
-                        if (widget.controller!.typOfBusiness.obs.value ==
-                            TypOfBusiness.business)
+                          context: context,
+                          validationRules: ['required'],
+                          hintText: Languages.of(context)
+                              ?.contactPersonNameHintText,
+                          controller:
+                          widget.controller!.contactPersonController,
+                          keyBoardType: TextInputType.emailAddress,
+                          labelName: '${Languages.of(context)?.contact} ${Languages.of(context)?.person} ${Languages.of(context)?.optional}',
+                        ),
+
+
+                        // Department
+                          if (widget.controller!.typOfBusiness.obs.value ==
+                              TypOfBusiness.business)
+                            WidgetUtils.genericTextFiled(
+                                context: context,
+                                validationRules: ['required'],
+                                hintText: Languages.of(context)
+                                    ?.departmentNameHintText,
+                                controller:
+                                widget.controller!.departmentController,
+                                keyBoardType: TextInputType.emailAddress,
+                                labelName:
+                                '${Languages.of(context)?.department}'),
+
+                        // Designation
                           WidgetUtils.genericTextFiled(
-                            context: context,
-                            validationRules: ['required'],
-                            keyBoardType: TextInputType.name,
-                            hintText: Languages.of(context)?.companyNameHint,
-                            controller: widget.controller!.legalNameController,
-                            labelName:
-                                '${Languages.of(context)?.business}  ${Languages.of(context)?.legalName}',
-                          ),
+                              context: context,
+                              validationRules: ['required'],
+                              hintText: Languages.of(context)
+                                  ?.designationNameHintText,
+                              keyBoardType: TextInputType.text,
+                              controller:
+                              widget.controller!.designationController,
+                              labelName:
+                              '${Languages.of(context)?.designation}'),
                         // Email ID
                         WidgetUtils.genericTextFiled(
                           context: context,
@@ -248,85 +304,45 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                           controller: widget.controller!.emailIDController,
                           labelName: '${Languages.of(context)?.emailID}',
                         ),
-                        if (widget.controller!.typOfBusiness.obs.value ==
-                            TypOfBusiness.business)
-                          // contact Person
-                          WidgetUtils.genericTextFiled(
+
+                        // Mobile No
+                        WidgetUtils.genericTextFiled(
                             context: context,
-                            validationRules: ['required'],
+                            validationRules: ['required', 'mobile_number'],
                             hintText: Languages.of(context)
-                                ?.contactPersonNameHintText,
+                                ?.clientMobileNumberHintText,
+                            keyBoardType: TextInputType.phone,
                             controller:
-                                widget.controller!.contactPersonController,
-                            keyBoardType: TextInputType.emailAddress,
-                            labelName: (widget
-                                        .controller!.typOfBusiness.obs.value ==
-                                    TypOfBusiness.business)
-                                ? '${Languages.of(context)?.contact} ${Languages.of(context)?.person}'
-                                : '${Languages.of(context)?.contact} ${Languages.of(context)?.person} ${Languages.of(context)?.optional}',
-                          ),
-
-                        if (widget.controller!.typOfBusiness.obs.value ==
-                            TypOfBusiness.business)
-                          // Department
-                          if (widget.controller!.typOfBusiness.obs.value ==
-                              TypOfBusiness.business)
-                            WidgetUtils.genericTextFiled(
-                                context: context,
-                                validationRules: ['required'],
-                                hintText: Languages.of(context)
-                                    ?.departmentNameHintText,
-                                controller:
-                                    widget.controller!.departmentController,
-                                keyBoardType: TextInputType.emailAddress,
-                                labelName:
-                                    '${Languages.of(context)?.department}'),
-
-                        if (widget.controller!.typOfBusiness.value ==
-                            TypOfBusiness.business)
-                          // Designation
-                          WidgetUtils.genericTextFiled(
-                              context: context,
-                              validationRules: ['required'],
-                              hintText: Languages.of(context)
-                                  ?.designationNameHintText,
-                              keyBoardType: TextInputType.text,
-                              controller:
-                                  widget.controller!.designationController,
-                              labelName:
-                                  '${Languages.of(context)?.designation}'),
-                        WidgetUtils.genericTextFiled(
-                            context: context,
-                            keyBoardType: TextInputType.name,
-                            validationRules: ['required'],
-                            controller:
-                            widget.controller!.address1,
+                            widget.controller!.mobileNumberController,
                             labelName:
-                            '${Languages.of(context)?.address1}',
-                            hintText:
-                            '${Languages.of(context)?.address1}'),
+                            '${Languages.of(context)?.mobileNumber}'),
+
+
+
 
                         WidgetUtils.genericTextFiled(
                             context: context,
+                            keyBoardType: TextInputType.streetAddress,
+                            validationRules: ['required'],
+                            controller: widget.controller!.fullAddress,
+                            labelName: '${Languages.of(context)?.fullAddress}',
+                            hintText: '${Languages.of(context)?.fullAddress}'),
+
+                       /* WidgetUtils.genericTextFiled(
+                            context: context,
                             keyBoardType: TextInputType.name,
                             validationRules: ['required'],
-                            controller:
-                            widget.controller!.address2,
-                            labelName:
-                            '${Languages.of(context)?.address2}',
-                            hintText:
-                            '${Languages.of(context)?.address2}'),
+                            controller: widget.controller!.address2,
+                            labelName: '${Languages.of(context)?.address2}',
+                            hintText: '${Languages.of(context)?.address2}'),
 
                         WidgetUtils.genericTextFiled(
                             context: context,
                             keyBoardType: TextInputType.number,
                             validationRules: ['required'],
-                            controller:
-                            widget.controller!.pinCode,
-                            labelName:
-                            '${Languages.of(context)?.pincode}',
-                            hintText:
-                            '${Languages.of(context)?.pincode}'),
+                            controller: widget.controller!.pinCode,
+                            labelName: '${Languages.of(context)?.pincode}',
+                            hintText: '${Languages.of(context)?.pincode}'),*/
                         const SizedBox(
                           height: 15,
                         ),

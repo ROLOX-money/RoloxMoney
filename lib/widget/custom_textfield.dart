@@ -166,12 +166,12 @@ class CustomTextFieldState extends State<CustomTextField> {
         prefixIcon: widget.prefixIcon,
         hintStyle: widget.hintStyle ??
             TextStyle(
-                color: Colors.black,
-                fontFamily: 'Poppins-Medium',
-                fontWeight: FontWeight.w400,
+                color: ColorResource.colorA0A1A9,
+                // fontFamily: 'Poppins-Medium',
+                // fontWeight: FontWeight.w400,
                 fontStyle: FontStyle.normal,
                 height: 1,
-                fontSize: 14),
+                fontSize: 16),
         errorStyle: widget.errorStyle ??
             Theme.of(context)
                 .textTheme
@@ -185,10 +185,10 @@ class CustomTextFieldState extends State<CustomTextField> {
             height: 1,
             fontSize: 12),
         // errorText: validatePassword(widget.controller.text.trim()),
-        labelStyle: Theme.of(context).textTheme.displayMedium!.copyWith(
-            color: (widget.focusNode != null && widget.focusNode!.hasFocus)
-                ? Colors.black
-                : Colors.black.withOpacity(0.4)),
+        // labelStyle: Theme.of(context).textTheme.displayMedium!.copyWith(
+        //     color: (widget.focusNode != null && widget.focusNode!.hasFocus)
+        //         ? Colors.black
+        //         : Colors.black.withOpacity(0.4)),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(color: widget.focusedBorder!, width: 0.25),

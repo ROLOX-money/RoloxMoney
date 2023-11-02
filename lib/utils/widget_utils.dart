@@ -34,7 +34,7 @@ abstract class WidgetUtils {
           text: labelName,
           style: labelStyle ??
               Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ColorResource.colorEC008C,
+                  color: ColorResource.color181B28,
                   fontWeight: FontWeight.w500),
         ),
         const SizedBox(
@@ -48,7 +48,7 @@ abstract class WidgetUtils {
             isReadOnly: isReadOnly,
             hintText: hintText,
             focusedBorder: Colors.grey,
-            textColor: Colors.white,
+            textColor: ColorResource.color181B28,
             onTapped: isReadOnly ? onTab : null,
             enableColor: Colors.grey,
             validationRules: validationRules,

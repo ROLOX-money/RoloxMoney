@@ -21,12 +21,11 @@ class AddClientController extends GetxController
   TextEditingController contactPersonController = TextEditingController();
   TextEditingController departmentController = TextEditingController();
   TextEditingController designationController = TextEditingController();
-  TextEditingController address1 = TextEditingController();
-  TextEditingController address2 = TextEditingController();
-  TextEditingController pinCode = TextEditingController();
+  TextEditingController fullAddress = TextEditingController();
   Rx<TypOfBusiness> typOfBusiness = TypOfBusiness.business.obs;
   final form = GlobalKey<FormState>();
 
+  RxBool gstNumber = false.obs;
   @override
   void onInit() async {
     change(null, status: RxStatus.success());
@@ -43,12 +42,14 @@ class AddClientController extends GetxController
       panNoController.text = 'BRYPC4090C';
       departmentController.text = 'Software Development';
       designationController.text = 'Software Developer';
-      address1.text = 'No:2/41, North Street';
-      address2.text = 'S.Ohaiyur, Kallakurichi';
-      pinCode.text = '606204';
+      fullAddress.text = 'No:2/41, North Street,S.Ohaiyur, Kallakurichi,606204';
     }
   }
 
+  void gstNumberCheckBox({bool? values}) {
+    gstNumber = values!.obs;
+    change(gstNumber);
+  }
   void businessToggle({TypOfBusiness? value}) {
     typOfBusiness = value!.obs;
     change(typOfBusiness);
@@ -92,9 +93,7 @@ class AddClientController extends GetxController
                         tableName: RoloxKey.supaBaseAddressTable,
                         userData: {
                           'phone': mobileNumberController.text,
-                          'address_1': address1.text,
-                          'address_2': address2.text,
-                          'pinCode': pinCode.text,
+                          'address_1': fullAddress.text,
                         }).then((addressInsertResponse) {
                       if (addressInsertResponse) {
                         SupaBaseController.toGetTheSelectedID(

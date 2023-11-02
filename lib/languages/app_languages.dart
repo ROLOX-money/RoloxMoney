@@ -190,6 +190,8 @@ abstract class Languages {
 
   String get companyName;
 
+  String get companyLegalName;
+
   String get companyNameHint;
 
   String get panNumberHint;

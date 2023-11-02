@@ -79,7 +79,7 @@ class LanguageEn extends Languages {
 
   String get gstNumber => 'GST Number';
 
-  String get iHaveAGSTNumber => 'I have a GSTIN (optional)';
+  String get iHaveAGSTNumber => 'I have a GST Number (optional)';
 
   String get role => 'Role';
 
@@ -191,6 +191,8 @@ class LanguageEn extends Languages {
   String get socialIdHint => 'Enter any one social ID';
 
   String get companyName => 'Company Name';
+
+  String get companyLegalName => 'Company Legal Name';
 
   String get companyNameHint => 'Enter your company name';
 
