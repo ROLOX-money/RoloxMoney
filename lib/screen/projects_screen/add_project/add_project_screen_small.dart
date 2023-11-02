@@ -147,6 +147,14 @@ class AddProjectScreenSmallState extends State<AddProjectScreenSmall> {
                               controller: widget.controller!.emailIDController,
                               labelName: '${Languages.of(context)?.emailID}',
                             ),
+                            WidgetUtils.genericTextFiled(
+                              context: context,
+                              hintText: Languages.of(context)
+                                  ?.projectLink,
+                              keyBoardType: TextInputType.name,
+                              controller: widget.controller!.projectLinkDController,
+                              labelName: '${Languages.of(context)?.emailID}',
+                            ),
                             const SizedBox(
                               height: 15,
                             ),
@@ -180,7 +188,7 @@ class AddProjectScreenSmallState extends State<AddProjectScreenSmall> {
                 ),
               ),
             ),
-            backgroundColor: Theme.of(context).backgroundColor,
+            backgroundColor: Colors.white,
           ),
         );
       },

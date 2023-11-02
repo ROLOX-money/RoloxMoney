@@ -39,7 +39,7 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
     return RoloxMoneyWidgetState(
       rxStatus: widget.controller!.status,
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         body: Container(
           child: ListView(
             physics: ScrollPhysics(),

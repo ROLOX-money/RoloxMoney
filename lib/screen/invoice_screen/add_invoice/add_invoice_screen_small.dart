@@ -197,7 +197,7 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
             ),
           ),
         ),
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Colors.white,
       ),
     );
   }

@@ -285,4 +285,6 @@ abstract class Languages {
   String get address1;
 
   String get address2;
+
+  String get projectLink;
 }

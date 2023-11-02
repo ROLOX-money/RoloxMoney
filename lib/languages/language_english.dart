@@ -289,4 +289,7 @@ class LanguageEn extends Languages {
   String get address1 => 'Address 1';
 
   String get address2 => 'Address 2';
+
+  String get projectLink =>
+      'Project Link (Optional)';
 }

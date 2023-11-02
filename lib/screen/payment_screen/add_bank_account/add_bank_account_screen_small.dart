@@ -44,12 +44,15 @@ class AddBankAccountScreenSmallState extends State<AddBankAccountScreenSmall> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppBar(
-                  backgroundColor: Theme.of(context).backgroundColor,
+                  backgroundColor: Theme.of(context)
+                      .appBarTheme
+                      .copyWith(backgroundColor: ColorResource.colorFFFFFF)
+                      .backgroundColor,
                   leading: IconButton(
                     icon: Icon(
                       Icons.arrow_back_sharp,
                       size: 30,
-                      color: Colors.white,
+                      color: ColorResource.color000000,
                     ),
                     onPressed: () {
                       Get.back();
@@ -59,8 +62,8 @@ class AddBankAccountScreenSmallState extends State<AddBankAccountScreenSmall> {
                   title: CustomText(
                     text: '${Languages.of(context)?.addBankAccount}',
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: ColorResource.colorFFFFFF,
-                        fontSize: 21,
+                        color: ColorResource.color000000,
+                        fontSize: 19,
                         fontWeight: FontWeight.w600),
                   ),
                   shadowColor: Colors.grey,
@@ -144,7 +147,7 @@ class AddBankAccountScreenSmallState extends State<AddBankAccountScreenSmall> {
             ),
           ),
         ),
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Colors.white,
       ),
     );
   }

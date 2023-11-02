@@ -17,6 +17,7 @@ class AddProjectController extends GetxController
   TextEditingController clientNameController = TextEditingController();
   TextEditingController projectValueController = TextEditingController();
   TextEditingController projectDueDateDController = TextEditingController();
+  TextEditingController projectLinkDController = TextEditingController();
   TextEditingController emailIDController = TextEditingController();
   final form = GlobalKey<FormState>();
   List<ClientModel> clientList = [];

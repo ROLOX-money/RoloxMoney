@@ -242,7 +242,7 @@ abstract class WidgetUtils {
         CustomText(
           text: labelName,
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
-              color: ColorResource.colorEC008C, fontWeight: FontWeight.w500),
+              color: ColorResource.color181B28, fontWeight: FontWeight.w500),
         ),
         const SizedBox(
           height: 5,
@@ -253,13 +253,13 @@ abstract class WidgetUtils {
               filled: true,
               hintText: hintText,
               hintStyle: TextStyle(
-                  color: Colors.grey.shade600,
+                  color: ColorResource.colorA0A1A9,
                   fontFamily: 'Poppins-Medium',
                   fontWeight: FontWeight.w400,
                   fontStyle: FontStyle.normal,
                   height: 1,
                   fontSize: 14),
-              fillColor: ColorResource.color151515,
+              fillColor: ColorResource.colorFFFFFF,
               suffixIconConstraints:
                   const BoxConstraints(minHeight: 18, minWidth: 18),
               suffixIcon: Padding(
