@@ -171,7 +171,7 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                       .textTheme
                                       .titleSmall!
                                       .copyWith(
-                                          color: ColorResource.colorEC008C,
+                                          color: ColorResource.color181B28,
                                           fontWeight: FontWeight.w500),
                                 ),
                                 const SizedBox(height: 5),
@@ -186,7 +186,7 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                     hintText:
                                         '${Languages.of(context)?.enter} ${Languages.of(context)?.mobileNumber}',
                                     focusedBorder: Colors.grey,
-                                    textColor: Colors.white,
+                                    textColor: ColorResource.color181B28,
                                     enableColor: Colors.grey,
                                     borderColor: Colors.red,
                                     disableColor: Colors.red,
@@ -223,10 +223,7 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                                   .textTheme
                                                   .titleSmall!
                                                   .copyWith(
-                                                      color: Theme.of(context)
-                                                          .textTheme
-                                                          .titleMedium!
-                                                          .color,
+                                                      color: ColorResource.color181B28,
                                                       fontSize: 16,
                                                       fontWeight:
                                                           FontWeight.w400),
@@ -234,10 +231,7 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                             Icon(
                                               Icons.keyboard_arrow_down,
                                               size: 22,
-                                              color: Theme.of(context)
-                                                  .textTheme
-                                                  .titleMedium!
-                                                  .color,
+                                              color: ColorResource.color181B28,
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -245,7 +239,7 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                             Container(
                                               width: 0.40,
                                               height: 20,
-                                              color: ColorResource.colorDDDDDD,
+                                              color: ColorResource.color181B28,
                                             )
                                           ],
                                         ),
