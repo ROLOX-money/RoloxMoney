@@ -39,18 +39,18 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
     return RoloxMoneyWidgetState(
       rxStatus: widget.controller!.status,
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         body: Container(
           child: ListView(
             physics: NeverScrollableScrollPhysics(),
             children: [
               AppBar(
-                backgroundColor: Theme.of(context).backgroundColor,
+                backgroundColor: Colors.white,
                 leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_sharp,
                     size: 30,
-                    color: Colors.white,
+                    color:  ColorResource.color181B28,
                   ),
                   onPressed: () {
                     Get.back();
@@ -60,8 +60,8 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
                 title: CustomText(
                   text: 'View Bank Account',
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: ColorResource.colorFFFFFF,
-                      fontSize: 21,
+                      color: ColorResource.color181B28,
+                      fontSize: 19,
                       fontWeight: FontWeight.w600),
                 ),
                 shadowColor: Colors.grey,
@@ -76,23 +76,24 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
                   SizedBox(
                     height: 15,
                   ),
-                  widget.controller!.bankList.obs.value.value.length > 0
+                  widget.controller!.bankList.obs.value.length > 0
                       ? Column(
                           children: [
                             ListView.builder(
                                 itemCount: widget.controller!.bankList.obs.value
-                                    .value.length,
+                                    .length,
                                 shrinkWrap: true,
+                                padding: EdgeInsets.symmetric(horizontal: 10),
                                 itemBuilder: (BuildContext context, int index) {
                                   BankModel bankModel = widget.controller!
-                                      .bankList.obs.value.value[index];
+                                      .bankList.obs.value[index];
                                   return Container(
                                     margin: EdgeInsets.only(top: 25),
                                     alignment: Alignment.centerLeft,
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                         color: bankModel.isPrimary
-                                            ? ColorResource.colorFFFFFF
+                                            ? ColorResource.colorA0A1A9
                                             : ColorResource.color383838,
                                         style: BorderStyle.solid,
                                         width: 1.0,
@@ -123,7 +124,7 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
                                               .toString(),
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1!
+                                              .titleMedium!
                                               .copyWith(
                                                   color:
                                                       ColorResource.colorEC008C,
@@ -142,7 +143,7 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
                                                 .titleSmall!
                                                 .copyWith(
                                                     color: ColorResource
-                                                        .colorF8F8F8,
+                                                        .color181B28,
                                                     overflow: TextOverflow.fade,
                                                     fontSize: 16,
                                                     fontWeight:
@@ -156,7 +157,7 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
                                                 .titleSmall!
                                                 .copyWith(
                                                     color: ColorResource
-                                                        .colorFFFFFF
+                                                        .colorA0A1A9
                                                         .withOpacity(0.6),
                                                     overflow: TextOverflow.fade,
                                                     fontSize: 14,
@@ -174,7 +175,7 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
                                                       .titleSmall!
                                                       .copyWith(
                                                           color: ColorResource
-                                                              .colorFFFFFF
+                                                              .colorA0A1A9
                                                               .withOpacity(0.6),
                                                           overflow:
                                                               TextOverflow.fade,
@@ -191,7 +192,7 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
                                         checkColor: ColorResource.colorFFFFFF,
                                         shape: CircleBorder(),
                                         // tristate: true,
-                                        activeColor: ColorResource.color00E94F,
+                                        activeColor: ColorResource.colorEC008C,
                                         onChanged: (bool? value) {},
                                       ),
                                     ),
@@ -202,18 +203,18 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
                             ),
 
                             Container(
-                              margin: EdgeInsets.only(top: 25),
+                              margin: EdgeInsets.symmetric(vertical: 25,horizontal: 10),
                               alignment: Alignment.centerLeft,
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                  color: ColorResource.color00E94F,
+                                  color: ColorResource.color60616B,
                                   style: BorderStyle.solid,
                                   width: 1.0,
                                 ),
                                 color: Colors.transparent,
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
-                              padding: EdgeInsets.symmetric(vertical: 15),
+                              padding: EdgeInsets.symmetric(vertical: 15, ),
                               child: ListTile(
                                 onTap: () {},
                                 leading: Container(
@@ -222,7 +223,7 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                      color: ColorResource.color383838,
+                                      color: ColorResource.color60616B,
                                       style: BorderStyle.solid,
                                       width: 1.0,
                                     ),
@@ -232,6 +233,7 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
                                   child: Image.asset(
                                     ImageResource.bank,
                                     height: 25,
+                                    color: ColorResource.color60616B,
                                     width: 25,
                                   ),
                                 ),
@@ -244,7 +246,7 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
                                           .textTheme
                                           .titleSmall!
                                           .copyWith(
-                                              color: ColorResource.color00E94F,
+                                              color: ColorResource.color60616B,
                                               overflow: TextOverflow.fade,
                                               fontSize: 16,
                                               fontWeight: FontWeight.w600),
@@ -253,7 +255,7 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
                                 ),
                                 trailing: Icon(
                                   Icons.add,
-                                  color: ColorResource.color00E94F,
+                                  color: ColorResource.color60616B,
                                   size: 30.0,
                                 ),
                               ),

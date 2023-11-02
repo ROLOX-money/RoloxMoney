@@ -8,6 +8,7 @@ class AddProjectController extends GetxController with StateMixin {
   TextEditingController clientNameController = TextEditingController();
   TextEditingController projectValueController = TextEditingController();
   TextEditingController projectDueDateDController = TextEditingController();
+  TextEditingController projectLinkDController = TextEditingController();
   TextEditingController emailIDController = TextEditingController();
 
   @override

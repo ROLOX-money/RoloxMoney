@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/model/project_model.dart';
-import 'package:roloxmoney/screen/projects_screen/add_project/add_project_controller.dart';
-import 'package:roloxmoney/screen/projects_screen/add_project/add_project_screen.dart';
 import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
