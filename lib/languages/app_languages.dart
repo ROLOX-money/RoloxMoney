@@ -285,4 +285,18 @@ abstract class Languages {
   String get projectLink;
 
   String get projectLinkHint;
+
+  String get enterYourWork;
+
+  String get viewBankAccount;
+
+  String get noInvoices;
+
+  String get funds;
+
+  String get withdrawFundsHint;
+
+  String get withdrawalAmount;
+
+  String get registered;
 }

@@ -36,7 +36,8 @@ class _HomeDetailScreenMediumState extends State<HomeDetailScreenMedium> {
                 backgroundColor: Colors.transparent,
                 body: Container(
                     alignment: Alignment.topLeft,
-                    child: ListView(shrinkWrap: true,
+                    child: ListView(
+                        shrinkWrap: true,
                         // physics: NeverScrollableScrollPhysics(),
                         children: [
                           Column(
@@ -44,7 +45,7 @@ class _HomeDetailScreenMediumState extends State<HomeDetailScreenMedium> {
                               children: [
                                 AppBar(
                                   backgroundColor:
-                                      Theme.of(context).backgroundColor,
+                                      ColorResource.mediumScreenAppBarBgColor,
                                   leading: GestureDetector(
                                     onTap: () {
                                       Get.back();

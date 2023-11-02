@@ -41,7 +41,6 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
     return RoloxMoneyWidgetState(
       rxStatus: widget.controller!.status,
       child: Scaffold(
-
         appBar: AppBar(
             centerTitle: false,
             backgroundColor: Theme.of(context).backgroundColor,
@@ -105,15 +104,15 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                     // Type of Business
                     Container(
                       decoration: BoxDecoration(
+                          color: ColorResource.buttonTextColor,
                           boxShadow: ColorResource.boxShadow,
                           border: Border.all(width: 0.25)),
                       padding: EdgeInsets.only(top: 10, bottom: 10),
                       child: Theme(
                         data: Theme.of(context).copyWith(
                             unselectedWidgetColor:
-                                Theme.of(context).scaffoldBackgroundColor,
-                            disabledColor:
-                                Theme.of(context).scaffoldBackgroundColor),
+                                Theme.of(context).dividerColor,
+                            disabledColor: Theme.of(context).dividerColor),
                         child: ListTile(
                           title: CustomText(
                             text: '${Languages.of(context)?.typeOfBusiness}',
@@ -196,7 +195,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                 onTap: () {
                                   widget.controller!.businessToggle(
                                       value: TypOfBusiness.agency);
-                                  WidgetUtils.showAlertDialog(context: context);
+                                  showAlertForAgencyFlow();
                                   widget.controller!.businessToggle(
                                       value: TypOfBusiness.business);
                                 },
@@ -252,6 +251,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                             child: Column(
                               children: [
                                 WidgetUtils.genericTextFiled(
+                                    height: 50,
                                     keyBoardType: TextInputType.name,
                                     context: context,
                                     validationRules: ['required'],
@@ -262,6 +262,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                     hintText:
                                         Languages.of(context)?.fullNameHint),
                                 WidgetUtils.genericTextFiled(
+                                    height: 50,
                                     context: context,
                                     keyBoardType: TextInputType.emailAddress,
                                     validationRules: ['required', 'email'],
@@ -272,6 +273,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                     hintText:
                                         Languages.of(context)?.emailIdHint),
                                 WidgetUtils.genericTextFiled(
+                                    height: 50,
                                     context: context,
                                     keyBoardType: TextInputType.name,
                                     controller: widget.controller!.socialId,
@@ -290,6 +292,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                   children: [
                                     // Company Name
                                     WidgetUtils.genericTextFiled(
+                                        height: 50,
                                         keyBoardType: TextInputType.name,
                                         context: context,
                                         validationRules: ['required'],
@@ -301,6 +304,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                             '${Languages.of(context)?.enter} ${Languages.of(context)?.companyName}'),
                                     // Company Email ID
                                     WidgetUtils.genericTextFiled(
+                                        height: 50,
                                         context: context,
                                         keyBoardType:
                                             TextInputType.emailAddress,
@@ -313,6 +317,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                             Languages.of(context)?.emailIdHint),
                                     // Company Pan Number
                                     WidgetUtils.genericTextFiled(
+                                        height: 50,
                                         context: context,
                                         keyBoardType: TextInputType.name,
                                         validationRules: ['required'],
@@ -324,6 +329,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                             '${Languages.of(context)?.panNumberHint}'),
                                     // aadhaar Numberƒ
                                     WidgetUtils.genericTextFiled(
+                                        height: 50,
                                         context: context,
                                         maximumWordCount: 14,
                                         // keyBoardType: TextInputType.number,
@@ -342,6 +348,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                             '${Languages.of(context)?.aadhaarNumberHint}'),
                                     // GST Number
                                     WidgetUtils.genericTextFiled(
+                                        height: 50,
                                         context: context,
                                         keyBoardType: TextInputType.name,
                                         validationRules: ['required'],
@@ -352,7 +359,9 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                         hintText:
                                             '${Languages.of(context)?.gstNumberHint}'),
                                     // social id
+
                                     WidgetUtils.genericTextFiled(
+                                        height: 50,
                                         context: context,
                                         keyBoardType: TextInputType.name,
                                         controller: widget.controller!.socialId,
@@ -369,6 +378,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                   children: [
                                     // Company Name
                                     WidgetUtils.genericTextFiled(
+                                        height: 50,
                                         keyBoardType: TextInputType.name,
                                         context: context,
                                         validationRules: ['required'],
@@ -380,6 +390,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                             '${Languages.of(context)?.enter} ${Languages.of(context)?.companyName}'),
                                     // Company Email ID
                                     WidgetUtils.genericTextFiled(
+                                        height: 50,
                                         context: context,
                                         keyBoardType:
                                             TextInputType.emailAddress,
@@ -392,6 +403,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                             Languages.of(context)?.emailIdHint),
                                     // Company Pan Number
                                     WidgetUtils.genericTextFiled(
+                                        height: 50,
                                         context: context,
                                         keyBoardType: TextInputType.name,
                                         validationRules: ['required'],
@@ -403,6 +415,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                             '${Languages.of(context)?.panNumberHint}'),
                                     // aadhaar Number
                                     WidgetUtils.genericTextFiled(
+                                        height: 50,
                                         context: context,
                                         maximumWordCount: 14,
                                         keyBoardType: TextInputType.number,
@@ -421,6 +434,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                             '${Languages.of(context)?.aadhaarNumberHint}'),
                                     // GST Number
                                     WidgetUtils.genericTextFiled(
+                                        height: 50,
                                         context: context,
                                         keyBoardType: TextInputType.name,
                                         validationRules: ['required'],
@@ -432,6 +446,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                             '${Languages.of(context)?.gstNumberHint}'),
                                     // social id
                                     WidgetUtils.genericTextFiled(
+                                        height: 50,
                                         context: context,
                                         keyBoardType: TextInputType.name,
                                         controller: widget.controller!.socialId,
@@ -476,7 +491,6 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
           ),
         ),
         backgroundColor: Theme.of(context).backgroundColor,
-
       ),
     );
   }

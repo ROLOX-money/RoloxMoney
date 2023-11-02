@@ -32,14 +32,16 @@ class _AddClientLargeScreenState extends State<AddClientLargeScreen> {
                 backgroundColor: Theme.of(context).backgroundColor,
                 appBar: AppBar(
                     centerTitle: false,
-                    backgroundColor: Theme.of(context).backgroundColor,
+                    backgroundColor: Colors.transparent,
                     title: Container(
                       padding: const EdgeInsets.only(left: 8.0, top: 20),
                       child: Image.asset(
                         ImageResource.rolox,
+                        color: Colors.black,
                         height: 30,
                       ),
                     ),
+                    automaticallyImplyLeading: false,
                     shadowColor: Colors.grey,
                     elevation: 0.0),
                 body: Center(
@@ -47,7 +49,7 @@ class _AddClientLargeScreenState extends State<AddClientLargeScreen> {
                   width: MediaQuery.of(context).size.width / 2,
                   height: MediaQuery.of(context).size.height / 1.2,
                   decoration: BoxDecoration(
-                      color: ColorResource.color1B2023,
+                      color: ColorResource.buttonTextColor,
                       borderRadius: BorderRadius.all(Radius.circular(24))),
                   alignment: Alignment.topLeft,
                   padding: EdgeInsets.symmetric(horizontal: 20),
@@ -55,7 +57,7 @@ class _AddClientLargeScreenState extends State<AddClientLargeScreen> {
                     children: [
                       SizedBox(height: 20),
                       AppBar(
-                        backgroundColor: ColorResource.color1B2023,
+                        backgroundColor: ColorResource.buttonTextColor,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(24),
@@ -67,7 +69,6 @@ class _AddClientLargeScreenState extends State<AddClientLargeScreen> {
                           child: Icon(
                             Icons.arrow_back_sharp,
                             size: 30,
-                            color: Colors.white,
                           ),
                         ),
                         centerTitle: false,
@@ -77,9 +78,7 @@ class _AddClientLargeScreenState extends State<AddClientLargeScreen> {
                               .textTheme
                               .titleSmall!
                               .copyWith(
-                                  color: ColorResource.colorFFFFFF,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600),
+                                  fontSize: 20, fontWeight: FontWeight.w600),
                         )),
                         shadowColor: Colors.grey,
                         elevation: 0.0,
@@ -94,137 +93,125 @@ class _AddClientLargeScreenState extends State<AddClientLargeScreen> {
                               // Type of Business
                               Container(
                                 decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey, width: 0.25),
-                                    color: ColorResource.color151515),
-                                padding: EdgeInsets.all(10.0),
+                                    color: ColorResource.buttonTextColor,
+                                    boxShadow: ColorResource.boxShadow,
+                                    border: Border.all(width: 0.25)),
+                                padding: EdgeInsets.only(top: 10, bottom: 10),
                                 child: Theme(
                                   data: Theme.of(context).copyWith(
-                                      unselectedWidgetColor: Colors.grey,
-                                      disabledColor: ColorResource.color00E94F),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(height: 10),
-                                      CustomText(
-                                        text:
-                                            '${Languages.of(context)?.typeOfBusiness}',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleSmall!
-                                            .copyWith(
-                                                color:
-                                                    ColorResource.colorE08AF4,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600),
-                                      ),
-                                      SizedBox(height: 10),
-                                      Row(
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () {
-                                              widget.controller!.businessToggle(
-                                                  value:
-                                                      TypOfBusiness.individual);
-                                            },
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Radio(
-                                                  value:
-                                                      TypOfBusiness.individual,
-                                                  groupValue: widget
-                                                      .controller!
-                                                      .typOfBusiness
-                                                      .obs
-                                                      .value
-                                                      .value,
-                                                  activeColor:
-                                                      ColorResource.color00E94F,
-                                                  onChanged:
-                                                      (TypOfBusiness? value) {
-                                                    widget.controller!
-                                                        .businessToggle(
-                                                            value: TypOfBusiness
-                                                                .individual);
-                                                  },
-                                                ),
-                                                CustomText(
-                                                  text:
-                                                      '${Languages.of(context)?.individual}',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleSmall!
-                                                      .copyWith(
-                                                          color: ColorResource
-                                                              .colorFFFFFF,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w600),
-                                                )
-                                              ],
-                                            ),
+                                      unselectedWidgetColor:
+                                          Theme.of(context).dividerColor,
+                                      disabledColor:
+                                          Theme.of(context).dividerColor),
+                                  child: ListTile(
+                                    title: CustomText(
+                                      text:
+                                          '${Languages.of(context)?.typeOfBusiness}',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium!
+                                          .copyWith(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w600),
+                                    ),
+                                    subtitle: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            widget.controller!.businessToggle(
+                                                value:
+                                                    TypOfBusiness.individual);
+                                          },
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Radio(
+                                                value: TypOfBusiness.individual,
+                                                groupValue: widget
+                                                    .controller!
+                                                    .typOfBusiness
+                                                    .obs
+                                                    .value
+                                                    .value,
+                                                activeColor: Theme.of(context)
+                                                    .primaryColor,
+                                                onChanged:
+                                                    (TypOfBusiness? value) {
+                                                  widget.controller!
+                                                      .businessToggle(
+                                                          value: TypOfBusiness
+                                                              .individual);
+                                                },
+                                              ),
+                                              CustomText(
+                                                text:
+                                                    '${Languages.of(context)?.individual}',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleSmall!
+                                                    .copyWith(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w300),
+                                              )
+                                            ],
                                           ),
-                                          SizedBox(width: 30),
-                                          GestureDetector(
-                                            onTap: () {
-                                              widget.controller!.businessToggle(
-                                                  value:
-                                                      TypOfBusiness.business);
-                                            },
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Radio(
-                                                  value: TypOfBusiness.business,
-                                                  groupValue: widget
-                                                      .controller!
-                                                      .typOfBusiness
-                                                      .obs
-                                                      .value
-                                                      .value,
-                                                  activeColor:
-                                                      ColorResource.color00E94F,
-                                                  onChanged:
-                                                      (TypOfBusiness? value) {
-                                                    widget.controller!
-                                                        .businessToggle(
-                                                            value: TypOfBusiness
-                                                                .business);
-                                                  },
-                                                ),
-                                                CustomText(
-                                                  text:
-                                                      '${Languages.of(context)?.business}',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleSmall!
-                                                      .copyWith(
-                                                          color: ColorResource
-                                                              .colorFFFFFF,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w600),
-                                                )
-                                              ],
-                                            ),
+                                        ),
+                                        SizedBox(width: 30),
+                                        GestureDetector(
+                                          onTap: () {
+                                            widget.controller!.businessToggle(
+                                                value: TypOfBusiness.business);
+                                          },
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Radio(
+                                                value: TypOfBusiness.business,
+                                                groupValue: widget
+                                                    .controller!
+                                                    .typOfBusiness
+                                                    .obs
+                                                    .value
+                                                    .value,
+                                                activeColor: Theme.of(context)
+                                                    .primaryColor,
+                                                onChanged:
+                                                    (TypOfBusiness? value) {
+                                                  widget.controller!
+                                                      .businessToggle(
+                                                          value: TypOfBusiness
+                                                              .business);
+                                                },
+                                              ),
+                                              CustomText(
+                                                text:
+                                                    '${Languages.of(context)?.business}',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleSmall!
+                                                    .copyWith(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w300),
+                                              )
+                                            ],
                                           ),
-                                        ],
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                      ),
-                                    ],
+                                        ),
+                                        SizedBox(width: 30),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
                               SizedBox(height: 10),
                               // Brand Name
                               WidgetUtils.genericTextFiled(
+                                height: 50,
                                 context: context,
                                 validationRules: ['required'],
                                 keyBoardType: TextInputType.name,
@@ -245,6 +232,7 @@ class _AddClientLargeScreenState extends State<AddClientLargeScreen> {
                               if (widget.controller!.typOfBusiness.obs.value ==
                                   TypOfBusiness.business)
                                 WidgetUtils.genericTextFiled(
+                                  height: 50,
                                   context: context,
                                   validationRules: ['required'],
                                   keyBoardType: TextInputType.name,
@@ -255,35 +243,43 @@ class _AddClientLargeScreenState extends State<AddClientLargeScreen> {
                                   labelName:
                                       '${Languages.of(context)?.business}  ${Languages.of(context)?.legalName}',
                                 ),
-
+                              SizedBox(height: 10),
                               // I have GST no
                               ListTile(
-                                visualDensity: VisualDensity(horizontal: -4, vertical: -4),
+                                visualDensity:
+                                    VisualDensity(horizontal: -4, vertical: -4),
                                 contentPadding: EdgeInsets.zero,
                                 dense: true,
                                 leading: Theme(
                                   data: Theme.of(context).copyWith(
-                                    unselectedWidgetColor: ColorResource.color00E94F,
+                                    unselectedWidgetColor:
+                                        Theme.of(context).unselectedWidgetColor,
                                   ),
                                   child: Checkbox(
-                                    value: widget.controller!.iDontHaveBusiness.obs.value.value,
-                                    activeColor: Colors.blue,
-                                    checkColor: ColorResource.color151515,
+                                    value: widget.controller!.iDontHaveBusiness
+                                        .obs.value.value,
+                                    activeColor: Theme.of(context).primaryColor,
+                                    checkColor: ColorResource.buttonTextColor,
                                     onChanged: (value) {
-                                      widget.controller!.noBusinessCheckBox(values: value);
+                                      widget.controller!
+                                          .noBusinessCheckBox(values: value);
                                     },
                                   ),
                                 ),
                                 title: CustomText(
-                                  text: '${Languages.of(context)?.iHaveAGSTNumber}',
-                                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                                      color: ColorResource.colorFFFFFF,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400),
+                                  text:
+                                      '${Languages.of(context)?.iHaveAGSTNumber}',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall!
+                                      .copyWith(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400),
                                 ),
                               ),
                               //  GST No
                               WidgetUtils.genericTextFiled(
+                                height: 50,
                                 context: context,
                                 validationRules: ['required'],
                                 hintText: Languages.of(context)?.gstNumberHint,
@@ -294,6 +290,7 @@ class _AddClientLargeScreenState extends State<AddClientLargeScreen> {
                               ),
                               // Pan No
                               WidgetUtils.genericTextFiled(
+                                height: 50,
                                 context: context,
                                 validationRules: ['required', 'pan'],
                                 hintText: Languages.of(context)?.panNumberHint,
@@ -303,6 +300,7 @@ class _AddClientLargeScreenState extends State<AddClientLargeScreen> {
                               ),
                               // Aadhaar No
                               WidgetUtils.genericTextFiled(
+                                  height: 50,
                                   context: context,
                                   validationRules: ['required', 'aadhar'],
                                   hintText:
@@ -314,6 +312,7 @@ class _AddClientLargeScreenState extends State<AddClientLargeScreen> {
                                       '${Languages.of(context)?.aadhaarNumber}'),
                               // contact Person
                               WidgetUtils.genericTextFiled(
+                                height: 50,
                                 context: context,
                                 validationRules: ['required'],
                                 hintText: Languages.of(context)
@@ -331,6 +330,7 @@ class _AddClientLargeScreenState extends State<AddClientLargeScreen> {
                               if (widget.controller!.typOfBusiness.obs.value ==
                                   TypOfBusiness.business)
                                 WidgetUtils.genericTextFiled(
+                                    height: 50,
                                     context: context,
                                     validationRules: ['required'],
                                     hintText: Languages.of(context)
@@ -342,6 +342,7 @@ class _AddClientLargeScreenState extends State<AddClientLargeScreen> {
                                         '${Languages.of(context)?.department}'),
                               // Designation
                               WidgetUtils.genericTextFiled(
+                                  height: 50,
                                   context: context,
                                   validationRules: ['required'],
                                   hintText: Languages.of(context)
@@ -353,6 +354,7 @@ class _AddClientLargeScreenState extends State<AddClientLargeScreen> {
                                       '${Languages.of(context)?.designation}'),
                               // Email ID
                               WidgetUtils.genericTextFiled(
+                                height: 50,
                                 context: context,
                                 validationRules: ['required', 'email'],
                                 hintText: Languages.of(context)
@@ -364,6 +366,7 @@ class _AddClientLargeScreenState extends State<AddClientLargeScreen> {
                               ),
                               // Mobile No
                               WidgetUtils.genericTextFiled(
+                                  height: 50,
                                   context: context,
                                   validationRules: [
                                     'required',
@@ -378,8 +381,10 @@ class _AddClientLargeScreenState extends State<AddClientLargeScreen> {
                                       '${Languages.of(context)?.mobileNumber}'),
                               // Full Address
                               WidgetUtils.genericTextFiled(
+                                  height: 150,
                                   context: context,
                                   validationRules: ['required'],
+
                                   hintText: Languages.of(context)
                                       ?.enterYourAddressHintText,
                                   keyBoardType: TextInputType.streetAddress,
@@ -396,7 +401,6 @@ class _AddClientLargeScreenState extends State<AddClientLargeScreen> {
                                 context,
                                 cardShape: 1,
                                 isIcon: true,
-                                textColor: ColorResource.black,
                                 fontSize: 20,
                                 onTap: () {
                                   if (widget.controller!.form.currentState!

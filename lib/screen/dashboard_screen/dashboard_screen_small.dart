@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
-import 'package:roloxmoney/model/dashboard_navigator_model.dart';
 import 'package:roloxmoney/screen/clients_screen/clients_screen.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_controller.dart';
 import 'package:roloxmoney/screen/home_screen/home_screen.dart';
@@ -33,7 +32,6 @@ class DashboardScreenSmall extends StatefulWidget {
 }
 
 class DashboardScreenSmallState extends State<DashboardScreenSmall> {
-
   @override
   void initState() {
     super.initState();

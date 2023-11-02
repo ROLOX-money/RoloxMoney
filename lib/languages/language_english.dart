@@ -79,7 +79,7 @@ class LanguageEn extends Languages {
 
   String get gstNumber => 'GST Number';
 
-  String get iHaveAGSTNumber => 'I have a GSTIN (optional)';
+  String get iHaveAGSTNumber => 'I have a GST Number (optional)';
 
   String get role => 'Role';
 
@@ -289,4 +289,18 @@ class LanguageEn extends Languages {
   String get projectLink => "Project Link";
 
   String get projectLinkHint => "Enter your Project Link Here";
+
+  String get enterYourWork => "Enter your work";
+
+  String get viewBankAccount => "View Bank Account";
+
+  String get noInvoices => "No Invoices are there";
+
+  String get funds => "funds";
+
+  String get withdrawFundsHint => "Amount of funds you want to withdraw";
+
+  String get withdrawalAmount => "Withdrawal Amount";
+
+  String get registered => "Registered";
 }

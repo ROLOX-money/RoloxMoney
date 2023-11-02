@@ -28,56 +28,104 @@ class _HomeScreenMediumState extends State<HomeScreenMedium> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             padding: EdgeInsets.all(30),
-            decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
+            decoration: BoxDecoration(
+              color: Theme.of(context).backgroundColor,
+            ),
             alignment: Alignment.topLeft,
             child: GridView.count(
               crossAxisCount: 2,
-              mainAxisSpacing: 30,
+              mainAxisSpacing:
+                  widget.controller!.isEmpty.value == true ? 20 : 30,
               crossAxisSpacing: 40,
-              childAspectRatio: 2,
+              childAspectRatio:
+                  widget.controller!.isEmpty.value == true ? 1.5 : 1.65,
               children: [
-                GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => HomeDetailsScreenLarge(
-                                    controller: widget.controller,
-                                    scaffoldKey: widget.scaffoldKey,
-                                    buttonNo: 1,
-                                  )));
+                if (widget.controller!.isEmpty.value == true) ...[
+                  widget.controller!.paidCardWidgetLarge(
+                    isWithdraw: false,
+                    isWalletBalance: true,
+                    headingString: '${Languages.of(context)!.upcomingInvoices}',
+                    topColor: ColorResource.buttonTextColor,
+                    context: context,
+                    title: '${Languages.of(context)?.noInvoices}',
+                    subTitleSecond: '${Languages.of(context)!.addInvoice}',
+                    secondaryButtonOnTap: () {
+                      widget.controller!.navigateProfile(1);
                     },
-                    child: widget.controller!.paidCardWidgetLarge(
-                        isWalletBalance: false,
-                        topColor: ColorResource.color0093FF,
-                        context: context,
-                        title:
-                            "${Languages.of(context)!.upcomingInvoices} \n ${Languages.of(context)!.inNext1Week}",
-                        subTitle:
-                            "${Languages.of(context)!.noOf} ${Languages.of(context)!.invoices}",
-                        count: "07",
-                        subTitleSecond: Languages.of(context)!.transactionWorth,
-                        amount: "₹ 50000")),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => HomeDetailsScreenLarge(
-                                  controller: widget.controller,
-                                  scaffoldKey: widget.scaffoldKey,
-                                  buttonNo: 2,
-                                )));
-                  },
-                  child: widget.controller!.paidCardWidgetLarge(
+                  ),
+                  widget.controller!.paidCardWidgetLarge(
                       isWalletBalance: true,
-                      topColor: ColorResource.color151515,
+                      isWithdraw: true,
+                      topColor: ColorResource.buttonTextColor,
+                      context: context,
+                      title: '${Languages.of(context)?.accountBalance}',
+                      subTitleSecond: '${Languages.of(context)!.withdraw}',
+                      secondaryButtonOnTap: () {
+                        widget.controller!.navigateProfile(2);
+                      },
+                      amount: "₹ 50000"),
+                  widget.controller!.paidCardWidgetLarge(
+                    isWalletBalance: true,
+                    isWithdraw: false,
+                    headingString: '${Languages.of(context)!.paidInvoices}',
+                    topColor: ColorResource.buttonTextColor,
+                    context: context,
+                    title: '${Languages.of(context)?.noInvoices}',
+                    subTitleSecond: '${Languages.of(context)!.addInvoice}',
+                    secondaryButtonOnTap: () {
+                      widget.controller!.navigateProfile(1);
+                    },
+                  ),
+                  widget.controller!.paidCardWidgetLarge(
+                    isWalletBalance: true,
+                    isWithdraw: false,
+                    topColor: ColorResource.buttonTextColor,
+                    headingString: '${Languages.of(context)!.dueInvoices}',
+                    context: context,
+                    title: '${Languages.of(context)?.noInvoices}',
+                    subTitleSecond: '${Languages.of(context)!.addInvoice}',
+                    secondaryButtonOnTap: () {
+                      widget.controller!.navigateProfile(1);
+                    },
+                  )
+                ],
+                if (widget.controller!.isEmpty.value == false) ...[
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeDetailsScreenLarge(
+                                      controller: widget.controller,
+                                      scaffoldKey: widget.scaffoldKey,
+                                      buttonNo: 1,
+                                    )));
+                      },
+                      child: widget.controller!.paidCardWidgetLarge(
+                          isWalletBalance: false,
+                          isWithdraw: false,
+                          topColor: ColorResource.primaryColor,
+                          context: context,
+                          title:
+                              "${Languages.of(context)!.upcomingInvoices} \n ${Languages.of(context)!.inNext1Week}",
+                          subTitle:
+                              "${Languages.of(context)!.noOf} ${Languages.of(context)!.invoices}",
+                          count: "07",
+                          subTitleSecond:
+                              Languages.of(context)!.transactionWorth,
+                          amount: "₹ 50000")),
+                  widget.controller!.paidCardWidgetLarge(
+                      isWalletBalance: true,
+                      isWithdraw: true,
+                      topColor: ColorResource.buttonTextColor,
                       context: context,
                       title: Languages.of(context)!.accountBalance,
                       subTitleSecond: Languages.of(context)!.withdraw,
+                      secondaryButtonOnTap: () {
+                        widget.controller!.navigateProfile(2);
+                      },
                       amount: "₹ 50000"),
-                ),
-                GestureDetector(
+                  GestureDetector(
                     onTap: () {
                       Navigator.push(
                           context,
@@ -88,18 +136,19 @@ class _HomeScreenMediumState extends State<HomeScreenMedium> {
                                     buttonNo: 2,
                                   )));
                     },
-                    child:  widget.controller!.paidCardWidgetLarge(
-                      isWalletBalance: false,
-                      topColor: ColorResource.color00D1B0,
-                      context: context,
-                      title: Languages.of(context)!.paidInvoices,
-                      subTitle:
-                          "${Languages.of(context)!.noOf} ${Languages.of(context)!.invoices}",
-                      count: "07",
-                      subTitleSecond: Languages.of(context)!.transactionWorth,
-                      amount: "₹ 50000"),
-                    ),
-                GestureDetector(
+                    child: widget.controller!.paidCardWidgetLarge(
+                        isWalletBalance: false,
+                        isWithdraw: false,
+                        topColor: ColorResource.greenColor,
+                        context: context,
+                        title: Languages.of(context)!.paidInvoices,
+                        subTitle:
+                            "${Languages.of(context)!.noOf} ${Languages.of(context)!.invoices}",
+                        count: "07",
+                        subTitleSecond: Languages.of(context)!.transactionWorth,
+                        amount: "₹ 50000"),
+                  ),
+                  GestureDetector(
                     onTap: () {
                       Navigator.push(
                           context,
@@ -111,16 +160,18 @@ class _HomeScreenMediumState extends State<HomeScreenMedium> {
                                   )));
                     },
                     child: widget.controller!.paidCardWidgetLarge(
-                      isWalletBalance: false,
-                      topColor: ColorResource.colorE08AF4,
-                      context: context,
-                      title: Languages.of(context)!.dueInvoices,
-                      subTitle:
-                          "${Languages.of(context)!.noOf} ${Languages.of(context)!.invoices}",
-                      count: "07",
-                      subTitleSecond: Languages.of(context)!.transactionWorth,
-                      amount: "₹ 50000"),
-                    ),
+                        isWithdraw: false,
+                        isWalletBalance: false,
+                        topColor: ColorResource.orangeColor,
+                        context: context,
+                        title: Languages.of(context)!.dueInvoices,
+                        subTitle:
+                            "${Languages.of(context)!.noOf} ${Languages.of(context)!.invoices}",
+                        count: "07",
+                        subTitleSecond: Languages.of(context)!.transactionWorth,
+                        amount: "₹ 50000"),
+                  ),
+                ]
               ],
             )));
   }

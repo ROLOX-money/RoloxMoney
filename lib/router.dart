@@ -12,7 +12,7 @@ import 'package:roloxmoney/screen/profile_screen/profile_screen.dart';
 import 'package:roloxmoney/screen/projects_screen/add_project/add_project_screen.dart';
 import 'package:roloxmoney/screen/splash_screen/splash_screen.dart';
 import 'package:roloxmoney/screen/welcome_screen/welcome_screen.dart';
-import 'package:roloxmoney/screen/welcome_screen/welcome_screen_large.dart';
+import 'package:roloxmoney/screen/withdraw_fund_screen/withdraw_fund_screen.dart';
 
 /*Chinnadurai Viswanathan*/
 class AppRoutes {
@@ -39,5 +39,7 @@ class AppRoutes {
         page: () => AddBankAccountScreen()),
     GetPage(name: ProfileScreen.routeName, page: () => ProfileScreen()),
     GetPage(name: BankListScreen.routeName, page: () => BankListScreen()),
+    GetPage(
+        name: WithdrawFundScreen.routeName, page: () => WithdrawFundScreen()),
   ];
 }

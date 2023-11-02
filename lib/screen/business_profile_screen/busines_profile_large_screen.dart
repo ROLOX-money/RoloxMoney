@@ -49,22 +49,23 @@ class _BusinessProfileLargeScreenState
                   height: 30,
                 ),
               ),
+              automaticallyImplyLeading: false,
               shadowColor: Colors.grey,
               elevation: 0.0),
           body: Center(
               child: Container(
             width: MediaQuery.of(context).size.width / 2,
             height: MediaQuery.of(context).size.height / 1.2,
-                decoration: BoxDecoration(
-                    color: ColorResource.color1B2023,
-                    borderRadius: BorderRadius.all(Radius.circular(24))),
-                padding: EdgeInsets.all(12),
+            decoration: BoxDecoration(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                borderRadius: BorderRadius.all(Radius.circular(24))),
+            padding: EdgeInsets.all(12),
             alignment: Alignment.topLeft,
             child: ListView(
               shrinkWrap: true,
               children: [
                 AppBar(
-                  backgroundColor: ColorResource.color1B2023,
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   centerTitle: false,
                   leading: GestureDetector(
                     onTap: () {
@@ -73,16 +74,15 @@ class _BusinessProfileLargeScreenState
                     child: Icon(
                       Icons.arrow_back_sharp,
                       size: 30,
-                      color: Colors.white,
                     ),
                   ),
                   title: Text.rich(TextSpan(
                       text:
                           '${Languages.of(context)?.profile} ${Languages.of(context)?.page} ',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: ColorResource.colorFFFFFF,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall!
+                          .copyWith(fontSize: 20, fontWeight: FontWeight.w600),
                       children: <InlineSpan>[
                         TextSpan(
                           text: '(${Languages.of(context)?.business})',
@@ -90,9 +90,7 @@ class _BusinessProfileLargeScreenState
                               .textTheme
                               .titleSmall!
                               .copyWith(
-                                  color: ColorResource.color00E94F,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600),
+                                  fontSize: 20, fontWeight: FontWeight.w600),
                         )
                       ])),
                   shadowColor: Colors.grey,
@@ -113,9 +111,7 @@ class _BusinessProfileLargeScreenState
                               .textTheme
                               .titleSmall!
                               .copyWith(
-                                  color: ColorResource.colorFFFFFF,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400),
+                                  fontSize: 16, fontWeight: FontWeight.w400),
                         ),
                         SizedBox(
                           height: 20,
@@ -140,13 +136,13 @@ class _BusinessProfileLargeScreenState
                         // Type of Business
                         Container(
                           decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: Colors.grey, width: 0.25),
-                              color: ColorResource.color151515),
+                            border: Border.all(color: Colors.grey, width: 0.25),
+                          ),
                           padding: EdgeInsets.all(10.0),
                           child: Theme(
                             data: Theme.of(context).copyWith(
-                                unselectedWidgetColor: Colors.grey,
+                                unselectedWidgetColor:
+                                    Theme.of(context).unselectedWidgetColor,
                                 disabledColor: ColorResource.color00E94F),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,7 +153,6 @@ class _BusinessProfileLargeScreenState
                                       .textTheme
                                       .titleSmall!
                                       .copyWith(
-                                          color: ColorResource.colorE08AF4,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600),
                                 ),
@@ -180,7 +175,7 @@ class _BusinessProfileLargeScreenState
                                             groupValue: widget.controller!
                                                 .modelOfWork.obs.value.value,
                                             activeColor:
-                                                ColorResource.color00E94F,
+                                                Theme.of(context).primaryColor,
                                             onChanged: (ModelOfWork? value) {
                                               widget.controller!
                                                   .modelOfWorkToggle(
@@ -195,11 +190,9 @@ class _BusinessProfileLargeScreenState
                                                 .textTheme
                                                 .titleSmall!
                                                 .copyWith(
-                                                    color: ColorResource
-                                                        .colorFFFFFF,
                                                     fontSize: 16,
                                                     fontWeight:
-                                                        FontWeight.w600),
+                                                        FontWeight.w300),
                                           )
                                         ],
                                       ),
@@ -218,7 +211,7 @@ class _BusinessProfileLargeScreenState
                                             groupValue: widget.controller!
                                                 .modelOfWork.obs.value.value,
                                             activeColor:
-                                                ColorResource.color00E94F,
+                                                Theme.of(context).primaryColor,
                                             onChanged: (ModelOfWork? value) {
                                               widget.controller!
                                                   .modelOfWorkToggle(
@@ -233,11 +226,9 @@ class _BusinessProfileLargeScreenState
                                                 .textTheme
                                                 .titleSmall!
                                                 .copyWith(
-                                                    color: ColorResource
-                                                        .colorFFFFFF,
                                                     fontSize: 16,
                                                     fontWeight:
-                                                        FontWeight.w600),
+                                                        FontWeight.w300),
                                           )
                                         ],
                                       ),
@@ -255,14 +246,14 @@ class _BusinessProfileLargeScreenState
                           children: <Widget>[
                             Theme(
                               data: Theme.of(context).copyWith(
-                                unselectedWidgetColor:
-                                    ColorResource.color00E94F,
-                              ),
+                                  unselectedWidgetColor:
+                                      Theme.of(context).unselectedWidgetColor),
                               child: Checkbox(
                                 value: widget.controller!.iDontHaveBusiness.obs
                                     .value.value,
-                                activeColor: Colors.blue,
-                                checkColor: ColorResource.color151515,
+                                activeColor: Theme.of(context).primaryColor,
+                                checkColor:
+                                    Theme.of(context).scaffoldBackgroundColor,
                                 onChanged: (value) {
                                   widget.controller!
                                       .noBusinessCheckBox(values: value);
@@ -270,30 +261,31 @@ class _BusinessProfileLargeScreenState
                               ),
                             ),
                             CustomText(
-                              text: '${Languages.of(context)?.iHaveABusiness}',
+                              text: '${Languages.of(context)?.iHaveAGSTNumber}',
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall!
                                   .copyWith(
-                                      color: ColorResource.colorFFFFFF,
-                                      fontSize: 16,
+                                      fontSize: 14,
                                       fontWeight: FontWeight.w400),
                             ),
                           ],
                         ),
                         // business Name
                         WidgetUtils.genericTextFiled(
+                          height: 50,
                           context: context,
                           controller: widget.controller!.businessNameController,
                           labelName: '${Languages.of(context)?.businessName}',
+                          hintText:
+                              '${Languages.of(context)?.businessName} or ${Languages.of(context)?.brandName}',
                           labelStyle: Theme.of(context)
                               .textTheme
-                              .titleSmall!
+                              .titleMedium!
                               .copyWith(
-                                  color: ColorResource.colorE08AF4,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500),
+                                  fontSize: 14, fontWeight: FontWeight.w500),
                         ),
+                        SizedBox(height: 10),
                         // nature of business
                         WidgetUtils.dropDown(
                             context: context,
@@ -310,19 +302,21 @@ class _BusinessProfileLargeScreenState
                                       widget.controller!.natureOfBusinessValue);
                             }),
                         SizedBox(height: 10),
-                        if (widget.controller!.natureOfBusinessValue.value == 'others')
+                        if (widget.controller!.natureOfBusinessValue.value
+                                .toLowerCase() ==
+                            'others')
                           WidgetUtils.genericTextFiled(
+                            height: 50,
                             context: context,
                             controller: widget.controller!
                                 .plsIfSpecifyControllerForNatureOfBusiness,
                             labelName: '${Languages.of(context)?.plsIfSpecify}',
+                            hintText: '${Languages.of(context)?.enterYourWork}',
                             labelStyle: Theme.of(context)
                                 .textTheme
-                                .titleSmall!
+                                .titleMedium!
                                 .copyWith(
-                                    color: ColorResource.colorE08AF4,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500),
+                                    fontSize: 14, fontWeight: FontWeight.w500),
                           ),
                         // nature of work
                         WidgetUtils.dropDown(
@@ -339,120 +333,113 @@ class _BusinessProfileLargeScreenState
                                       widget.controller!.natureOfWorkValue);
                             }),
                         SizedBox(height: 10),
-                        if (widget.controller!.natureOfWorkValue.value == 'other')
+                        if (widget.controller!.natureOfWorkValue.value
+                                .toLowerCase() ==
+                            'other')
                           WidgetUtils.genericTextFiled(
+                            height: 50,
                             context: context,
                             controller:
                                 widget.controller!.plsIfSpecifyController,
                             labelName: '${Languages.of(context)?.plsIfSpecify}',
+                            hintText: '${Languages.of(context)?.enterYourWork}',
                             labelStyle: Theme.of(context)
                                 .textTheme
-                                .titleSmall!
+                                .titleMedium!
                                 .copyWith(
-                                    color: ColorResource.colorE08AF4,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500),
+                                    fontSize: 14, fontWeight: FontWeight.w500),
                           ),
                         // mobile no
                         CustomText(
                           text: '${Languages.of(context)?.mobileNumber}',
                           style: Theme.of(context)
                               .textTheme
-                              .titleSmall!
+                              .titleMedium!
                               .copyWith(
-                                  color: ColorResource.colorE08AF4,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500),
+                                  fontSize: 14, fontWeight: FontWeight.w500),
                         ),
                         const SizedBox(height: 5),
-                        SizedBox(
-                          child: CustomTextField(
-                            widget.controller!.mobilNumberController.obs.value,
-                            focusedBorder: Colors.grey,
-                            textColor: Colors.white,
-                            enableColor: Colors.grey,
-                            borderColor: Colors.red,
-                            disableColor: Colors.red,
-                            keyBoardType: TextInputType.phone,
-                            prefixIcon: Container(
-                              width: 100,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: [
-                                    ClipOval(
-                                      child: Material(
-                                        child: InkWell(
-                                          splashColor: Colors.red,
-                                          // Splash color
-                                          onTap: () {},
-                                          child: SizedBox(
-                                            width: 22,
-                                            height: 22,
-                                            child: Image.network(
-                                              'https://think360studio-media.s3.ap-south-1.amazonaws.com/download/india-flag-2021-wallpaper-1.png',
-                                              fit: BoxFit.fill,
-                                            ),
-                                          ),
+                        CustomTextField(
+                          widget.controller!.mobilNumberController.obs.value,
+                          focusedBorder: Colors.grey,
+                          validatorCallBack: (bool value) {},
+                          enableColor: Colors.grey,
+                          borderColor: Colors.red,
+                          validationRules: ['required', 'mobile_number'],
+                          disableColor: Colors.red,
+                          keyBoardType: TextInputType.phone,
+                          prefixIcon: Container(
+                            width: 120,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Row(
+                                children: [
+                                  ClipOval(
+                                    child: Material(
+                                      child: InkWell(
+                                        splashColor: Colors.red,
+                                        // Splash color
+                                        onTap: () {},
+                                        child: SizedBox(
+                                          width: 32,
+                                          height: 32,
+                                          child: Image.network(
+                                              'https://cdn.pixabay.com/photo/2020/07/04/08/24/india-5368684__340.jpg',
+                                              fit: BoxFit.cover),
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(width: 5),
-                                    CustomText(
-                                      text: '+91',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall!
-                                          .copyWith(
-                                              color: Theme.of(context)
-                                                  .textTheme
-                                                  .titleMedium!
-                                                  .color,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400),
-                                    ),
-                                    Icon(
-                                      Icons.keyboard_arrow_down,
-                                      size: 22,
-                                      color: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium!
-                                          .color,
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    Container(
-                                      width: 0.40,
-                                      height: 20,
-                                      color: ColorResource.colorDDDDDD,
-                                    )
-                                  ],
-                                ),
+                                  ),
+                                  const SizedBox(width: 5),
+                                  CustomText(
+                                    text: '+91',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .copyWith(
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium!
+                                                .color,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400),
+                                  ),
+                                  Icon(
+                                    Icons.keyboard_arrow_down,
+                                    size: 22,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .color,
+                                  ),
+                                  VerticalDivider(
+                                    thickness: 1,
+                                    indent: 15,
+                                    endIndent: 15,
+                                  )
+                                ],
                               ),
                             ),
                           ),
-                          height: 70,
                         ),
                         //email id
                         WidgetUtils.genericTextFiled(
+                          height: 50,
                           context: context,
                           controller: widget.controller!.emailController,
                           labelName: '${Languages.of(context)?.emailID}',
                           labelStyle: Theme.of(context)
                               .textTheme
-                              .titleSmall!
+                              .titleMedium!
                               .copyWith(
-                                  color: ColorResource.colorE08AF4,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500),
+                                  fontSize: 14, fontWeight: FontWeight.w500),
                         ),
+                        SizedBox(height: 30),
                         PrimaryButton(
                           '${Languages.of(context)!.continueText}',
                           context,
                           cardShape: 1,
                           isIcon: true,
-                          textColor: ColorResource.black,
                           fontSize: 20,
                           onTap: () {
                             Get.put(DashboardController());

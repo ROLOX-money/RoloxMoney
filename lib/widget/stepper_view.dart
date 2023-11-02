@@ -48,7 +48,7 @@ class NumberStepper extends StatelessWidget {
           child: getInnerElementOfStepper(i + 1, context),
           decoration: BoxDecoration(
             color: currentStep > i + 1
-                ? ColorResource.stepperLineColor
+                ? ColorResource.primaryColor
                 : Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.all(Radius.circular(25.0)),
             border: Border.all(

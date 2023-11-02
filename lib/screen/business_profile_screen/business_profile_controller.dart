@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:roloxmoney/screen/login_screen/login_controller.dart';
 
 
 enum ModelOfWork { fullTime, partTime }
@@ -60,9 +61,12 @@ class BusinessProfileController extends GetxController with StateMixin {
   RxBool gstNumber = true.obs;
   RxInt currentStep = 1.obs;
 
+  LoginController loginController = Get.put(LoginController());
+
   @override
   void onInit() async {
     change(null, status: RxStatus.success());
+    mobilNumberController.value = loginController.mobilNumberController.value;
     Future.delayed(const Duration(seconds: 5), () {});
     super.onInit();
   }

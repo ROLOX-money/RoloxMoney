@@ -32,7 +32,7 @@ class _AddInvoiceScreenLargeState extends State<AddInvoiceScreenLarge> {
                 backgroundColor: Theme.of(context).backgroundColor,
                 appBar: AppBar(
                     centerTitle: false,
-                    backgroundColor: Theme.of(context).backgroundColor,
+                    backgroundColor: Colors.transparent,
                     title: Container(
                       padding: const EdgeInsets.only(left: 8.0, top: 20),
                       child: Image.asset(
@@ -40,27 +40,27 @@ class _AddInvoiceScreenLargeState extends State<AddInvoiceScreenLarge> {
                         height: 30,
                       ),
                     ),
+                    automaticallyImplyLeading: false,
                     shadowColor: Colors.grey,
                     elevation: 0.0),
                 body: Center(
                     child: Container(
                         width: MediaQuery.of(context).size.width / 2,
                         height: MediaQuery.of(context).size.height / 1.2,
-
+                        padding: EdgeInsets.symmetric(horizontal: 16,vertical: 10),
                         decoration: BoxDecoration(
-                            color: ColorResource.color1B2023,
+                            color: ColorResource.buttonTextColor,
                             borderRadius:
                                 BorderRadius.all(Radius.circular(24))),
                         alignment: Alignment.topLeft,
                         child: ListView(children: [
                           AppBar(
-                            backgroundColor: ColorResource.color1B2023,
+                            backgroundColor: ColorResource.buttonTextColor,
                             toolbarHeight: 80,
                             leading: IconButton(
                               icon: Icon(
                                 Icons.arrow_back_sharp,
                                 size: 30,
-                                color: Colors.white,
                               ),
                               onPressed: () {
                                 Get.back();
@@ -73,7 +73,6 @@ class _AddInvoiceScreenLargeState extends State<AddInvoiceScreenLarge> {
                                   .textTheme
                                   .titleSmall!
                                   .copyWith(
-                                      color: ColorResource.colorFFFFFF,
                                       fontSize: 21,
                                       fontWeight: FontWeight.w600),
                             ),
@@ -87,11 +86,13 @@ class _AddInvoiceScreenLargeState extends State<AddInvoiceScreenLarge> {
                           Form(
                             key: widget.controller!.form,
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 16,right: 16,bottom: 16),
+                              padding: const EdgeInsets.only(
+                                  left: 16, right: 16, bottom: 16),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   WidgetUtils.genericTextFiled(
+                                    height: 50,
                                     context: context,
                                     validationRules: ['required'],
                                     hintText: Languages.of(context)
@@ -103,6 +104,7 @@ class _AddInvoiceScreenLargeState extends State<AddInvoiceScreenLarge> {
                                         '${Languages.of(context)?.invoiceName}',
                                   ),
                                   WidgetUtils.genericTextFiled(
+                                    height: 50,
                                     context: context,
                                     validationRules: ['required'],
                                     hintText: Languages.of(context)
@@ -113,6 +115,7 @@ class _AddInvoiceScreenLargeState extends State<AddInvoiceScreenLarge> {
                                         '${Languages.of(context)?.invoiceNumber}',
                                   ),
                                   WidgetUtils.genericTextFiled(
+                                    height: 50,
                                     context: context,
                                     validationRules: ['required'],
                                     hintText:
@@ -124,6 +127,7 @@ class _AddInvoiceScreenLargeState extends State<AddInvoiceScreenLarge> {
                                         '${Languages.of(context)?.invoiceValueWithoutGST}',
                                   ),
                                   WidgetUtils.genericTextFiled(
+                                    height: 50,
                                     context: context,
                                     validationRules: ['required'],
                                     hintText: Languages.of(context)
@@ -136,6 +140,7 @@ class _AddInvoiceScreenLargeState extends State<AddInvoiceScreenLarge> {
                                         '${Languages.of(context)?.projectName}',
                                   ),
                                   WidgetUtils.genericTextFiled(
+                                    height: 50,
                                     context: context,
                                     hintText: "DD/MM/YYYY",
                                     validationRules: ['required'],
@@ -147,6 +152,7 @@ class _AddInvoiceScreenLargeState extends State<AddInvoiceScreenLarge> {
                                         '${Languages.of(context)?.invoiceDueDate}',
                                   ),
                                   WidgetUtils.genericTextFiled(
+                                    height: 50,
                                     context: context,
                                     validationRules: ['required'],
                                     hintText:
@@ -158,6 +164,7 @@ class _AddInvoiceScreenLargeState extends State<AddInvoiceScreenLarge> {
                                         '${Languages.of(context)?.hsnCode}',
                                   ),
                                   WidgetUtils.genericTextFiled(
+                                    height: 50,
                                     context: context,
                                     validationRules: ['required'],
                                     hintText: Languages.of(context)?.gstCharges,
@@ -167,25 +174,15 @@ class _AddInvoiceScreenLargeState extends State<AddInvoiceScreenLarge> {
                                     labelName:
                                         '${Languages.of(context)?.gstCharges}',
                                   ),
-                                  WidgetUtils.genericTextFiled(
-                                    context: context,
-                                    validationRules: ['required'],
-                                    hintText: Languages.of(context)?.state,
-                                    keyBoardType: TextInputType.phone,
-                                    controller:
-                                        widget.controller!.stateController,
-                                    labelName:
-                                        '${Languages.of(context)?.state}',
-                                  ),
+
                                   const SizedBox(
                                     height: 15,
                                   ),
                                   PrimaryButton(
-                                    '${Languages.of(context)!.save}',
+                                    '${Languages.of(context)!.paid}',
                                     context,
                                     cardShape: 1,
                                     isIcon: true,
-                                    textColor: ColorResource.black,
                                     fontSize: 20,
                                     onTap: () {
                                       if (widget.controller!.form.currentState!

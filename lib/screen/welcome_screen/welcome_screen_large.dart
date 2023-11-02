@@ -48,12 +48,12 @@ class WelcomeScreenLargeState extends State<WelcomeScreenLarge> {
                   SizedBox(height: 40),
                   CustomText(
                     text: '${Languages.of(context)?.congratulations}',
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                         color: ColorResource.buttonColor,
                         fontSize: 30,
                         fontWeight: FontWeight.w700),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 15),
                   CustomText(
                     text:
                         '${Languages.of(context)?.accountCreatedSuccessfully}',

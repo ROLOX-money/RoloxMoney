@@ -16,6 +16,19 @@ class ColorResource {
   static const Color stepperColor = Color(0xffF58220);
   static const Color stepperLineColor = Color(0xffE2E2E2);
   static const Color photoBackgroundColor = Color(0xffF5F5F5);
+  static const Color appbarBackgroundColor = Color(0xffEFEFEF);
+  static const Color selectedTileColor = Color(0xffF9EBFB);
+  static const Color toggleButtonColor = Color(0xffC4C4C4);
+  static const Color cardDividerColor = Color(0xffE1E1E1);
+  static const Color eyeVisibleIconColor = Color(0xff8B8B8B);
+  static const Color greenColor = Color(0xff5AB570);
+  static const Color orangeColor = Color(0xffF58220);
+  static const Color mediumScreenAppBarBgColor = Color(0xffF8F8F8);
+  static const Color initialBgColor = Color(0xffF3E3FF);
+  static const Color initialBgColor2 = Color(0xffF8EBD9);
+  static const Color initialTextColor = Color(0xffA44FE7);
+  static const Color initialTextColor2 = Color(0xffF2A536);
+  static const Color textFiledBgColor = Color(0xffE4E4E4);
 
   static List<BoxShadow> boxShadow = [
     BoxShadow(

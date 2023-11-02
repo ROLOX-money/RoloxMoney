@@ -105,7 +105,7 @@ class _IndividualProfileScreenLargeState
                       width: MediaQuery.of(context).size.width / 5,
                       currentStep:
                           widget.controller!.currentStep.obs.value.value,
-                      stepCompleteColor: ColorResource.red,
+                      stepCompleteColor: ColorResource.buttonTextColor,
                       currentStepColor: ColorResource.stepperColor,
                       inactiveColor: ColorResource.stepperLineColor,
                       lineWidth: 1,
@@ -129,7 +129,7 @@ class _IndividualProfileScreenLargeState
                       context,
                       cardShape: 1,
                       isIcon: true,
-                      fontSize: 20,
+                      fontSize: 18,
                       onTap: () {
                         if (widget.controller!.form.currentState!.validate()) {
                           if (widget.controller!.currentStep.obs.value.value !=
@@ -248,12 +248,14 @@ class _IndividualProfileScreenLargeState
                 SizedBox(height: 10),
                 if (widget.controller!.natureOfBusinessValue.value
                         .toLowerCase() ==
-                    'other')
+                    'others')
                   WidgetUtils.genericTextFiled(
+                    height: 50,
                     context: context,
                     validationRules: ['required'],
                     controller: widget.controller!.plsIfSpecifyController,
                     labelName: '${Languages.of(context)?.plsIfSpecify}',
+                    hintText: '${Languages.of(context)?.enterYourWork}',
                     labelStyle: Theme.of(context)
                         .textTheme
                         .titleMedium!
@@ -274,11 +276,13 @@ class _IndividualProfileScreenLargeState
                 if (widget.controller!.natureOfWorkValue.value.toLowerCase() ==
                     'other')
                   WidgetUtils.genericTextFiled(
+                    height: 50,
                     context: context,
                     validationRules: ['required'],
                     controller: widget
                         .controller!.plsIfSpecifyControllerForNatureOfWork,
                     labelName: '${Languages.of(context)?.plsIfSpecify}',
+                    hintText: '${Languages.of(context)?.enterYourWork}',
                     labelStyle: Theme.of(context)
                         .textTheme
                         .titleSmall!
@@ -294,6 +298,7 @@ class _IndividualProfileScreenLargeState
                 ),
                 const SizedBox(height: 5),
                 SizedBox(
+                  height: 50,
                   child: CustomTextField(
                     widget.controller!.mobilNumberController.obs.value,
                     focusedBorder: Colors.grey,
@@ -306,7 +311,7 @@ class _IndividualProfileScreenLargeState
                     prefixIcon: Container(
                       width: 120,
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.only(left: 8),
                         child: Row(
                           children: [
                             ClipOval(
@@ -357,7 +362,6 @@ class _IndividualProfileScreenLargeState
                       ),
                     ),
                   ),
-                  height: 70,
                 ),
                 const SizedBox(height: 5),
               ]),
@@ -369,7 +373,7 @@ class _IndividualProfileScreenLargeState
   Widget secondPageForIndividual() {
     return ListView(shrinkWrap: true, children: [
       Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.only(top: 16.0, left: 16, right: 16),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             CustomText(
@@ -382,6 +386,7 @@ class _IndividualProfileScreenLargeState
             SizedBox(height: 20),
             // PAN No
             WidgetUtils.genericTextFiled(
+              height: 50,
               context: context,
               validationRules: ['required'],
               controller: widget.controller!.panNumberController,
@@ -391,6 +396,7 @@ class _IndividualProfileScreenLargeState
                   .titleMedium!
                   .copyWith(fontSize: 14, fontWeight: FontWeight.w500),
             ),
+            SizedBox(height: 10),
             // I have GST no
             ListTile(
               visualDensity: VisualDensity(horizontal: -4, vertical: -4),
@@ -418,8 +424,10 @@ class _IndividualProfileScreenLargeState
                     .copyWith(fontSize: 16, fontWeight: FontWeight.w400),
               ),
             ),
+            SizedBox(height: 10),
             WidgetUtils.genericTextFiled(
               context: context,
+              height: 50,
               validationRules: ['required'],
               controller: widget.controller!.gstController,
               labelName: '${Languages.of(context)?.gstNumber}',
@@ -446,6 +454,7 @@ class _IndividualProfileScreenLargeState
             SizedBox(height: 5),
             // PinCode
             WidgetUtils.genericTextFiled(
+                height: 50,
                 context: context,
                 validationRules: ['required'],
                 controller: widget.controller!.pincodeController,

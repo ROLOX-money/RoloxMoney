@@ -1,13 +1,12 @@
 import 'dart:async';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:roloxmoney/model/project_model.dart';
 import 'package:roloxmoney/screen/projects_screen/add_project/add_project_controller.dart';
 import 'package:roloxmoney/screen/projects_screen/add_project/add_project_screen.dart';
 
 /*Chinnadurai Viswanathan*/
 class ProjectsController extends GetxController with StateMixin {
-  RxList projectInvoicesList = [].obs;
+  RxList<ProjectModel> projectInvoicesList = <ProjectModel>[].obs;
 
   @override
   void onInit() async {
@@ -16,18 +15,21 @@ class ProjectsController extends GetxController with StateMixin {
       projectInvoicesList.addAll([
         ProjectModel(
             amount: '25000',
+            clientName: 'Target InfoTech',
             projectName: 'Target InfoTech',
-            date: DateFormat('dd MMM yyyy').format(DateTime.now()),
+            date: DateTime.now().toString(),
             noOfInvoice: 2),
         ProjectModel(
             amount: '25000',
             projectName: 'Target InfoTech',
-            date: DateFormat('dd MMM yyyy').format(DateTime.now()),
+            clientName: 'Target InfoTech',
+            date: DateTime.now().toString(),
             noOfInvoice: 2),
         ProjectModel(
             amount: '25000',
             projectName: 'Target InfoTech',
-            date: DateFormat('dd MMM yyyy').format(DateTime.now()),
+            clientName: 'Target InfoTech',
+            date: DateTime.now().toString(),
             noOfInvoice: 2),
       ]);
       change(projectInvoicesList);

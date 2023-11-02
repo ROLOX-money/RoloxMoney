@@ -33,7 +33,7 @@ class IndividualProfileController extends GetxController with StateMixin {
     'Software',
     'Driver',
     'Auditor',
-    'Other',
+    'Others',
   ].obs;
   RxString natureOfBusinessValue = 'Software'.obs;
   RxBool iDontHaveBusiness = true.obs;

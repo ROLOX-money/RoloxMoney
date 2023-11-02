@@ -23,15 +23,36 @@ class DashboardController extends GetxController with StateMixin {
   Rx<PageController> pageController = PageController().obs;
 
   RxList<DashboardNavigatorModel>? dashboardNavigatorModelList = [
-    DashboardNavigatorModel(icon: ImageResource.home, name: 'Home', index: 0),
     DashboardNavigatorModel(
-        icon: ImageResource.client, name: 'Clients', index: 1),
+      icon: ImageResource.home,
+      name: 'Home',
+      index: 0,
+      icon1: ImageResource.homeBold,
+    ),
     DashboardNavigatorModel(
-        icon: ImageResource.projects, name: 'Projects', index: 2),
+      icon: ImageResource.client,
+      name: 'Clients',
+      index: 1,
+      icon1: ImageResource.clientBold,
+    ),
     DashboardNavigatorModel(
-        icon: ImageResource.invoice, name: 'Invoices', index: 3),
+      icon: ImageResource.projects,
+      name: 'Projects',
+      index: 2,
+      icon1: ImageResource.projectBold,
+    ),
     DashboardNavigatorModel(
-        icon: ImageResource.wallet, name: 'Payments', index: 4),
+      icon: ImageResource.invoice,
+      name: 'Invoices',
+      index: 3,
+      icon1: ImageResource.invoiceBold,
+    ),
+    DashboardNavigatorModel(
+      icon: ImageResource.wallet,
+      name: 'Payments',
+      index: 4,
+      icon1: ImageResource.walletBold,
+    ),
   ].obs;
 
   RxString selectedBottomButton = 'empty'.obs;
@@ -39,12 +60,14 @@ class DashboardController extends GetxController with StateMixin {
   RxInt selectedIndex = 0.obs;
   CurrentPage currentPage = CurrentPage.HomePage;
 
+  HomeController homeController = Get.put(HomeController());
+
   @override
   void onInit() async {
     change(null, status: RxStatus.success());
     Future.delayed(const Duration(seconds: 5), () {
-      // selectedBottomButton = 'Home'.obs;
-      // change(selectedBottomButton);
+      selectedBottomButton = 'Home'.obs;
+      change(selectedBottomButton);
     });
     super.onInit();
   }

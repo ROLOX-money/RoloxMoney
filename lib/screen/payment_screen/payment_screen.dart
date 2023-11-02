@@ -31,7 +31,7 @@ class PaymentScreenState extends State<PaymentScreen> {
         return ResponsiveWidget(
           largeScreen: PaymentScreenLarge(
               controller: controller, scaffoldKey: widget.scaffoldKey),
-          mediumScreen: PaymentScreenSmall(
+          mediumScreen: PaymentScreenLarge(
               controller: controller, scaffoldKey: widget.scaffoldKey),
           smallScreen: PaymentScreenSmall(
               controller: controller, scaffoldKey: widget.scaffoldKey),

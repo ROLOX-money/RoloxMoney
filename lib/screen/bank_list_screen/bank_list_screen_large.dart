@@ -32,14 +32,16 @@ class _BankListLargeScreenState extends State<BankListLargeScreen> {
                 backgroundColor: Theme.of(context).backgroundColor,
                 appBar: AppBar(
                     centerTitle: false,
-                    backgroundColor: Theme.of(context).backgroundColor,
+                    backgroundColor: Colors.transparent,
                     title: Container(
                       padding: const EdgeInsets.only(left: 8.0, top: 20),
                       child: Image.asset(
                         ImageResource.rolox,
                         height: 30,
+                        color: Colors.black,
                       ),
                     ),
+                    automaticallyImplyLeading: false,
                     shadowColor: Colors.grey,
                     elevation: 0.0),
                 body: Center(
@@ -47,20 +49,21 @@ class _BankListLargeScreenState extends State<BankListLargeScreen> {
                         width: MediaQuery.of(context).size.width / 2,
                         height: MediaQuery.of(context).size.height / 1.3,
                         decoration: BoxDecoration(
-                            color: ColorResource.color1B2023,
-                            borderRadius: BorderRadius.all(Radius.circular(24))),
+                            color: ColorResource.buttonTextColor,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(24))),
                         alignment: Alignment.topLeft,
                         child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 30),
                             child: ListView(shrinkWrap: true, children: [
                               AppBar(
-                                  backgroundColor: ColorResource.color1B2023,
+                                  backgroundColor:
+                                      ColorResource.buttonTextColor,
                                   leading: IconButton(
                                     icon: Icon(
                                       Icons.arrow_back_sharp,
                                       size: 30,
-                                      color: Colors.white,
                                     ),
                                     onPressed: () {
                                       Get.back();
@@ -73,7 +76,6 @@ class _BankListLargeScreenState extends State<BankListLargeScreen> {
                                         .textTheme
                                         .titleSmall!
                                         .copyWith(
-                                            color: ColorResource.colorFFFFFF,
                                             fontSize: 21,
                                             fontWeight: FontWeight.w600),
                                   ),
@@ -119,7 +121,7 @@ class _BankListLargeScreenState extends State<BankListLargeScreen> {
                                                         color: bankModel
                                                                 .isPrimary
                                                             ? ColorResource
-                                                                .colorFFFFFF
+                                                                .buttonColor
                                                             : ColorResource
                                                                 .color383838,
                                                         style:
@@ -135,104 +137,76 @@ class _BankListLargeScreenState extends State<BankListLargeScreen> {
                                                         EdgeInsets.symmetric(
                                                             vertical: 15),
                                                     child: ListTile(
-                                                      onTap: () {
-                                                        widget.controller!
-                                                            .changedThePrimaryAccount(
-                                                                selectedIndex:
-                                                                    index);
-                                                      },
-                                                      leading: Container(
-                                                        height: 40,
-                                                        width: 40,
-                                                        alignment:
-                                                            Alignment.center,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                            Radius.circular(20),
+                                                        onTap: () {
+                                                          widget.controller!
+                                                              .changedThePrimaryAccount(
+                                                                  selectedIndex:
+                                                                      index);
+                                                        },
+                                                        leading: Container(
+                                                          height: 40,
+                                                          width: 40,
+                                                          alignment:
+                                                              Alignment.center,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .all(
+                                                              Radius.circular(
+                                                                  20),
+                                                            ),
+                                                            color: ColorResource
+                                                                .photoBackgroundColor,
                                                           ),
-                                                          color: ColorResource
-                                                              .color381D4E,
-                                                        ),
-                                                        child: CustomText(
-                                                          text: AppUtils
-                                                                  .getInitials(
-                                                                      bankModel
-                                                                          .bankName)
-                                                              .toString(),
-                                                          style: Theme.of(
-                                                                  context)
-                                                              .textTheme
-                                                              .bodyText1!
-                                                              .copyWith(
-                                                                  color: ColorResource
-                                                                      .colorE08AF4,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w700),
-                                                        ),
-                                                      ),
-                                                      title: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          CustomText(
-                                                            text:
-                                                                '${bankModel.bankName!} *****3456',
+                                                          child: CustomText(
+                                                            text: AppUtils
+                                                                    .getInitials(
+                                                                        bankModel
+                                                                            .bankName)
+                                                                .toString(),
                                                             style: Theme.of(
                                                                     context)
                                                                 .textTheme
-                                                                .titleSmall!
+                                                                .bodyText1!
                                                                 .copyWith(
-                                                                    color: ColorResource
-                                                                        .colorF8F8F8,
-                                                                    overflow:
-                                                                        TextOverflow
-                                                                            .fade,
-                                                                    fontSize:
-                                                                        16,
                                                                     fontWeight:
                                                                         FontWeight
-                                                                            .w600),
+                                                                            .w700),
                                                           ),
-                                                          SizedBox(height: 10),
-                                                          CustomText(
-                                                            text: bankModel
-                                                                .holderName!,
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .titleSmall!
-                                                                .copyWith(
-                                                                    color: ColorResource
-                                                                        .colorFFFFFF
-                                                                        .withOpacity(
-                                                                            0.6),
-                                                                    overflow:
-                                                                        TextOverflow
-                                                                            .fade,
-                                                                    fontSize:
-                                                                        14,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600),
-                                                          ),
-                                                          if (bankModel
-                                                              .isPrimary)
-                                                            Column(
-                                                              children: [
-                                                                SizedBox(
-                                                                    height: 5),
-                                                                CustomText(
-                                                                  text:
-                                                                      'Primary',
-                                                                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                                                                      color: ColorResource
-                                                                          .colorFFFFFF
-                                                                          .withOpacity(
-                                                                              0.6),
+                                                        ),
+                                                        title: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            CustomText(
+                                                              text:
+                                                                  '${bankModel.bankName!} *****3456',
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .titleSmall!
+                                                                  .copyWith(
+                                                                      overflow:
+                                                                          TextOverflow
+                                                                              .fade,
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600),
+                                                            ),
+                                                            SizedBox(
+                                                                height: 10),
+                                                            CustomText(
+                                                              text: bankModel
+                                                                  .holderName!,
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .titleSmall!
+                                                                  .copyWith(
                                                                       overflow:
                                                                           TextOverflow
                                                                               .fade,
@@ -241,26 +215,57 @@ class _BankListLargeScreenState extends State<BankListLargeScreen> {
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w600),
-                                                                ),
-                                                              ],
-                                                            )
-                                                        ],
-                                                      ),
-                                                      trailing: Checkbox(
-                                                        value:
-                                                            bankModel.isPrimary,
-                                                        checkColor:
-                                                            ColorResource
-                                                                .colorFFFFFF,
-                                                        shape: CircleBorder(),
-                                                        // tristate: true,
-                                                        activeColor:
-                                                            ColorResource
-                                                                .color00E94F,
-                                                        onChanged:
-                                                            (bool? value) {},
-                                                      ),
-                                                    ),
+                                                            ),
+                                                            if (bankModel
+                                                                .isPrimary)
+                                                              Column(
+                                                                children: [
+                                                                  SizedBox(
+                                                                      height:
+                                                                          5),
+                                                                  CustomText(
+                                                                    text:
+                                                                        'Primary',
+                                                                    style: Theme.of(
+                                                                            context)
+                                                                        .textTheme
+                                                                        .titleSmall!
+                                                                        .copyWith(
+                                                                            overflow: TextOverflow
+                                                                                .fade,
+                                                                            fontSize:
+                                                                                14,
+                                                                            fontWeight:
+                                                                                FontWeight.w600),
+                                                                  ),
+                                                                ],
+                                                              )
+                                                          ],
+                                                        ),
+                                                        trailing: Theme(
+                                                          data: Theme.of(context).copyWith(
+                                                              unselectedWidgetColor:
+                                                                  Theme.of(
+                                                                          context)
+                                                                      .unselectedWidgetColor),
+                                                          child: Checkbox(
+                                                            value: bankModel
+                                                                .isPrimary,
+                                                            activeColor: Theme
+                                                                    .of(context)
+                                                                .primaryColor,
+                                                            checkColor: Theme
+                                                                    .of(context)
+                                                                .scaffoldBackgroundColor,
+
+                                                            shape:
+                                                                CircleBorder(),
+                                                            // tristate: true,
+
+                                                            onChanged: (bool?
+                                                                value) {},
+                                                          ),
+                                                        )),
                                                   );
                                                 }),
                                             SizedBox(
@@ -272,7 +277,7 @@ class _BankListLargeScreenState extends State<BankListLargeScreen> {
                                               decoration: BoxDecoration(
                                                 border: Border.all(
                                                   color:
-                                                      ColorResource.color00E94F,
+                                                      ColorResource.buttonColor,
                                                   style: BorderStyle.solid,
                                                   width: 1.0,
                                                 ),
@@ -283,7 +288,10 @@ class _BankListLargeScreenState extends State<BankListLargeScreen> {
                                               padding: EdgeInsets.symmetric(
                                                   vertical: 15),
                                               child: ListTile(
-                                                onTap: () {},
+                                                onTap: () {
+                                                  widget.controller!
+                                                      .navigateAddBankAccountScreen();
+                                                },
                                                 leading: Container(
                                                   height: 45,
                                                   width: 45,
@@ -291,11 +299,12 @@ class _BankListLargeScreenState extends State<BankListLargeScreen> {
                                                   decoration: BoxDecoration(
                                                     border: Border.all(
                                                       color: ColorResource
-                                                          .color383838,
+                                                          .buttonColor,
                                                       style: BorderStyle.solid,
                                                       width: 1.0,
                                                     ),
-                                                    color: Colors.transparent,
+                                                    color: ColorResource
+                                                        .photoBackgroundColor,
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             40.0),
@@ -304,6 +313,8 @@ class _BankListLargeScreenState extends State<BankListLargeScreen> {
                                                     ImageResource.bank,
                                                     height: 25,
                                                     width: 25,
+                                                    color: ColorResource
+                                                        .buttonColor,
                                                   ),
                                                 ),
                                                 title: Column(
@@ -316,8 +327,6 @@ class _BankListLargeScreenState extends State<BankListLargeScreen> {
                                                           .textTheme
                                                           .titleSmall!
                                                           .copyWith(
-                                                              color: ColorResource
-                                                                  .color00E94F,
                                                               overflow:
                                                                   TextOverflow
                                                                       .fade,
@@ -330,8 +339,6 @@ class _BankListLargeScreenState extends State<BankListLargeScreen> {
                                                 ),
                                                 trailing: Icon(
                                                   Icons.add,
-                                                  color:
-                                                      ColorResource.color00E94F,
                                                   size: 30.0,
                                                 ),
                                               ),

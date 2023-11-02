@@ -3,6 +3,7 @@ class ProjectModel {
   int? noOfInvoice;
   String? amount;
   String? date;
+  String? clientName;
   bool? isCredit;
 
   ProjectModel(
@@ -10,5 +11,6 @@ class ProjectModel {
       this.noOfInvoice,
       this.amount,
       this.date,
+      this.clientName,
       this.isCredit = false});
 }

@@ -32,37 +32,38 @@ class _AddBankAccountScreenLargeState extends State<AddBankAccountScreenLarge> {
         child: SafeArea(
             child: Scaffold(
                 backgroundColor: Theme.of(context).backgroundColor,
-                appBar:AppBar(
+                appBar: AppBar(
                     centerTitle: false,
-                    backgroundColor: Theme.of(context).backgroundColor,
+                    backgroundColor: Colors.transparent,
                     title: Container(
                       padding: const EdgeInsets.only(left: 8.0, top: 20),
                       child: Image.asset(
                         ImageResource.rolox,
                         height: 30,
+                        color: Colors.black,
                       ),
                     ),
+                    automaticallyImplyLeading: false,
                     shadowColor: Colors.grey,
                     elevation: 0.0),
                 body: Center(
                     child: Container(
                         width: MediaQuery.of(context).size.width / 2,
                         height: MediaQuery.of(context).size.height / 1.2,
+                        padding: EdgeInsets.symmetric(horizontal: 16,vertical: 10),
                         decoration: BoxDecoration(
-                            color: ColorResource.color1B2023,
+                            color: ColorResource.buttonTextColor,
                             borderRadius:
                                 BorderRadius.all(Radius.circular(24))),
                         alignment: Alignment.topLeft,
                         child: ListView(children: [
                           SizedBox(height: 20),
                           AppBar(
-                              // backgroundColor: Theme.of(context).backgroundColor,
-                              backgroundColor: ColorResource.color1B2023,
+                              backgroundColor: ColorResource.buttonTextColor,
                               leading: IconButton(
                                 icon: Icon(
                                   Icons.arrow_back_sharp,
                                   size: 30,
-                                  color: Colors.white,
                                 ),
                                 onPressed: () {
                                   Get.back();
@@ -76,7 +77,6 @@ class _AddBankAccountScreenLargeState extends State<AddBankAccountScreenLarge> {
                                     .textTheme
                                     .titleSmall!
                                     .copyWith(
-                                        color: ColorResource.colorFFFFFF,
                                         fontSize: 21,
                                         fontWeight: FontWeight.w600),
                               ),
@@ -86,86 +86,93 @@ class _AddBankAccountScreenLargeState extends State<AddBankAccountScreenLarge> {
                                   borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(24),
                                       topRight: Radius.circular(24)))),
-                          Form(
-                            key: widget.controller!.form,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 16,right: 16,bottom: 16),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  WidgetUtils.genericTextFiled(
-                                    context: context,
-                                    validationRules: ['required'],
-                                    hintText: Languages.of(context)
-                                        ?.accountNoHintText,
-                                    keyBoardType: TextInputType.name,
-                                    controller: widget.controller!
-                                        .bankAccountNumberController,
-                                    labelName:
-                                        '${Languages.of(context)?.bankAccountNumber}',
-                                  ),
-                                  WidgetUtils.genericTextFiled(
-                                    context: context,
-                                    validationRules: ['required'],
-                                    hintText: Languages.of(context)
-                                        ?.accountHolderName,
-                                    controller: widget.controller!
-                                        .accountHolderNameController,
-                                    labelName:
-                                        '${Languages.of(context)?.accountHolderName}',
-                                  ),
-                                  WidgetUtils.genericTextFiled(
-                                    context: context,
-                                    validationRules: ['required'],
-                                    hintText: Languages.of(context)
-                                        ?.accountIfscHintText,
-                                    keyBoardType: TextInputType.name,
-                                    controller: widget
-                                        .controller!.bankIFSCCodeController,
-                                    labelName:
-                                        '${Languages.of(context)?.bankIFSCCode}',
-                                  ),
-                                  WidgetUtils.genericTextFiled(
-                                    context: context,
-                                    validationRules: ['required'],
-                                    hintText: Languages.of(context)
-                                        ?.brandNameHintText,
-                                    controller:
-                                        widget.controller!.branchNameController,
-                                    keyBoardType: TextInputType.emailAddress,
-                                    labelName:
-                                        '${Languages.of(context)?.branchName}',
-                                  ),
-                                  WidgetUtils.genericTextFiled(
-                                    context: context,
-                                    validationRules: ['required'],
-                                    hintText:
-                                        '${Languages.of(context)?.enter} ${Languages.of(context)?.cityName}',
-                                    controller:
-                                        widget.controller!.cityNameController,
-                                    keyBoardType: TextInputType.emailAddress,
-                                    labelName:
-                                        '${Languages.of(context)?.cityName}'
-                                            .toUpperCase(),
-                                  ),
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                  PrimaryButton(
-                                    '${Languages.of(context)!.save}',
-                                    context,
-                                    cardShape: 1,
-                                    isIcon: true,
-                                    textColor: ColorResource.black,
-                                    fontSize: 20,
-                                    onTap: () {
-                                      if (widget.controller!.form.currentState!
-                                          .validate()) {
-                                        Get.back();
-                                      }
-                                    },
-                                  )
-                                ],
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Form(
+                              key: widget.controller!.form,
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 16, right: 16, bottom: 16),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    WidgetUtils.genericTextFiled(
+                                      height: 50,
+                                      context: context,
+                                      validationRules: ['required'],
+                                      hintText: Languages.of(context)
+                                          ?.accountNoHintText,
+                                      keyBoardType: TextInputType.name,
+                                      controller: widget.controller!
+                                          .bankAccountNumberController,
+                                      labelName:
+                                          '${Languages.of(context)?.bankAccountNumber}',
+                                    ),
+                                    WidgetUtils.genericTextFiled(
+                                      height: 50,
+                                      context: context,
+                                      validationRules: ['required'],
+                                      hintText: Languages.of(context)
+                                          ?.accountHolderName,
+                                      controller: widget.controller!
+                                          .accountHolderNameController,
+                                      labelName:
+                                          '${Languages.of(context)?.accountHolderName}',
+                                    ),
+                                    WidgetUtils.genericTextFiled(
+                                      height: 50,
+                                      context: context,
+                                      validationRules: ['required'],
+                                      hintText: Languages.of(context)
+                                          ?.accountIfscHintText,
+                                      keyBoardType: TextInputType.name,
+                                      controller: widget
+                                          .controller!.bankIFSCCodeController,
+                                      labelName:
+                                          '${Languages.of(context)?.bankIFSCCode}',
+                                    ),
+                                    WidgetUtils.genericTextFiled(
+                                      height: 50,
+                                      context: context,
+                                      validationRules: ['required'],
+                                      hintText: Languages.of(context)
+                                          ?.brandNameHintText,
+                                      controller:
+                                          widget.controller!.branchNameController,
+                                      keyBoardType: TextInputType.emailAddress,
+                                      labelName:
+                                          '${Languages.of(context)?.branchName}',
+                                    ),
+                                    WidgetUtils.genericTextFiled(
+                                      height: 50,
+                                      context: context,
+                                      validationRules: ['required'],
+                                      hintText:
+                                          '${Languages.of(context)?.enter} ${Languages.of(context)?.cityName}',
+                                      controller:
+                                          widget.controller!.cityNameController,
+                                      keyBoardType: TextInputType.emailAddress,
+                                      labelName:
+                                          '${Languages.of(context)?.cityName}',
+                                    ),
+                                    const SizedBox(
+                                      height: 30,
+                                    ),
+                                    PrimaryButton(
+                                      '${Languages.of(context)!.save}',
+                                      context,
+                                      cardShape: 1,
+                                      isIcon: true,
+                                      fontSize: 20,
+                                      onTap: () {
+                                        if (widget.controller!.form.currentState!
+                                            .validate()) {
+                                          Get.back();
+                                        }
+                                      },
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),

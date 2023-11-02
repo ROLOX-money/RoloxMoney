@@ -42,6 +42,7 @@ class _ProfileScreenLargeState extends State<ProfileScreenLarge> {
                   height: 30,
                 ),
               ),
+              automaticallyImplyLeading: false,
               shadowColor: Colors.grey,
               elevation: 0.0),
           body: Center(
@@ -49,7 +50,7 @@ class _ProfileScreenLargeState extends State<ProfileScreenLarge> {
                   width: MediaQuery.of(context).size.width / 2,
                   height: MediaQuery.of(context).size.height / 1.2,
                   decoration: BoxDecoration(
-                      color: ColorResource.color1B2023,
+                      color: ColorResource.buttonTextColor,
                       borderRadius: BorderRadius.all(Radius.circular(24))),
                   alignment: Alignment.topLeft,
                   child: Padding(
@@ -57,7 +58,7 @@ class _ProfileScreenLargeState extends State<ProfileScreenLarge> {
                         vertical: 10, horizontal: 20),
                     child: ListView(children: [
                       AppBar(
-                        backgroundColor: ColorResource.color1B2023,
+                        backgroundColor: ColorResource.buttonTextColor,
                         leading: GestureDetector(
                           onTap: () {
                             Get.back();
@@ -65,7 +66,6 @@ class _ProfileScreenLargeState extends State<ProfileScreenLarge> {
                           child: Icon(
                             Icons.arrow_back_sharp,
                             size: 30,
-                            color: Colors.white,
                           ),
                         ),
                         centerTitle: false,
@@ -77,7 +77,6 @@ class _ProfileScreenLargeState extends State<ProfileScreenLarge> {
                                   .textTheme
                                   .titleSmall!
                                   .copyWith(
-                                      color: ColorResource.colorFFFFFF,
                                       fontSize: 20,
                                       fontWeight: FontWeight.w600),
                               children: <InlineSpan>[]),
@@ -96,11 +95,9 @@ class _ProfileScreenLargeState extends State<ProfileScreenLarge> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(
-                                height: 10,
-                              ),
                               WidgetUtils.genericTextFiled(
                                 context: context,
+                                height: 50,
                                 validationRules: ['required'],
                                 hintText:
                                     '${Languages.of(context)?.enter} ${Languages.of(context)?.firstName}',
@@ -111,6 +108,7 @@ class _ProfileScreenLargeState extends State<ProfileScreenLarge> {
                               ),
                               WidgetUtils.genericTextFiled(
                                 context: context,
+                                height: 50,
                                 validationRules: ['required'],
                                 hintText:
                                     '${Languages.of(context)?.enter} ${Languages.of(context)?.lastName}',
@@ -118,97 +116,87 @@ class _ProfileScreenLargeState extends State<ProfileScreenLarge> {
                                     widget.controller!.lastNameController,
                                 labelName: '${Languages.of(context)?.lastName}',
                               ),
+                              const SizedBox(height: 10),
                               CustomText(
                                 text: '${Languages.of(context)?.mobileNumber}',
                                 style: Theme.of(context)
                                     .textTheme
-                                    .titleSmall!
-                                    .copyWith(
-                                        color: ColorResource.colorE08AF4,
-                                        fontWeight: FontWeight.w500),
+                                    .titleMedium!
+                                    .copyWith(fontWeight: FontWeight.w500),
                               ),
                               const SizedBox(height: 5),
                               SizedBox(
                                 child: CustomTextField(
                                   widget.controller!.mobilNumberController.obs
                                       .value,
+                                  focusedBorder: Colors.grey,
+                                  validatorCallBack: (bool value) {},
+                                  enableColor: Colors.grey,
+                                  borderColor: Colors.red,
                                   validationRules: [
                                     'required',
                                     'mobile_number'
                                   ],
-                                  hintText:
-                                      '${Languages.of(context)?.enter} ${Languages.of(context)?.mobileNumber}',
-                                  focusedBorder: Colors.grey,
-                                  textColor: Colors.white,
-                                  enableColor: Colors.grey,
-                                  borderColor: Colors.red,
                                   disableColor: Colors.red,
                                   keyBoardType: TextInputType.phone,
                                   prefixIcon: Container(
-                                    width: 100,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        children: [
-                                          ClipOval(
-                                            child: Material(
-                                              child: InkWell(
-                                                splashColor: Colors.red,
-                                                // Splash color
-                                                onTap: () {},
-                                                child: SizedBox(
-                                                  width: 22,
-                                                  height: 22,
-                                                  child: Image.network(
-                                                    'https://think360studio-media.s3.ap-south-1.amazonaws.com/download/india-flag-2021-wallpaper-1.png',
-                                                    fit: BoxFit.fill,
-                                                  ),
-                                                ),
+                                    width: 120,
+                                    padding: EdgeInsets.only(left: 8),
+                                    child: Row(
+                                      children: [
+                                        ClipOval(
+                                          child: Material(
+                                            child: InkWell(
+                                              splashColor: Colors.red,
+                                              // Splash color
+                                              onTap: () {},
+                                              child: SizedBox(
+                                                width: 32,
+                                                height: 32,
+                                                child: Image.network(
+                                                    'https://cdn.pixabay.com/photo/2020/07/04/08/24/india-5368684__340.jpg',
+                                                    fit: BoxFit.cover),
                                               ),
                                             ),
                                           ),
-                                          const SizedBox(
-                                            width: 5,
-                                          ),
-                                          CustomText(
-                                            text: '+91',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleSmall!
-                                                .copyWith(
-                                                    color: Theme.of(context)
-                                                        .textTheme
-                                                        .titleMedium!
-                                                        .color,
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                          ),
-                                          Icon(
-                                            Icons.keyboard_arrow_down,
-                                            size: 22,
-                                            color: Theme.of(context)
-                                                .textTheme
-                                                .titleMedium!
-                                                .color,
-                                          ),
-                                          const SizedBox(
-                                            width: 5,
-                                          ),
-                                          Container(
-                                            width: 0.40,
-                                            height: 20,
-                                            color: ColorResource.colorDDDDDD,
-                                          )
-                                        ],
-                                      ),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        CustomText(
+                                          text: '+91',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleMedium!
+                                              .copyWith(
+                                                  color: Theme.of(context)
+                                                      .textTheme
+                                                      .titleMedium!
+                                                      .color,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w400),
+                                        ),
+                                        Icon(
+                                          Icons.keyboard_arrow_down,
+                                          size: 22,
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .titleMedium!
+                                              .color,
+                                        ),
+                                        VerticalDivider(
+                                          thickness: 1,
+                                          indent: 15,
+                                          endIndent: 15,
+                                        )
+                                      ],
                                     ),
                                   ),
                                 ),
-                                height: 70,
+                                height: 50,
                               ),
+                              const SizedBox(height: 10),
                               WidgetUtils.genericTextFiled(
                                 context: context,
+                                height: 50,
                                 validationRules: ['required', 'email'],
                                 hintText:
                                     '${Languages.of(context)?.emailIdHint}',
@@ -217,6 +205,7 @@ class _ProfileScreenLargeState extends State<ProfileScreenLarge> {
                               ),
                               WidgetUtils.genericTextFiled(
                                 context: context,
+                                height: 50,
                                 validationRules: ['required'],
                                 hintText:
                                     '${Languages.of(context)?.brandNameHintText}',
@@ -227,6 +216,7 @@ class _ProfileScreenLargeState extends State<ProfileScreenLarge> {
                               ),
                               WidgetUtils.genericTextFiled(
                                 context: context,
+                                height: 50,
                                 validationRules: ['required'],
                                 hintText:
                                     '${Languages.of(context)?.enter} ${Languages.of(context)?.accountNoHintText}',
@@ -237,6 +227,7 @@ class _ProfileScreenLargeState extends State<ProfileScreenLarge> {
                               ),
                               WidgetUtils.genericTextFiled(
                                 context: context,
+                                height: 50,
                                 validationRules: ['required'],
                                 hintText:
                                     '${Languages.of(context)?.enter} ${Languages.of(context)?.accountIfscHintText}',
@@ -245,14 +236,13 @@ class _ProfileScreenLargeState extends State<ProfileScreenLarge> {
                                 labelName:
                                     '${Languages.of(context)?.bankIFSCCode}',
                               ),
-                              const SizedBox(height: 10),
+                              const SizedBox(height: 30),
                               PrimaryButton(
                                 '${Languages.of(context)!.save}',
                                 context,
                                 cardShape: 1,
                                 isIcon: true,
-                                textColor: ColorResource.black,
-                                fontSize: 20,
+                                fontSize: 16,
                                 onTap: () {
                                   if (widget.controller!.form.currentState!
                                       .validate()) {

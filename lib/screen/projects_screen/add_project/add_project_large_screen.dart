@@ -32,29 +32,32 @@ class _AddProjectLargeScreenState extends State<AddProjectLargeScreen> {
                 backgroundColor: Theme.of(context).backgroundColor,
                 appBar: AppBar(
                     centerTitle: false,
-                    backgroundColor: Theme.of(context).backgroundColor,
+                    backgroundColor: Colors.transparent,
                     title: Container(
                       padding: const EdgeInsets.only(left: 8.0, top: 20),
                       child: Image.asset(
                         ImageResource.rolox,
                         height: 30,
+                        color: Colors.black,
                       ),
                     ),
+                    automaticallyImplyLeading: false,
                     shadowColor: Colors.grey,
                     elevation: 0.0),
                 body: Center(
                     child: Container(
                         width: MediaQuery.of(context).size.width / 2,
                         height: MediaQuery.of(context).size.height / 1.2,
+                        padding: EdgeInsets.symmetric(horizontal: 16,vertical: 12),
                         decoration: BoxDecoration(
-                            color: ColorResource.color1B2023,
+                            color: ColorResource.buttonTextColor,
                             borderRadius:
                                 BorderRadius.all(Radius.circular(24))),
                         alignment: Alignment.topLeft,
                         child: ListView(children: [
                           SizedBox(height: 20),
                           AppBar(
-                            backgroundColor: ColorResource.color1B2023,
+                            backgroundColor: ColorResource.buttonTextColor,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(24),
@@ -63,7 +66,6 @@ class _AddProjectLargeScreenState extends State<AddProjectLargeScreen> {
                               icon: Icon(
                                 Icons.arrow_back_sharp,
                                 size: 30,
-                                color: Colors.white,
                               ),
                               onPressed: () {
                                 Get.back();
@@ -76,7 +78,6 @@ class _AddProjectLargeScreenState extends State<AddProjectLargeScreen> {
                                   .textTheme
                                   .titleSmall!
                                   .copyWith(
-                                      color: ColorResource.colorFFFFFF,
                                       fontSize: 21,
                                       fontWeight: FontWeight.w600),
                             ),
@@ -90,6 +91,7 @@ class _AddProjectLargeScreenState extends State<AddProjectLargeScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   WidgetUtils.genericTextFiled(
+                                    height: 50,
                                     context: context,
                                     validationRules: ['required'],
                                     keyBoardType: TextInputType.name,
@@ -101,6 +103,7 @@ class _AddProjectLargeScreenState extends State<AddProjectLargeScreen> {
                                         '${Languages.of(context)?.projectName}',
                                   ),
                                   WidgetUtils.genericTextFiled(
+                                    height: 50,
                                     context: context,
                                     validationRules: ['required'],
                                     hintText: Languages.of(context)
@@ -112,6 +115,7 @@ class _AddProjectLargeScreenState extends State<AddProjectLargeScreen> {
                                         '${Languages.of(context)?.clientName}',
                                   ),
                                   WidgetUtils.genericTextFiled(
+                                    height: 50,
                                     context: context,
                                     validationRules: ['required'],
                                     hintText: Languages.of(context)
@@ -123,6 +127,7 @@ class _AddProjectLargeScreenState extends State<AddProjectLargeScreen> {
                                         '${Languages.of(context)?.projectValue}',
                                   ),
                                   WidgetUtils.genericTextFiled(
+                                    height: 50,
                                     context: context,
                                     validationRules: [
                                       'required',
@@ -136,6 +141,7 @@ class _AddProjectLargeScreenState extends State<AddProjectLargeScreen> {
                                         '${Languages.of(context)?.projectDueDate}',
                                   ),
                                   WidgetUtils.genericTextFiled(
+                                    height: 50,
                                     context: context,
                                     validationRules: ['required', 'email'],
                                     hintText: Languages.of(context)
@@ -147,12 +153,13 @@ class _AddProjectLargeScreenState extends State<AddProjectLargeScreen> {
                                         '${Languages.of(context)?.emailID}',
                                   ),
                                   WidgetUtils.genericTextFiled(
+                                    height: 50,
                                     context: context,
                                     hintText:
                                         Languages.of(context)?.projectLinkHint,
                                     keyBoardType: TextInputType.phone,
-                                    controller:
-                                        widget.controller!.projectLinkController,
+                                    controller: widget
+                                        .controller!.projectLinkController,
                                     labelName:
                                         "${Languages.of(context)?.projectLink} ${Languages.of(context)?.optional}",
                                   ),
@@ -164,7 +171,6 @@ class _AddProjectLargeScreenState extends State<AddProjectLargeScreen> {
                                     context,
                                     cardShape: 1,
                                     isIcon: true,
-                                    textColor: ColorResource.black,
                                     fontSize: 20,
                                     onTap: () {
                                       if (widget.controller!.form.currentState!
