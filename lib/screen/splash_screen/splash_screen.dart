@@ -31,9 +31,9 @@ class SplashScreenState extends State<SplashScreen> {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
-                  ImageResource.splashScreen,
+                  ImageResource.rolox,
                 ),
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               ),
             ),
             child: Scaffold(

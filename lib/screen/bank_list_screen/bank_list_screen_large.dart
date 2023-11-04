@@ -38,7 +38,6 @@ class _BankListLargeScreenState extends State<BankListLargeScreen> {
                       child: Image.asset(
                         ImageResource.rolox,
                         height: 30,
-                        color: Colors.black,
                       ),
                     ),
                     automaticallyImplyLeading: false,
