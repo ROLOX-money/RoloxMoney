@@ -87,6 +87,7 @@ class RoloxMoneyAppState extends CoreWidgetsState {
       builder: (BuildContext context, ThemeData theme) {
         return GetMaterialApp(
           locale: _locale,
+          title: 'Means Money',
           theme: lightTheme,
           supportedLocales: const [
             Locale('en', ''),
