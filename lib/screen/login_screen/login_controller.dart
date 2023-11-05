@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -28,6 +29,11 @@ class LoginController extends RoloxGetXController {
   @override
   void onInit() async {
     mobilNumberController.text = '9585313659';
+
+    if(kDebugMode){
+      acceptTermsAndCondition.value = true;
+      otpController.text = "1234";
+    }
     change(null, status: RxStatus.success());
     // if (kDebugMode) mobilNumberController.text = '9585313659';
     // Future.delayed(const Duration(seconds: 5), () {});

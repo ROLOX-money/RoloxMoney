@@ -15,13 +15,10 @@ class LoginProfileController extends GetxController with StateMixin {
   TextEditingController gstNumberController = TextEditingController();
   TextEditingController aadhaarNumberController = TextEditingController();
 
-
   TextEditingController socialId = TextEditingController();
   Rx<TypOfBusiness> typOfBusiness = TypOfBusiness.business.obs;
 
-
   final form = GlobalKey<FormState>();
-
 
   @override
   void onInit() async {
@@ -34,6 +31,4 @@ class LoginProfileController extends GetxController with StateMixin {
     typOfBusiness = value!.obs;
     change(typOfBusiness);
   }
-
-
 }

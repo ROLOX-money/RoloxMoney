@@ -22,6 +22,8 @@ dependencies:
   flutter_svg: ^1.1.4
   dio: ^5.0.1
   data_table_2: ^2.5.8
+  flutter_switch: ^0.3.2
+
 
 #  firebase_auth: ^3.6.4
 #  firebase_auth:

@@ -16,8 +16,8 @@ import 'package:roloxmoney/screen/withdraw_fund_screen/withdraw_fund_screen.dart
 /*Chinnadurai Viswanathan*/
 class AppRoutes {
   static List<GetPage<dynamic>>? routes = [
-    GetPage(name: '/', page: () => LoginScreen()),
-    // GetPage(name: '/', page: () => DashboardScreen()),
+    // GetPage(name: '/', page: () => LoginScreen()),
+    GetPage(name: '/', page: () => DashboardScreen()),
     GetPage(name: LoginScreen.routeName, page: () => LoginScreen()),
     GetPage(name: WelcomeScreen.routeName, page: () => WelcomeScreen()),
 

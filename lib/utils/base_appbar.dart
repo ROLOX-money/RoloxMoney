@@ -1,7 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/profile_screen/profile_controller.dart';
 import 'package:roloxmoney/screen/profile_screen/profile_screen.dart';
@@ -33,18 +34,26 @@ class _MyStatefulWidgetState extends State<BaseAppBar> {
           children: [
             const Text('Means'),
             Spacer(),
-            Obx(() {
-              return Switch(
-                onChanged: (val) {
-                  isDarkMode.value = val;
-                },
-                value: isDarkMode.value,
-                activeColor: ColorResource.buttonTextColor,
-                activeTrackColor: ColorResource.buttonTextColor,
-                inactiveThumbColor: ColorResource.toggleButtonColor,
-                inactiveTrackColor: ColorResource.toggleButtonColor,
-              );
-            }),
+            FlutterSwitch(
+              activeColor: ColorResource.primaryColor,
+              toggleColor: ColorResource.toggleButtonColor,
+              inactiveColor: ColorResource.toggleButtonColor,
+              width: 50.0,
+              height: 25.0,
+              value: isDarkMode.value,
+              borderRadius: 20.0,
+              padding: 3,
+              toggleBorder: Border.all(
+                color: ColorResource.buttonTextColor,
+                width: 5.0,
+              ),
+              onToggle: (bool value) {
+                setState(() {
+                  isDarkMode.value = value;
+                });
+              },
+            ),
+            SizedBox(width: 10),
             CustomText(
               text: '${Languages.of(context)?.darkMode}',
               style: Theme.of(context).textTheme.subtitle2!.copyWith(
