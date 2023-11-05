@@ -13,6 +13,7 @@ class AddBankAccountController extends GetxController with StateMixin {
   TextEditingController gstChargesController = TextEditingController();
   TextEditingController hsnController = TextEditingController();
   TextEditingController stateController = TextEditingController();
+  final form = GlobalKey<FormState>();
 
   @override
   void onInit() async {

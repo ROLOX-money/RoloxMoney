@@ -69,65 +69,78 @@ class AddBankAccountScreenSmallState extends State<AddBankAccountScreenSmall> {
                   shadowColor: Colors.grey,
                   elevation: 0.75,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 10,
-                      ),
-                      WidgetUtils.genericTextFiled(
-                        context: context,
-                        keyBoardType: TextInputType.name,
-                        controller:
-                            widget.controller!.bankAccountNumberController,
-                        labelName: '${Languages.of(context)?.bankAccountNumber}'
-                            .toUpperCase(),
-                      ),
-                      WidgetUtils.genericTextFiled(
-                        context: context,
-                        controller:
-                            widget.controller!.accountHolderNameController,
-                        labelName: '${Languages.of(context)?.accountHolderName}'
-                            .toUpperCase(),
-                      ),
-                      WidgetUtils.genericTextFiled(
-                        context: context,
-                        keyBoardType: TextInputType.name,
-                        controller: widget.controller!.bankIFSCCodeController,
-                        labelName: '${Languages.of(context)?.bankIFSCCode}'
-                            .toUpperCase(),
-                      ),
-                      WidgetUtils.genericTextFiled(
-                        context: context,
-                        controller: widget.controller!.branchNameController,
-                        keyBoardType: TextInputType.emailAddress,
-                        labelName: '${Languages.of(context)?.branchName}'
-                            .toUpperCase(),
-                      ),
-                      WidgetUtils.genericTextFiled(
-                        context: context,
-                        controller: widget.controller!.cityNameController,
-                        keyBoardType: TextInputType.emailAddress,
-                        labelName:
-                            '${Languages.of(context)?.cityName}'.toUpperCase(),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      PrimaryButton(
-                        '${Languages.of(context)!.save}',
-                        context,
-                        cardShape: 1,
-                        isIcon: true,
-                        textColor: ColorResource.black,
-                        fontSize: 20,
-                        onTap: () {
-                          Get.back();
-                        },
-                      )
-                    ],
+                Form(
+                  key: widget.controller!.form,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 10),
+                        WidgetUtils.genericTextFiled(
+                          context: context,
+                          validationRules: ['required'],
+                          hintText: Languages.of(context)?.accountNoHintText,
+                          keyBoardType: TextInputType.name,
+                          controller:
+                              widget.controller!.bankAccountNumberController,
+                          labelName:
+                              '${Languages.of(context)?.bankAccountNumber}',
+                        ),
+                        WidgetUtils.genericTextFiled(
+                          context: context,
+                          validationRules: ['required'],
+                          hintText: Languages.of(context)?.accountHolderName,
+                          controller:
+                              widget.controller!.accountHolderNameController,
+                          labelName:
+                              '${Languages.of(context)?.accountHolderName}',
+                        ),
+                        WidgetUtils.genericTextFiled(
+                          context: context,
+                          validationRules: ['required'],
+                          hintText: Languages.of(context)?.accountIfscHintText,
+                          keyBoardType: TextInputType.name,
+                          controller: widget.controller!.bankIFSCCodeController,
+                          labelName: '${Languages.of(context)?.bankIFSCCode}',
+                        ),
+                        WidgetUtils.genericTextFiled(
+                          context: context,
+                          validationRules: ['required'],
+                          hintText: Languages.of(context)?.brandNameHintText,
+                          controller: widget.controller!.branchNameController,
+                          keyBoardType: TextInputType.emailAddress,
+                          labelName: '${Languages.of(context)?.branchName}',
+                        ),
+                        WidgetUtils.genericTextFiled(
+                          context: context,
+                          validationRules: ['required'],
+                          hintText:
+                              '${Languages.of(context)?.enter} ${Languages.of(context)?.cityName}',
+                          controller: widget.controller!.cityNameController,
+                          keyBoardType: TextInputType.emailAddress,
+                          labelName: '${Languages.of(context)?.cityName}'
+                              .toUpperCase(),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        PrimaryButton(
+                          '${Languages.of(context)!.save}',
+                          context,
+                          cardShape: 1,
+                          isIcon: true,
+                          textColor: ColorResource.black,
+                          fontSize: 20,
+                          onTap: () {
+                            if (widget.controller!.form.currentState!
+                                .validate()) {
+                              Get.back();
+                            }
+                          },
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],

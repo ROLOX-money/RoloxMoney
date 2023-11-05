@@ -13,6 +13,9 @@ class BusinessProfileController extends GetxController with StateMixin {
   TextEditingController otherIndustryOfWorkController = TextEditingController();
   TextEditingController mobilNumberController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController plsIfSpecifyController = TextEditingController();
+  TextEditingController plsIfSpecifyControllerForNatureOfBusiness = TextEditingController();
+
 
 
   Rx<ModelOfWork> modelOfWork = ModelOfWork.fullTime.obs;
@@ -29,7 +32,13 @@ class BusinessProfileController extends GetxController with StateMixin {
     'Other',
   ].obs;
   RxString natureOfWorkValue = 'Software'.obs;
-
+  RxList<String> natureOfBusiness = [
+    'Software',
+    'Driver',
+    'Auditor',
+    'Other',
+  ].obs;
+  RxString natureOfBusinessValue = 'Software'.obs;
 
   RxBool iDontHaveBusiness = true.obs;
 
@@ -63,6 +72,9 @@ class BusinessProfileController extends GetxController with StateMixin {
     if (variableName == this.roleDropDownValue) {
       roleDropDownValue = value!.obs;
       change(roleDropDownValue);
+    } else if (variableName == this.natureOfBusinessValue) {
+      natureOfBusinessValue = value!.obs;
+      change(natureOfBusinessValue);
     } else if (variableName == this.natureOfWorkValue) {
       natureOfWorkValue = value!.obs;
       change(natureOfWorkValue);

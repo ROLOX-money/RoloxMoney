@@ -10,6 +10,11 @@ class IndividualProfileController extends GetxController with StateMixin {
   TextEditingController pincodeController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController gstController = TextEditingController();
+  TextEditingController plsIfSpecifyController = TextEditingController();
+  TextEditingController plsIfSpecifyControllerForNatureOfWork =
+      TextEditingController();
+  TextEditingController mobilNumberController = TextEditingController();
+  TextEditingController aadharNoController = TextEditingController();
 
   RxList<String> modelOfWork = [
     'Full Time',
@@ -23,7 +28,14 @@ class IndividualProfileController extends GetxController with StateMixin {
     'Auditor',
     'Other',
   ].obs;
+  RxList<String> natureOfBusiness = [
+    'Software',
+    'Driver',
+    'Auditor',
+    'Other',
+  ].obs;
   RxString natureOfWorkValue = 'Software'.obs;
+  RxString natureOfBusinessValue = 'Software'.obs;
   RxBool iDontHaveBusiness = true.obs;
 
   RxList<String> industryOfWork = [
@@ -45,6 +57,8 @@ class IndividualProfileController extends GetxController with StateMixin {
   RxBool gstNumber = true.obs;
   RxInt currentStep = 1.obs;
 
+  final form = GlobalKey<FormState>();
+
   @override
   void onInit() async {
     change(null, status: RxStatus.success());
@@ -56,6 +70,9 @@ class IndividualProfileController extends GetxController with StateMixin {
     if (variableName == this.modelOfWorkValue) {
       modelOfWorkValue = value!.obs;
       change(modelOfWorkValue);
+    } else if (variableName == this.natureOfBusinessValue) {
+      natureOfBusinessValue = value!.obs;
+      change(natureOfBusinessValue);
     } else if (variableName == this.natureOfWorkValue) {
       natureOfWorkValue = value!.obs;
       change(natureOfWorkValue);
@@ -72,10 +89,12 @@ class IndividualProfileController extends GetxController with StateMixin {
     iDontHaveBusiness = values!.obs;
     change(iDontHaveBusiness);
   }
+
   void noGSTCheckBox({bool? values}) {
     gstNumber = values!.obs;
     change(gstNumber);
   }
+
   void stepCount({required int values}) {
     currentStep = values.obs;
     change(currentStep);
