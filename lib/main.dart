@@ -93,6 +93,7 @@ class RoloxMoneyAppState extends CoreWidgetsState {
         return GetMaterialApp(
           locale: _locale,
           theme: lightTheme,
+          title: 'Means Money',
           supportedLocales: const [
             Locale('en', ''),
           ],
