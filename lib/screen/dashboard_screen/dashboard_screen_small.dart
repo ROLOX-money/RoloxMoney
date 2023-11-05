@@ -185,7 +185,8 @@ class DashboardScreenSmallState extends State<DashboardScreenSmall> {
                 ],
               ),
         bottomNavigationBar: Container(
-          height: 80,
+          height: 85,
+          alignment: Alignment.bottomCenter,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: widget.controller!.dashboardNavigatorModelList.obs.value!
