@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
-import 'package:roloxmoney/model/project_model.dart';
-import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_screen.dart';
+import 'package:roloxmoney/screen/invoice_screen/entities/invoice_model.dart';
+import 'package:roloxmoney/screen/pd_view/pdf_screen.dart';
+import 'package:roloxmoney/screen/pd_view/pdf_screen_small.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
@@ -38,10 +39,10 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
     return RoloxMoneyWidgetState(
       rxStatus: widget.controller!.status,
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         body: Container(
           child: ListView(
-            physics: NeverScrollableScrollPhysics(),
+            physics: ScrollPhysics(),
             children: [
               SizedBox(
                 height: 15,
@@ -49,9 +50,7 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  widget.controller!.projectInvoicesList.obs.value.value
-                              .length >
-                          0
+                  widget.controller!.invoicesList.obs.value.length > 0
                       ? Container(
                           margin: EdgeInsets.symmetric(horizontal: 10),
                           child: Row(
@@ -64,7 +63,7 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                     .textTheme
                                     .titleSmall!
                                     .copyWith(
-                                        color: ColorResource.colorE08AF4,
+                                        color: ColorResource.color000000,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500),
                               ),
@@ -74,9 +73,9 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                 child: SecondaryButton(
                                   '${Languages.of(context)!.addInvoice}',
                                   context,
-                                  backgroundColor: ColorResource.color00E94F,
+                                  backgroundColor: ColorResource.color000000,
                                   fontWeight: FontWeight.w500,
-                                  textColor: ColorResource.black,
+                                  textColor: ColorResource.colorFFFFFF,
                                   fontSize: 14,
                                   onTap: () {
                                     widget.controller!
@@ -91,23 +90,22 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                   SizedBox(
                     height: 15,
                   ),
-                  widget.controller!.projectInvoicesList.obs.value.value
-                              .length >
-                          0
+                  widget.controller!.invoicesList.obs.value.length > 0
                       ? ListView.separated(
                           separatorBuilder: (BuildContext context, int index) =>
                               Divider(
                                   height: 1,
                                   color: Theme.of(context).dividerColor),
-                          itemCount: widget.controller!.projectInvoicesList.obs
-                              .value.value.length,
+                          itemCount:
+                              widget.controller!.invoicesList.obs.value.length,
                           shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
                           // physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
-                            ProjectModel projectModel = widget.controller!
-                                .projectInvoicesList.obs.value.value[index];
+                            Invoice invoice = widget
+                                .controller!.invoicesList.obs.value[index];
                             return Container(
-                              color: ColorResource.color151515,
+                              color: ColorResource.colorFFFFFF,
                               alignment: Alignment.centerLeft,
                               padding: EdgeInsets.symmetric(vertical: 15),
                               child: ListTile(
@@ -122,13 +120,14 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                     color: ColorResource.color381D4E,
                                   ),
                                   child: CustomText(
-                                    text: AppUtils.getInitials('Client Name')
+                                    text: AppUtils.getInitials(
+                                            invoice.invoiceName)
                                         .toString(),
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyText1!
                                         .copyWith(
-                                            color: ColorResource.colorE08AF4,
+                                            color: ColorResource.colorA0BCD0,
                                             fontWeight: FontWeight.w700),
                                   ),
                                 ),
@@ -137,28 +136,29 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                   children: [
                                     Text.rich(
                                       TextSpan(
-                                          text: 'Invoice Name',
+                                          text: invoice.invoiceName ?? '',
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall!
                                               .copyWith(
                                                   color:
-                                                      ColorResource.colorFFFFFF,
+                                                      ColorResource.color000000,
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w400),
                                           children: <InlineSpan>[
-                                            TextSpan(
-                                              text: ' #123',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleSmall!
-                                                  .copyWith(
-                                                      color: ColorResource
-                                                          .colorA0BCD0,
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                            )
+                                            // TextSpan(
+                                            //   text:
+                                            //       ' #${invoice.invoiceNumber}',
+                                            //   style: Theme.of(context)
+                                            //       .textTheme
+                                            //       .titleSmall!
+                                            //       .copyWith(
+                                            //           color: ColorResource
+                                            //               .colorA0A1A9,
+                                            //           fontSize: 16,
+                                            //           fontWeight:
+                                            //               FontWeight.w500),
+                                            // )
                                           ]),
                                       maxLines: 2,
                                       softWrap: true,
@@ -168,13 +168,13 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                       height: 5,
                                     ),
                                     CustomText(
-                                      text: '10000',
+                                      text: '${invoice.invoiceAmount ?? ''}',
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleSmall!
                                           .copyWith(
-                                              color: ColorResource.color00E94F,
-                                              fontSize: 16,
+                                              color: ColorResource.color181B28,
+                                              fontSize: 13,
                                               fontWeight: FontWeight.w500),
                                     ),
                                     SizedBox(
@@ -183,14 +183,14 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                     Row(
                                       children: [
                                         CustomText(
-                                          text: 'Project Name',
+                                          text: invoice.invoiceName ?? '',
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall!
                                               .copyWith(
                                                   color:
-                                                      ColorResource.colorFFFFFF,
-                                                  fontSize: 14,
+                                                      ColorResource.colorA0A1A9,
+                                                  fontSize: 11,
                                                   fontWeight: FontWeight.w500),
                                         ),
                                         SizedBox(
@@ -200,7 +200,7 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                           height: 5,
                                           width: 5,
                                           decoration: BoxDecoration(
-                                            color: ColorResource.colorA0BCD0,
+                                            color: ColorResource.colorA0A1A9,
                                             borderRadius: BorderRadius.only(
                                                 topRight: Radius.circular(40.0),
                                                 bottomRight:
@@ -217,15 +217,15 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                           width: 5,
                                         ),
                                         CustomText(
-                                          text: '${projectModel.date}',
+                                          text: '${invoice.dueDate}',
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall!
                                               .copyWith(
                                                   color:
-                                                      ColorResource.colorA0BCD0,
+                                                      ColorResource.colorA0A1A9,
                                                   overflow: TextOverflow.fade,
-                                                  fontSize: 12,
+                                                  fontSize: 11,
                                                   fontWeight: FontWeight.w400),
                                         ),
                                         SizedBox(
@@ -242,10 +242,12 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                       child: SecondaryButton(
                                         '${Languages.of(context)!.viewMore}',
                                         context,
-                                        fontWeight: FontWeight.w500,
-                                        textColor: ColorResource.color00E94F,
+                                        backgroundColor: ColorResource.colorF5F5F5,
+                                        textColor: ColorResource.color181B28,
                                         fontSize: 14,
-                                        onTap: () {},
+                                        onTap: () {
+                                          Get.toNamed(PDFScreen.routeName);
+                                        },
                                       ),
                                     )
                                   ],

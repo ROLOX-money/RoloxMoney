@@ -1,4 +1,7 @@
+import 'package:altogic/altogic.dart';
 import 'package:dynamic_themes/dynamic_themes.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -20,14 +23,19 @@ import 'package:roloxmoney/screen/payment_screen/payment_controller.dart';
 import 'package:roloxmoney/screen/profile_screen/profile_controller.dart';
 import 'package:roloxmoney/screen/projects_screen/add_project/add_project_controller.dart';
 import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
+import 'package:roloxmoney/screen/welcome_screen/welcome_screen_controller.dart';
+import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/RoloxKey.dart';
 import 'package:roloxmoney/utils/app_themes.dart';
 import 'package:roloxmoney/widget/rolox_money_core_widgets.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 /*Chinnadurai Viswanathan*/
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   Get.put(LoginController());
+  Get.put(WelcomeController());
   Get.put(LoginProfileController());
   Get.lazyPut(() => DashboardController());
   Get.lazyPut(() => HomeController());
@@ -63,6 +71,7 @@ class RoloxMoneyAppState extends CoreWidgetsState {
   void initState() {
     RoloxKey.baseUrl = 'https://65.2.137.244:8080/';
     RoloxKey.header = {'content-Type': 'application/json'};
+
     super.initState();
   }
 

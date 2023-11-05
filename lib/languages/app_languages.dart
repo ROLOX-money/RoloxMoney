@@ -62,7 +62,7 @@ abstract class Languages {
 
   String get otherNatureOfWork;
 
-  String get iDontHaveABusiness;
+  String get iHaveABusiness;
 
   String get industryOfWork;
 
@@ -76,7 +76,7 @@ abstract class Languages {
 
   String get fullAddress;
 
-  String get iDontHaveAGSTNumber;
+  String get iHaveAGSTNumber;
 
   String get gstNumber;
 
@@ -94,7 +94,7 @@ abstract class Languages {
 
   String get professionalInvoice;
 
-  String get welcomeToRolox;
+  String get welcomeToMean;
 
   String get explore;
 
@@ -154,6 +154,8 @@ abstract class Languages {
 
   String get invoiceNumber;
 
+  String get invoiceDueDate;
+
   String get invoiceValueWithoutGST;
 
   String get hsnCode;
@@ -173,4 +175,116 @@ abstract class Languages {
   String get cityName;
 
   String get enterAnyOneSocialMediaIdLabel;
+
+  String get agree;
+
+  String get roloxTermsAndCondition;
+
+  String get fullName;
+
+  String get fullNameHint;
+
+  String get emailIdHint;
+
+  String get socialIdHint;
+
+  String get companyName;
+
+  String get companyLegalName;
+
+  String get companyNameHint;
+
+  String get panNumberHint;
+
+  String get aadhaarNumberHint;
+
+  String get gstNumberHint;
+
+  String get aadhaarNumber;
+
+  String get congratulations;
+
+  String get accountCreatedSuccessfully;
+
+  String get accountCreatedScreenContent;
+
+  String get letsExplore;
+
+  String get contact;
+
+  String get modeOfWork;
+
+  String get natureOfBusiness;
+
+  String get plsIfSpecify;
+
+  String get profileSecondPageContent;
+
+  String get accountBalance;
+
+  String get allInvoices;
+
+  String get upcoming;
+
+  String get inNext1Week;
+
+  String get noOf;
+
+  String get transactionWorth;
+
+  String get paid;
+
+  String get due;
+
+  String get person;
+
+  String get department;
+
+  String get designation;
+
+  String get profileScreenFreeContent;
+
+  String get optional;
+
+  String get brandNameHintText;
+
+  String get contactPersonNameHintText;
+
+  String get departmentNameHintText;
+
+  String get designationNameHintText;
+
+  String get clientsEmailIdHintText;
+
+  String get clientMobileNumberHintText;
+
+  String get enterYourAddressHintText;
+
+  String get searchClientNameHintText;
+
+  String get projectValueHintText;
+
+  String get projectsEmailIDHintText;
+
+  String get invoiceNameHintText;
+
+  String get invoiceNoHintText;
+
+  String get valueHintText;
+
+  String get hsnCodeHintText;
+
+  String get accountNoHintText;
+
+  String get accountIfscHintText;
+
+  String get addProfilePhoto;
+
+  String get rolox;
+
+  String get address1;
+
+  String get address2;
+
+  String get projectLink;
 }

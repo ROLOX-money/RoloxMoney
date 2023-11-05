@@ -4,6 +4,8 @@ import 'package:roloxmoney/screen/login_profile_screen/login_profile_controller.
 import 'package:roloxmoney/screen/login_profile_screen/login_profile_screen_small.dart';
 import 'package:roloxmoney/widget/responsive_widget.dart';
 
+import 'login_profile_screen_large.dart';
+
 /*Chinnadurai Viswanathan*/
 
 class LoginProfileScreen extends StatelessWidget {
@@ -18,7 +20,7 @@ class LoginProfileScreen extends StatelessWidget {
       assignId: true,
       builder: (controller) {
         return ResponsiveWidget(
-          largeScreen: LoginProfileScreenSmall(
+          largeScreen: LoginProfileScreenLarge(
               controller: loginController, scaffoldKey: _loginScaffoldKey),
           mediumScreen: LoginProfileScreenSmall(
               controller: loginController, scaffoldKey: _loginScaffoldKey),

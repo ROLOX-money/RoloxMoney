@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
-import 'package:roloxmoney/model/project_model.dart';
 import 'package:roloxmoney/screen/clients_screen/clients_controller.dart';
-import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
-import 'package:roloxmoney/screen/template_screen/template_controller.dart';
+import 'package:roloxmoney/screen/clients_screen/entites/clinet_model.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
@@ -49,12 +47,10 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  widget.controller!.projectInvoicesList.obs.value.value
-                              .length >
-                          0
+                  widget.controller!.clientList.obs.value.length > 0
                       ? Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                        child: Row(
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               CustomText(
@@ -64,7 +60,7 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                     .textTheme
                                     .titleSmall!
                                     .copyWith(
-                                        color: ColorResource.colorE08AF4,
+                                        color: ColorResource.colorEC008C,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500),
                               ),
@@ -79,31 +75,30 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                   textColor: ColorResource.black,
                                   fontSize: 14,
                                   onTap: () {
-                                    widget.controller!.navigateAddClientScreen();
+                                    widget.controller!
+                                        .navigateAddClientScreen();
                                   },
                                 ),
                               )
                             ],
                           ),
-                      )
+                        )
                       : SizedBox(),
                   SizedBox(
                     height: 15,
                   ),
-                  widget.controller!.projectInvoicesList.obs.value.value
-                              .length >
-                          0
+                  widget.controller!.clientList.obs.value.length > 0
                       ? ListView.separated(
                           separatorBuilder: (BuildContext context, int index) =>
                               Divider(
                                   height: 1, color: ColorResource.colorA0BCD0),
-                          itemCount: widget.controller!.projectInvoicesList.obs
-                              .value.value.length,
+                          itemCount:
+                              widget.controller!.clientList.obs.value.length,
                           shrinkWrap: true,
                           // physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
-                            ProjectModel projectModel = widget.controller!
-                                .projectInvoicesList.obs.value.value[index];
+                            ClientModel clientModel =
+                                widget.controller!.clientList.obs.value[index];
                             return Container(
                               color: ColorResource.color151515,
                               alignment: Alignment.centerLeft,
@@ -120,13 +115,16 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                     color: ColorResource.color381D4E,
                                   ),
                                   child: CustomText(
-                                    text: AppUtils.getInitials('Client Name')
+                                    // text: AppUtils.getInitials('Client Name')
+                                    //     .toString(),
+                                    text: AppUtils.getInitials(
+                                            clientModel.companyDB!.companyName)
                                         .toString(),
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyText1!
                                         .copyWith(
-                                            color: ColorResource.colorE08AF4,
+                                            color: ColorResource.colorEC008C,
                                             fontWeight: FontWeight.w700),
                                   ),
                                 ),
@@ -134,7 +132,7 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     CustomText(
-                                      text: 'Client Name',
+                                      text: clientModel.companyDB!.companyName!,
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleSmall!
@@ -170,7 +168,7 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                         ),
                                         CustomText(
                                           text:
-                                              '${projectModel.noOfInvoice} ${Languages.of(context)!.projects}',
+                                              '${clientModel.companyDB!.companyName}',
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall!
@@ -208,7 +206,8 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                         //   width: 5,
                                         // ),
                                         CustomText(
-                                          text: '${projectModel.date}',
+                                          text:
+                                              '${clientModel.companyDB!.companyName}',
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall!

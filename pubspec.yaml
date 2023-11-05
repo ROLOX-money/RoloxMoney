@@ -17,19 +17,22 @@ dependencies:
   get_it: ^7.2.0
   flutter_localizations:
     sdk: flutter
-  intl: ^0.17.0
+  intl:
   pin_code_fields: ^7.4.0
   flutter_svg: ^1.1.4
   dio: ^5.0.1
-
-#  firebase_auth: ^3.6.4
-#  firebase_auth:
-##  firebase_core: ^1.21.0
-#  firebase_core:
-##  firebase_remote_config: ^2.0.15
-#  firebase_remote_config:
-#  firebase_analytics: ^9.3.2
-#  firebase_analytics:
+  altogic: ^1.0.6
+  shared_preferences: ^2.1.1
+  supabase_flutter: ^1.10.9
+  firebase_messaging: ^14.6.5
+  firebase_core: ^2.15.0
+  flutter_cached_pdfview: ^0.4.2
+  permission_handler: ^10.4.3
+  path_provider: ^2.0.15
+  internet_file: ^1.2.0
+  share_plus: ^7.0.2
+  flutter_share: ^2.0.0
+  image_picker: ^1.0.1
 
 dev_dependencies:
   flutter_test:

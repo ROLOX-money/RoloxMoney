@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/screen/login_screen/login_controller.dart';
+import 'package:roloxmoney/screen/login_screen/login_screen_large.dart';
 import 'package:roloxmoney/screen/login_screen/login_screen_small.dart';
 import 'package:roloxmoney/widget/responsive_widget.dart';
 
@@ -18,7 +19,7 @@ class LoginScreen extends StatelessWidget {
       assignId: true,
       builder: (controller) {
         return ResponsiveWidget(
-          largeScreen: LoginScreenSmall(
+          largeScreen: LoginScreenLarge(
               controller: loginController, scaffoldKey: _loginScaffoldKey),
           mediumScreen: LoginScreenSmall(
               controller: loginController, scaffoldKey: _loginScaffoldKey),

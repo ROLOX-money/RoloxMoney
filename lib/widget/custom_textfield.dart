@@ -35,43 +35,47 @@ class CustomTextField extends StatefulWidget {
   final Widget? prefixIcon;
   final bool isEnableLabel;
   TextStyle? errorStyle;
+  TextStyle? hintStyle;
   String? Function(String?)? validatorFunction;
   AutovalidateMode? autoValidateMode;
+  int? maxLines;
+  int? minLines;
 
-  CustomTextField(
-    this.controller, {
-    super.key,
-    this.hintText,
-    this.obscureText = false,
-    this.suffixWidget,
-    this.prefixWidget,
-    this.isEnable = true,
-    this.onTapped,
-    this.isReadOnly = false,
-    this.maximumWordCount,
-    this.titleColor,
-    this.textColor = ColorResource.colorFFFFFF,
-    this.borderColor = Colors.grey,
-    this.enableColor = Colors.grey,
-    this.disableColor = Colors.grey,
-    this.focusedBorder = Colors.grey,
-    this.isHighlighted = false,
-    this.highlightColor,
-    this.focusNode,
-    this.focusTextColor,
-    this.keyBoardType = TextInputType.name,
-    this.descriptionText,
-    this.oncomplete,
-    this.validatorCallBack,
-    this.onEditing,
-    this.prefixIcon,
-    this.isEnableLabel = true,
-    this.inputformaters,
-    this.validatorFunction,
-    this.autoValidateMode,
-    this.errorStyle,
-    this.validationRules = const [],
-  });
+  CustomTextField(this.controller,
+      {super.key,
+      this.hintText,
+      this.obscureText = false,
+      this.suffixWidget,
+      this.prefixWidget,
+      this.isEnable = true,
+      this.onTapped,
+      this.isReadOnly = false,
+      this.maximumWordCount,
+      this.titleColor,
+      this.textColor = ColorResource.colorFFFFFF,
+      this.borderColor = Colors.grey,
+      this.enableColor = Colors.grey,
+      this.disableColor = Colors.grey,
+      this.focusedBorder = Colors.grey,
+      this.isHighlighted = false,
+      this.highlightColor,
+      this.focusNode,
+      this.focusTextColor,
+      this.keyBoardType = TextInputType.name,
+      this.descriptionText,
+      this.oncomplete,
+      this.validatorCallBack,
+      this.onEditing,
+      this.prefixIcon,
+      this.isEnableLabel = true,
+      this.inputformaters,
+      this.validatorFunction,
+      this.autoValidateMode,
+      this.hintStyle,
+      this.errorStyle,
+      this.validationRules = const [],
+      this.maxLines,
+      this.minLines});
 
   @override
   CustomTextFieldState createState() => CustomTextFieldState();
@@ -89,6 +93,8 @@ class CustomTextFieldState extends State<CustomTextField> {
     // widget.borderColor =
     //     Theme.of(context).textTheme.titleMedium!.backgroundColor!;
     return TextFormField(
+      maxLines: widget.maxLines ?? 1,
+      minLines: widget.maxLines ?? 1,
       textInputAction: TextInputAction.done,
       validator: widget.validatorFunction ??
           (String? value) {
@@ -140,15 +146,17 @@ class CustomTextFieldState extends State<CustomTextField> {
       keyboardType: widget.keyBoardType,
       cursorHeight: 20,
       focusNode: widget.focusNode,
-      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+      style: Theme.of(context).textTheme.titleMedium!.copyWith(
           color: (widget.focusNode != null && widget.focusNode!.hasFocus)
               ? widget.focusTextColor
               : widget.textColor),
       decoration: InputDecoration(
+        floatingLabelBehavior: FloatingLabelBehavior.never,
         prefix: widget.prefixWidget,
-        fillColor: ColorResource.color151515,
+        fillColor: Colors.white,
         filled: true,
         labelText: widget.hintText,
+        hintText: widget.hintText,
         isDense: true,
         counterText: widget.descriptionText,
         errorMaxLines: 2,
@@ -156,23 +164,31 @@ class CustomTextFieldState extends State<CustomTextField> {
         suffixIconConstraints:
             const BoxConstraints(minHeight: 24, minWidth: 24),
         prefixIcon: widget.prefixIcon,
+        hintStyle: widget.hintStyle ??
+            TextStyle(
+                color: ColorResource.colorA0A1A9,
+                // fontFamily: 'Poppins-Medium',
+                // fontWeight: FontWeight.w400,
+                fontStyle: FontStyle.normal,
+                height: 1,
+                fontSize: 16),
         errorStyle: widget.errorStyle ??
             Theme.of(context)
                 .textTheme
-                .subtitle1!
+                .titleMedium!
                 .copyWith(color: Colors.red, height: 0.5),
         counterStyle: const TextStyle(
-            color: ColorResource.colorFFFFFF,
+            color: Colors.black,
             fontFamily: 'Poppins-Medium',
             fontWeight: FontWeight.normal,
             fontStyle: FontStyle.normal,
             height: 1,
             fontSize: 12),
         // errorText: validatePassword(widget.controller.text.trim()),
-        labelStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
-            color: (widget.focusNode != null && widget.focusNode!.hasFocus)
-                ? ColorResource.colorF58220
-                : ColorResource.colorFFFFFF),
+        // labelStyle: Theme.of(context).textTheme.displayMedium!.copyWith(
+        //     color: (widget.focusNode != null && widget.focusNode!.hasFocus)
+        //         ? Colors.black
+        //         : Colors.black.withOpacity(0.4)),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(color: widget.focusedBorder!, width: 0.25),
@@ -181,7 +197,6 @@ class CustomTextFieldState extends State<CustomTextField> {
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(width: 0.5),
         ),
-
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(color: widget.enableColor!, width: 0.25),
@@ -191,7 +206,6 @@ class CustomTextFieldState extends State<CustomTextField> {
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(color: widget.disableColor!, width: 0.25),
         ),
-
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(color: widget.borderColor!, width: 0.5),

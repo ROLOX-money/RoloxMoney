@@ -69,6 +69,9 @@ class AppUtils {
       }
       for (int i = 0; i < numWords; i++) {
         initials += '${names[i][0]}';
+        if (i == 1) {
+          break;
+        }
       }
     } else {
       initials = name[0];
@@ -98,52 +101,59 @@ class AppUtils {
       required String buttonName,
       Function()? callBack}) {
     return Padding(
-      padding: EdgeInsets.only(top: 80),
-      child: Container(
-        margin: EdgeInsets.all(20.0),
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey, width: 0.15),
-          color: ColorResource.color151515,
+      padding: EdgeInsets.only(top: 80,right: 20,left: 20),
+      child: Card(
+        elevation: 10,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
         ),
-        height: 320,
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              imagePath,
-              height: 170,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            CustomText(
-              text: contentString,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(color: Colors.white),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              width: 110,
-              height: 40,
-              child: SecondaryButton(
-                buttonName,
-                context,
-                fontWeight: FontWeight.w500,
-                borderRadius: 8,
-                backgroundColor: ColorResource.color00E94F,
-                textColor: ColorResource.color151515,
-                fontSize: 14,
-                onTap: () {
-                  callBack!();
-                },
+        color:  ColorResource.colorFFFFFF,
+        child: Container(
+          margin: EdgeInsets.all(20.0),
+          decoration: BoxDecoration(
+            // border: Border.all(color: Colors.grey, width: 0.15),
+            color: ColorResource.colorFFFFFF,
+          ),
+          height: 320,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                imagePath,
+                height: 170,
               ),
-            )
-          ],
+              SizedBox(
+                height: 20,
+              ),
+              CustomText(
+                text: contentString,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .copyWith(color:  ColorResource.color000000),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                width: 110,
+                height: 40,
+                child: SecondaryButton(
+                  buttonName,
+                  context,
+                  fontWeight: FontWeight.w500,
+                  borderRadius: 8,
+                  backgroundColor: ColorResource.color000000,
+                  textColor: ColorResource.colorFFFFFF,
+                  fontSize: 14,
+                  onTap: () {
+                    callBack!();
+                  },
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

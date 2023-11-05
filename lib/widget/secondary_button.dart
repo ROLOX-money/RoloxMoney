@@ -80,8 +80,8 @@ class _SecondaryButtonState extends State<SecondaryButton> {
         height: 46,
         child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(widget.borderRadius),
-              border: Border.all(width: .5, color: ColorResource.color00E94F),
+              // borderRadius: BorderRadius.circular(widget.borderRadius),
+              // border: Border.all(width: .5, color: ColorResource.color00E94F),
               color:
                   widget.backgroundColor ?? Theme.of(context).backgroundColor),
           padding: const EdgeInsets.all(0.0),

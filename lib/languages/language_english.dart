@@ -13,7 +13,7 @@ class LanguageEn extends Languages {
 
   String get alreadyAMember => 'Already a member';
 
-  String get mobileNumber => 'mobile number';
+  String get mobileNumber => 'Mobile Number';
 
   String get send => 'Send';
 
@@ -50,7 +50,7 @@ class LanguageEn extends Languages {
 
   String get continueText => 'Continue';
 
-  String get oopsAgency => 'Oops! Thanks for your interest';
+  String get oopsAgency => 'Hey! Thanks for your interest';
 
   String get oopsAgencyMessage =>
       'We are working on something for you as well and would love to have you onboard with us.';
@@ -59,9 +59,11 @@ class LanguageEn extends Languages {
 
   String get natureOfWork => 'Nature of work';
 
+  String get natureOfBusiness => 'Nature of Business';
+
   String get otherNatureOfWork => 'Other Nature of work';
 
-  String get iDontHaveABusiness => 'I don\'t have a business/brand name';
+  String get iHaveABusiness => 'I  have a business/brand name';
 
   String get industryOfWork => 'Industry of work';
 
@@ -77,7 +79,7 @@ class LanguageEn extends Languages {
 
   String get gstNumber => 'GST Number';
 
-  String get iDontHaveAGSTNumber => 'I don\'t have a GSTIN';
+  String get iHaveAGSTNumber => 'I have a GST Number (optional)';
 
   String get role => 'Role';
 
@@ -87,9 +89,9 @@ class LanguageEn extends Languages {
 
   String get businessName => 'Business Name';
 
-  String get welcomeToRolox => 'Welcome to rolox!';
+  String get welcomeToMean => 'Welcome to Means!';
 
-  String get welcomeNote => 'Manage your business with';
+  String get welcomeNote => 'Manage your business \nwith';
 
   String get professionalInvoice => 'professional invoices';
 
@@ -153,6 +155,8 @@ class LanguageEn extends Languages {
 
   String get invoiceNumber => 'Invoice number';
 
+  String get invoiceDueDate => 'Invoice Due Date';
+
   String get invoiceValueWithoutGST => 'Invoice Value without GST';
 
   String get hsnCode => 'HSN Code';
@@ -173,4 +177,119 @@ class LanguageEn extends Languages {
 
   String get enterAnyOneSocialMediaIdLabel =>
       'Facebook/Instagram/Youtube/Twitter/Linkedin';
+
+  String get agree => 'I agree to the ';
+
+  String get roloxTermsAndCondition => 'Rolox Terms & Conditions';
+
+  String get fullName => 'Full Name';
+
+  String get fullNameHint => 'Enter your full name';
+
+  String get emailIdHint => 'Enter your Email ID';
+
+  String get socialIdHint => 'Enter any one social ID';
+
+  String get companyName => 'Company Name';
+
+  String get companyLegalName => 'Company Legal Name';
+
+  String get companyNameHint => 'Enter your company name';
+
+  String get panNumberHint => 'Enter your PAN number';
+
+  String get aadhaarNumberHint => 'Enter your Aadhaar number';
+
+  String get gstNumberHint => 'Enter your GST number';
+
+  String get aadhaarNumber => 'Aadhaar Number';
+
+  String get congratulations => 'Congratulations!';
+
+  String get accountCreatedSuccessfully =>
+      'Your Rolox account has been created successfully';
+
+  String get accountCreatedScreenContent =>
+      'Banking for Creators, Influencers, Freelancers, Gig, Solopreneurs, Small Business, Brands, Agencies';
+
+  String get letsExplore => 'Lets Explore';
+
+  String get contact => 'Contact';
+
+  String get modeOfWork => 'Mode of Work';
+
+  String get plsIfSpecify => 'Pls Specify if others';
+
+  String get profileSecondPageContent =>
+      'Please share a bit about your setup to get your dashboard up and running!';
+
+  String get accountBalance => 'Account Balance';
+
+  String get allInvoices => 'All Invoices';
+
+  String get upcoming => 'Upcoming';
+
+  String get inNext1Week => 'in next 1 week';
+
+  String get noOf => 'No.of';
+
+  String get transactionWorth => 'Transaction worth';
+
+  String get paid => 'Paid';
+
+  String get due => 'Due';
+
+  String get person => 'Person';
+
+  String get department => 'Department';
+
+  String get designation => 'Designation';
+
+  String get profileScreenFreeContent =>
+      "Please share a bit about your business to setup things better for you!";
+
+  String get optional => '(optional)';
+
+  String get brandNameHintText => 'Enter Your Business Name';
+
+  String get contactPersonNameHintText => 'Enter contact person name';
+
+  String get departmentNameHintText => 'Enter department name';
+
+  String get designationNameHintText => 'Enter designation name';
+
+  String get clientsEmailIdHintText => 'Your client\'s Email ID';
+
+  String get clientMobileNumberHintText => 'Your client\'s mobile number';
+
+  String get enterYourAddressHintText => 'Enter Your Address';
+
+  String get searchClientNameHintText => 'Search Client Name';
+
+  String get projectValueHintText => 'Enter your project value';
+
+  String get projectsEmailIDHintText => 'Your project\'s Email ID';
+
+  String get invoiceNameHintText => 'Your name for invoice for reference';
+
+  String get invoiceNoHintText => 'Your number for invoice for tracking';
+
+  String get valueHintText => 'Value in INR';
+
+  String get hsnCodeHintText => 'HSN Code';
+
+  String get accountNoHintText => 'Your account number';
+
+  String get accountIfscHintText => 'Your account\'s IFSC code';
+
+  String get addProfilePhoto => 'ADD PROFILE PHOTO';
+
+  String get rolox => 'ROLOX';
+
+  String get address1 => 'Address 1';
+
+  String get address2 => 'Address 2';
+
+  String get projectLink =>
+      'Project Link (Optional)';
 }
