@@ -9,8 +9,6 @@ import 'package:roloxmoney/widget/custom_button.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/custom_textfield.dart';
 import 'package:roloxmoney/widget/rolox_money_widget.dart';
-import 'package:roloxmoney/widget/stepper_view.dart';
-
 import '../dashboard_screen/dashboard_controller.dart';
 
 /*Chinnadurai Viswanathan*/
@@ -157,7 +155,7 @@ class BusinessProfileScreenSmallState
                                                 .titleSmall!
                                                 .copyWith(
                                                     color: ColorResource
-                                                        .colorE08AF4,
+                                                        .colorEC008C,
                                                     fontSize: 14,
                                                     fontWeight:
                                                         FontWeight.w600),
@@ -322,7 +320,7 @@ class BusinessProfileScreenSmallState
                                             .titleSmall!
                                             .copyWith(
                                                 color:
-                                                    ColorResource.colorE08AF4,
+                                                    ColorResource.colorEC008C,
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w500),
                                       ),
@@ -357,7 +355,7 @@ class BusinessProfileScreenSmallState
                                           .textTheme
                                           .titleSmall!
                                           .copyWith(
-                                              color: ColorResource.colorE08AF4,
+                                              color: ColorResource.colorEC008C,
                                               fontSize: 14,
                                               fontWeight: FontWeight.w500),
                                     ),
@@ -390,7 +388,7 @@ class BusinessProfileScreenSmallState
                                           .textTheme
                                           .titleSmall!
                                           .copyWith(
-                                              color: ColorResource.colorE08AF4,
+                                              color: ColorResource.colorEC008C,
                                               fontSize: 14,
                                               fontWeight: FontWeight.w500),
                                     ),
@@ -460,7 +458,7 @@ class BusinessProfileScreenSmallState
                                         .textTheme
                                         .titleSmall!
                                         .copyWith(
-                                        color: ColorResource.colorE08AF4,
+                                        color: ColorResource.colorEC008C,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500),
 
@@ -549,7 +547,7 @@ class BusinessProfileScreenSmallState
                                         .textTheme
                                         .titleSmall!
                                         .copyWith(
-                                            color: ColorResource.colorE08AF4,
+                                            color: ColorResource.colorEC008C,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w500),
                                   ),

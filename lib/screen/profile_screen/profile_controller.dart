@@ -1,21 +1,26 @@
 import 'dart:async';
+import 'dart:io';
+import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-
-import '../login_profile_screen/login_profile_controller.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:roloxmoney/singleton.dart';
+import 'package:roloxmoney/utils/RoloxKey.dart';
+import 'package:roloxmoney/utils/app_utils.dart';
 
 enum ModelOfWork { fullTime, partTime }
 
 /*Chinnadurai Viswanathan*/
 class ProfileController extends GetxController with StateMixin {
-  TextEditingController lastNameController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController mobilNumberController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController businessNameController = TextEditingController();
   TextEditingController bankAccountController = TextEditingController();
   TextEditingController bankIFSCController = TextEditingController();
-
+  TextEditingController lastNameController = TextEditingController();
+  RxBool isFreelancer = false.obs;
+  RxBool isLogo = false.obs;
   final form = GlobalKey<FormState>();
   Rx<ModelOfWork> modelOfWork = ModelOfWork.fullTime.obs;
   RxList<String> roleDropDown = [
@@ -31,7 +36,6 @@ class ProfileController extends GetxController with StateMixin {
     'Other',
   ].obs;
   RxString natureOfWorkValue = 'Software'.obs;
-
 
   RxBool iDontHaveBusiness = true.obs;
 
@@ -56,9 +60,88 @@ class ProfileController extends GetxController with StateMixin {
 
   @override
   void onInit() async {
-    change(null, status: RxStatus.success());
-    Future.delayed(const Duration(seconds: 5), () {});
+    Singleton.supabaseInstance.client
+        .from(RoloxKey.supaBaseUserTable)
+        .select('*')
+        .eq('id', Singleton.mobileUserId)
+        .then((userResponse) {
+      firstNameController.text = userResponse[0]['name'];
+      emailController.text = userResponse[0]['email'];
+      isFreelancer.value = userResponse[0]['profiletype'] == 1;
+      mobilNumberController.text = userResponse[0]['phone']
+          .toString()
+          .substring(userResponse[0]['phone'].toString().contains('+91')
+              ? 3
+              : userResponse[0]['phone'].toString().contains('91')
+                  ? 2
+                  : userResponse[0]['phone'].toString().contains('1')
+                      ? 1
+                      : 0);
+
+      Singleton.supabaseInstance.client
+          .from(RoloxKey.supaBaseCompanyTable)
+          .select('companyName')
+          .eq('userid', [Singleton.mobileUserId]).then((value) {
+        if (value is List && value.isNotEmpty) {
+          businessNameController.text = value[0]['companyName'] ?? '';
+        }
+      });
+      change(null, status: RxStatus.success());
+    });
     super.onInit();
+  }
+
+  filePickerDialog() async {
+    await ImagePicker().pickImage(source: ImageSource.gallery).then((value) {
+      uploadFile(filePath: value!.path);
+    });
+  }
+
+  Future<void> filePicker() async {
+    // if (await Permission.storage.isGranted) {
+    //   filePickerDialog();
+    // } else {
+    //   await Permission.storage.request().then((status) {
+    //     if (status.isGranted) {
+    //       filePickerDialog();
+    //     } else {
+    //       filePicker();
+    //     }
+    //   });
+    // }
+    filePickerDialog();
+  }
+
+  Future<void> uploadFile({required String filePath}) async {
+    change(null, status: RxStatus.loading());
+    debugPrint('file values--> $filePath');
+    try {
+      File file = File(filePath);
+      var request = http.MultipartRequest(
+        'PUT',
+        Uri.parse(
+            '${Singleton.imageUploadURL + Singleton.mobileUserId}.${file.path.split('.').last}'),
+      );
+      request.files.add(
+          await http.MultipartFile.fromPath(Singleton.mobileUserId, file.path));
+      try {
+        await request.send().then((response) async {
+          String responseString = await response.stream.bytesToString();
+          debugPrint('File uploaded successfully. Response: $responseString');
+          AppUtils.showSnackBar(Get.context!, 'File uploaded successfully');
+        });
+      } catch (e) {
+        AppUtils.showErrorSnackBar(
+            Get.context!, 'Error file convert into MultipartRequest',
+            durations: 5000);
+      }
+    } catch (e) {
+      AppUtils.showErrorSnackBar(
+          Get.context!, 'Error file convert into MultipartRequest',
+          durations: 5000);
+      debugPrint('Error file convert into MultipartRequest: $e');
+    }
+    change(null, status: RxStatus.success());
   }
 
   void updateValuesOnUI({String? value, RxString? variableName}) {

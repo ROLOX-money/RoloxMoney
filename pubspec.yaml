@@ -17,10 +17,22 @@ dependencies:
   get_it: ^7.2.0
   flutter_localizations:
     sdk: flutter
-  intl: ^0.18.1
+  intl:
   pin_code_fields: ^7.4.0
   flutter_svg: ^1.1.4
   dio: ^5.0.1
+  altogic: ^1.0.6
+  shared_preferences: ^2.1.1
+  supabase_flutter: ^1.10.9
+  firebase_messaging: ^14.6.5
+  firebase_core: ^2.15.0
+  flutter_cached_pdfview: ^0.4.2
+  permission_handler: ^10.4.3
+  path_provider: ^2.0.15
+  internet_file: ^1.2.0
+  share_plus: ^7.0.2
+  flutter_share: ^2.0.0
+  image_picker: ^1.0.1
   data_table_2: ^2.5.8
   flutter_switch: ^0.3.2
 

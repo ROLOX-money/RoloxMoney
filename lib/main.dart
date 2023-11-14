@@ -1,4 +1,6 @@
+
 import 'package:dynamic_themes/dynamic_themes.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -26,9 +28,11 @@ import 'package:roloxmoney/utils/RoloxKey.dart';
 import 'package:roloxmoney/utils/app_themes.dart';
 import 'package:roloxmoney/widget/rolox_money_core_widgets.dart';
 
+
 /*Chinnadurai Viswanathan*/
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   Get.put(LoginController());
   Get.put(WelcomeController());
   Get.put(LoginProfileController());
@@ -67,6 +71,7 @@ class RoloxMoneyAppState extends CoreWidgetsState {
   void initState() {
     RoloxKey.baseUrl = 'https://65.2.137.244:8080/';
     RoloxKey.header = {'content-Type': 'application/json'};
+
     super.initState();
   }
 
@@ -87,8 +92,8 @@ class RoloxMoneyAppState extends CoreWidgetsState {
       builder: (BuildContext context, ThemeData theme) {
         return GetMaterialApp(
           locale: _locale,
-          title: 'Means Money',
           theme: lightTheme,
+          title: 'Means Money',
           supportedLocales: const [
             Locale('en', ''),
           ],

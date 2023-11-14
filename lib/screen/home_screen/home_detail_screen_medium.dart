@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/model/group_invoices_model.dart';
 import 'package:roloxmoney/screen/home_screen/home_controller.dart';
-import 'package:roloxmoney/screen/home_screen/home_detail_screen.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
@@ -136,7 +135,7 @@ class _HomeDetailScreenMediumState extends State<HomeDetailScreenMedium> {
                                             .upcomingInvoicesList
                                             .obs
                                             .value
-                                            .value
+
                                             .length
                                         : (widget.buttonNo == 2)
                                             ? widget
@@ -144,10 +143,10 @@ class _HomeDetailScreenMediumState extends State<HomeDetailScreenMedium> {
                                                 .paidInvoicesList
                                                 .obs
                                                 .value
-                                                .value
+
                                                 .length
                                             : widget.controller!.dueInvoicesList
-                                                .obs.value.value.length,
+                                                .obs.value.length,
                                     shrinkWrap: true,
                                     physics: NeverScrollableScrollPhysics(),
                                     itemBuilder:
@@ -158,20 +157,20 @@ class _HomeDetailScreenMediumState extends State<HomeDetailScreenMedium> {
                                                   .controller!
                                                   .upcomingInvoicesList
                                                   .obs
-                                                  .value
+
                                                   .value[index]
                                               : (widget.buttonNo == 2)
                                                   ? widget
                                                       .controller!
                                                       .paidInvoicesList
                                                       .obs
-                                                      .value
+
                                                       .value[index]
                                                   : widget
                                                       .controller!
                                                       .dueInvoicesList
                                                       .obs
-                                                      .value
+
                                                       .value[index];
                                       return Column(
                                         children: [
@@ -210,42 +209,43 @@ class _HomeDetailScreenMediumState extends State<HomeDetailScreenMedium> {
                                           SizedBox(
                                             height: 15,
                                           ),
-                                          Container(
-                                            padding: EdgeInsets.all(1.0),
-                                            margin:
-                                                EdgeInsets.only(bottom: 15.0),
-                                            child: Theme(
-                                              data: Theme.of(context).copyWith(
-                                                  unselectedWidgetColor:
-                                                      Colors.grey,
-                                                  disabledColor: ColorResource
-                                                      .color00E94F),
-                                              // child:
-                                              child: invoiceWidget(
-                                                  groupInvoices: (widget
-                                                              .buttonNo ==
-                                                          1)
-                                                      ? widget
-                                                          .controller!
-                                                          .upcomingInvoicesList
-                                                          .obs
-                                                          .value
-                                                          .value[index]
-                                                      : (widget.buttonNo == 2)
-                                                          ? widget
-                                                              .controller!
-                                                              .paidInvoicesList
-                                                              .obs
-                                                              .value
-                                                              .value[index]
-                                                          : widget
-                                                              .controller!
-                                                              .dueInvoicesList
-                                                              .obs
-                                                              .value
-                                                              .value[index]),
-                                            ),
-                                          ),
+
+                                          // Todo: need to fix
+                                          // Container(
+                                          //   padding: EdgeInsets.all(1.0),
+                                          //   margin:
+                                          //       EdgeInsets.only(bottom: 15.0),
+                                          //   child: Theme(
+                                          //     data: Theme.of(context).copyWith(
+                                          //         unselectedWidgetColor:
+                                          //             Colors.grey,
+                                          //         disabledColor: ColorResource
+                                          //             .color00E94F),
+                                          //     child: invoice(
+                                          //         groupInvoices: (widget
+                                          //                     .buttonNo ==
+                                          //                 1)
+                                          //             ? widget
+                                          //                 .controller!
+                                          //                 .upcomingInvoicesList
+                                          //                 .obs
+                                          //                 .value
+                                          //                 .value[index]
+                                          //             : (widget.buttonNo == 2)
+                                          //                 ? widget
+                                          //                     .controller!
+                                          //                     .paidInvoicesList
+                                          //                     .obs
+                                          //                     .value
+                                          //                     .value[index]
+                                          //                 : widget
+                                          //                     .controller!
+                                          //                     .dueInvoicesList
+                                          //                     .obs
+                                          //                     .value
+                                          //                     .value[index]),
+                                          //   ),
+                                          // ),
                                         ],
                                       );
                                     }),

@@ -216,7 +216,7 @@ class _DashBoardLargeScreenState extends State<DashBoardLargeScreen> {
                               ),
                               CustomText(
                                 text:
-                                    '${Languages.of(context)?.welcomeToRolox}',
+                                    '${Languages.of(context)?.welcomeToMean}',
                                 style: Theme.of(context)
                                     .textTheme
                                     .titleSmall!
@@ -252,7 +252,7 @@ class _DashBoardLargeScreenState extends State<DashBoardLargeScreen> {
                                                 height: 1.5,
                                                 foreground: Paint()
                                                   ..shader = ColorResource
-                                                      .newLinearGradient),
+                                                      .linearGradient),
                                       )
                                     ]),
                                 maxLines: 2,

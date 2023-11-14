@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/model/project_model.dart';
-import 'package:roloxmoney/screen/projects_screen/add_project/add_project_controller.dart';
-import 'package:roloxmoney/screen/projects_screen/add_project/add_project_screen.dart';
 import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
@@ -40,7 +38,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: ListView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: ScrollPhysics(),
           children: [
             SizedBox(
               height: 15,
@@ -48,8 +46,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                widget.controller!.projectInvoicesList.obs.value.value.length >
-                        0
+                widget.controller!.projectInvoicesList.obs.value.length > 0
                     ? Container(
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         child: Row(
@@ -62,7 +59,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                   .textTheme
                                   .titleSmall!
                                   .copyWith(
-                                      color: ColorResource.colorE08AF4,
+                                      color: ColorResource.color000000,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500),
                             ),
@@ -72,9 +69,9 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                               child: SecondaryButton(
                                 '${Languages.of(context)!.addProject}',
                                 context,
-                                backgroundColor: ColorResource.color00E94F,
+                                backgroundColor: ColorResource.color000000,
                                 fontWeight: FontWeight.w500,
-                                textColor: ColorResource.black,
+                                textColor: ColorResource.colorFFFFFF,
                                 fontSize: 14,
                                 onTap: () {
                                   widget.controller!.navigateAddProjectScreen();
@@ -88,21 +85,20 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                 SizedBox(
                   height: 15,
                 ),
-                widget.controller!.projectInvoicesList.obs.value.value.length >
-                        0
+                widget.controller!.projectInvoicesList.obs.value.length > 0
                     ? ListView.separated(
                         separatorBuilder: (BuildContext context, int index) =>
                             Divider(
-                                height: 1, color: ColorResource.colorA0BCD0),
-                        itemCount: widget.controller!.projectInvoicesList.obs
-                            .value.value.length,
+                                height: 1, color: ColorResource.color181B28),
+                        itemCount: widget
+                            .controller!.projectInvoicesList.obs.value.length,
                         shrinkWrap: true,
-                        // physics: NeverScrollableScrollPhysics(),
+                        physics: NeverScrollableScrollPhysics(),
                         itemBuilder: (BuildContext context, int index) {
-                          ProjectModel projectModel = widget.controller!
-                              .projectInvoicesList.obs.value.value[index];
+                          ProjectModel projectModel = widget
+                              .controller!.projectInvoicesList.obs.value[index];
                           return Container(
-                            color: ColorResource.color151515,
+                            color: ColorResource.colorFFFFFF,
                             alignment: Alignment.centerLeft,
                             padding: EdgeInsets.symmetric(vertical: 20),
                             child: ListTile(
@@ -118,11 +114,11 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                 ),
                                 child: CustomText(
                                   text: AppUtils.getInitials(
-                                          projectModel.projectName)
+                                          projectModel.clientName)
                                       .toString(),
                                   style: Theme.of(context)
                                       .textTheme
-                                      .bodyText1!
+                                      .titleMedium!
                                       .copyWith(
                                           color: ColorResource.colorA0BCD0,
                                           fontWeight: FontWeight.w700),
@@ -132,13 +128,13 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomText(
-                                    text: '${projectModel.projectName}',
+                                    text: projectModel.clientName!,
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleSmall!
                                         .copyWith(
-                                            color: ColorResource.colorFFFFFF,
-                                            fontSize: 16,
+                                            color: ColorResource.color000000,
+                                            fontSize: 15,
                                             fontWeight: FontWeight.w500),
                                   ),
                                   SizedBox(
@@ -154,14 +150,13 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                         width: 5,
                                       ),
                                       CustomText(
-                                        text:
-                                            '${projectModel.noOfInvoice} ${Languages.of(context)!.projects}',
+                                        text: projectModel.projectName!,
                                         style: Theme.of(context)
                                             .textTheme
                                             .titleSmall!
                                             .copyWith(
                                                 color:
-                                                    ColorResource.colorA0BCD0,
+                                                    ColorResource.colorA0A1A9,
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w400),
                                       ),
@@ -172,7 +167,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                         height: 5,
                                         width: 5,
                                         decoration: BoxDecoration(
-                                          color: ColorResource.colorA0BCD0,
+                                          color: ColorResource.colorA0A1A9,
                                           borderRadius: BorderRadius.only(
                                               topRight: Radius.circular(40.0),
                                               bottomRight:
@@ -199,7 +194,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                             .titleSmall!
                                             .copyWith(
                                                 color:
-                                                    ColorResource.colorA0BCD0,
+                                                    ColorResource.colorA0A1A9,
                                                 overflow: TextOverflow.fade,
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w400),
@@ -219,7 +214,8 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                       '${Languages.of(context)!.viewMore}',
                                       context,
                                       fontWeight: FontWeight.w500,
-                                      textColor: ColorResource.color00E94F,
+                                      backgroundColor: ColorResource.colorF5F5F5,
+                                      textColor: ColorResource.color181B28,
                                       fontSize: 14,
                                       onTap: () {},
                                     ),

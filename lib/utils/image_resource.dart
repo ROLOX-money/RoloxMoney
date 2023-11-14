@@ -28,11 +28,14 @@ class ImageResource {
   static const String loginImagePNG = 'assets/png/login_image.png';
   static const String OTPImagePNG = 'assets/png/otp_Image.png';
   static const String bank = 'assets/png/bank.png';
-  static const String bottomSelected = 'assets/png/bottom_navigation/bottom_selected.png';
+  static const String bottomSelected =
+      'assets/png/bottom_navigation/bottom_selected.png';
   static const String welcomeScreenImage = 'assets/png/congrats_image.png';
-  static const String companyProfilePageImage = 'assets/svg/company_profile_page_image.svg';
+  static const String companyProfilePageImage =
+      'assets/svg/company_profile_page_image.svg';
   static const String businessTypeSvg = 'assets/svg/business_type.svg';
-  static const String companyProfileImagePng = 'assets/png/company_profile_image.png';
+  static const String companyProfileImagePng =
+      'assets/png/company_profile_image.png';
   static const String companyImage = 'assets/png/company_image.png';
   static const String contactAddIcon = 'assets/png/image_add.png';
   static const String addPhotoIcon = 'assets/png/add_photo_icon.png';
@@ -43,4 +46,9 @@ class ImageResource {
   static const String walletBold = 'assets/png/bottom_navigation/wallet_bold.png';
   static const String noInvoice = 'assets/png/no_invoices.png';
   static const String withDrawFunds = 'assets/png/withdraw_funds.png';
+  static const String paidIcon = 'assets/png/paid.png';
+  static const String welcomePNG = 'assets/png/welcome.png';
+  static const String meansPNG = 'assets/png/means.png';
+  static const String welcome = 'assets/svg/welcome.svg';
+  static const String means = 'assets/svg/means.svg';
 }

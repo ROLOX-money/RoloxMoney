@@ -94,7 +94,7 @@ abstract class Languages {
 
   String get professionalInvoice;
 
-  String get welcomeToRolox;
+  String get welcomeToMean;
 
   String get explore;
 
@@ -190,6 +190,8 @@ abstract class Languages {
 
   String get companyName;
 
+  String get companyLegalName;
+
   String get companyNameHint;
 
   String get panNumberHint;
@@ -280,9 +282,14 @@ abstract class Languages {
 
   String get rolox;
 
-  String get darkMode;
+  String get address1;
+
+  String get address2;
 
   String get projectLink;
+
+  String get darkMode;
+
 
   String get projectLinkHint;
 

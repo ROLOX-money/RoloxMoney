@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/business_profile_screen/business_profile_controller.dart';
-import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
 import 'package:roloxmoney/screen/profile_screen/profile_controller.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/widget_utils.dart';
@@ -10,7 +9,6 @@ import 'package:roloxmoney/widget/custom_button.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/custom_textfield.dart';
 import 'package:roloxmoney/widget/rolox_money_widget.dart';
-import 'package:roloxmoney/widget/stepper_view.dart';
 
 /*Chinnadurai Viswanathan*/
 // ignore: must_be_immutable
@@ -48,7 +46,10 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     AppBar(
-                      backgroundColor: Theme.of(context).backgroundColor,
+                      backgroundColor: Theme.of(context)
+                          .appBarTheme
+                          .copyWith(backgroundColor: ColorResource.colorFFFFFF)
+                          .backgroundColor,
                       leading: GestureDetector(
                         onTap: () {
                           Get.back();
@@ -56,7 +57,7 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                         child: Icon(
                           Icons.arrow_back_sharp,
                           size: 30,
-                          color: Colors.white,
+                          color: ColorResource.color000000,
                         ),
                       ),
                       centerTitle: true,
@@ -68,13 +69,66 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                 .textTheme
                                 .titleSmall!
                                 .copyWith(
-                                    color: ColorResource.colorFFFFFF,
-                                    fontSize: 20,
+                                color: ColorResource.color000000,
+                                    fontSize: 19,
                                     fontWeight: FontWeight.w600),
                             children: <InlineSpan>[]),
                       ),
                       shadowColor: Colors.grey,
                       elevation: 0.75,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 0),
+                      child: Center(
+                        child: Stack(
+                          alignment: Alignment.bottomRight,
+                          fit: StackFit.passthrough,
+                          children: [
+                            // if (widget.controller!.isFreelancer.value)
+                            GestureDetector(
+                              onTap: () {
+                                widget.controller!.filePicker();
+                              },
+                              child: Container(
+                                width: 200,
+                                height: 200,
+                                alignment: Alignment.center,
+                                child: widget.controller!.isLogo.value
+                                    ? CustomText(
+                                        text: 'Upload Company Logo',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall!
+                                            .copyWith(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                                height: 1.5,
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                foreground: Paint()
+                                                  ..shader = ColorResource
+                                                      .linearGradient),
+                                      )
+                                    : null,
+                                decoration: BoxDecoration(
+                                  image: !widget.controller!.isLogo.value
+                                      ? DecorationImage(
+                                          image: NetworkImage(
+                                              'https://www.shutterstock.com/shutterstock/photos/1395298487/display_1500/stock-photo-focused-woman-wearing-headphones-using-laptop-in-cafe-writing-notes-attractive-female-student-1395298487.jpg'),
+                                          fit: BoxFit.cover,
+                                        )
+                                      : null,
+                                  border: Border.all(
+                                    color: Colors.white,
+                                    width: 1.0, // Sets the border width
+                                  ),
+                                  borderRadius: BorderRadius.circular(360),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                     Form(
                       key: widget.controller!.form,
@@ -98,16 +152,16 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                   labelName:
                                       '${Languages.of(context)?.firstName}',
                                 ),
-                                WidgetUtils.genericTextFiled(
-                                  context: context,
-                                  validationRules: ['required'],
-                                  hintText:
-                                      '${Languages.of(context)?.enter} ${Languages.of(context)?.lastName}',
-                                  controller:
-                                      widget.controller!.lastNameController,
-                                  labelName:
-                                      '${Languages.of(context)?.lastName}',
-                                ),
+                                // WidgetUtils.genericTextFiled(
+                                //   context: context,
+                                //   validationRules: ['required'],
+                                //   hintText:
+                                //       '${Languages.of(context)?.enter} ${Languages.of(context)?.lastName}',
+                                //   controller:
+                                //       widget.controller!.lastNameController,
+                                //   labelName:
+                                //       '${Languages.of(context)?.lastName}',
+                                // ),
                                 CustomText(
                                   text:
                                       '${Languages.of(context)?.mobileNumber}',
@@ -115,7 +169,7 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                       .textTheme
                                       .titleSmall!
                                       .copyWith(
-                                          color: ColorResource.colorE08AF4,
+                                          color: ColorResource.color181B28,
                                           fontWeight: FontWeight.w500),
                                 ),
                                 const SizedBox(height: 5),
@@ -123,11 +177,14 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                   child: CustomTextField(
                                     widget.controller!.mobilNumberController.obs
                                         .value,
-                                    validationRules: ['required','mobile_number'],
+                                    validationRules: [
+                                      'required',
+                                      'mobile_number'
+                                    ],
                                     hintText:
                                         '${Languages.of(context)?.enter} ${Languages.of(context)?.mobileNumber}',
                                     focusedBorder: Colors.grey,
-                                    textColor: Colors.white,
+                                    textColor: ColorResource.color181B28,
                                     enableColor: Colors.grey,
                                     borderColor: Colors.red,
                                     disableColor: Colors.red,
@@ -164,10 +221,7 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                                   .textTheme
                                                   .titleSmall!
                                                   .copyWith(
-                                                      color: Theme.of(context)
-                                                          .textTheme
-                                                          .titleMedium!
-                                                          .color,
+                                                      color: ColorResource.color181B28,
                                                       fontSize: 16,
                                                       fontWeight:
                                                           FontWeight.w400),
@@ -175,10 +229,7 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                             Icon(
                                               Icons.keyboard_arrow_down,
                                               size: 22,
-                                              color: Theme.of(context)
-                                                  .textTheme
-                                                  .titleMedium!
-                                                  .color,
+                                              color: ColorResource.color181B28,
                                             ),
                                             const SizedBox(
                                               width: 5,
@@ -186,7 +237,7 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                             Container(
                                               width: 0.40,
                                               height: 20,
-                                              color: ColorResource.colorDDDDDD,
+                                              color: ColorResource.color181B28,
                                             )
                                           ],
                                         ),
@@ -197,7 +248,7 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                 ),
                                 WidgetUtils.genericTextFiled(
                                   context: context,
-                                  validationRules: ['required','email'],
+                                  validationRules: ['required', 'email'],
                                   hintText:
                                       '${Languages.of(context)?.emailIdHint}',
                                   controller:
@@ -205,16 +256,17 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                   labelName:
                                       '${Languages.of(context)?.emailID}',
                                 ),
-                                WidgetUtils.genericTextFiled(
-                                  context: context,
-                                  validationRules: ['required'],
-                                  hintText:
-                                      '${Languages.of(context)?.brandNameHintText}',
-                                  controller:
-                                      widget.controller!.businessNameController,
-                                  labelName:
-                                      '${Languages.of(context)?.businessName}',
-                                ),
+                                if (widget.controller!.isFreelancer.value)
+                                  WidgetUtils.genericTextFiled(
+                                    context: context,
+                                    validationRules: ['required'],
+                                    hintText:
+                                        '${Languages.of(context)?.brandNameHintText}',
+                                    controller: widget
+                                        .controller!.businessNameController,
+                                    labelName:
+                                        '${Languages.of(context)?.businessName}',
+                                  ),
                                 WidgetUtils.genericTextFiled(
                                   context: context,
                                   validationRules: ['required'],
@@ -246,7 +298,7 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
               ],
             ),
           ),
-          backgroundColor: Theme.of(context).backgroundColor,
+          backgroundColor: Colors.white,
           bottomNavigationBar: PrimaryButton(
             '${Languages.of(context)!.save}',
             context,

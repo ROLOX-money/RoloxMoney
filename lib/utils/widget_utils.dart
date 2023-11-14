@@ -9,6 +9,7 @@ import 'package:roloxmoney/model/project_model.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
+import 'package:roloxmoney/utils/rolox_autocomplete_textfiled.dart';
 import 'package:roloxmoney/widget/custom_button.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/custom_textfield.dart';
@@ -24,11 +25,13 @@ abstract class WidgetUtils {
       int? maxLines,
       int? minLines,
       TextInputType? keyBoardType,
+        bool isReadOnly = false,
       TextStyle? labelStyle,
       List<TextInputFormatter>? inputformaters,
       Function? onEditing,
       bool obscureText = false,
       int? maximumWordCount,
+        Function()? onTab,
       double? height}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,10 +57,12 @@ abstract class WidgetUtils {
             minLines: minLines,
             maximumWordCount: maximumWordCount,
             maxLines: maxLines,
+            isReadOnly: isReadOnly,
             hintText: hintText,
-            // focusedBorder: Colors.grey,
-            // textColor: Colors.white,
-            // enableColor: Colors.grey,
+            focusedBorder: Colors.grey,
+            textColor: ColorResource.color181B28,
+            onTapped: isReadOnly ? onTab : null,
+            enableColor: Colors.grey,
             validationRules: validationRules,
             borderColor: Colors.red,
             inputformaters: inputformaters,
@@ -198,7 +203,7 @@ abstract class WidgetUtils {
                   CustomText(
                     text: '${Languages.of(context)?.oopsAgency}',
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: ColorResource.colorE08AF4,
+                        color: ColorResource.colorEC008C,
                         fontSize: 16,
                         fontWeight: FontWeight.w500),
                   ),
@@ -235,6 +240,74 @@ abstract class WidgetUtils {
           ),
         );
       },
+    );
+  }
+
+  static Widget genericAutoCompleteTextField(
+      {required textController,
+      required context,
+      required suggestions,
+      required labelName,
+      required hintText,
+      required Function(String) textSubmitted,
+      required Function(String) textChanged}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomText(
+          text: labelName,
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+              color: ColorResource.color181B28, fontWeight: FontWeight.w500),
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        SimpleAutoCompleteTextField(
+            key: GlobalKey(),
+            decoration: InputDecoration(
+              filled: true,
+              hintText: hintText,
+              hintStyle: TextStyle(
+                  color: ColorResource.colorA0A1A9,
+                  fontFamily: 'Poppins-Medium',
+                  fontWeight: FontWeight.w400,
+                  fontStyle: FontStyle.normal,
+                  height: 1,
+                  fontSize: 14),
+              fillColor: ColorResource.colorFFFFFF,
+              suffixIconConstraints:
+                  const BoxConstraints(minHeight: 18, minWidth: 18),
+              suffixIcon: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: AppUtils.setSVG(svgPath: ImageResource.searchSVG),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: BorderSide(color: Colors.grey, width: 0.25),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: BorderSide(width: 0.5),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: BorderSide(color: Colors.grey, width: 0.25),
+              ),
+              enabled: true,
+              disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: BorderSide(color: Colors.grey, width: 0.25),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: BorderSide(color: Colors.grey, width: 0.5),
+              ),
+            ),
+            controller: textController,
+            suggestions: suggestions,
+            textChanged: textChanged,
+            textSubmitted: textSubmitted),
+      ],
     );
   }
 

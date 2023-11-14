@@ -2,6 +2,7 @@ import 'package:roloxmoney/languages/app_languages.dart';
 /*Chinnadurai Viswanathan*/
 
 class LanguageEn extends Languages {
+
   @override
   String get appName => 'Means Money';
 
@@ -89,7 +90,7 @@ class LanguageEn extends Languages {
 
   String get businessName => 'Business Name';
 
-  String get welcomeToRolox => 'Welcome to Means!';
+  String get welcomeToMean => 'Welcome to Means!';
 
   String get welcomeNote => 'Manage your business with';
 
@@ -191,6 +192,8 @@ class LanguageEn extends Languages {
   String get socialIdHint => 'Enter any one social ID';
 
   String get companyName => 'Company Name';
+
+  String get companyLegalName => 'Company Legal Name';
 
   String get companyNameHint => 'Enter your company name';
 
@@ -294,7 +297,14 @@ class LanguageEn extends Languages {
 
   String get viewBankAccount => "View Bank Account";
 
+  String get address1 => 'Address 1';
+
+  String get address2 => 'Address 2';
+
   String get noInvoices => "No Invoices are there";
+
+  // String get projectLink =>
+  //     'Project Link (Optional)';
 
   String get funds => "funds";
 

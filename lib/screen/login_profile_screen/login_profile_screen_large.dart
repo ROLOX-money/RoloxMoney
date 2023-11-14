@@ -332,7 +332,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                         height: 50,
                                         context: context,
                                         maximumWordCount: 14,
-                                        // keyBoardType: TextInputType.number,
+                                        keyBoardType: TextInputType.text,
                                         validationRules: [
                                           'required',
                                           'number_only'
@@ -341,11 +341,10 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                         //   CustomAadhaarInputFormatter()
                                         // ],
                                         controller: widget.controller!
-                                            .aadhaarNumberController,
-                                        labelName:
-                                            '${Languages.of(context)?.aadhaarNumber}',
+                                            .contactPersonNameController,
+                                        labelName: 'Contact person name',
                                         hintText:
-                                            '${Languages.of(context)?.aadhaarNumberHint}'),
+                                            'Enter the contact person name'),
                                     // GST Number
                                     WidgetUtils.genericTextFiled(
                                         height: 50,
@@ -427,7 +426,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                           CustomAadhaarInputFormatter()
                                         ],
                                         controller: widget.controller!
-                                            .aadhaarNumberController,
+                                            .contactPersonNameController,
                                         labelName:
                                             '${Languages.of(context)?.aadhaarNumber}',
                                         hintText:

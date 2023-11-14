@@ -73,48 +73,50 @@ class _PrimaryButtonState extends State<PrimaryButton> {
           widget.onTap!();
         }
       },
-      child: Container(
-        height: 56,
+      child: SizedBox(
         width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(widget.borderRadius ?? 0),
-            // border: Border(
-            //   bottom: BorderSide(color: ColorResource.buttonColor, width: 2,),
-            //   right: BorderSide(color: ColorResource.buttonColor, width: 2),
-            // ),
-            color: ColorResource.buttonColor),
-        padding: const EdgeInsets.all(0.0),
-        child: Flex(
-          direction: widget.axis,
-          mainAxisAlignment: widget.alignment,
-          children: [
-            if (widget.isLeading) widget.leadingWidget,
-            if (widget.text != null)
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
-                  widget.text.toString(),
-                  textAlign: widget.textAlign,
-                  style: Theme.of(context).textTheme.button!.copyWith(
-                      fontSize: widget.fontSize,
-                      color: widget.textColor.withOpacity(1),
-                      fontWeight: FontWeight.w600),
-                  maxLines: widget.maxLines,
-                  overflow: widget.isSingleLine ? TextOverflow.ellipsis : null,
+        height: 56,
+        child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(widget.borderRadius ?? 0),
+              // border: Border(
+              //   bottom: BorderSide(color: Colors.white, width: 2),
+              //   right: BorderSide(color: Colors.white, width: 2),
+              // ),
+              color: ColorResource.buttonColor),
+          padding: const EdgeInsets.all(0.0),
+          child: Flex(
+            direction: widget.axis,
+            mainAxisAlignment: widget.alignment,
+            children: [
+              if (widget.isLeading) widget.leadingWidget,
+              if (widget.text != null)
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Text(
+                    widget.text.toString(),
+                    textAlign: widget.textAlign,
+                    style: Theme.of(context).textTheme.button!.copyWith(
+                        fontSize: widget.fontSize,
+                        color: widget.textColor.withOpacity(1),
+                        fontWeight: FontWeight.w600),
+                    maxLines: widget.maxLines,
+                    overflow:
+                        widget.isSingleLine ? TextOverflow.ellipsis : null,
+                  ),
                 ),
-              ),
-            if (widget.isIcon)
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Image.asset(
-                  ImageResource.buttonArrow,
-                  width: 20,
-                  height: 10,
-                  color: ColorResource.buttonTextColor,
+              if (widget.isIcon)
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Image.asset(
+                    ImageResource.buttonArrow,
+                    width: 20,
+                    height: 10,
+                  ),
                 ),
-              ),
-            if (widget.isTrailing) widget.trailingWidget
-          ],
+              if (widget.isTrailing) widget.trailingWidget
+            ],
+          ),
         ),
       ),
     );

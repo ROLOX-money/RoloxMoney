@@ -4,8 +4,6 @@ import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/clients_screen/clients_screen.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_controller.dart';
 import 'package:roloxmoney/screen/home_screen/home_screen.dart';
-import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_controller.dart';
-import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_screen.dart';
 import 'package:roloxmoney/screen/invoice_screen/invoice_screen.dart';
 import 'package:roloxmoney/screen/payment_screen/payment_screen.dart';
 import 'package:roloxmoney/screen/profile_screen/profile_controller.dart';
@@ -43,19 +41,19 @@ class DashboardScreenSmallState extends State<DashboardScreenSmall> {
     return RoloxMoneyWidgetState(
       rxStatus: widget.controller!.status,
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Theme.of(context).backgroundColor,
+          backgroundColor: Colors.white,
           leading: Icon(
             Icons.menu,
             size: 30,
-            color: Colors.white,
+            color: Colors.black,
           ),
           title: Container(
             alignment: Alignment.centerLeft,
             child: Image.asset(
-              ImageResource.rolox,
-              height: 20,
+              ImageResource.meansPNG,
+              height: 18,
             ),
           ),
           actions: [
@@ -127,10 +125,10 @@ class DashboardScreenSmallState extends State<DashboardScreenSmall> {
                     height: 30,
                   ),
                   CustomText(
-                    text: '${Languages.of(context)?.welcomeToRolox}'
+                    text: '${Languages.of(context)?.welcomeToMean}'
                         .toUpperCase(),
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: ColorResource.colorE08AF4,
+                        color: ColorResource.colorEC008C,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                         fontStyle: FontStyle.normal),
@@ -142,7 +140,7 @@ class DashboardScreenSmallState extends State<DashboardScreenSmall> {
                     TextSpan(
                         text: '${Languages.of(context)?.welcomeNote}',
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: ColorResource.colorFFFFFF,
+                            color: Colors.black,
                             fontSize: 24,
                             fontWeight: FontWeight.w600),
                         children: <InlineSpan>[
@@ -171,18 +169,21 @@ class DashboardScreenSmallState extends State<DashboardScreenSmall> {
                       context,
                       cardShape: 1,
                       isIcon: true,
-                      textColor: ColorResource.black,
+                      textColor: Colors.white,
                       fontSize: 20,
                       onTap: () {
-                        Get.put(AddInvoiceController());
-                        Get.toNamed(AddInvoiceScreen.routeName);
+                        // Get.put(AddInvoiceController());
+                        // Get.toNamed(AddInvoiceScreen.routeName);
+                        widget.controller!
+                            .bottomNavigation(selectedBottom: 'Home');
                       },
                     ),
                   )
                 ],
               ),
         bottomNavigationBar: Container(
-          height: 80,
+          height: 85,
+          alignment: Alignment.bottomCenter,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: widget.controller!.dashboardNavigatorModelList.obs.value!
@@ -206,8 +207,8 @@ class DashboardScreenSmallState extends State<DashboardScreenSmall> {
                               color: widget.controller!.selectedBottomButton.obs
                                           .value.value ==
                                       item.name!.obs.value
-                                  ? ColorResource.color00E94F
-                                  : ColorResource.colorA0BCD0,
+                                  ? ColorResource.colorEC008C
+                                  : ColorResource.color60616B,
                             ),
                           ),
                           SizedBox(
@@ -226,8 +227,8 @@ class DashboardScreenSmallState extends State<DashboardScreenSmall> {
                                                 .value
                                                 .value ==
                                             item.name!.obs.value
-                                        ? ColorResource.color00E94F
-                                        : ColorResource.colorA0BCD0,
+                                        ? ColorResource.colorEC008C
+                                        : ColorResource.color60616B,
                                     fontSize: 15,
                                     fontWeight: FontWeight.w400),
                           ),

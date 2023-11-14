@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,13 +12,16 @@ import 'package:roloxmoney/screen/invoice_screen/invoice_screen.dart';
 import 'package:roloxmoney/screen/payment_screen/payment_controller.dart';
 import 'package:roloxmoney/screen/payment_screen/payment_screen.dart';
 import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
+import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/screen/projects_screen/projects_screen.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
+import 'package:roloxmoney/utils/supa_base_control.dart';
 
 enum CurrentPage { HomePage, ClientPage, ProjectPage, InvoicePage, PaymentPage }
 
 /*Chinnadurai Viswanathan*/
-class DashboardController extends GetxController with StateMixin {
+class DashboardController extends GetxController
+    with StateMixin, SupaBaseController {
   Rx<PageController> pageController = PageController().obs;
 
   RxList<DashboardNavigatorModel>? dashboardNavigatorModelList = [
@@ -69,20 +71,33 @@ class DashboardController extends GetxController with StateMixin {
       selectedBottomButton = 'Home'.obs;
       change(selectedBottomButton);
     });
+    SupaBaseController.toGetTheSelectedUser(
+            mobileNumber: Singleton
+                    .supabaseInstance.client.auth.currentUser!.phone
+                    .toString()
+                    .contains('+')
+                ? Singleton.supabaseInstance.client.auth.currentUser!.phone
+                    .toString()
+                : '+${Singleton.supabaseInstance.client.auth.currentUser!.phone.toString()}')
+        .then((value) async {
+      if (value is List && value.length > 0) {
+        Singleton.mobileUserId = value[0]['id'];
+        await toInsertFCM(userID: value[0]['id']);
+        change(null, status: RxStatus.success());
+      }
+    });
+
     super.onInit();
   }
 
-  void bottomNavigation({required String selectedBottom}) {
+  Future<void> bottomNavigation({required String selectedBottom}) async {
     Get.lazyPut(() => HomeController());
     Get.lazyPut(() => ProjectsController());
     Get.lazyPut(() => ClientsController());
     Get.lazyPut(() => InvoiceController());
     Get.lazyPut(() => PaymentController());
     selectedBottomButton = selectedBottom.obs;
-    dashboardNavigatorModelList!.forEach((element) {
-      // element.index
-      // pageController.obs.value.value.c
-    });
+    dashboardNavigatorModelList!.forEach((element) {});
     change(selectedBottomButton);
   }
 

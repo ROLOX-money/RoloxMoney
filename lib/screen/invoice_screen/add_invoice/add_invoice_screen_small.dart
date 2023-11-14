@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_controller.dart';
+import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/utils/widget_utils.dart';
@@ -76,6 +77,23 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                           SizedBox(
                             height: 10,
                           ),
+                          WidgetUtils.genericAutoCompleteTextField(
+                            textController:
+                                widget.controller!.projectNameController,
+                            context: context,
+                            hintText: Languages.of(context)?.brandNameHintText,
+                            suggestions: widget.controller!.projectList
+                                .map((item) => item.projectName!)
+                                .toList(),
+                            labelName: Languages.of(context)?.projectName,
+                            textSubmitted: (text) {
+                              widget.controller!
+                                  .toSetClientId(searchingText: text);
+                            },
+                            textChanged: (text) {
+                              widget.controller!.toSetClientId(isClear: true);
+                            },
+                          ),
                           WidgetUtils.genericTextFiled(
                             context: context,
                             validationRules: ['required'],
@@ -107,21 +125,15 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                           ),
                           WidgetUtils.genericTextFiled(
                             context: context,
-                            validationRules: ['required'],
-                            hintText: Languages.of(context)?.brandNameHintText,
-                            controller:
-                                widget.controller!.projectNameController,
-                            keyBoardType: TextInputType.emailAddress,
-                            suffixImagePath: ImageResource.searchSVG,
-                            labelName: '${Languages.of(context)?.projectName}',
-                          ),
-                          WidgetUtils.genericTextFiled(
-                            context: context,
                             hintText: "DD/MM/YYYY",
                             validationRules: ['required'],
                             controller:
                                 widget.controller!.invoiceDueDateController,
-                            keyBoardType: TextInputType.emailAddress,
+                            keyBoardType: TextInputType.datetime,
+                            isReadOnly: true,
+                            onTab: () {
+                              widget.controller!.toSelectDate();
+                            },
                             suffixImagePath: ImageResource.calendarSVG,
                             labelName:
                                 '${Languages.of(context)?.invoiceDueDate}',
@@ -131,25 +143,25 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                             validationRules: ['required'],
                             hintText: Languages.of(context)?.hsnCodeHintText,
                             keyBoardType: TextInputType.phone,
-                            controller: widget.controller!.gstChargesController,
+                            controller: widget.controller!.hsnController,
                             labelName: '${Languages.of(context)?.hsnCode}',
                           ),
                           WidgetUtils.genericTextFiled(
                             context: context,
                             validationRules: ['required'],
-                            hintText: Languages.of(context)?.gstCharges,
+                            hintText: '${Languages.of(context)?.gstCharges} (Optional)',
                             keyBoardType: TextInputType.phone,
                             controller: widget.controller!.gstChargesController,
                             labelName: '${Languages.of(context)?.gstCharges}',
                           ),
-                          WidgetUtils.genericTextFiled(
-                            context: context,
-                            validationRules: ['required'],
-                            hintText: Languages.of(context)?.state,
-                            keyBoardType: TextInputType.phone,
-                            controller: widget.controller!.stateController,
-                            labelName: '${Languages.of(context)?.state}',
-                          ),
+                          // WidgetUtils.genericTextFiled(
+                          //   context: context,
+                          //   validationRules: ['required'],
+                          //   hintText: Languages.of(context)?.state,
+                          //   keyBoardType: TextInputType.text,
+                          //   controller: widget.controller!.stateController,
+                          //   labelName: '${Languages.of(context)?.state}',
+                          // ),
                           const SizedBox(
                             height: 15,
                           ),
@@ -163,7 +175,13 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                             onTap: () {
                               if (widget.controller!.form.currentState!
                                   .validate()) {
-                                Get.back();
+                                if (widget.controller!.projectId != null) {
+                                  widget.controller!.toAddInvoice();
+                                } else {
+                                  AppUtils.showErrorSnackBar(context,
+                                      'Please select at least one project ',
+                                      durations: 2000);
+                                }
                               }
                             },
                           ),
@@ -179,7 +197,7 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
             ),
           ),
         ),
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Colors.white,
       ),
     );
   }

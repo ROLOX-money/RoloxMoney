@@ -1,16 +1,16 @@
 class ProjectModel {
   String? projectName;
+  String? clientName;
   int? noOfInvoice;
   String? amount;
   String? date;
-  String? clientName;
   bool? isCredit;
 
   ProjectModel(
       {this.projectName,
       this.noOfInvoice,
       this.amount,
-      this.date,
       this.clientName,
+      this.date,
       this.isCredit = false});
 }

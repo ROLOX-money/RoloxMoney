@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:roloxmoney/utils/font.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 /*Chinnadurai Viswanathan*/
@@ -80,8 +79,8 @@ class _SecondaryButtonState extends State<SecondaryButton> {
         width: MediaQuery.of(context).size.width,
         height: 46,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(widget.borderRadius),
-            border: Border.all(width: .5, color: Colors.transparent),
+            // borderRadius: BorderRadius.circular(widget.borderRadius),
+            // border: Border.all(width: .5, color: Colors.transparent),
             color: widget.backgroundColor ?? Theme.of(context).backgroundColor),
         padding: const EdgeInsets.all(0.0),
         child: Flex(

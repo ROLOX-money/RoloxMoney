@@ -4,8 +4,6 @@ import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/model/project_model.dart';
 import 'package:roloxmoney/screen/bank_list_screen/bank_list_controller.dart';
 import 'package:roloxmoney/screen/bank_list_screen/bank_list_screen.dart';
-import 'package:roloxmoney/screen/payment_screen/add_bank_account/add_bank_account_controller.dart';
-import 'package:roloxmoney/screen/payment_screen/add_bank_account/add_bank_account_screen.dart';
 import 'package:roloxmoney/screen/payment_screen/payment_controller.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
@@ -64,7 +62,7 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                               .textTheme
                               .titleSmall!
                               .copyWith(
-                                  color: ColorResource.colorE08AF4,
+                                  color: ColorResource.color000000,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500),
                         ),
@@ -74,9 +72,9 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                           child: SecondaryButton(
                             'View Bank Account',
                             context,
-                            backgroundColor: ColorResource.color00E94F,
+                            backgroundColor: ColorResource.color000000,
                             fontWeight: FontWeight.w500,
-                            textColor: ColorResource.color151515,
+                            textColor: ColorResource.colorFFFFFF,
                             fontSize: 14,
                             onTap: () {
                               // Get.put(AddBankAccountController());
@@ -92,22 +90,22 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                   SizedBox(
                     height: 15,
                   ),
-                  widget.controller!.projectInvoicesList.obs.value.value
+                  widget.controller!.projectInvoicesList.obs.value
                               .length >
                           0
                       ? ListView.separated(
                           separatorBuilder: (BuildContext context, int index) =>
                               Divider(
-                                  height: 1, color: ColorResource.colorA0BCD0),
+                                  height: 1, color: ColorResource.color181B28),
                           itemCount: widget.controller!.projectInvoicesList.obs
-                              .value.value.length,
+                              .value.length,
                           shrinkWrap: true,
                           // physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
                             ProjectModel projectModel = widget.controller!
-                                .projectInvoicesList.obs.value.value[index];
+                                .projectInvoicesList.obs.value[index];
                             return Container(
-                              color: ColorResource.color151515,
+                              color: ColorResource.colorFFFFFF,
                               alignment: Alignment.centerLeft,
                               padding: EdgeInsets.symmetric(vertical: 15),
                               child: ListTile(
@@ -127,9 +125,9 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                         .toString(),
                                     style: Theme.of(context)
                                         .textTheme
-                                        .bodyText1!
+                                        .titleMedium!
                                         .copyWith(
-                                            color: ColorResource.colorE08AF4,
+                                            color: ColorResource.colorA0A1A9,
                                             fontWeight: FontWeight.w700),
                                   ),
                                 ),
@@ -141,16 +139,27 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Container(
-                                          height: 15,
                                           alignment: Alignment.center,
-                                          color: projectModel.isCredit == false
-                                              ? ColorResource.color4A3114
-                                              : ColorResource.color1C415C,
+                                          // padding: EdgeInsets.all(2),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                                width: 3.0
+                                            ),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(7.0) //                 <--- border radius here
+                                            ),
+                                            color: Colors.white
+                                            // color: projectModel.isCredit == false
+                                            //   ? ColorResource.color4A3114
+                                            //   : ColorResource.color1C5F2C,
+                                          ),
+
                                           child: CustomText(
                                             text: projectModel.isCredit == false
                                                 ? 'Pending'.toUpperCase()
                                                 : '${Languages.of(context)!.credit}'
                                                     .toUpperCase(),
+                                            color: Colors.red,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .titleSmall!
@@ -162,18 +171,17 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                                                 .colorFFC700
                                                             : ColorResource
                                                                 .color0093FF,
-                                                    fontSize: 12,
+                                                    fontSize: 09,
                                                     fontWeight:
                                                         FontWeight.w500),
                                           ),
                                         ),
+                                        if(projectModel.isCredit == false)
                                         Container(
                                           height: 15,
                                           alignment: Alignment.center,
                                           child: CustomText(
-                                            text: projectModel.isCredit == false
-                                                ? 'Reminder'
-                                                : 'Received',
+                                            text: 'Reminder',
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .titleSmall!
@@ -211,7 +219,7 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                           .textTheme
                                           .titleSmall!
                                           .copyWith(
-                                              color: ColorResource.color00E94F,
+                                              color: ColorResource.color000000,
                                               overflow: TextOverflow.fade,
                                               fontSize: 16,
                                               fontWeight: FontWeight.w600),
@@ -227,7 +235,7 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                                   .titleSmall!
                                                   .copyWith(
                                                       color: ColorResource
-                                                          .colorFFFFFF,
+                                                          .color181B28,
                                                       fontSize: 14,
                                                       fontWeight:
                                                           FontWeight.w400),
@@ -239,7 +247,7 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                                       .titleSmall!
                                                       .copyWith(
                                                           color: ColorResource
-                                                              .colorA0BCD0,
+                                                              .colorA0A1A9,
                                                           fontSize: 14,
                                                           fontWeight:
                                                               FontWeight.w500),
@@ -256,7 +264,7 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                           height: 5,
                                           width: 5,
                                           decoration: BoxDecoration(
-                                            color: ColorResource.colorA0BCD0,
+                                            color: ColorResource.colorA0A1A9,
                                             borderRadius: BorderRadius.only(
                                                 topRight: Radius.circular(40.0),
                                                 bottomRight:
@@ -279,7 +287,7 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                               .titleSmall!
                                               .copyWith(
                                                   color:
-                                                      ColorResource.colorA0BCD0,
+                                                      ColorResource.colorA0A1A9,
                                                   overflow: TextOverflow.fade,
                                                   fontSize: 12,
                                                   fontWeight: FontWeight.w400),
@@ -299,8 +307,9 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                         '${Languages.of(context)!.viewMore}',
                                         context,
                                         fontWeight: FontWeight.w500,
-                                        textColor: ColorResource.color00E94F,
+                                        textColor: ColorResource.color181B28,
                                         fontSize: 14,
+                                        backgroundColor: ColorResource.colorF5F5F5,
                                         onTap: () {},
                                       ),
                                     )

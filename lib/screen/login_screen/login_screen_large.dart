@@ -54,7 +54,7 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                   Padding(
                     padding: const EdgeInsets.only(top: 50, bottom: 0),
                     child: CustomText(
-                      text: '${Languages.of(context)?.welcomeToRolox}',
+                      text: '${Languages.of(context)?.welcomeToMean}',
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           color: Theme.of(context).primaryColor,
                           fontSize: 18,
@@ -86,7 +86,7 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                                     height: 1.5,
                                     foreground: Paint()
                                       ..shader =
-                                          ColorResource.newLinearGradient),
+                                          ColorResource.linearGradient),
                           )
                         ]),
                     softWrap: true,
@@ -274,10 +274,12 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                                     .validate() &&
                                 widget.controller!.acceptTermsAndCondition.obs
                                     .value.value) {
-                              otpAlertDialogue(
-                                  controller: widget.controller!,
-                                  mobileNumber:
-                                      ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
+
+
+                              // otpAlertDialogue(
+                              //     controller: widget.controller!,
+                              //     mobileNumber:
+                              //         ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
 
                               // otpBottomSheet(
                               //     controller: widget.controller!,

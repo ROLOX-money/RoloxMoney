@@ -63,7 +63,10 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
-
+    packagingOptions {
+        pickFirst '**/libc++_shared.so'
+        pickFirst '**/libfbjni.so'
+    }
     defaultConfig {
         applicationId "com.rolox"
         minSdkVersion flutter.minSdkVersion
@@ -103,14 +106,19 @@ android {
     flavorDimensions "default"
     productFlavors {
         dev {
+            //com.rolox.money.dev
             applicationIdSuffix ".money.dev"
         }
         uat {
             applicationIdSuffix ".money.uat"
         }
         prod {
-            applicationIdSuffix ".money"
+            applicationIdSuffix ".money.dev"
         }
+    }
+    sourceSets.main {
+        jniLibs.srcDir 'libs'
+        jni.srcDirs = [] //disable automatic ndk-build call
     }
 }
 
