@@ -276,10 +276,10 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                                     .value.value) {
 
 
-                              // otpAlertDialogue(
-                              //     controller: widget.controller!,
-                              //     mobileNumber:
-                              //         ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
+                              otpAlertDialogue(
+                                  controller: widget.controller!,
+                                  mobileNumber:
+                                      ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
 
                               // otpBottomSheet(
                               //     controller: widget.controller!,

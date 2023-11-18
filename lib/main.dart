@@ -32,7 +32,7 @@ import 'package:roloxmoney/widget/rolox_money_core_widgets.dart';
 /*Chinnadurai Viswanathan*/
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
   Get.put(LoginController());
   Get.put(WelcomeController());
   Get.put(LoginProfileController());
