@@ -293,7 +293,7 @@ class HomeController extends GetxController with StateMixin {
 
       change(groupInvoicesList);
     });
-    toGetTheInvoiceList();
+    // toGetTheInvoiceList();
     super.onInit();
   }
 

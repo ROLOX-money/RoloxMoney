@@ -39,7 +39,7 @@ class InvoiceController extends GetxController with StateMixin {
       change(projectInvoicesList);
     });
 
-    toGetTheInvoiceList();
+    // toGetTheInvoiceList();
     super.onInit();
   }
 

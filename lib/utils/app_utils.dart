@@ -96,16 +96,16 @@ class AppUtils {
       required String contentString,
       required String imagePath,
       required String buttonName,
-         double? buttonWidth,
+      double? buttonWidth,
       Function()? callBack}) {
     return Padding(
-      padding: EdgeInsets.only(top: 80,right: 20,left: 20),
+      padding: EdgeInsets.only(top: 80, right: 20, left: 20),
       child: Card(
         elevation: 10,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
-        color:  ColorResource.colorFFFFFF,
+        color: ColorResource.colorFFFFFF,
         child: Container(
           margin: EdgeInsets.all(20.0),
           decoration: BoxDecoration(
@@ -129,13 +129,13 @@ class AppUtils {
                 style: Theme.of(context)
                     .textTheme
                     .titleMedium!
-                    .copyWith(color:  ColorResource.color000000),
+                    .copyWith(color: ColorResource.color000000),
               ),
               SizedBox(
                 height: 20,
               ),
               Container(
-                width: 110,
+                width: buttonWidth ?? 110,
                 height: 40,
                 child: SecondaryButton(
                   buttonName,

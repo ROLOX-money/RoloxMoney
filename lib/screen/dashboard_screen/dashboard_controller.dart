@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/model/dashboard_navigator_model.dart';
@@ -12,7 +11,6 @@ import 'package:roloxmoney/screen/invoice_screen/invoice_screen.dart';
 import 'package:roloxmoney/screen/payment_screen/payment_controller.dart';
 import 'package:roloxmoney/screen/payment_screen/payment_screen.dart';
 import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
-import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/screen/projects_screen/projects_screen.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/utils/supa_base_control.dart';
@@ -71,21 +69,22 @@ class DashboardController extends GetxController
       selectedBottomButton = 'Home'.obs;
       change(selectedBottomButton);
     });
-    SupaBaseController.toGetTheSelectedUser(
-            mobileNumber: Singleton
-                    .supabaseInstance.client.auth.currentUser!.phone
-                    .toString()
-                    .contains('+')
-                ? Singleton.supabaseInstance.client.auth.currentUser!.phone
-                    .toString()
-                : '+${Singleton.supabaseInstance.client.auth.currentUser!.phone.toString()}')
-        .then((value) async {
-      if (value is List && value.length > 0) {
-        Singleton.mobileUserId = value[0]['id'];
-        await toInsertFCM(userID: value[0]['id']);
-        change(null, status: RxStatus.success());
-      }
-    });
+    // SupaBaseController.toGetTheSelectedUser(
+    //         mobileNumber: Singleton
+    //                 .supabaseInstance.client.auth.currentUser!.phone
+    //                 .toString()
+    //                 .contains('+')
+    //             ? Singleton.supabaseInstance.client.auth.currentUser!.phone
+    //                 .toString()
+    //             : '+${Singleton.supabaseInstance.client.auth.currentUser!.phone.toString()}')
+    //     .then((value) async {
+    //   if (value is List && value.length > 0) {
+    //     Singleton.mobileUserId = value[0]['id'];
+    //     await toInsertFCM(userID: value[0]['id']);
+    //     // change(null, status: RxStatus.success());
+    //   }
+    // });
+    // change(null, status: RxStatus.success());
 
     super.onInit();
   }
