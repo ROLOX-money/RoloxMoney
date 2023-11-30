@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
+import 'package:roloxmoney/screen/login_profile_screen/login_profile_controller.dart';
 import 'package:roloxmoney/screen/login_profile_screen/login_profile_screen.dart';
 import 'package:roloxmoney/screen/welcome_screen/welcome_screen.dart';
 import 'package:roloxmoney/screen/welcome_screen/welcome_screen_controller.dart';
@@ -46,11 +47,13 @@ class LoginController extends RoloxGetXController with SupaBaseController {
   }
 
   void navigateProfile() {
-    if (otpController.text.length == 4) {
+    if (otpController.text.length == 6) {
       // Future.delayed(const Duration(seconds: 5), () {
-      Get.put(WelcomeController());
-      Get.toNamed(WelcomeScreen.routeName);
+      // Get.put(WelcomeController());
+      // Get.toNamed(WelcomeScreen.routeName);
       // });
+      Get.put(LoginProfileController());
+      Get.offAndToNamed(LoginProfileScreen.routeName);
     }
   }
 
@@ -276,14 +279,14 @@ class LoginController extends RoloxGetXController with SupaBaseController {
 
   Future<void> triggerLogin() async {
     change(null, status: RxStatus.loading());
-    /*await SupaBaseController.sendSignInCode(
+    await SupaBaseController.sendSignInCode(
             mobileNumber: '+91${mobilNumberController.text}')
         .then((value) {
       if (value) {
         otpBottomSheet(mobileNumber: '${mobilNumberController.text}');
       }
-    });*/
-    otpBottomSheet(mobileNumber: '${mobilNumberController.text}');
+    });
+    // otpBottomSheet(mobileNumber: '${mobilNumberController.text}');
     change(null, status: RxStatus.success());
   }
 }
