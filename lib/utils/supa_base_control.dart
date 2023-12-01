@@ -165,6 +165,10 @@ mixin SupaBaseController {
       required searchValue,
       required tableName}) async {
     try {
+      debugPrint('whatTypeOfValueYouWant--> $whatTypeOfValueYouWant');
+      debugPrint('searchKey--> $searchKey');
+      debugPrint('searchValue--> $searchValue');
+      debugPrint('tableName--> $tableName');
       return await Singleton.supabaseInstance.client
           .from(tableName)
           .select(whatTypeOfValueYouWant ?? '*')
@@ -236,6 +240,7 @@ mixin SupaBaseController {
 
   Future<List<ClientModel>> toGetTheClientList() async {
     List<ClientModel> clientList = [];
+    debugPrint('userid-->to fetch the client ${Singleton.mobileUserId}');
     try {
       await Singleton.supabaseInstance.client
           .from(RoloxKey.supaBaseUserToClientMap)

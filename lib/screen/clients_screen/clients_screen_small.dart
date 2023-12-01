@@ -91,7 +91,7 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                       ? ListView.separated(
                           separatorBuilder: (BuildContext context, int index) =>
                               Divider(
-                                  height: 1, color: ColorResource.colorA0BCD0),
+                                  height: 1, color: ColorResource.colorA0A1A9),
                           itemCount:
                               widget.controller!.clientList.obs.value.length,
                           shrinkWrap: true,
@@ -100,7 +100,7 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                             ClientModel clientModel =
                                 widget.controller!.clientList.obs.value[index];
                             return Container(
-                              color: ColorResource.color151515,
+                              color: ColorResource.colorFFFFFF,
                               alignment: Alignment.centerLeft,
                               padding: EdgeInsets.symmetric(vertical: 15),
                               child: ListTile(
@@ -137,22 +137,9 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                           .textTheme
                                           .titleSmall!
                                           .copyWith(
-                                              color: ColorResource.colorFFFFFF,
-                                              fontSize: 16,
+                                              color: ColorResource.color000000,
+                                              fontSize: 15,
                                               fontWeight: FontWeight.w500),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    CustomText(
-                                      text: 'Naveen Business Card Projects',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall!
-                                          .copyWith(
-                                              color: ColorResource.colorA0BCD0,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400),
                                     ),
                                     SizedBox(
                                       height: 10,

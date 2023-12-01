@@ -132,7 +132,7 @@ class AddClientController extends GetxController
                                   userData: {
                                     'gstNumber': gstNumberController.text,
                                     'refrenceid': userResponseList[0]['id'],
-                                    'profiletype': typOfBusiness.value ==
+                                    'profileType': typOfBusiness.value ==
                                             TypOfBusiness.business
                                         ? 2
                                         : 1,
@@ -142,8 +142,9 @@ class AddClientController extends GetxController
                                         tableName:
                                             RoloxKey.supaBaseCompanyTable,
                                         whatTypeOfValueYouWant: 'id',
-                                        searchKey: 'gstNumber')
+                                        searchKey: 'companyName')
                                     .then((companyResponseList) {
+                                      debugPrint('companyResponseList--> ${companyResponseList}');
                                   if (companyResponseList.isNotEmpty) {
                                     toInsert(
                                         tableName:
@@ -191,16 +192,17 @@ class AddClientController extends GetxController
               });
             });
           } else {
+            change(null, status: RxStatus.success());
             AppUtils.showErrorSnackBar(
                 Get.context!, 'This PAN already mapped with another client',
-                durations: 10000);
+                durations: 5000);
           }
         });
       } else {
         change(null, status: RxStatus.success());
         AppUtils.showErrorSnackBar(
             Get.context!, 'This GST already mapped with another client',
-            durations: 10000);
+            durations: 5000);
       }
     });
   }

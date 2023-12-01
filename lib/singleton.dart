@@ -4,7 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class Singleton {
   //1 = real device, 2= Testing device
   int deviceType = 1;
-  static String mobileUserId = 'b8464be6-5217-44f6-82be-addf2e25b281';
+  static String mobileUserId = '1bcf7890-52c3-4d9c-87c9-287b606b7cc4';
   static String imageUploadURL =
       'https://2bcgkzypx4.execute-api.ap-south-1.amazonaws.com/dev/logo.vm.rstk.in/';
   static String invoiceDownloadURL =

@@ -37,7 +37,6 @@ class LoginController extends RoloxGetXController with SupaBaseController {
 
     if (kDebugMode) {
       acceptTermsAndCondition.value = true;
-      otpController.text = "1234";
     }
     change(null, status: RxStatus.success());
     // if (kDebugMode) mobilNumberController.text = '9585313659';
@@ -48,12 +47,13 @@ class LoginController extends RoloxGetXController with SupaBaseController {
 
   void navigateProfile() {
     if (otpController.text.length == 6) {
-      // Future.delayed(const Duration(seconds: 5), () {
-      // Get.put(WelcomeController());
-      // Get.toNamed(WelcomeScreen.routeName);
-      // });
-      Get.put(LoginProfileController());
-      Get.offAndToNamed(LoginProfileScreen.routeName);
+      otpVerification(context: Get.context);
+      // // Future.delayed(const Duration(seconds: 5), () {
+      // // Get.put(WelcomeController());
+      // // Get.toNamed(WelcomeScreen.routeName);
+      // // });
+      // Get.put(LoginProfileController());
+      // Get.offAndToNamed(LoginProfileScreen.routeName);
     }
   }
 
@@ -76,16 +76,19 @@ class LoginController extends RoloxGetXController with SupaBaseController {
               Get.offAndToNamed(LoginProfileScreen.routeName,
                   arguments: mobilNumberController.text);
             } else {
-              toInsertFCM(userID: value[0]['id']).then((fcmTokenValue) {
-                if (fcmTokenValue) {
-                  Get.offAndToNamed(DashboardScreen.routeName,
-                      arguments: mobilNumberController.text);
-                } else {
-                  AppUtils.showErrorSnackBar(Get.context!,
-                      'Something went wrong..Please Please try again latter',
-                      durations: 2000);
-                }
-              });
+
+              Get.offAndToNamed(DashboardScreen.routeName,
+                  arguments: mobilNumberController.text);
+              // toInsertFCM(userID: value[0]['id']).then((fcmTokenValue) {
+              //   if (fcmTokenValue) {
+              //     Get.offAndToNamed(DashboardScreen.routeName,
+              //         arguments: mobilNumberController.text);
+              //   } else {
+              //     AppUtils.showErrorSnackBar(Get.context!,
+              //         'Something went wrong..Please Please try again latter',
+              //         durations: 2000);
+              //   }
+              // });
             }
           });
         } else {

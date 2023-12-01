@@ -110,6 +110,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Image.asset(
                     ImageResource.buttonArrow,
+                    color: ColorResource.colorFFFFFF,
                     width: 20,
                     height: 10,
                   ),
