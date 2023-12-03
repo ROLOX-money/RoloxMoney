@@ -98,7 +98,7 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                         disableColor: Colors.red,
                         keyBoardType: TextInputType.phone,
                         prefixIcon: Container(
-                          width: 100,
+                          width: 110,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
@@ -154,7 +154,6 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                           ),
                         ),
                       ),
-
                     ),
                   ),
                   ListTile(
@@ -175,17 +174,6 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                         },
                       ),
                     ),
-                    // Checkbox(
-                    //   value: widget.controller!.acceptTermsAndCondition
-                    //       .obs.value.value,
-                    //   activeColor: Colors.blue,
-                    //   checkColor: ColorResource.color151515,
-                    //   onChanged: (value) {
-                    //     widget.controller!
-                    //         .noAgreeTermsAndConditionCheckBox(
-                    //         values: value);
-                    //   },
-                    // ),
                     title: RichText(
                         overflow: TextOverflow.fade,
                         softWrap: true,
@@ -227,7 +215,6 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                     cardShape: 1,
                     isIcon: true,
                     onTap: () async {
-                      /// fixme
                       if (widget.controller!.form.currentState!.validate()) {
                         widget.controller!.triggerLogin();
                       }

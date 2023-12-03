@@ -20,7 +20,7 @@ class AppRoutes {
   static List<GetPage<dynamic>>? routes = [
     // GetPage(name: '/', page: () => LoginScreen()),
     // GetPage(name: '/', page: () => DashboardScreen()),
-    GetPage(name: '/', page: () => SplashScreen()),
+    // GetPage(name: '/', page: () => SplashScreen()),
     GetPage(name: PDFScreen.routeName, page: () => PDFScreen()),
     // GetPage(name: '/', page: () => PDFScreen()),
     // GetPage(name: '/', page: () => HomeScreen()),
@@ -35,7 +35,8 @@ class AppRoutes {
     GetPage(
         name: BusinessProfileScreen.routeName,
         page: () => BusinessProfileScreen()),
-    GetPage(name: DashboardScreen.routeName, page: () => DashboardScreen()),
+    // GetPage(name: DashboardScreen.routeName, page: () => DashboardScreen()),
+    GetPage(name: '/', page: () => DashboardScreen()),
     GetPage(name: AddClientScreen.routeName, page: () => AddClientScreen()),
     GetPage(name: AddProjectScreen.routeName, page: () => AddProjectScreen()),
     GetPage(name: AddInvoiceScreen.routeName, page: () => AddInvoiceScreen()),
