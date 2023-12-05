@@ -10,7 +10,7 @@ class AutoComplete {
     List<String> values = suggestionValue ?? [];
     return Container(
       decoration: BoxDecoration(
-          boxShadow: ColorResource.boxShadow,color: Colors.white),
+          boxShadow: ColorResource.boxShadow, color: Colors.white),
       height: 60,
       child: Autocomplete<String>(
         initialValue: value != null ? TextEditingValue(text: value) : null,
@@ -71,7 +71,8 @@ class AutoComplete {
           });
         },
         optionsViewBuilder: (BuildContext context,
-            AutocompleteOnSelected<String> onSelected, Iterable<String> options) {
+            AutocompleteOnSelected<String> onSelected,
+            Iterable<String> options) {
           return Align(
             alignment: Alignment.topLeft,
             child: Padding(
@@ -80,13 +81,15 @@ class AutoComplete {
                 color: Colors.white,
                 child: Container(
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black54),
-                      color: Colors.white70,
-                      borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(15),
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15),
-                          bottomRight: Radius.circular(15))),
+                    border: Border.all(color: Colors.black54,width: 0.5),
+                    color: Colors.white70,
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(5),
+                      topLeft: Radius.circular(5),
+                      topRight: Radius.circular(5),
+                      bottomRight: Radius.circular(5),
+                    ),
+                  ),
                   width: MediaQuery.of(context).size.width - 30,
                   height: options.length == 1
                       ? 75

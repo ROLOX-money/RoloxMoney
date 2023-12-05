@@ -56,13 +56,13 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                               CustomText(
                                 text: '${Languages.of(context)!.clientDetails}'
                                     .toUpperCase(),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleSmall!
-                                    .copyWith(
-                                        color: ColorResource.colorEC008C,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall!
+                                      .copyWith(
+                                      color: ColorResource.color000000,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500),
                               ),
                               Container(
                                 width: 110,
@@ -70,9 +70,9 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                 child: SecondaryButton(
                                   '${Languages.of(context)!.addClient}',
                                   context,
-                                  backgroundColor: ColorResource.color00E94F,
+                                  backgroundColor: ColorResource.color000000,
                                   fontWeight: FontWeight.w500,
-                                  textColor: ColorResource.black,
+                                  textColor: ColorResource.colorFFFFFF,
                                   fontSize: 14,
                                   onTap: () {
                                     widget.controller!
@@ -122,7 +122,7 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                         .toString(),
                                     style: Theme.of(context)
                                         .textTheme
-                                        .bodyText1!
+                                        .bodyLarge!
                                         .copyWith(
                                             color: ColorResource.colorEC008C,
                                             fontWeight: FontWeight.w700),
@@ -219,8 +219,8 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                       child: SecondaryButton(
                                         '${Languages.of(context)!.viewMore}',
                                         context,
-                                        fontWeight: FontWeight.w500,
-                                        textColor: ColorResource.color00E94F,
+                                        backgroundColor: ColorResource.colorF5F5F5,
+                                        textColor: ColorResource.color181B28,
                                         fontSize: 14,
                                         onTap: () {},
                                       ),
