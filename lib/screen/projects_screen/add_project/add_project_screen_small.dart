@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/projects_screen/add_project/add_project_controller.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
+import 'package:roloxmoney/utils/auto_complete.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/utils/widget_utils.dart';
@@ -77,23 +78,48 @@ class AddProjectScreenSmallState extends State<AddProjectScreenSmall> {
                             SizedBox(
                               height: 10,
                             ),
-                            WidgetUtils.genericAutoCompleteTextField(
-                              textController:
-                                  widget.controller!.clientNameController,
-                              context: context,
-                              hintText: Languages.of(context)
-                                  ?.searchClientNameHintText,
-                              suggestions: widget.controller!.clientList
-                                  .map((item) => item.companyDB!.companyName!)
-                                  .toList(),
-                              labelName: Languages.of(context)?.clientName,
-                              textSubmitted: (text) {
-                                widget.controller!
-                                    .toSetClientId(searchingText: text);
-                              },
-                              textChanged: (text) {
-                                widget.controller!.toSetClientId(isClear: true);
-                              },
+                            // WidgetUtils.genericAutoCompleteTextField(
+                            //   textController:
+                            //       widget.controller!.clientNameController,
+                            //   context: context,
+                            //   hintText: Languages.of(context)
+                            //       ?.searchClientNameHintText,
+                            //   suggestions: widget.controller!.clientList
+                            //       .map((item) => item.companyDB!.companyName!)
+                            //       .toList(),
+                            //   labelName: Languages.of(context)?.clientName,
+                            //   textSubmitted: (text) {
+                            //     widget.controller!
+                            //         .toSetClientId(searchingText: text);
+                            //   },
+                            //   textChanged: (text) {
+                            //     widget.controller!.toSetClientId(isClear: true);
+                            //   },
+                            // ),
+                            CustomText(
+                              text: Languages.of(context)!.clientName,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(fontWeight: FontWeight.w500),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Card(
+                              key: Key("projectName"),
+                              // alignment: Alignment.center,
+                              child: AutoComplete.autoComplete(
+                                  hintText: Languages.of(context)!
+                                      .searchClientNameHintText,
+                                  value: null,
+                                  suggestionValue: widget.controller!.clientList
+                                      .map((item) => item.companyDB!.companyName!)
+                                      .toList(),
+                                  onFieldSubmitted: (value) {
+                                    widget.controller!
+                                        .toSetClientId(searchingText: value);
+                                  }),
                             ),
                             WidgetUtils.genericTextFiled(
                               context: context,
@@ -145,10 +171,10 @@ class AddProjectScreenSmallState extends State<AddProjectScreenSmall> {
                             ),
                             WidgetUtils.genericTextFiled(
                               context: context,
-                              hintText: Languages.of(context)
-                                  ?.projectLink,
+                              hintText: Languages.of(context)?.projectLink,
                               keyBoardType: TextInputType.name,
-                              controller: widget.controller!.projectLinkDController,
+                              controller:
+                                  widget.controller!.projectLinkDController,
                               labelName: '${Languages.of(context)?.emailID}',
                             ),
                             const SizedBox(
@@ -159,7 +185,7 @@ class AddProjectScreenSmallState extends State<AddProjectScreenSmall> {
                               context,
                               cardShape: 1,
                               isIcon: true,
-                              textColor: ColorResource.black,
+                              textColor: ColorResource. colorFFFFFF,
                               fontSize: 20,
                               onTap: () {
                                 if (widget.controller!.form.currentState!

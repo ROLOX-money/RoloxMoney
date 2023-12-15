@@ -90,6 +90,8 @@ mixin SupaBaseController {
           .select('id')
           .eq('companyName', companyName)
           .then((companyResponse) {
+        debugPrint('toGetTheSelectedCompany-----> $companyResponse');
+
         return companyResponse;
       });
     } catch (e) {
@@ -116,6 +118,7 @@ mixin SupaBaseController {
         return true;
       });
     } catch (e) {
+      debugPrint('in toInsert method--> $e');
       if (e is PostgrestException) {
         AppUtils.showErrorSnackBar(Get.context!, e.message, durations: 5000);
       } else {

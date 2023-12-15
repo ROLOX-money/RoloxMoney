@@ -129,7 +129,7 @@ class AddBankAccountScreenSmallState extends State<AddBankAccountScreenSmall> {
                           context,
                           cardShape: 1,
                           isIcon: true,
-                          textColor: ColorResource.black,
+                          textColor: ColorResource.colorFFFFFF,
                           fontSize: 20,
                           onTap: () {
                             if (widget.controller!.form.currentState!

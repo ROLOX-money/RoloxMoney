@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:roloxmoney/screen/clients_screen/add_client/add_client_screen.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
 import 'package:roloxmoney/screen/login_profile_screen/login_profile_screen.dart';
 import 'package:roloxmoney/screen/login_screen/login_screen.dart';
@@ -42,6 +43,8 @@ class SplashScreenController extends GetxController with StateMixin {
         } else {
           Get.offAndToNamed(LoginScreen.routeName);
         }
+        // Get.offAndToNamed(AddClientScreen.routeName);
+
       });
     } catch (e) {
       debugPrint('exception--> $e');

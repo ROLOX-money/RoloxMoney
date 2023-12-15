@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/model/project_model.dart';
 import 'package:roloxmoney/screen/projects_screen/add_project/add_project_controller.dart';
@@ -42,12 +43,14 @@ class ProjectsController extends GetxController with StateMixin {
   }
 
   Future<void> getProjectList() async {
+    //Todo to get the based on user mapping
     await Singleton.supabaseInstance.client
         .from(RoloxKey.supaBaseProjectDb)
         .select('*')
-        .eq('refrenceID',  Singleton.mobileUserId)
+        // .eq('refrenceID',  Singleton.mobileUserId)
         .then((value) {
       if (value is List) {
+        debugPrint('after geting project from project table--> $value');
         projectInvoicesList.value = [];
         value.forEach((element) {
           projectInvoicesList.add(ProjectModel(

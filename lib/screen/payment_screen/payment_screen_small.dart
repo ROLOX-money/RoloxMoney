@@ -67,7 +67,7 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                   fontWeight: FontWeight.w500),
                         ),
                         Container(
-                          width: 160,
+                          width: 161,
                           height: 40,
                           child: SecondaryButton(
                             'View Bank Account',
@@ -278,24 +278,22 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                         SizedBox(
                                           width: 5,
                                         ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        CustomText(
-                                          text: '${projectModel.date}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleSmall!
-                                              .copyWith(
-                                                  color:
-                                                      ColorResource.colorA0A1A9,
-                                                  overflow: TextOverflow.fade,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400),
-                                        ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
+                                        //
+                                        // CustomText(
+                                        //   text: '${projectModel.date}',
+                                        //   style: Theme.of(context)
+                                        //       .textTheme
+                                        //       .titleSmall!
+                                        //       .copyWith(
+                                        //           color:
+                                        //               ColorResource.colorA0A1A9,
+                                        //           overflow: TextOverflow.fade,
+                                        //           fontSize: 12,
+                                        //           fontWeight: FontWeight.w400),
+                                        // ),
+                                        // SizedBox(
+                                        //   width: 5,
+                                        // ),
                                       ],
                                     ),
                                     SizedBox(

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_controller.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
+import 'package:roloxmoney/utils/auto_complete.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/utils/widget_utils.dart';
@@ -77,22 +78,47 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                           SizedBox(
                             height: 10,
                           ),
-                          WidgetUtils.genericAutoCompleteTextField(
-                            textController:
-                                widget.controller!.projectNameController,
-                            context: context,
-                            hintText: Languages.of(context)?.brandNameHintText,
-                            suggestions: widget.controller!.projectList
-                                .map((item) => item.projectName!)
-                                .toList(),
-                            labelName: Languages.of(context)?.projectName,
-                            textSubmitted: (text) {
-                              widget.controller!
-                                  .toSetClientId(searchingText: text);
-                            },
-                            textChanged: (text) {
-                              widget.controller!.toSetClientId(isClear: true);
-                            },
+                          // WidgetUtils.genericAutoCompleteTextField(
+                          //   textController:
+                          //       widget.controller!.projectNameController,
+                          //   context: context,
+                          //   hintText: Languages.of(context)?.brandNameHintText,
+                          //   suggestions: widget.controller!.projectList
+                          //       .map((item) => item.projectName!)
+                          //       .toList(),
+                          //   labelName: Languages.of(context)?.projectName,
+                          //   textSubmitted: (text) {
+                          //     widget.controller!
+                          //         .toSetClientId(searchingText: text);
+                          //   },
+                          //   textChanged: (text) {
+                          //     widget.controller!.toSetClientId(isClear: true);
+                          //   },
+                          // ),
+                          CustomText(
+                            text: Languages.of(context)!.projectName,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .copyWith(fontWeight: FontWeight.w500),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Card(
+                            key: Key("projectName"),
+                            // alignment: Alignment.center,
+                            child: AutoComplete.autoComplete(
+                                hintText:
+                                    Languages.of(context)!.projectName,
+                                value: null,
+                                suggestionValue: widget.controller!.projectList
+                                    .map((item) => item.projectName!)
+                                    .toList(),
+                                onFieldSubmitted: (value) {
+                                  widget.controller!
+                                      .toSetClientId(searchingText: value);
+                                }),
                           ),
                           WidgetUtils.genericTextFiled(
                             context: context,
@@ -149,7 +175,8 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                           WidgetUtils.genericTextFiled(
                             context: context,
                             validationRules: ['required'],
-                            hintText: '${Languages.of(context)?.gstCharges} (Optional)',
+                            hintText:
+                                '${Languages.of(context)?.gstCharges} (Optional)',
                             keyBoardType: TextInputType.phone,
                             controller: widget.controller!.gstChargesController,
                             labelName: '${Languages.of(context)?.gstCharges}',
@@ -170,7 +197,7 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                             context,
                             cardShape: 1,
                             isIcon: true,
-                            textColor: ColorResource.black,
+                            textColor: ColorResource.colorFFFFFF,
                             fontSize: 20,
                             onTap: () {
                               if (widget.controller!.form.currentState!
