@@ -24,6 +24,13 @@ class ClientScreenLarge extends StatefulWidget {
 }
 
 class _ClientScreenLargeState extends State<ClientScreenLarge> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     Get.put(ClientsController());
@@ -99,7 +106,7 @@ class _ClientScreenLargeState extends State<ClientScreenLarge> {
             shadowColor: Colors.grey,
             elevation: 0.75,
           ),
-          body: widget.controller!.projectInvoicesList.obs.value.length > 0
+          body: widget.controller!.clientList.obs.value.length > 0
               ? Padding(
                   padding: const EdgeInsets.only(
                       top: 30, bottom: 60, right: 30, left: 30),

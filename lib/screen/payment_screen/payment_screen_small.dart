@@ -226,6 +226,7 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                     ),
                                     SizedBox(height: 5),
                                     Row(
+                                      mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Text.rich(
                                           TextSpan(

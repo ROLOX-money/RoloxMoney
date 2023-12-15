@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/model/invoice_model.dart';
 import 'package:roloxmoney/model/project_model.dart';
+import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
@@ -13,6 +14,8 @@ import 'package:roloxmoney/utils/rolox_autocomplete_textfiled.dart';
 import 'package:roloxmoney/widget/custom_button.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/custom_textfield.dart';
+
+import '../screen/dashboard_screen/dashboard_controller.dart';
 
 abstract class WidgetUtils {
   static Widget genericTextFiled(
@@ -25,13 +28,13 @@ abstract class WidgetUtils {
       int? maxLines,
       int? minLines,
       TextInputType? keyBoardType,
-        bool isReadOnly = false,
+      bool isReadOnly = false,
       TextStyle? labelStyle,
       List<TextInputFormatter>? inputformaters,
       Function? onEditing,
       bool obscureText = false,
       int? maximumWordCount,
-        Function()? onTab,
+      Function()? onTab,
       double? height}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,7 +73,7 @@ abstract class WidgetUtils {
             obscureText: obscureText,
             suffixWidget: suffixImagePath != null
                 ? Padding(
-                    padding: const EdgeInsets.only(left:20,right: 20),
+                    padding: const EdgeInsets.only(left: 20, right: 20),
                     child: AppUtils.setSVG(svgPath: suffixImagePath),
                   )
                 : null,
@@ -144,99 +147,81 @@ abstract class WidgetUtils {
     );
   }
 
-  static showAlertDialog({required BuildContext context}) {
+  static showAlertDialog(
+      {required BuildContext context,
+      Function()? iconButtonOnPressed,
+      Function()? primaryButtonOnTap}) {
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return Container(
-          child: AlertDialog(
-            backgroundColor: Theme.of(context).backgroundColor,
-            insetPadding: EdgeInsets.all(5),
-            content: Container(
-              padding: EdgeInsets.only(left: 20, right: 20),
-              decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                border: Border.all(color: Colors.grey),
-                color: Theme.of(context).backgroundColor,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(32.0),
+        return AlertDialog(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          insetPadding: EdgeInsets.all(15),
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color: ColorResource.borderColor, width: 2),
+            borderRadius: BorderRadius.circular(30),
+          ),
+          title: MediaQuery.removePadding(
+            removeTop: true,
+            removeBottom: true,
+            removeLeft: true,
+            removeRight: true,
+            context: context,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                    onPressed: iconButtonOnPressed,
+                    icon: Icon(
+                      Icons.close,
+                      color: ColorResource.closeIconColor,
+                    ))
+              ],
+            ),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                alignment: Alignment.center,
+                child: Image.asset(
+                  ImageResource.agencyAlertImage,
+                  height: 280,
+                  width: 180,
                 ),
               ),
-              height: 500,
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                children: [
-                  MediaQuery.removePadding(
-                    removeTop: true,
-                    removeBottom: true,
-                    removeLeft: true,
-                    removeRight: true,
-                    context: context,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              Get.back();
-                            },
-                            icon: Icon(
-                              Icons.close,
-                              color: Colors.white,
-                            ))
-                      ],
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    // child: Image.asset(
-                    //   ImageResource.error,
-                    //   height: 280,
-                    //   width: 180,
-                    // ),
-                    child: Image.asset(
-                      ImageResource.agencyAlertImage,
-                      height: 280,
-                      width: 180,
-                    ),
-                  ),
-                  CustomText(
-                    text: '${Languages.of(context)?.oopsAgency}',
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: ColorResource.colorEC008C,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  CustomText(
-                    text: '${Languages.of(context)?.oopsAgencyMessage}',
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: ColorResource.colorFFFFFF,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  PrimaryButton(
-                    '${Languages.of(context)!.continueText}',
-                    context,
-                    cardShape: 1,
-                    isIcon: true,
-                    textColor: ColorResource.black,
-                    fontSize: 20,
-                    onTap: () {
-                      Get.back();
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                ],
+              CustomText(
+                text: '${Languages.of(context)?.oopsAgency}',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall!
+                    .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
               ),
-            ),
+              SizedBox(
+                height: 20,
+              ),
+              CustomText(
+                text: '${Languages.of(context)?.oopsAgencyMessage}',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall!
+                    .copyWith(fontSize: 14, fontWeight: FontWeight.w400),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              PrimaryButton('${Languages.of(context)!.continueText}', context,
+                  cardShape: 1,
+                  isIcon: true,
+                  fontSize: 20,
+                  onTap: primaryButtonOnTap),
+              SizedBox(
+                height: 10,
+              ),
+            ],
           ),
         );
       },

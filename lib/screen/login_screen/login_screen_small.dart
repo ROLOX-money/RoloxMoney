@@ -36,9 +36,10 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
       rxStatus: widget.controller!.status,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
-        body: SingleChildScrollView(reverse: true,
+        body: SingleChildScrollView(
+          reverse: true,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20,vertical: 50),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 50),
             child: Container(
               alignment: Alignment.center,
               child: Column(
@@ -50,14 +51,18 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                     padding: const EdgeInsets.only(left: 8.0),
                     child: Column(
                       children: [
-                    MediaQuery.removePadding(child:
-                        Image.asset(
-                          ImageResource.welcomePNG,
-                          width: 150,
-                        ),
-                      context: context,removeBottom: true),
-                        MediaQuery.removePadding(child: AppUtils.setSVG(svgPath: ImageResource.means),
-                            context: context,removeTop: true),
+                        MediaQuery.removePadding(
+                            child: Image.asset(
+                              ImageResource.welcomePNG,
+                              width: 150,
+                            ),
+                            context: context,
+                            removeBottom: true),
+                        MediaQuery.removePadding(
+                            child:
+                                AppUtils.setSVG(svgPath: ImageResource.means),
+                            context: context,
+                            removeTop: true),
                       ],
                     ),
                   ),
@@ -76,8 +81,8 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                     height: 20,
                   ),
                   CustomText(
-                    text: '${Languages.of(context)?.mobileNumber}'
-                        .toUpperCase(),
+                    text:
+                        '${Languages.of(context)?.mobileNumber}'.toUpperCase(),
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
                         color: Colors.black, fontWeight: FontWeight.w500),
                   ),
@@ -154,7 +159,6 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                           ),
                         ),
                       ),
-
                     ),
                   ),
                   ListTile(
@@ -170,8 +174,8 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                         activeColor: Colors.pinkAccent,
                         checkColor: Colors.white,
                         onChanged: (value) {
-                          widget.controller!.noAgreeTermsAndConditionCheckBox(
-                              values: value);
+                          widget.controller!
+                              .noAgreeTermsAndConditionCheckBox(values: value);
                         },
                       ),
                     ),
@@ -214,6 +218,7 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                                 ..onTap = () {
                                   debugPrint(
                                       "onTap of Terms and condition screen");
+
                                   ///fixme
                                   // need to navigate the terms and condition Screen
                                 },
@@ -228,12 +233,12 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                     isIcon: true,
                     onTap: () async {
                       /// fixme
-                      if (widget.controller!.form.currentState!.validate()) {
-                        widget.controller!.triggerLogin();
-                      }
-                      // widget.controller!.otpBottomSheet(
-                      //     mobileNumber:
-                      //         ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
+                      // if (widget.controller!.form.currentState!.validate()) {
+                      //   widget.controller!.triggerLogin("smallScreen", context);
+                      // }
+                      widget.controller!.otpBottomSheet(
+                          mobileNumber:
+                              ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
 
                       // otpBottomSheet(
                       //     controller: widget.controller!,
@@ -246,7 +251,7 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
             ),
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).backgroundColor,
       ),
     );
   }
