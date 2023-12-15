@@ -6,7 +6,6 @@ import 'package:intl/intl.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/model/invoice_model.dart';
 import 'package:roloxmoney/model/project_model.dart';
-import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
@@ -15,7 +14,6 @@ import 'package:roloxmoney/widget/custom_button.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/custom_textfield.dart';
 
-import '../screen/dashboard_screen/dashboard_controller.dart';
 
 abstract class WidgetUtils {
   static Widget genericTextFiled(
