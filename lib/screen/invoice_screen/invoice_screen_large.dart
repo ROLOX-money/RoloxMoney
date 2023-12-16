@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
+import 'package:roloxmoney/screen/invoice_screen/entities/invoice_model.dart';
 import 'package:roloxmoney/screen/invoice_screen/invoice_controller.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
@@ -96,18 +97,15 @@ class _InvoiceScreenLargeState extends State<InvoiceScreenLarge> {
             shadowColor: Colors.grey,
             elevation: 0.75,
           ),
-          body: widget.controller!.projectInvoicesList.obs.value.value.length >
-                  0
+          body: widget.controller!.invoicesList.obs.value.length > 0
               ? Padding(
                   padding: const EdgeInsets.only(
                       top: 30, bottom: 60, right: 30, left: 30),
                   child: WidgetUtils.customTableWidget(
                     context: context,
                     isHomeTap: false,
-                    listLength:
-                        widget.controller!.projectInvoicesList.obs.value.length,
-                    projectList:
-                        widget.controller!.projectInvoicesList.obs.value,
+                    listLength: widget.controller!.invoicesList.obs.value.length,
+                    invoiceList: widget.controller!.invoicesList.obs.value as List<Invoice>,
                     isPaymentTap: false,
                   ))
               : AppUtils.emptyViewWidget(

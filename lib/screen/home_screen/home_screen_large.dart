@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
+import 'package:roloxmoney/screen/home_screen/home_detail_screen.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/widget/rolox_money_widget.dart';
 
@@ -46,9 +47,7 @@ class _HomeScreenLargeState extends State<HomeScreenLarge> {
                             topColor: ColorResource.red,
                             context: context,
                             title: "'${Languages.of(context)?.accountBalance}'",
-                            subTitleSecond:
-                                "'${Languages.of(context)!.withdraw}'",
-
+                            subTitleSecond: "'${Languages.of(context)!.withdraw}'",
                             amount: "₹ 50000"),
                         widget.controller!.paidCardWidgetLarge(
                             isWalletBalance: true,
@@ -74,8 +73,7 @@ class _HomeScreenLargeState extends State<HomeScreenLarge> {
                             topColor: ColorResource.red,
                             context: context,
                             title: "'${Languages.of(context)?.accountBalance}'",
-                            subTitleSecond:
-                                "'${Languages.of(context)!.withdraw}'",
+                            subTitleSecond: "'${Languages.of(context)!.withdraw}'",
                             amount: "₹ 50000")
                       ],
                       if (widget.controller!.isEmpty.value == false) ...[
@@ -88,7 +86,7 @@ class _HomeScreenLargeState extends State<HomeScreenLarge> {
                                         HomeDetailsScreenLarge(
                                           controller: widget.controller,
                                           scaffoldKey: widget.scaffoldKey,
-                                          buttonNo: 1,
+                                          invoiceType: InvoiceType.UPCOMING,
                                         )));
                           },
                           child: widget.controller!.paidCardWidgetLarge(
@@ -123,7 +121,7 @@ class _HomeScreenLargeState extends State<HomeScreenLarge> {
                                         HomeDetailsScreenLarge(
                                           controller: widget.controller,
                                           scaffoldKey: widget.scaffoldKey,
-                                          buttonNo: 2,
+                                          invoiceType: InvoiceType.PAID,
                                         )));
                           },
                           child: widget.controller!.paidCardWidgetLarge(
@@ -132,11 +130,9 @@ class _HomeScreenLargeState extends State<HomeScreenLarge> {
                               topColor: ColorResource.red,
                               context: context,
                               title: "${Languages.of(context)?.paidInvoices}",
-                              subTitle:
-                                  "${Languages.of(context)?.noOf} ${Languages.of(context)?.invoices}",
+                              subTitle: "${Languages.of(context)?.noOf} ${Languages.of(context)?.invoices}",
                               count: "07",
-                              subTitleSecond:
-                                  "${Languages.of(context)?.transactionWorth}",
+                              subTitleSecond: "${Languages.of(context)?.transactionWorth}",
                               amount: "₹ 50000"),
                         ),
                         GestureDetector(
@@ -148,7 +144,7 @@ class _HomeScreenLargeState extends State<HomeScreenLarge> {
                                         HomeDetailsScreenLarge(
                                           controller: widget.controller,
                                           scaffoldKey: widget.scaffoldKey,
-                                          buttonNo: 3,
+                                          invoiceType: InvoiceType.DUE,
                                         )));
                           },
                           child: widget.controller!.paidCardWidgetLarge(

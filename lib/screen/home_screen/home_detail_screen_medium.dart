@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/model/group_invoices_model.dart';
 import 'package:roloxmoney/screen/home_screen/home_controller.dart';
+import 'package:roloxmoney/screen/home_screen/home_detail_screen.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
@@ -11,13 +12,13 @@ import 'package:roloxmoney/widget/rolox_money_widget.dart';
 class HomeDetailScreenMedium extends StatefulWidget {
   HomeController? controller;
   GlobalKey<ScaffoldState>? scaffoldKey;
-  int? buttonNo;
+  InvoiceType invoiceType;
 
   HomeDetailScreenMedium(
       {Key? key,
       required this.controller,
       required this.scaffoldKey,
-      required this.buttonNo})
+      required this.invoiceType})
       : super(key: key);
 
   @override
@@ -58,9 +59,11 @@ class _HomeDetailScreenMediumState extends State<HomeDetailScreenMedium> {
                                   centerTitle: true,
                                   title: Text.rich(
                                       TextSpan(
-                                          text: (widget.buttonNo == 1)
+                                          text: (widget.invoiceType ==
+                                                  InvoiceType.UPCOMING)
                                               ? '${Languages.of(context)?.upcomingInvoices} \n '
-                                              : (widget.buttonNo == 2)
+                                              : (widget.invoiceType ==
+                                                      (InvoiceType.PAID))
                                                   ? '${Languages.of(context)?.paidInvoices}'
                                                   : '${Languages.of(context)?.dueInvoices}',
                                           style: Theme.of(context)
@@ -72,7 +75,7 @@ class _HomeDetailScreenMediumState extends State<HomeDetailScreenMedium> {
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.w600),
                                           children: <InlineSpan>[
-                                            if (widget.buttonNo == 1)
+                                            if (widget.invoiceType == InvoiceType.UPCOMING)
                                               TextSpan(
                                                 text:
                                                     '(${Languages.of(context)?.inNext1Week})',
@@ -129,21 +132,19 @@ class _HomeDetailScreenMediumState extends State<HomeDetailScreenMedium> {
                                 ),
                                 SizedBox(height: 20),
                                 ListView.builder(
-                                    itemCount: (widget.buttonNo == 1)
+                                    itemCount: (widget.invoiceType == InvoiceType.UPCOMING)
                                         ? widget
                                             .controller!
                                             .upcomingInvoicesList
                                             .obs
                                             .value
-
                                             .length
-                                        : (widget.buttonNo == 2)
+                                        : (widget.invoiceType == InvoiceType.PAID)
                                             ? widget
                                                 .controller!
                                                 .paidInvoicesList
                                                 .obs
                                                 .value
-
                                                 .length
                                             : widget.controller!.dueInvoicesList
                                                 .obs.value.length,
@@ -152,25 +153,22 @@ class _HomeDetailScreenMediumState extends State<HomeDetailScreenMedium> {
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       GroupInvoices groupInvoices =
-                                          (widget.buttonNo == 1)
+                                          (widget.invoiceType == InvoiceType.UPCOMING)
                                               ? widget
                                                   .controller!
                                                   .upcomingInvoicesList
                                                   .obs
-
                                                   .value[index]
-                                              : (widget.buttonNo == 2)
+                                              : (widget.invoiceType == InvoiceType.PAID)
                                                   ? widget
                                                       .controller!
                                                       .paidInvoicesList
                                                       .obs
-
                                                       .value[index]
                                                   : widget
                                                       .controller!
                                                       .dueInvoicesList
                                                       .obs
-
                                                       .value[index];
                                       return Column(
                                         children: [

@@ -4,6 +4,7 @@ import 'package:roloxmoney/model/project_model.dart';
 import 'package:roloxmoney/screen/bank_list_screen/bank_list_controller.dart';
 import 'package:roloxmoney/screen/payment_screen/add_bank_account/add_bank_account_controller.dart';
 import 'package:roloxmoney/screen/payment_screen/add_bank_account/add_bank_account_screen.dart';
+
 /*Chinnadurai Viswanathan*/
 class PaymentController extends GetxController with StateMixin {
   RxList<ProjectModel> projectInvoicesList = <ProjectModel>[].obs;

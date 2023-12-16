@@ -272,12 +272,12 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                                     .validate() &&
                                 widget.controller!.acceptTermsAndCondition.obs
                                     .value.value) {
-                              // widget.controller!
-                              //     .triggerLogin("largeScreen", context);
-                              widget.controller!.otpAlertDialogue(
-                                  context: context,
-                                  mobileNumber:
-                                      ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
+                              widget.controller!
+                                  .triggerLogin("largescreen", context);
+                              // widget.controller!.otpAlertDialogue(
+                              //     context: context,
+                              //     mobileNumber:
+                              //         ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
                             } else {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(SnackBar(

@@ -113,8 +113,7 @@ class _ClientScreenLargeState extends State<ClientScreenLarge> {
                   child: WidgetUtils.customTableWidget(
                     context: context,
                     isHomeTap: false,
-                    listLength:
-                        widget.controller!.projectInvoicesList.obs.value.length,
+                    listLength: widget.controller!.clientList.obs.value.length,
                     projectList: widget.controller!.projectInvoicesList.value,
                     isPaymentTap: false,
                   ))

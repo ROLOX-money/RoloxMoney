@@ -8,6 +8,7 @@ import 'package:roloxmoney/model/group_invoices_model.dart';
 import 'package:roloxmoney/model/invoice_model.dart';
 import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_controller.dart';
 import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_screen.dart';
+import 'package:roloxmoney/screen/invoice_screen/entities/invoice_model.dart';
 import 'package:roloxmoney/screen/withdraw_fund_screen/withdraw_controller.dart';
 import 'package:roloxmoney/screen/withdraw_fund_screen/withdraw_fund_screen.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
@@ -35,8 +36,7 @@ class HomeController extends GetxController with StateMixin {
   RxBool isEmpty = true.obs;
   RxInt buttonNo = 0.obs;
 
-  WithdrawFundController withdrawFundController =
-      Get.put(WithdrawFundController());
+  WithdrawFundController withdrawFundController = Get.put(WithdrawFundController());
 
   @override
   void onInit() async {

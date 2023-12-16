@@ -1,7 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
+import 'package:roloxmoney/screen/home_screen/home_detail_screen.dart';
+import 'package:roloxmoney/screen/invoice_screen/entities/invoice_model.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
@@ -14,13 +16,13 @@ import 'home_controller.dart';
 class HomeDetailsScreenLarge extends StatefulWidget {
   HomeController? controller;
   GlobalKey<ScaffoldState>? scaffoldKey;
-  int? buttonNo;
+  InvoiceType invoiceType;
 
   HomeDetailsScreenLarge(
       {Key? key,
       required this.controller,
       required this.scaffoldKey,
-      required this.buttonNo})
+      required this.invoiceType})
       : super(key: key);
 
   @override
@@ -50,9 +52,9 @@ class _HomeDetailsScreenLargeState extends State<HomeDetailsScreenLarge> {
                     children: [
                       Text.rich(
                           TextSpan(
-                              text: (widget.buttonNo == 1)
+                              text: (widget.invoiceType == InvoiceType.UPCOMING)
                                   ? '${Languages.of(context)?.upcomingInvoices} '
-                                  : (widget.buttonNo == 2)
+                                  : (widget.invoiceType == InvoiceType.PAID)
                                       ? '${Languages.of(context)?.paidInvoices}'
                                       : '${Languages.of(context)?.dueInvoices}',
                               style: Theme.of(context)
@@ -62,7 +64,8 @@ class _HomeDetailsScreenLargeState extends State<HomeDetailsScreenLarge> {
                                       fontSize: 20,
                                       fontWeight: FontWeight.w600),
                               children: <InlineSpan>[
-                                if (widget.buttonNo == 1)
+                                if ((widget.invoiceType ==
+                                    InvoiceType.UPCOMING))
                                   TextSpan(
                                     text:
                                         '(${Languages.of(context)?.inNext1Week})',
@@ -147,22 +150,21 @@ class _HomeDetailsScreenLargeState extends State<HomeDetailsScreenLarge> {
                     child: WidgetUtils.customTableWidget(
                         context: context,
                         isHomeTap: true,
-                        listLength: (widget.buttonNo == 1)
-                            ? widget.controller!.upcomingInvoicesListLargeScreen
-                                .length
-                            : (widget.buttonNo == 2)
-                                ? widget.controller!.paidInvoicesListLargeScreen
-                                    .length
-                                : widget.controller!.dueInvoicesListLargeScreen
-                                    .length,
-                        invoiceList: (widget.buttonNo == 1)
-                            ? widget.controller!.upcomingInvoicesListLargeScreen
-                                .value
-                            : (widget.buttonNo == 2)
-                                ? widget.controller!.paidInvoicesListLargeScreen
-                                    .value
-                                : widget.controller!.dueInvoicesListLargeScreen
-                                    .value,
+                        listLength: widget.controller!.invoicesList
+                            .where((p0) => widget.invoiceType == InvoiceType.UPCOMING
+                                ? DateFormat("dd/MM/yyyy").parse(p0.dueDate!).isBefore(DateTime.now().add(Duration(days: 2))) &&
+                                    p0.paid == false
+                                : p0.paid ==
+                                    (widget.invoiceType == InvoiceType.PAID))
+                            .length,
+                        invoiceList: widget.controller!.invoicesList
+                            .where((p0) => widget.invoiceType == InvoiceType.UPCOMING
+                                ? DateFormat("dd/MM/yyyy")
+                                        .parse(p0.dueDate!)
+                                        .isBefore(DateTime.now().add(Duration(days: 2))) &&
+                                    p0.paid == false
+                                : p0.paid == (widget.invoiceType == InvoiceType.PAID))
+                            .toList() as List<Invoice>,
                         isPaymentTap: false)))));
   }
 }

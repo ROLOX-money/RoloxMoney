@@ -4,8 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
-import 'package:roloxmoney/model/invoice_model.dart';
 import 'package:roloxmoney/model/project_model.dart';
+import 'package:roloxmoney/screen/clients_screen/entites/clinet_model.dart';
+import 'package:roloxmoney/screen/invoice_screen/entities/invoice_model.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
@@ -13,7 +14,6 @@ import 'package:roloxmoney/utils/rolox_autocomplete_textfiled.dart';
 import 'package:roloxmoney/widget/custom_button.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/custom_textfield.dart';
-
 
 abstract class WidgetUtils {
   static Widget genericTextFiled(
@@ -299,11 +299,13 @@ abstract class WidgetUtils {
     required bool isHomeTap,
     required int listLength,
     required bool isPaymentTap,
-    List<InvoiceModel>? invoiceList,
+    List<Invoice>? invoiceList,
     List<ProjectModel>? projectList,
+    List<ClientModel>? clientList,
   }) {
-    InvoiceModel invoiceModelData = InvoiceModel();
+    Invoice invoiceModelData = Invoice();
     ProjectModel projectModelData = ProjectModel();
+    ClientModel clientModelData = ClientModel();
 
     Map<String, ColumnSize> value = {};
     if (isHomeTap == true) {
@@ -364,6 +366,8 @@ abstract class WidgetUtils {
               invoiceModelData = invoiceList![index];
             } else if (isHomeTap == false) {
               projectModelData = projectList![index];
+            } else if (isHomeTap == false && isPaymentTap == false) {
+              clientModelData = clientList![index];
             }
             List<DataCell> dataCell = [
               if (isHomeTap == true) ...[
@@ -388,10 +392,10 @@ abstract class WidgetUtils {
                     Text(invoiceModelData.clientName.toString())
                   ],
                 )),
-                DataCell(Text(invoiceModelData.amount.toString())),
+                DataCell(Text(invoiceModelData.invoiceAmount.toString())),
                 DataCell(Text(DateFormat('MM/dd/yyyy')
-                    .format(DateTime.parse(invoiceModelData.date!)))),
-                DataCell(Text(invoiceModelData.workName.toString())),
+                    .format(DateTime.parse(invoiceModelData.createdAt!)))),
+                DataCell(Text(invoiceModelData.projectName.toString())),
                 DataCell(TextButton(
                   onPressed: () {},
                   child: CustomText(
@@ -410,7 +414,7 @@ abstract class WidgetUtils {
                           : ColorResource.initialBgColor2,
                       child: CustomText(
                         text: AppUtils.getInitials(AppUtils.getFirstName(
-                            projectModelData.clientName.toString())),
+                            clientModelData.companyDB!.companyName.toString())),
                         style: TextStyle(
                             color: index.isOdd
                                 ? ColorResource.initialTextColor
@@ -418,7 +422,7 @@ abstract class WidgetUtils {
                       ),
                     ),
                     SizedBox(width: 5),
-                    Text(projectModelData.clientName.toString())
+                    Text(clientModelData.companyDB!.companyName.toString())
                   ],
                 )),
                 DataCell(Text(projectModelData.projectName.toString())),

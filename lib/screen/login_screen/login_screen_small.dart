@@ -222,7 +222,7 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                     isIcon: true,
                     onTap: () async {
                       if (widget.controller!.form.currentState!.validate()) {
-                        widget.controller!.triggerLogin();
+                        widget.controller!.triggerLogin("smallScreen",context);
                       }
                       // widget.controller!.otpBottomSheet(
                       //     mobileNumber:

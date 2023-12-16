@@ -282,11 +282,11 @@ class LoginController extends RoloxGetXController with SupaBaseController {
             mobileNumber: '+91${mobilNumberController.text}')
         .then((value) {
       if (value) {
-        if (screen.toLowerCase() == "smallScreen") {
+        if (screen.toLowerCase() == "smallscreen") {
           otpBottomSheet(
             mobileNumber: '${mobilNumberController.text}',
           );
-        } else if (screen.toLowerCase() == "largeScreen") {
+        } else if (screen.toLowerCase() == "largescreen") {
           otpAlertDialogue(
             context: context,
             mobileNumber: '${mobilNumberController.text}',

@@ -15,30 +15,6 @@ class InvoiceController extends GetxController with StateMixin {
   @override
   void onInit() async {
     change(null, status: RxStatus.success());
-    // Future.delayed(const Duration(seconds: 5), () {
-    //   projectInvoicesList.addAll([
-    //     ProjectModel(
-    //         clientName: 'Target InfoTech',
-    //         amount: '25000',
-    //         projectName: 'Target InfoTech',
-    //         date: DateTime.now().toString(),
-    //         noOfInvoice: 2),
-    //     ProjectModel(
-    //         amount: '25000',
-    //         clientName: 'Target InfoTech',
-    //         projectName: 'Target InfoTech',
-    //         date: DateTime.now().toString(),
-    //         noOfInvoice: 2),
-    //     ProjectModel(
-    //         amount: '25000',
-    //         clientName: 'Target InfoTech',
-    //         projectName: 'Target InfoTech',
-    //         date: DateTime.now().toString(),
-    //         noOfInvoice: 2),
-    //   ]);
-    //   change(projectInvoicesList);
-    // });
-
     toGetTheInvoiceList();
     super.onInit();
   }

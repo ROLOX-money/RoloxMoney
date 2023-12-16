@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/home_screen/home_controller.dart';
+import 'package:roloxmoney/screen/home_screen/home_detail_screen.dart';
 import 'package:roloxmoney/screen/home_screen/home_detail_screen_large.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/widget/rolox_money_widget.dart';
@@ -98,7 +100,7 @@ class _HomeScreenMediumState extends State<HomeScreenMedium> {
                                 builder: (context) => HomeDetailsScreenLarge(
                                       controller: widget.controller,
                                       scaffoldKey: widget.scaffoldKey,
-                                      buttonNo: 1,
+                                      invoiceType: InvoiceType.UPCOMING,
                                     )));
                       },
                       child: widget.controller!.paidCardWidgetLarge(
@@ -110,7 +112,15 @@ class _HomeScreenMediumState extends State<HomeScreenMedium> {
                               "${Languages.of(context)!.upcomingInvoices} \n ${Languages.of(context)!.inNext1Week}",
                           subTitle:
                               "${Languages.of(context)!.noOf} ${Languages.of(context)!.invoices}",
-                          count: "07",
+                          count: widget.controller!.invoicesList
+                              .where((p0) =>
+                                  DateFormat("dd/MM/yyyy")
+                                      .parse(p0.dueDate!)
+                                      .isAfter(DateTime.now()
+                                          .add(Duration(days: 7))) &&
+                                  p0.paid == false)
+                              .length
+                              .toString(),
                           subTitleSecond:
                               Languages.of(context)!.transactionWorth,
                           amount: "₹ 50000")),
@@ -133,7 +143,7 @@ class _HomeScreenMediumState extends State<HomeScreenMedium> {
                               builder: (context) => HomeDetailsScreenLarge(
                                     controller: widget.controller,
                                     scaffoldKey: widget.scaffoldKey,
-                                    buttonNo: 2,
+                                    invoiceType: InvoiceType.PAID,
                                   )));
                     },
                     child: widget.controller!.paidCardWidgetLarge(
@@ -144,7 +154,8 @@ class _HomeScreenMediumState extends State<HomeScreenMedium> {
                         title: Languages.of(context)!.paidInvoices,
                         subTitle:
                             "${Languages.of(context)!.noOf} ${Languages.of(context)!.invoices}",
-                        count: "07",
+                        count:
+                            '${widget.controller!.invoicesList.where((p0) => p0.paid == true).length}',
                         subTitleSecond: Languages.of(context)!.transactionWorth,
                         amount: "₹ 50000"),
                   ),
@@ -156,7 +167,7 @@ class _HomeScreenMediumState extends State<HomeScreenMedium> {
                               builder: (context) => HomeDetailsScreenLarge(
                                     controller: widget.controller,
                                     scaffoldKey: widget.scaffoldKey,
-                                    buttonNo: 3,
+                                    invoiceType: InvoiceType.DUE,
                                   )));
                     },
                     child: widget.controller!.paidCardWidgetLarge(
@@ -167,7 +178,15 @@ class _HomeScreenMediumState extends State<HomeScreenMedium> {
                         title: Languages.of(context)!.dueInvoices,
                         subTitle:
                             "${Languages.of(context)!.noOf} ${Languages.of(context)!.invoices}",
-                        count: "07",
+                        count: widget.controller!.invoicesList
+                            .where((p0) =>
+                                DateFormat("dd/MM/yyyy")
+                                    .parse(p0.dueDate!)
+                                    .isBefore(DateTime.now()
+                                        .add(Duration(days: 7))) &&
+                                p0.paid == false)
+                            .length
+                            .toString(),
                         subTitleSecond: Languages.of(context)!.transactionWorth,
                         amount: "₹ 50000"),
                   ),
