@@ -290,7 +290,6 @@ abstract class Languages {
 
   String get darkMode;
 
-
   String get projectLinkHint;
 
   String get enterYourWork;
@@ -306,4 +305,12 @@ abstract class Languages {
   String get withdrawalAmount;
 
   String get registered;
+
+  String get inboundInvoices;
+
+  String get payableInvoice;
+
+  String get overDue;
+
+  String get netAmount;
 }

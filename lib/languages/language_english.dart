@@ -2,7 +2,6 @@ import 'package:roloxmoney/languages/app_languages.dart';
 /*Chinnadurai Viswanathan*/
 
 class LanguageEn extends Languages {
-
   @override
   String get appName => 'Means Money';
 
@@ -313,4 +312,12 @@ class LanguageEn extends Languages {
   String get withdrawalAmount => "Withdrawal Amount";
 
   String get registered => "Registered";
+
+  String get inboundInvoices => "Inbound Invoices";
+
+  String get payableInvoice => "Payable Invoices";
+
+  String get overDue => "Overdue";
+
+  String get netAmount => "Net Amount";
 }

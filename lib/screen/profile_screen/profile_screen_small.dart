@@ -190,7 +190,7 @@ class ProfileScreenSmallState extends State<ProfileScreenSmall> {
                                     disableColor: Colors.red,
                                     keyBoardType: TextInputType.phone,
                                     prefixIcon: Container(
-                                      width: 100,
+                                      width: 110,
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Row(
