@@ -107,7 +107,7 @@ abstract class WidgetUtils {
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
             border: Border.all(color: Colors.grey, width: 0.25),
-            boxShadow: ColorResource.boxShadow,
+            // boxShadow: ColorResource.boxShadow,
             color: Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.all(Radius.circular(5.0)),
           ),

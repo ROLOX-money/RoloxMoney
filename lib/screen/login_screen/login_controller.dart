@@ -76,19 +76,8 @@ class LoginController extends RoloxGetXController with SupaBaseController {
               Get.offAndToNamed(LoginProfileScreen.routeName,
                   arguments: mobilNumberController.text);
             } else {
-
               Get.offAndToNamed(DashboardScreen.routeName,
                   arguments: mobilNumberController.text);
-              // toInsertFCM(userID: value[0]['id']).then((fcmTokenValue) {
-              //   if (fcmTokenValue) {
-              //     Get.offAndToNamed(DashboardScreen.routeName,
-              //         arguments: mobilNumberController.text);
-              //   } else {
-              //     AppUtils.showErrorSnackBar(Get.context!,
-              //         'Something went wrong..Please Please try again latter',
-              //         durations: 2000);
-              //   }
-              // });
             }
           });
         } else {

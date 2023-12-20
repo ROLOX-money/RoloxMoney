@@ -15,29 +15,29 @@ class ClientsController extends GetxController
   @override
   void onInit() async {
     change(null, status: RxStatus.success());
-    Future.delayed(const Duration(seconds: 5), () {
-      projectInvoicesList.addAll([
-        ProjectModel(
-            amount: '25000',
-            clientName: 'Target InfoTech',
-            projectName: 'Target InfoTech',
-            date: DateTime.now().toString(),
-            noOfInvoice: 2),
-        ProjectModel(
-            amount: '25000',
-            clientName: 'Hyundai Corporation',
-            projectName: 'Target InfoTech',
-            date: DateTime.now().toString(),
-            noOfInvoice: 2),
-        ProjectModel(
-            amount: '25000',
-            clientName: 'Target InfoTech',
-            projectName: 'Target InfoTech',
-            date: DateTime.now().toString(),
-            noOfInvoice: 2),
-      ]);
-      change(projectInvoicesList);
-    });
+    // Future.delayed(const Duration(seconds: 5), () {
+    //   projectInvoicesList.addAll([
+    //     ProjectModel(
+    //         amount: '25000',
+    //         clientName: 'Target InfoTech',
+    //         projectName: 'Target InfoTech',
+    //         date: DateTime.now().toString(),
+    //         noOfInvoice: 2),
+    //     ProjectModel(
+    //         amount: '25000',
+    //         clientName: 'Hyundai Corporation',
+    //         projectName: 'Target InfoTech',
+    //         date: DateTime.now().toString(),
+    //         noOfInvoice: 2),
+    //     ProjectModel(
+    //         amount: '25000',
+    //         clientName: 'Target InfoTech',
+    //         projectName: 'Target InfoTech',
+    //         date: DateTime.now().toString(),
+    //         noOfInvoice: 2),
+    //   ]);
+    //   change(projectInvoicesList);
+    // });
     super.onInit();
     toGetTheClientList().then((value) {
       clientList.value = value;
@@ -48,6 +48,7 @@ class ClientsController extends GetxController
   void navigateAddClientScreen() {
     Get.put(AddClientController());
     Get.toNamed(AddClientScreen.routeName)?.then((value) {
+      change(null, status: RxStatus.loading());
       toGetTheClientList().then((value) {
         clientList.value = value;
         change(clientList, status: RxStatus.success());

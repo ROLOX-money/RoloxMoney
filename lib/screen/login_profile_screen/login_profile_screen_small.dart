@@ -36,12 +36,13 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
       child: Scaffold(
         body: Container(
           alignment: Alignment.topLeft,
+          color: ColorResource.colorFFFFFF,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppBar(
-                  backgroundColor: Theme.of(context).backgroundColor,
+                  backgroundColor: ColorResource.colorFFFFFF,
                   leading: GestureDetector(
                     onTap: () {
                       Get.back();
@@ -49,7 +50,7 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                     child: Icon(
                       Icons.arrow_back_sharp,
                       size: 30,
-                      color: Colors.white,
+                      color: ColorResource.color0D0D0D,
                     ),
                   ),
                   centerTitle: true,
@@ -57,7 +58,7 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                     text:
                         '${Languages.of(context)?.profile} ${Languages.of(context)?.page}',
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: ColorResource.colorFFFFFF,
+                        color: ColorResource.color0D0D0D,
                         fontSize: 18,
                         fontWeight: FontWeight.w600),
                   ),
@@ -74,8 +75,8 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                       CustomText(
                         text: '${Languages.of(context)?.profilePageContent}',
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: ColorResource.colorFFFFFF,
-                            fontSize: 16,
+                            color: ColorResource.color8B8B8B,
+                            fontSize: 14,
                             fontWeight: FontWeight.w400),
                       ),
                       const SizedBox(
@@ -85,7 +86,7 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                       Container(
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey, width: 0.25),
-                            color: ColorResource.color151515),
+                            color: ColorResource.colorFFFFFF),
                         padding: EdgeInsets.all(10.0),
                         child: Theme(
                           data: Theme.of(context).copyWith(
@@ -146,7 +147,7 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                                   .titleSmall!
                                                   .copyWith(
                                                       color: ColorResource
-                                                          .colorFFFFFF,
+                                                          .color272727,
                                                       fontSize: 16,
                                                       fontWeight:
                                                           FontWeight.w600),
@@ -189,7 +190,7 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                                   .titleSmall!
                                                   .copyWith(
                                                       color: ColorResource
-                                                          .colorFFFFFF,
+                                                          .color272727,
                                                       fontSize: 16,
                                                       fontWeight:
                                                           FontWeight.w600),
@@ -236,7 +237,7 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                                   .titleSmall!
                                                   .copyWith(
                                                       color: ColorResource
-                                                          .colorFFFFFF,
+                                                          .color272727,
                                                       fontSize: 16,
                                                       fontWeight:
                                                           FontWeight.w600),
@@ -303,40 +304,6 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                           '${Languages.of(context)?.emailID}',
                                       hintText:
                                           Languages.of(context)?.emailIdHint),
-
-                                  WidgetUtils.genericTextFiled(
-                                      context: context,
-                                      keyBoardType: TextInputType.name,
-                                      validationRules: ['required'],
-                                      controller:
-                                      widget.controller!.address1,
-                                      labelName:
-                                      '${Languages.of(context)?.address1}',
-                                      hintText:
-                                      '${Languages.of(context)?.address1}'),
-
-                                  WidgetUtils.genericTextFiled(
-                                      context: context,
-                                      keyBoardType: TextInputType.name,
-                                      validationRules: ['required'],
-                                      controller:
-                                      widget.controller!.address2,
-                                      labelName:
-                                      '${Languages.of(context)?.address2}',
-                                      hintText:
-                                      '${Languages.of(context)?.address2}'),
-
-                                  WidgetUtils.genericTextFiled(
-                                      context: context,
-                                      keyBoardType: TextInputType.number,
-                                      validationRules: ['required'],
-                                      controller:
-                                      widget.controller!.pinCode,
-                                      labelName:
-                                      '${Languages.of(context)?.pincode}',
-                                      hintText:
-                                      '${Languages.of(context)?.pincode}'),
-
                                   WidgetUtils.genericTextFiled(
                                       context: context,
                                       keyBoardType: TextInputType.name,
@@ -392,15 +359,15 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                           hintText:
                                               '${Languages.of(context)?.panNumberHint}'),
                                       // aadhaar Number
-                                      WidgetUtils.genericTextFiled(
-                                          context: context,
-                                          keyBoardType: TextInputType.number,
-                                          validationRules: ['required'],
-                                          controller: widget.controller!
-                                              .contactPersonNameController,
-                                          labelName: 'Contact person name',
-                                          hintText:
-                                              'Enter the contact person name'),
+                                      // WidgetUtils.genericTextFiled(
+                                      //     context: context,
+                                      //     keyBoardType: TextInputType.number,
+                                      //     validationRules: ['required'],
+                                      //     controller: widget.controller!
+                                      //         .contactPersonNameController,
+                                      //     labelName: 'Contact person name',
+                                      //     hintText:
+                                      //         'Enter the contact person name'),
                                       // GST Number
                                       WidgetUtils.genericTextFiled(
                                           context: context,
@@ -413,38 +380,38 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                                           hintText:
                                               '${Languages.of(context)?.gstNumberHint}'),
 
-                                      WidgetUtils.genericTextFiled(
-                                          context: context,
-                                          keyBoardType: TextInputType.name,
-                                          validationRules: ['required'],
-                                          controller:
-                                              widget.controller!.address1,
-                                          labelName:
-                                              '${Languages.of(context)?.fullAddress}',
-                                          hintText:
-                                              '${Languages.of(context)?.fullAddress}'),
-
-                                      WidgetUtils.genericTextFiled(
-                                          context: context,
-                                          keyBoardType: TextInputType.name,
-                                          validationRules: ['required'],
-                                          controller:
-                                              widget.controller!.address2,
-                                          labelName:
-                                              '${Languages.of(context)?.fullAddress}',
-                                          hintText:
-                                              '${Languages.of(context)?.fullAddress}'),
-
-                                      WidgetUtils.genericTextFiled(
-                                          context: context,
-                                          keyBoardType: TextInputType.number,
-                                          validationRules: ['required'],
-                                          controller:
-                                              widget.controller!.pinCode,
-                                          labelName:
-                                              '${Languages.of(context)?.pincode}',
-                                          hintText:
-                                              '${Languages.of(context)?.pincode}'),
+                                      // WidgetUtils.genericTextFiled(
+                                      //     context: context,
+                                      //     keyBoardType: TextInputType.name,
+                                      //     validationRules: ['required'],
+                                      //     controller:
+                                      //         widget.controller!.address1,
+                                      //     labelName:
+                                      //         '${Languages.of(context)?.fullAddress}',
+                                      //     hintText:
+                                      //         '${Languages.of(context)?.fullAddress}'),
+                                      //
+                                      // WidgetUtils.genericTextFiled(
+                                      //     context: context,
+                                      //     keyBoardType: TextInputType.name,
+                                      //     validationRules: ['required'],
+                                      //     controller:
+                                      //         widget.controller!.address2,
+                                      //     labelName:
+                                      //         '${Languages.of(context)?.fullAddress}',
+                                      //     hintText:
+                                      //         '${Languages.of(context)?.fullAddress}'),
+                                      //
+                                      // WidgetUtils.genericTextFiled(
+                                      //     context: context,
+                                      //     keyBoardType: TextInputType.number,
+                                      //     validationRules: ['required'],
+                                      //     controller:
+                                      //         widget.controller!.pinCode,
+                                      //     labelName:
+                                      //         '${Languages.of(context)?.pincode}',
+                                      //     hintText:
+                                      //         '${Languages.of(context)?.pincode}'),
                                       // social id
                                       WidgetUtils.genericTextFiled(
                                           context: context,
@@ -543,7 +510,7 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                         context,
                         cardShape: 1,
                         isIcon: true,
-                        textColor: ColorResource.black,
+                        textColor: ColorResource.colorFFFFFF,
                         fontSize: 20,
                         onTap: () {
                           if (widget.controller!.form.currentState!
@@ -565,7 +532,6 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
             ),
           ),
         ),
-        backgroundColor: Theme.of(context).backgroundColor,
       ),
     );
   }

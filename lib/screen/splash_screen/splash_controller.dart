@@ -37,14 +37,14 @@ class SplashScreenController extends GetxController with StateMixin {
               Get.offAndToNamed(LoginProfileScreen.routeName,
                   arguments: initializeValue.client.auth.currentUser?.phone);
             } else {
-              Get.offAndToNamed(DashboardScreen.routeName);
+              // Get.offAndToNamed(DashboardScreen.routeName);
+              Get.offAndToNamed(LoginProfileScreen.routeName,
+                  arguments: initializeValue.client.auth.currentUser?.phone);
             }
           });
         } else {
           Get.offAndToNamed(LoginScreen.routeName);
         }
-        // Get.offAndToNamed(AddClientScreen.routeName);
-
       });
     } catch (e) {
       debugPrint('exception--> $e');
