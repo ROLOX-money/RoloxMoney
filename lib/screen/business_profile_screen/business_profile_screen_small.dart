@@ -41,6 +41,7 @@ class BusinessProfileScreenSmallState
       child: SafeArea(
         child: Scaffold(
           body: Container(
+            color: ColorResource.colorFFFFFF,
             margin: EdgeInsets.only(bottom: 40),
             alignment: Alignment.topLeft,
             child: ListView(
@@ -49,7 +50,7 @@ class BusinessProfileScreenSmallState
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     AppBar(
-                      backgroundColor: Theme.of(context).backgroundColor,
+                      backgroundColor: ColorResource.colorFFFFFF,
                       leading: GestureDetector(
                         onTap: () {
                           Get.back();
@@ -57,7 +58,7 @@ class BusinessProfileScreenSmallState
                         child: Icon(
                           Icons.arrow_back_sharp,
                           size: 30,
-                          color: Colors.white,
+                          color: ColorResource.color0D0D0D,
                         ),
                       ),
                       centerTitle: true,
@@ -68,8 +69,8 @@ class BusinessProfileScreenSmallState
                               .textTheme
                               .titleSmall!
                               .copyWith(
-                                  color: ColorResource.colorFFFFFF,
-                                  fontSize: 20,
+                                  color: ColorResource.color0D0D0D,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.w600),
                           children: <InlineSpan>[
                             TextSpan(
@@ -78,8 +79,8 @@ class BusinessProfileScreenSmallState
                                   .textTheme
                                   .titleSmall!
                                   .copyWith(
-                                      color: ColorResource.color00E94F,
-                                      fontSize: 20,
+                                      color: ColorResource.color0D0D0D,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.w600),
                             )
                           ])),
@@ -103,8 +104,8 @@ class BusinessProfileScreenSmallState
                                     .textTheme
                                     .titleSmall!
                                     .copyWith(
-                                        color: ColorResource.colorFFFFFF,
-                                        fontSize: 16,
+                                        color: ColorResource.color8B8B8B,
+                                        fontSize: 14,
                                         fontWeight: FontWeight.w400),
                               ),
                               Column(
@@ -136,7 +137,7 @@ class BusinessProfileScreenSmallState
                                     decoration: BoxDecoration(
                                         border: Border.all(
                                             color: Colors.grey, width: 0.25),
-                                        color: ColorResource.color151515),
+                                        color: ColorResource.colorFFFFFF),
                                     padding: EdgeInsets.all(10.0),
                                     child: Theme(
                                       data: Theme.of(context).copyWith(
@@ -155,13 +156,13 @@ class BusinessProfileScreenSmallState
                                                 .titleSmall!
                                                 .copyWith(
                                                     color: ColorResource
-                                                        .colorEC008C,
+                                                        .color020e36,
                                                     fontSize: 14,
                                                     fontWeight:
                                                         FontWeight.w600),
                                           ),
                                           SizedBox(
-                                            height: 10,
+                                            height: 5,
                                           ),
                                           Row(
                                             children: [
@@ -186,7 +187,7 @@ class BusinessProfileScreenSmallState
                                                           .value
                                                           .value,
                                                       activeColor: ColorResource
-                                                          .color00E94F,
+                                                          .colorEC008C,
                                                       onChanged:
                                                           (ModelOfWork? value) {
                                                         widget.controller!
@@ -203,8 +204,8 @@ class BusinessProfileScreenSmallState
                                                           .titleSmall!
                                                           .copyWith(
                                                               color: ColorResource
-                                                                  .colorFFFFFF,
-                                                              fontSize: 16,
+                                                                  .color8B8B8B,
+                                                              fontSize: 14,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w600),
@@ -233,7 +234,7 @@ class BusinessProfileScreenSmallState
                                                           .value
                                                           .value,
                                                       activeColor: ColorResource
-                                                          .color00E94F,
+                                                          .colorEC008C,
                                                       onChanged:
                                                           (ModelOfWork? value) {
                                                         widget.controller!
@@ -250,8 +251,8 @@ class BusinessProfileScreenSmallState
                                                           .titleSmall!
                                                           .copyWith(
                                                               color: ColorResource
-                                                                  .colorFFFFFF,
-                                                              fontSize: 16,
+                                                                  .color8B8B8B,
+                                                              fontSize: 14,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w600),
@@ -265,7 +266,7 @@ class BusinessProfileScreenSmallState
                                       ),
                                     ),
                                   ),
-                                  SizedBox(height: 20),
+                                  SizedBox(height: 5),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
@@ -274,7 +275,7 @@ class BusinessProfileScreenSmallState
                                       Theme(
                                         data: Theme.of(context).copyWith(
                                           unselectedWidgetColor:
-                                              ColorResource.color00E94F,
+                                              ColorResource.color020e36,
                                         ),
                                         child: Checkbox(
                                           value: widget
@@ -283,8 +284,9 @@ class BusinessProfileScreenSmallState
                                               .obs
                                               .value
                                               .value,
-                                          activeColor: Colors.blue,
-                                          checkColor: ColorResource.color151515,
+                                          activeColor:
+                                              ColorResource.colorEC008C,
+                                          checkColor: ColorResource.colorFFFFFF,
                                           onChanged: (value) {
                                             widget.controller!
                                                 .noBusinessCheckBox(
@@ -299,63 +301,66 @@ class BusinessProfileScreenSmallState
                                             .textTheme
                                             .titleSmall!
                                             .copyWith(
-                                                color: ColorResource.colorFFFFFF,
+                                                color:
+                                                    ColorResource.color020e36,
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w400),
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 20),
+                                  SizedBox(height: 5),
                                   // business Name
-                                  Column(
-                                    children: [
-                                      WidgetUtils.genericTextFiled(
-                                        context: context,
-                                        controller: widget
-                                            .controller!.businessNameController,
-                                        labelName:
-                                            '${Languages.of(context)?.businessName}',
-                                        labelStyle: Theme.of(context)
-                                            .textTheme
-                                            .titleSmall!
-                                            .copyWith(
-                                                color:
-                                                    ColorResource.colorEC008C,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w500),
-                                      ),
-                                    ],
-                                  ),
+
+                                  if (widget.controller!.iDontHaveBusiness.obs
+                                      .value.value)
+                                    Column(
+                                      children: [
+                                        WidgetUtils.genericTextFiled(
+                                          context: context,
+                                          controller: widget.controller!
+                                              .businessNameController,
+                                          labelName:
+                                              '${Languages.of(context)?.businessName}',
+                                          labelStyle: Theme.of(context)
+                                              .textTheme
+                                              .titleSmall!
+                                              .copyWith(
+                                                  color:
+                                                      ColorResource.color020e36,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500),
+                                        ),
+                                      ],
+                                    ),
                                   // nature of business
                                   WidgetUtils.dropDown(
                                       context: context,
                                       lableName:
                                           '${Languages.of(context)?.natureOfBusiness}',
-                                      dropDownList: widget
-                                          .controller!.natureOfBusiness.obs.value,
-                                      selectedValues: widget
-                                          .controller!.natureOfBusinessValue.value,
+                                      dropDownList: widget.controller!
+                                          .natureOfBusiness.obs.value,
+                                      selectedValues: widget.controller!
+                                          .natureOfBusinessValue.value,
                                       onChanged: (value) {
-                                        widget.controller!.updateValuesOnUI(
-                                            value: value,
-                                            variableName: widget
-                                                .controller!.natureOfBusinessValue);
+                                        widget.controller!
+                                            .updateNatureOfBusinessValue(value);
                                       }),
-                                  SizedBox(height: 10),
-                                  if (widget.controller!.natureOfBusinessValue.value
+                                  SizedBox(height: 5),
+                                  if (widget.controller!.natureOfBusinessValue
+                                          .value
                                           .toLowerCase() ==
-                                      'other')
+                                      'others')
                                     WidgetUtils.genericTextFiled(
                                       context: context,
-                                      controller: widget
-                                          .controller!.plsIfSpecifyControllerForNatureOfBusiness,
+                                      controller: widget.controller!
+                                          .plsIfSpecifyControllerForNatureOfBusiness,
                                       labelName:
                                           '${Languages.of(context)?.plsIfSpecify}',
                                       labelStyle: Theme.of(context)
                                           .textTheme
                                           .titleSmall!
                                           .copyWith(
-                                              color: ColorResource.colorEC008C,
+                                              color: ColorResource.color020e36,
                                               fontSize: 14,
                                               fontWeight: FontWeight.w500),
                                     ),
@@ -369,15 +374,13 @@ class BusinessProfileScreenSmallState
                                       selectedValues: widget
                                           .controller!.natureOfWorkValue.value,
                                       onChanged: (value) {
-                                        widget.controller!.updateValuesOnUI(
-                                            value: value,
-                                            variableName: widget
-                                                .controller!.natureOfWorkValue);
+                                        widget.controller!
+                                            .updateNatureOfWork(value);
                                       }),
                                   SizedBox(height: 10),
                                   if (widget.controller!.natureOfWorkValue.value
                                           .toLowerCase() ==
-                                      'other')
+                                      'others')
                                     WidgetUtils.genericTextFiled(
                                       context: context,
                                       controller: widget
@@ -388,91 +391,31 @@ class BusinessProfileScreenSmallState
                                           .textTheme
                                           .titleSmall!
                                           .copyWith(
-                                              color: ColorResource.colorEC008C,
+                                              color: ColorResource.color020e36,
                                               fontSize: 14,
                                               fontWeight: FontWeight.w500),
                                     ),
-                                  // Column(
-                                  //   children: [
-                                  //     SizedBox(
-                                  //       height: 20,
-                                  //     ),
-                                  //     WidgetUtils.genericTextFiled(
-                                  //       context: context,
-                                  //       controller: widget
-                                  //           .controller!.otherNatureController,
-                                  //       labelName:
-                                  //           '${Languages.of(context)?.otherNatureOfWork}'
-                                  //               .toUpperCase(),
-                                  //     ),
-                                  //   ],
-                                  // ),
-
-                                  // SizedBox(
-                                  //   height: 10,
-                                  // ),
-                                  // //industry of work
-                                  // WidgetUtils.dropDown(
-                                  //     context: context,
-                                  //     lableName:
-                                  //         '${Languages.of(context)?.industryOfWork}'
-                                  //             .toLowerCase(),
-                                  //     dropDownList: widget
-                                  //         .controller!.industryOfWork.obs.value,
-                                  //     selectedValues: widget.controller!
-                                  //         .industryOfWorkValue.value,
-                                  //     onChanged: (value) {
-                                  //       widget.controller!.updateValuesOnUI(
-                                  //           value: value,
-                                  //           variableName: widget.controller!
-                                  //               .industryOfWorkValue);
-                                  //     }),
-                                  // if (widget
-                                  //         .controller!.industryOfWorkValue.value
-                                  //         .toLowerCase() ==
-                                  //     'other')
-                                  //   Column(
-                                  //     children: [
-                                  //       SizedBox(
-                                  //         height: 20,
-                                  //       ),
-                                  //       WidgetUtils.genericTextFiled(
-                                  //         context: context,
-                                  //         controller: widget.controller!
-                                  //             .otherIndustryOfWorkController,
-                                  //         labelName:
-                                  //             '${Languages.of(context)?.otherIndustryOfWork}'
-                                  //                 .toUpperCase(),
-                                  //       ),
-                                  //     ],
-                                  //   ),
-                                  // const SizedBox(
-                                  //   height: 15,
-                                  // ),
-
-                                  // mobile no
                                   CustomText(
                                     text:
                                         '${Languages.of(context)?.mobileNumber}',
-                                    style:  Theme.of(context)
+                                    style: Theme.of(context)
                                         .textTheme
                                         .titleSmall!
                                         .copyWith(
-                                        color: ColorResource.colorEC008C,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500),
-
+                                            color: ColorResource.color020e36,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500),
                                   ),
                                   const SizedBox(height: 5),
                                   SizedBox(
                                     child: CustomTextField(
-                                      widget.controller!.mobilNumberController
-                                          .obs.value,
+                                      widget.controller!.mobilNumberController,
                                       focusedBorder: Colors.grey,
-                                      textColor: Colors.white,
-                                      enableColor: Colors.grey,
-                                      borderColor: Colors.red,
-                                      disableColor: Colors.red,
+                                      textColor: ColorResource.color020e36,
+                                      enableColor: ColorResource.color020e36,
+                                      borderColor: ColorResource.color020e36,
+                                      disableColor: ColorResource.color020e36,
+                                      isEnable: false,
                                       keyBoardType: TextInputType.phone,
                                       prefixIcon: Container(
                                         width: 100,
@@ -487,8 +430,8 @@ class BusinessProfileScreenSmallState
                                                     // Splash color
                                                     onTap: () {},
                                                     child: SizedBox(
-                                                      width: 22,
-                                                      height: 22,
+                                                      width: 20,
+                                                      height: 20,
                                                       child: Image.network(
                                                         'https://think360studio-media.s3.ap-south-1.amazonaws.com/download/india-flag-2021-wallpaper-1.png',
                                                         fit: BoxFit.fill,
@@ -497,24 +440,24 @@ class BusinessProfileScreenSmallState
                                                   ),
                                                 ),
                                               ),
-                                              const SizedBox(width: 5),
+                                              const SizedBox(width: 6),
                                               CustomText(
                                                 text: '+91',
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .titleSmall!
                                                     .copyWith(
-                                                    color: Theme.of(context)
-                                                        .textTheme
-                                                        .titleMedium!
-                                                        .color,
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                    FontWeight.w400),
+                                                        color: Theme.of(context)
+                                                            .textTheme
+                                                            .titleMedium!
+                                                            .color,
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w400),
                                               ),
                                               Icon(
                                                 Icons.keyboard_arrow_down,
-                                                size: 22,
+                                                size: 20,
                                                 color: Theme.of(context)
                                                     .textTheme
                                                     .titleMedium!
@@ -527,7 +470,7 @@ class BusinessProfileScreenSmallState
                                                 width: 0.40,
                                                 height: 20,
                                                 color:
-                                                ColorResource.colorDDDDDD,
+                                                    ColorResource.colorDDDDDD,
                                               )
                                             ],
                                           ),
@@ -539,189 +482,19 @@ class BusinessProfileScreenSmallState
                                   //email id
                                   WidgetUtils.genericTextFiled(
                                     context: context,
+                                    keyBoardType: TextInputType.emailAddress,
                                     controller:
-                                    widget.controller!.emailController,
+                                        widget.controller!.emailController,
                                     labelName:
                                         '${Languages.of(context)?.emailID}',
                                     labelStyle: Theme.of(context)
                                         .textTheme
                                         .titleSmall!
                                         .copyWith(
-                                            color: ColorResource.colorEC008C,
+                                            color: ColorResource.color020e36,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w500),
                                   ),
-                                  // // nature of work
-                                  // WidgetUtils.dropDown(
-                                  //     context: context,
-                                  //     lableName:
-                                  //         '${Languages.of(context)?.natureOfWork}'
-                                  //             .toLowerCase(),
-                                  //     dropDownList: widget
-                                  //         .controller!.natureOfWork.obs.value,
-                                  //     selectedValues: widget
-                                  //         .controller!.natureOfWorkValue.value,
-                                  //     onChanged: (value) {
-                                  //       widget.controller!.updateValuesOnUI(
-                                  //           value: value,
-                                  //           variableName: widget
-                                  //               .controller!.natureOfWorkValue);
-                                  //     }),
-                                  // if (widget.controller!.natureOfWorkValue.value
-                                  //         .toLowerCase() ==
-                                  //     'other')
-                                  //   Column(
-                                  //     children: [
-                                  //       SizedBox(
-                                  //         height: 20,
-                                  //       ),
-                                  //       WidgetUtils.genericTextFiled(
-                                  //         context: context,
-                                  //         controller: widget.controller!
-                                  //             .otherNatureController,
-                                  //         labelName:
-                                  //             '${Languages.of(context)?.otherNatureOfWork}'
-                                  //                 .toUpperCase(),
-                                  //       ),
-                                  //     ],
-                                  //   ),
-                                  // SizedBox(
-                                  //   height: 10,
-                                  // ),
-                                  // //industry of work
-                                  // WidgetUtils.dropDown(
-                                  //     context: context,
-                                  //     lableName:
-                                  //         '${Languages.of(context)?.industryOfWork}'
-                                  //             .toLowerCase(),
-                                  //     dropDownList: widget
-                                  //         .controller!.industryOfWork.obs.value,
-                                  //     selectedValues: widget.controller!
-                                  //         .industryOfWorkValue.value,
-                                  //     onChanged: (value) {
-                                  //       widget.controller!.updateValuesOnUI(
-                                  //           value: value,
-                                  //           variableName: widget.controller!
-                                  //               .industryOfWorkValue);
-                                  //     }),
-                                  // if (widget
-                                  //         .controller!.industryOfWorkValue.value
-                                  //         .toLowerCase() ==
-                                  //     'other')
-                                  //   Column(
-                                  //     children: [
-                                  //       SizedBox(
-                                  //         height: 20,
-                                  //       ),
-                                  //       WidgetUtils.genericTextFiled(
-                                  //         context: context,
-                                  //         controller: widget.controller!
-                                  //             .otherIndustryOfWorkController,
-                                  //         labelName:
-                                  //             '${Languages.of(context)?.otherIndustryOfWork}'
-                                  //                 .toUpperCase(),
-                                  //       ),
-                                  //     ],
-                                  //   ),
-                                  // const SizedBox(
-                                  //   height: 15,
-                                  // ),
-                                  // CustomText(
-                                  //   text:
-                                  //       '${Languages.of(context)?.mobileNumber}'
-                                  //           .toUpperCase(),
-                                  //   style: Theme.of(context)
-                                  //       .textTheme
-                                  //       .titleSmall!
-                                  //       .copyWith(
-                                  //           color: ColorResource.colorE08AF4,
-                                  //           fontWeight: FontWeight.w500),
-                                  // ),
-                                  // const SizedBox(
-                                  //   height: 5,
-                                  // ),
-                                  // SizedBox(
-                                  //   child: CustomTextField(
-                                  //     widget.controller!.mobilNumberController
-                                  //         .obs.value,
-                                  //     focusedBorder: Colors.grey,
-                                  //     textColor: Colors.white,
-                                  //     enableColor: Colors.grey,
-                                  //     borderColor: Colors.red,
-                                  //     disableColor: Colors.red,
-                                  //     keyBoardType: TextInputType.phone,
-                                  //     prefixIcon: Container(
-                                  //       width: 100,
-                                  //       child: Padding(
-                                  //         padding: const EdgeInsets.all(8.0),
-                                  //         child: Row(
-                                  //           children: [
-                                  //             ClipOval(
-                                  //               child: Material(
-                                  //                 child: InkWell(
-                                  //                   splashColor: Colors.red,
-                                  //                   // Splash color
-                                  //                   onTap: () {},
-                                  //                   child: SizedBox(
-                                  //                     width: 22,
-                                  //                     height: 22,
-                                  //                     child: Image.network(
-                                  //                       'https://think360studio-media.s3.ap-south-1.amazonaws.com/download/india-flag-2021-wallpaper-1.png',
-                                  //                       fit: BoxFit.fill,
-                                  //                     ),
-                                  //                   ),
-                                  //                 ),
-                                  //               ),
-                                  //             ),
-                                  //             const SizedBox(
-                                  //               width: 5,
-                                  //             ),
-                                  //             CustomText(
-                                  //               text: '+91',
-                                  //               style: Theme.of(context)
-                                  //                   .textTheme
-                                  //                   .titleSmall!
-                                  //                   .copyWith(
-                                  //                       color: Theme.of(context)
-                                  //                           .textTheme
-                                  //                           .titleMedium!
-                                  //                           .color,
-                                  //                       fontSize: 16,
-                                  //                       fontWeight:
-                                  //                           FontWeight.w400),
-                                  //             ),
-                                  //             Icon(
-                                  //               Icons.keyboard_arrow_down,
-                                  //               size: 22,
-                                  //               color: Theme.of(context)
-                                  //                   .textTheme
-                                  //                   .titleMedium!
-                                  //                   .color,
-                                  //             ),
-                                  //             const SizedBox(
-                                  //               width: 5,
-                                  //             ),
-                                  //             Container(
-                                  //               width: 0.40,
-                                  //               height: 20,
-                                  //               color:
-                                  //                   ColorResource.colorDDDDDD,
-                                  //             )
-                                  //           ],
-                                  //         ),
-                                  //       ),
-                                  //     ),
-                                  //   ),
-                                  //   height: 70,
-                                  // ),
-                                  // WidgetUtils.genericTextFiled(
-                                  //   context: context,
-                                  //   controller:
-                                  //       widget.controller!.emailController,
-                                  //   labelName:
-                                  //       '${Languages.of(context)?.emailID}'
-                                  //           .toUpperCase(),
-                                  // ),
                                 ],
                               ),
                             ],
@@ -734,17 +507,17 @@ class BusinessProfileScreenSmallState
               ],
             ),
           ),
-          backgroundColor: Theme.of(context).backgroundColor,
           bottomNavigationBar: PrimaryButton(
             '${Languages.of(context)!.continueText}',
             context,
             cardShape: 1,
             isIcon: true,
-            textColor: ColorResource.black,
+            textColor: ColorResource.colorFFFFFF,
             fontSize: 20,
             onTap: () {
-              Get.put(DashboardController());
-              Get.offAll(DashboardScreen());
+              widget.controller!.validatingProfile();
+              // Get.put(DashboardController());
+              // Get.offAll(DashboardScreen());
             },
           ),
         ),

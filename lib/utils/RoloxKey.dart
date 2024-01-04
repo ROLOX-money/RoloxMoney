@@ -26,4 +26,5 @@ class RoloxKey {
   static late String supaBaseInvoiceTable = 'invoice';
   static late String supaBaseUserToInvoiceTable = 'userToInvoice';
   static late String supaBaseFCMTokenTable = 'fcmToken';
+  static late String supaBaseFreelancerDB = 'freelancerDB';
 }

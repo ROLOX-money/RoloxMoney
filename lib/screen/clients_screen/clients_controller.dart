@@ -48,6 +48,7 @@ class ClientsController extends GetxController
   void navigateAddClientScreen() {
     Get.put(AddClientController());
     Get.toNamed(AddClientScreen.routeName)?.then((value) {
+      change(null, status: RxStatus.loading());
       toGetTheClientList().then((value) {
         clientList.value = value;
         change(clientList, status: RxStatus.success());

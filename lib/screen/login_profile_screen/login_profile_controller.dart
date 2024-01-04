@@ -2,12 +2,13 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:roloxmoney/screen/business_profile_screen/business_profile_screen.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
+import 'package:roloxmoney/screen/individual_profile_screen/individual_profile_screen.dart';
 
 import 'package:roloxmoney/utils/RoloxKey.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/supa_base_control.dart';
-
 
 /*Chinnadurai Viswanathan*/
 enum TypOfBusiness { individual, business, agency }
@@ -36,8 +37,8 @@ class LoginProfileController extends GetxController
     firstNameController.text = 'Chinnadurai';
     emailIDController.text = 'chinnadurai@gmail.com';
     companyNameController.text = 'Rolox Money Agency';
-    panNumberController.text = 'BRYPC4090C';
-    gstNumberController.text = '123445667687';
+    panNumberController.text = 'BRYPC4090B';
+    gstNumberController.text = '12344566';
     contactPersonNameController.text = 'Viswanathan';
     socialId.text = 'Agencies Link';
     address1.text = 'No:2/41, North Street';
@@ -55,175 +56,66 @@ class LoginProfileController extends GetxController
 
   Future<void> singUpNewUser() async {
     change(null, status: RxStatus.loading());
-    if (typOfBusiness.obs.value.value == TypOfBusiness.individual) {
-      insertUser();
-    } else {
-      SupaBaseController.toSearchPANAvailability(
-              panNumber: panNumberController.text)
-          .then((panAvailabilityResponse) {
-        if (panAvailabilityResponse) {
+    SupaBaseController.toGetTheSelectedID(
+            searchValue: emailIDController.text.trim(),
+            tableName: RoloxKey.supaBaseUserTable,
+            whatTypeOfValueYouWant: 'id',
+            searchKey: 'email')
+        .then((value) {
+      if (value.isEmpty) {
+        if (typOfBusiness.obs.value.value == TypOfBusiness.individual) {
           change(null, status: RxStatus.success());
-          AppUtils.showErrorSnackBar(Get.context!,
-              'PAN Mapped with another profile..Please consider your PAN',
-              durations: 2000);
+          var tempMap = {
+            "name": firstNameController.text.trim(),
+            "profileType": 1,
+            "emailAddress": emailIDController.text.trim(),
+            'socialId': socialId.text,
+          };
+          Get.toNamed(IndividualProfileScreen.routeName, arguments: tempMap);
         } else {
-          SupaBaseController.toGetTheSelectedID(
+          SupaBaseController.toSearchPANAvailability(
+              panNumber: panNumberController.text)
+              .then((panAvailabilityResponse) {
+            if (panAvailabilityResponse) {
+              change(null, status: RxStatus.success());
+              AppUtils.showErrorSnackBar(Get.context!,
+                  'PAN Mapped with another profile..Please consider your PAN',
+                  durations: 2000);
+            } else {
+              SupaBaseController.toGetTheSelectedID(
                   searchValue: gstNumberController.text,
                   tableName: RoloxKey.supaBaseGSTTable,
                   whatTypeOfValueYouWant: 'id',
                   searchKey: 'gstNumber')
-              .then((responseList) {
-            if (responseList.isEmpty) {
-              insertUser();
-            } else {
-              change(null, status: RxStatus.success());
-              AppUtils.showErrorSnackBar(Get.context!,
-                  'GST Mapped with another profile..Please consider your GST',
-                  durations: 2000);
-            }
-          });
-        }
-      });
-    }
-  }
-
-  insertUser() {
-    toInsert(userData: {
-      'name': typOfBusiness.obs.value.value == TypOfBusiness.business
-          ? contactPersonNameController.text
-          : firstNameController.text,
-      'email': emailIDController.text,
-      'phoneVerfied': true,
-      'socialId': socialId.text,
-      'phone': Get.arguments.toString().contains('+')
-          ? Get.arguments.toString()
-          : '+91${Get.arguments.toString()}',
-      'profiletype': typOfBusiness.obs.value.value == TypOfBusiness.individual
-          ? '1'
-          : typOfBusiness.obs.value.value == TypOfBusiness.business
-              ? '2'
-              : '3',
-    }, tableName: RoloxKey.supaBaseUserTable)
-        .then((insertNewUserResponse) {
-      if (insertNewUserResponse) {
-        try {
-          SupaBaseController.toGetTheSelectedUser(
-                  mobileNumber: Get.arguments.toString().contains('+')
-                      ? Get.arguments.toString()
-                      : '+91${Get.arguments.toString()}')
-              .then((selectedUserResponse) {
-            if (selectedUserResponse is List) {
-              if (selectedUserResponse.length > 0) {
-                toInsertFCM(userID: selectedUserResponse[0]['id'])
-                    .then((fcmTokenValue) {
-                  if (fcmTokenValue) {
-                    toInsert(userData: {
-                      'userType':
-                          typOfBusiness.value == TypOfBusiness.business ? 2 : 1,
-                      'referenceID': selectedUserResponse[0]['id'],
-                      'address_1': address1.text,
-                      'address_2': address2.text,
-                      'pinCode': pinCode.text,
-                      'phone': Get.arguments.toString().contains('+')
-                          ? Get.arguments.toString()
-                          : '+${Get.arguments.toString()}'
-                    }, tableName: RoloxKey.supaBaseAddressTable)
-                        .then((value) {
-                      if (typOfBusiness.value == TypOfBusiness.business) {
-                        toInsert(userData: {
-                          'companyName': companyNameController.text,
-                          'userid': [selectedUserResponse[0]['id']],
-                        }, tableName: RoloxKey.supaBaseCompanyTable)
-                            .then((insertResponse) {
-                          if (insertResponse) {
-                            SupaBaseController.toGetTheSelectedCompany(
-                                    companyName: companyNameController.text)
-                                .then((selectedCompanyResponse) {
-                              if (selectedCompanyResponse is List) {
-                                if (selectedCompanyResponse.length > 0) {
-                                  toInsert(userData: {
-                                    'Pannumber': panNumberController.text,
-                                    'profiletype':
-                                        typOfBusiness.obs.value.value ==
-                                                TypOfBusiness.business
-                                            ? '2'
-                                            : '3',
-                                    'refrenceid': selectedCompanyResponse[0]
-                                        ['id'],
-                                  }, tableName: RoloxKey.supaBasePANTable)
-                                      .then((panCardInsertResponse) {
-                                    toInsert(userData: {
-                                      'gstNumber': gstNumberController.text,
-                                      'profileType':
-                                          typOfBusiness.obs.value.value ==
-                                                  TypOfBusiness.business
-                                              ? '2'
-                                              : '3',
-                                      'refrenceid': selectedCompanyResponse[0]
-                                          ['id'],
-                                    }, tableName: RoloxKey.supaBaseGSTTable)
-                                        .then((gstInsertResponse) {
-                                      if (gstInsertResponse) {
-                                        Get.offAllNamed(
-                                            DashboardScreen.routeName);
-                                      } else {
-                                        change(null,
-                                            status: RxStatus.success());
-                                        AppUtils.showErrorSnackBar(Get.context!,
-                                            'Something went wrong..Please Please try again latter',
-                                            durations: 2000);
-                                      }
-                                    });
-                                  });
-                                } else {
-                                  change(null, status: RxStatus.success());
-                                  AppUtils.showErrorSnackBar(Get.context!,
-                                      'Something went wrong..Please Please try again latter',
-                                      durations: 2000);
-                                }
-                              } else {
-                                change(null, status: RxStatus.success());
-                                AppUtils.showErrorSnackBar(Get.context!,
-                                    'Something went wrong..Please Please try again latter',
-                                    durations: 2000);
-                              }
-                            });
-                          } else {
-                            change(null, status: RxStatus.success());
-                          }
-                        });
-                      } else {
-                        Get.offAllNamed(DashboardScreen.routeName);
-                      }
-                    });
-                  } else {
-                    change(null, status: RxStatus.success());
-                  }
-                });
-              } else {
+                  .then((responseList) {
                 change(null, status: RxStatus.success());
-                AppUtils.showErrorSnackBar(Get.context!,
-                    'Something went wrong. Please try again after sometime',
-                    durations: 2000);
-                change(null, status: RxStatus.success());
-              }
-            } else {
-              change(null, status: RxStatus.success());
-              AppUtils.showErrorSnackBar(Get.context!,
-                  'Something went wrong. Please try again after sometime',
-                  durations: 2000);
+                if (responseList.isEmpty) {
+                  var tempMap = {
+                    "name": companyNameController.text.trim(),
+                    "profileType": 2,
+                    "contactEmail": emailIDController.text.trim(),
+                    "panNumber": panNumberController.text,
+                    "emailAddress": emailIDController.text.trim(),
+                    "gstNumber": gstNumberController.text,
+                    'socialId': socialId.text,
+                  };
+                  Get.toNamed(BusinessProfileScreen.routeName, arguments: tempMap);
+                } else {
+                  AppUtils.showErrorSnackBar(Get.context!,
+                      'GST Mapped with another profile..Please consider your GST',
+                      durations: 2000);
+                }
+              });
               change(null, status: RxStatus.success());
             }
           });
-        } catch (e) {
-          AppUtils.showErrorSnackBar(Get.context!,
-              'Something went wrong. Please try again after sometime',
-              durations: 2000);
-          change(null, status: RxStatus.success());
         }
       } else {
-        change(null, status: RxStatus.success());
+        AppUtils.showErrorSnackBar(Get.context!,
+            'Email already exist..Please consider your your email',
+            durations: 3000);
       }
     });
+    change(null, status: RxStatus.success());
   }
 }

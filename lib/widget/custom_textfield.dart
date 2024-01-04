@@ -99,8 +99,8 @@ class CustomTextFieldState extends State<CustomTextField> {
     // widget.borderColor =
     //     Theme.of(context).textTheme.titleMedium!.backgroundColor!;
     return Container(
-        decoration: BoxDecoration(
-            boxShadow: ColorResource.boxShadow, color: widget.bgColor),
+        // decoration: BoxDecoration(
+        //     boxShadow: ColorResource.boxShadow, color: widget.bgColor),
         height: 50,
         child: TextFormField(
           maxLines: widget.maxLines ?? 1,

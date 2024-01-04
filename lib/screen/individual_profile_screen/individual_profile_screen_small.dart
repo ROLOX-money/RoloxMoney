@@ -42,25 +42,32 @@ class IndividualProfileScreenSmallState
       rxStatus: widget.controller!.status,
       child: SafeArea(
         child: Scaffold(
+          backgroundColor: ColorResource.colorFFFFFF,
+          resizeToAvoidBottomInset: true,
           body: Container(
+            color: ColorResource.colorFFFFFF,
             alignment: Alignment.topLeft,
             child: ListView(
               shrinkWrap: true,
-              // physics: NeverScrollableScrollPhysics(),
+              physics: NeverScrollableScrollPhysics(),
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     AppBar(
-                      backgroundColor: Theme.of(context).backgroundColor,
+                      backgroundColor: ColorResource.colorFFFFFF,
                       leading: GestureDetector(
                         onTap: () {
-                          Get.back();
+                          if (widget.controller!.currentStep.obs.value == 2) {
+                            widget.controller!.stepCount(values: 1);
+                          } else {
+                            Get.back();
+                          }
                         },
                         child: Icon(
                           Icons.arrow_back_sharp,
                           size: 30,
-                          color: Colors.white,
+                          color: ColorResource.color0D0D0D,
                         ),
                       ),
                       centerTitle: true,
@@ -71,7 +78,7 @@ class IndividualProfileScreenSmallState
                               .textTheme
                               .titleSmall!
                               .copyWith(
-                                  color: ColorResource.colorFFFFFF,
+                                  color: ColorResource.color0D0D0D,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w600),
                           children: <InlineSpan>[
@@ -81,7 +88,7 @@ class IndividualProfileScreenSmallState
                                   .textTheme
                                   .titleSmall!
                                   .copyWith(
-                                      color: ColorResource.color00E94F,
+                                      color: ColorResource.color0D0D0D,
                                       fontSize: 20,
                                       fontWeight: FontWeight.w600),
                             )
@@ -97,10 +104,10 @@ class IndividualProfileScreenSmallState
                         width: MediaQuery.of(context).size.width,
                         currentStep:
                             widget.controller!.currentStep.obs.value.value,
-                        stepCompleteColor: Colors.blue,
+                        stepCompleteColor: Colors.white,
                         currentStepColor: Color(0xffdbecff),
                         inactiveColor: Color(0xffbababa),
-                        lineWidth: 1,
+                        lineWidth: 0.5,
                       ),
                     ),
                     Form(
@@ -118,25 +125,18 @@ class IndividualProfileScreenSmallState
               ],
             ),
           ),
-          backgroundColor: Theme.of(context).backgroundColor,
           bottomNavigationBar: PrimaryButton(
             '${Languages.of(context)!.continueText}',
             context,
             cardShape: 1,
             isIcon: true,
-            textColor: ColorResource.black,
+            textColor: ColorResource.colorFFFFFF,
             fontSize: 20,
             onTap: () {
-              if (widget.controller!.form.currentState!.validate()) {
-                if (widget.controller!.currentStep.obs.value.value != 2) {
-                  widget.controller!.stepCount(
-                      values:
-                          widget.controller!.currentStep.obs.value.value + 1);
-                } else {
-                  Get.put(DashboardController());
-                  Get.offAll(DashboardScreen());
-                }
-              }
+              debugPrint(
+                  'screen-->${widget.controller!.currentStep.obs.value}');
+
+              widget.controller!.validatingProfile();
             },
           ),
         ),
@@ -157,7 +157,7 @@ class IndividualProfileScreenSmallState
               CustomText(
                 text: '${Languages.of(context)?.profileScreenFreeContent}',
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: ColorResource.colorFFFFFF,
+                    color: ColorResource.color8B8B8B,
                     fontSize: 16,
                     fontWeight: FontWeight.w400),
               ),
@@ -168,6 +168,7 @@ class IndividualProfileScreenSmallState
                   child: Container(
                     height: 120,
                     width: 120,
+                    alignment: Alignment.center,
                     decoration: BoxDecoration(
                         color: ColorResource.black,
                         borderRadius: BorderRadius.circular(60)),
@@ -191,7 +192,7 @@ class IndividualProfileScreenSmallState
                       ),
 
                       // )
-                    ]),
+                    ], alignment: Alignment.center),
                   ),
                 ),
               ),
@@ -208,9 +209,7 @@ class IndividualProfileScreenSmallState
                       dropDownList: widget.controller!.modelOfWork.obs.value,
                       selectedValues: widget.controller!.modelOfWorkValue.value,
                       onChanged: (value) {
-                        widget.controller!.updateValuesOnUI(
-                            value: value,
-                            variableName: widget.controller!.modelOfWorkValue);
+                        widget.controller!.updatedModelOfWorkValue(value);
                       }),
                   SizedBox(height: 20),
                   // nature of business
@@ -222,15 +221,12 @@ class IndividualProfileScreenSmallState
                       selectedValues:
                           widget.controller!.natureOfBusinessValue.value,
                       onChanged: (value) {
-                        widget.controller!.updateValuesOnUI(
-                            value: value,
-                            variableName:
-                                widget.controller!.natureOfBusinessValue);
+                        widget.controller!.updateNatureOfBusinessValue(value);
                       }),
                   SizedBox(height: 10),
                   if (widget.controller!.natureOfBusinessValue.value
                           .toLowerCase() ==
-                      'other')
+                      'others')
                     WidgetUtils.genericTextFiled(
                       context: context,
                       validationRules: ['required'],
@@ -240,7 +236,7 @@ class IndividualProfileScreenSmallState
                           .textTheme
                           .titleSmall!
                           .copyWith(
-                              color: ColorResource.colorEC008C,
+                              color: ColorResource.color020e36,
                               fontSize: 14,
                               fontWeight: FontWeight.w500),
                     ),
@@ -252,14 +248,12 @@ class IndividualProfileScreenSmallState
                       selectedValues:
                           widget.controller!.natureOfWorkValue.value,
                       onChanged: (value) {
-                        widget.controller!.updateValuesOnUI(
-                            value: value,
-                            variableName: widget.controller!.natureOfWorkValue);
+                        widget.controller!.updateNatureOfWork(value);
                       }),
                   SizedBox(height: 10),
                   if (widget.controller!.natureOfWorkValue.value
                           .toLowerCase() ==
-                      'other')
+                      'others')
                     WidgetUtils.genericTextFiled(
                       context: context,
                       validationRules: ['required'],
@@ -270,7 +264,7 @@ class IndividualProfileScreenSmallState
                           .textTheme
                           .titleSmall!
                           .copyWith(
-                              color: ColorResource.colorEC008C,
+                              color: ColorResource.color020e36,
                               fontSize: 14,
                               fontWeight: FontWeight.w500),
                     ),
@@ -287,10 +281,10 @@ class IndividualProfileScreenSmallState
                     child: CustomTextField(
                       widget.controller!.mobilNumberController.obs.value,
                       focusedBorder: Colors.grey,
-                      textColor: Colors.white,
+                      textColor: ColorResource.color020e36,
                       enableColor: Colors.grey,
-                      borderColor: Colors.red,
-                      disableColor: Colors.red,
+                      borderColor: Colors.grey,
+                      disableColor: Colors.grey,
                       keyBoardType: TextInputType.phone,
                       validationRules: ['required'],
                       prefixIcon: Container(
@@ -306,8 +300,8 @@ class IndividualProfileScreenSmallState
                                     // Splash color
                                     onTap: () {},
                                     child: SizedBox(
-                                      width: 22,
-                                      height: 22,
+                                      width: 20,
+                                      height: 20,
                                       child: Image.network(
                                         'https://think360studio-media.s3.ap-south-1.amazonaws.com/download/india-flag-2021-wallpaper-1.png',
                                         fit: BoxFit.fill,
@@ -327,12 +321,12 @@ class IndividualProfileScreenSmallState
                                             .textTheme
                                             .titleMedium!
                                             .color,
-                                        fontSize: 16,
+                                        fontSize: 14,
                                         fontWeight: FontWeight.w400),
                               ),
                               Icon(
                                 Icons.keyboard_arrow_down,
-                                size: 22,
+                                size: 20,
                                 color: Theme.of(context)
                                     .textTheme
                                     .titleMedium!
@@ -350,10 +344,11 @@ class IndividualProfileScreenSmallState
                           ),
                         ),
                       ),
+                      isEnable: false,
                     ),
                     height: 70,
                   ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 15),
                 ],
               )
             ],
@@ -366,105 +361,106 @@ class IndividualProfileScreenSmallState
   Widget secondPageForIndividual() {
     return ListView(shrinkWrap: true, children: [
       Padding(
-          padding: const EdgeInsets.all(16.0),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            CustomText(
-              text: '${Languages.of(context)?.profileSecondPageContent}',
+        padding: const EdgeInsets.all(16.0),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          CustomText(
+            text: '${Languages.of(context)?.profileSecondPageContent}',
+            style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                color: ColorResource.colorFFFFFF,
+                fontSize: 16,
+                fontWeight: FontWeight.w400),
+          ),
+          SizedBox(height: 10),
+          // PAN No
+          WidgetUtils.genericTextFiled(
+            context: context,
+            validationRules: ['required'],
+            controller: widget.controller!.panNumberController,
+            labelName: '${Languages.of(context)?.panNumber}',
+            labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
+                color: ColorResource.color020e36,
+                fontSize: 14,
+                fontWeight: FontWeight.w500),
+          ),
+          // I have GST no
+          ListTile(
+            visualDensity: VisualDensity(horizontal: -4, vertical: -4),
+            contentPadding: EdgeInsets.zero,
+            dense: true,
+            leading: Theme(
+              data: Theme.of(context).copyWith(
+                unselectedWidgetColor: ColorResource.color00E94F,
+              ),
+              child: Checkbox(
+                value: widget.controller!.iDontHaveBusiness.obs.value.value,
+                activeColor: ColorResource.colorEC008C,
+                checkColor: ColorResource.colorFFFFFF,
+                onChanged: (value) {
+                  widget.controller!.noBusinessCheckBox(values: value);
+                },
+              ),
+            ),
+            title: CustomText(
+              text: '${Languages.of(context)?.iHaveAGSTNumber}',
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ColorResource.colorFFFFFF,
+                  color: ColorResource.color020e36,
                   fontSize: 16,
                   fontWeight: FontWeight.w400),
             ),
-            SizedBox(height: 10),
-            // PAN No
-            WidgetUtils.genericTextFiled(
-              context: context,
-              validationRules: ['required'],
-              controller: widget.controller!.panNumberController,
-              labelName: '${Languages.of(context)?.panNumber}',
-              labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ColorResource.colorEC008C,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500),
-            ),
-            // I have GST no
-            ListTile(
-              visualDensity: VisualDensity(horizontal: -4, vertical: -4),
-              contentPadding: EdgeInsets.zero,
-              dense: true,
-              leading: Theme(
-                data: Theme.of(context).copyWith(
-                  unselectedWidgetColor: ColorResource.color00E94F,
-                ),
-                child: Checkbox(
-                  value: widget.controller!.iDontHaveBusiness.obs.value.value,
-                  activeColor: Colors.blue,
-                  checkColor: ColorResource.color151515,
-                  onChanged: (value) {
-                    widget.controller!.noBusinessCheckBox(values: value);
-                  },
-                ),
-              ),
-              title: CustomText(
-                text: '${Languages.of(context)?.iHaveAGSTNumber}',
-                style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: ColorResource.colorFFFFFF,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400),
-              ),
-            ),
+          ),
+          if (widget.controller!.iDontHaveBusiness.obs.value.value)
             WidgetUtils.genericTextFiled(
               context: context,
               validationRules: ['required'],
               controller: widget.controller!.gstController,
               labelName: '${Languages.of(context)?.gstNumber}',
               labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ColorResource.colorEC008C,
+                  color: ColorResource.color020e36,
                   fontSize: 14,
                   fontWeight: FontWeight.w500),
             ),
-            SizedBox(height: 5),
-            // Full Address
-            WidgetUtils.genericTextFiled(
+          SizedBox(height: 5),
+          // Full Address
+          WidgetUtils.genericTextFiled(
+            context: context,
+            maxLines: 20,
+            minLines: 1,
+            validationRules: ['required'],
+            keyBoardType: TextInputType.multiline,
+            controller: widget.controller!.addressController,
+            labelName: '${Languages.of(context)?.fullAddress}',
+            labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
+                color: ColorResource.color020e36,
+                fontSize: 14,
+                fontWeight: FontWeight.w500),
+          ),
+          SizedBox(height: 5),
+          // PinCode
+          WidgetUtils.genericTextFiled(
               context: context,
-              maxLines: 20,
-              minLines: 10,
               validationRules: ['required'],
-              controller: widget.controller!.addressController,
-              labelName: '${Languages.of(context)?.fullAddress}',
+              controller: widget.controller!.pincodeController,
+              labelName: '${Languages.of(context)?.pincode}',
               labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                  color: ColorResource.colorEC008C,
+                  color: ColorResource.color020e36,
                   fontSize: 14,
                   fontWeight: FontWeight.w500),
-            ),
-            SizedBox(height: 5),
-            // PinCode
-            WidgetUtils.genericTextFiled(
-                context: context,
-                validationRules: ['required'],
-                controller: widget.controller!.pincodeController,
-                labelName: '${Languages.of(context)?.pincode}',
-                labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: ColorResource.colorEC008C,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500),
-                keyBoardType: TextInputType.number),
-            SizedBox(height: 5),
-            // type of address
-            WidgetUtils.dropDown(
-                context: context,
-
-                lableName: '${Languages.of(context)?.typeOfAddress}',
-                dropDownList: widget.controller!.typeOfAddress.obs.value,
-                selectedValues: widget.controller!.typeOfAddressValue.value,
-                onChanged: (value) {
-                  widget.controller!.updateValuesOnUI(
-                      value: value,
-                      variableName: widget.controller!.typeOfAddressValue);
-                }),
-            SizedBox(height: 10),
-          ]))
+              keyBoardType: TextInputType.number),
+          SizedBox(height: 5),
+          // type of address
+          WidgetUtils.dropDown(
+              context: context,
+              lableName: '${Languages.of(context)?.typeOfAddress}',
+              dropDownList: widget.controller!.typeOfAddress.obs.value,
+              selectedValues: widget.controller!.typeOfAddressValue.value,
+              onChanged: (value) {
+                widget.controller!.updateValuesOnUI(
+                    value: value,
+                    variableName: widget.controller!.typeOfAddressValue);
+              }),
+          SizedBox(height: 60),
+        ]),
+      )
     ]);
   }
 }
