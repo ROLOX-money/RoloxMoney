@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
 import 'package:roloxmoney/screen/login_screen/login_controller.dart';
 import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/RoloxKey.dart';
@@ -24,8 +25,11 @@ class BusinessProfileController extends GetxController
   Rx<ModelOfWork> modelOfWork = ModelOfWork.fullTime.obs;
   RxList<String> roleDropDown = [
     'Founder',
-    'CEO',
-    'Admin',
+    'Operations',
+    'Accounts',
+    'Finance',
+    'Contractor',
+    'Others',
   ].obs;
   RxString roleDropDownValue = 'Founder'.obs;
   RxList<String> natureOfWork = [
@@ -127,24 +131,74 @@ class BusinessProfileController extends GetxController
                   whatTypeOfValueYouWant: 'id',
                   searchKey: 'phone')
               .then((userResponseList) {
-            Future.wait([
-              toInsert(userData: {
-                'Pannumber': loginValues['panNumber'],
-                'profiletype': loginValues['profileType'],
-                'refrenceid': userResponseList[0]['id'],
-              }, tableName: RoloxKey.supaBasePANTable),
-              toInsert(userData: {
-                'gstNumber': loginValues['gstNumberController'],
-                'profileType': loginValues['profileType'],
-                'refrenceid': userResponseList[0]['id'],
-              }, tableName: RoloxKey.supaBaseGSTTable),
-              //Todo add the nature of work and business
-              toInsert(userData: {
-                'companyName': businessNameController.text,
-                'typeOfbuisness': loginValues['profileType'],
-                'userid': [userResponseList[0]['id']],
-              }, tableName: RoloxKey.supaBaseCompanyTable)
-            ]);
+            toInsert(userData: {
+              'companyName': businessNameController.text.trim(),
+              'typeOfbuisness': loginValues['profileType'],
+              'userid': [userResponseList[0]['id']],
+            }, tableName: RoloxKey.supaBaseCompanyTable)
+                .then((value) {
+              if (value) {
+                SupaBaseController.toGetTheSelectedID(
+                        searchValue: businessNameController.text.trim(),
+                        tableName: RoloxKey.supaBaseCompanyTable,
+                        whatTypeOfValueYouWant: 'id',
+                        searchKey: 'companyName')
+                    .then((companyResponse) {
+                  debugPrint('values from supabase--> ${companyResponse}');
+                  debugPrint(
+                      'searching values--> ${userResponseList[0]['id']}');
+                  Future.wait([
+                    toInsert(userData: {
+                      'Pannumber': loginValues['panNumber'],
+                      'profiletype': loginValues['profileType'],
+                      'refrenceid': userResponseList[0]['id'],
+                    }, tableName: RoloxKey.supaBasePANTable),
+                    toInsert(userData: {
+                      'gstNumber': loginValues['gstNumberController'],
+                      'profileType': loginValues['profileType'],
+                      'refrenceid': userResponseList[0]['id'],
+                    }, tableName: RoloxKey.supaBaseGSTTable),
+                    //Todo add the nature of work and business
+                  ]).then((value) {
+                    if (value.every((item) => item)) {
+                      toInsert(userData: {
+                        'designation': roleDropDownValue.obs.value.value,
+                        'phone': mobilNumberController.text.trim(),
+                        'natureOfWork':
+                            natureOfWorkValue.value.toLowerCase() == 'others'
+                                ? plsIfSpecifyController.text.trim()
+                                : natureOfWorkValue.value,
+                        'natureOfBusiness':
+                            natureOfBusinessValue.value.toLowerCase() ==
+                                    'others'
+                                ? plsIfSpecifyControllerForNatureOfBusiness.text
+                                : natureOfBusinessValue.value,
+                        'companyRefrenceId': companyResponse[0]['id'],
+                      }, tableName: RoloxKey.supaBaseProfileCompanyTable)
+                          .then((value) {
+                        change(null, status: RxStatus.success());
+                        if (value) {
+                          Get.offAndToNamed(DashboardScreen.routeName,
+                              arguments: mobilNumberController.text);
+                        } else {
+                          AppUtils.showErrorSnackBar(Get.context!,
+                              'Something went wrong. Please try again',
+                              durations: 3000);
+                        }
+                      });
+                    } else {
+                      AppUtils.showErrorSnackBar(Get.context!,
+                          'Something went wrong. Please try again',
+                          durations: 3000);
+                    }
+                  });
+                });
+              } else {
+                AppUtils.showErrorSnackBar(
+                    Get.context!, 'Something went wrong. Please try again',
+                    durations: 3000);
+              }
+            });
           });
         } else {
           AppUtils.showErrorSnackBar(
@@ -171,6 +225,11 @@ class BusinessProfileController extends GetxController
       roleDropDownValue = value!.obs;
       change(roleDropDownValue);
     }
+  }
+
+  void updateRoleDropDownValue({required String value}) {
+    roleDropDownValue = value.obs;
+    change(roleDropDownValue);
   }
 
   void modelOfWorkToggle({ModelOfWork? value}) {
