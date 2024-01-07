@@ -33,7 +33,7 @@ class SplashScreenState extends State<SplashScreen> {
                 image: AssetImage(
                   ImageResource.rolox,
                 ),
-                fit: BoxFit.fill,
+                fit: BoxFit.contain,
               ),
             ),
             child: Scaffold(

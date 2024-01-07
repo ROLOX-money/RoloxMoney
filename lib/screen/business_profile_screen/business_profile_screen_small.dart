@@ -124,148 +124,151 @@ class BusinessProfileScreenSmallState
                                       selectedValues: widget
                                           .controller!.roleDropDownValue.value,
                                       onChanged: (value) {
-                                        widget.controller!.updateValuesOnUI(
-                                            value: value,
-                                            variableName: widget
-                                                .controller!.roleDropDownValue);
+                                        widget.controller!
+                                            .updateRoleDropDownValue(
+                                                value: value);
                                       }),
                                   SizedBox(
-                                    height: 20,
+                                    height: 5,
                                   ),
-                                  // Type of Business
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.grey, width: 0.25),
-                                        color: ColorResource.colorFFFFFF),
-                                    padding: EdgeInsets.all(10.0),
-                                    child: Theme(
-                                      data: Theme.of(context).copyWith(
-                                          unselectedWidgetColor: Colors.grey,
-                                          disabledColor:
-                                              ColorResource.color00E94F),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CustomText(
-                                            text:
-                                                '${Languages.of(context)?.modeOfWork}',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleSmall!
-                                                .copyWith(
-                                                    color: ColorResource
-                                                        .color020e36,
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.w600),
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Row(
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  widget.controller!
-                                                      .modelOfWorkToggle(
-                                                          value: ModelOfWork
-                                                              .fullTime);
-                                                },
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Radio(
-                                                      value:
-                                                          ModelOfWork.fullTime,
-                                                      groupValue: widget
-                                                          .controller!
-                                                          .modelOfWork
-                                                          .obs
-                                                          .value
-                                                          .value,
-                                                      activeColor: ColorResource
-                                                          .colorEC008C,
-                                                      onChanged:
-                                                          (ModelOfWork? value) {
-                                                        widget.controller!
-                                                            .modelOfWorkToggle(
-                                                                value: ModelOfWork
-                                                                    .partTime);
-                                                      },
-                                                    ),
-                                                    CustomText(
-                                                      text:
-                                                          '${Languages.of(context)?.fullTime}',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .titleSmall!
-                                                          .copyWith(
-                                                              color: ColorResource
-                                                                  .color8B8B8B,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600),
-                                                    )
-                                                  ],
+                                  if (widget.controller!.roleDropDownValue.value
+                                          .toLowerCase() ==
+                                      'contractor')
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.grey, width: 0.25),
+                                          color: ColorResource.colorFFFFFF),
+                                      padding: EdgeInsets.all(10.0),
+                                      child: Theme(
+                                        data: Theme.of(context).copyWith(
+                                            unselectedWidgetColor: Colors.grey,
+                                            disabledColor:
+                                                ColorResource.color00E94F),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            CustomText(
+                                              text:
+                                                  '${Languages.of(context)?.modeOfWork}',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleSmall!
+                                                  .copyWith(
+                                                      color: ColorResource
+                                                          .color020e36,
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Row(
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    widget.controller!
+                                                        .modelOfWorkToggle(
+                                                            value: ModelOfWork
+                                                                .fullTime);
+                                                  },
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Radio(
+                                                        value: ModelOfWork
+                                                            .fullTime,
+                                                        groupValue: widget
+                                                            .controller!
+                                                            .modelOfWork
+                                                            .obs
+                                                            .value
+                                                            .value,
+                                                        activeColor:
+                                                            ColorResource
+                                                                .colorEC008C,
+                                                        onChanged: (ModelOfWork?
+                                                            value) {
+                                                          widget.controller!
+                                                              .modelOfWorkToggle(
+                                                                  value: ModelOfWork
+                                                                      .partTime);
+                                                        },
+                                                      ),
+                                                      CustomText(
+                                                        text:
+                                                            '${Languages.of(context)?.fullTime}',
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .titleSmall!
+                                                            .copyWith(
+                                                                color: ColorResource
+                                                                    .color8B8B8B,
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600),
+                                                      )
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  widget.controller!
-                                                      .modelOfWorkToggle(
-                                                          value: ModelOfWork
-                                                              .partTime);
-                                                },
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Radio(
-                                                      value:
-                                                          ModelOfWork.partTime,
-                                                      groupValue: widget
-                                                          .controller!
-                                                          .modelOfWork
-                                                          .obs
-                                                          .value
-                                                          .value,
-                                                      activeColor: ColorResource
-                                                          .colorEC008C,
-                                                      onChanged:
-                                                          (ModelOfWork? value) {
-                                                        widget.controller!
-                                                            .modelOfWorkToggle(
-                                                                value: ModelOfWork
-                                                                    .partTime);
-                                                      },
-                                                    ),
-                                                    CustomText(
-                                                      text:
-                                                          '${Languages.of(context)?.partTime}',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .titleSmall!
-                                                          .copyWith(
-                                                              color: ColorResource
-                                                                  .color8B8B8B,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600),
-                                                    )
-                                                  ],
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    widget.controller!
+                                                        .modelOfWorkToggle(
+                                                            value: ModelOfWork
+                                                                .partTime);
+                                                  },
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Radio(
+                                                        value: ModelOfWork
+                                                            .partTime,
+                                                        groupValue: widget
+                                                            .controller!
+                                                            .modelOfWork
+                                                            .obs
+                                                            .value
+                                                            .value,
+                                                        activeColor:
+                                                            ColorResource
+                                                                .colorEC008C,
+                                                        onChanged: (ModelOfWork?
+                                                            value) {
+                                                          widget.controller!
+                                                              .modelOfWorkToggle(
+                                                                  value: ModelOfWork
+                                                                      .partTime);
+                                                        },
+                                                      ),
+                                                      CustomText(
+                                                        text:
+                                                            '${Languages.of(context)?.partTime}',
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .titleSmall!
+                                                            .copyWith(
+                                                                color: ColorResource
+                                                                    .color8B8B8B,
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600),
+                                                      )
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
-                                          )
-                                        ],
+                                              ],
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
                                   SizedBox(height: 5),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,

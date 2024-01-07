@@ -64,33 +64,32 @@ class LoginProfileController extends GetxController
         .then((value) {
       if (value.isEmpty) {
         if (typOfBusiness.obs.value.value == TypOfBusiness.individual) {
-          change(null, status: RxStatus.success());
-          var tempMap = {
+          var login = {
             "name": firstNameController.text.trim(),
             "profileType": 1,
             "emailAddress": emailIDController.text.trim(),
             'socialId': socialId.text,
           };
-          Get.toNamed(IndividualProfileScreen.routeName, arguments: tempMap);
+          change(null, status: RxStatus.success());
+          Get.toNamed(IndividualProfileScreen.routeName, arguments: login);
         } else {
           SupaBaseController.toSearchPANAvailability(
-              panNumber: panNumberController.text)
+                  panNumber: panNumberController.text)
               .then((panAvailabilityResponse) {
             if (panAvailabilityResponse) {
-              change(null, status: RxStatus.success());
               AppUtils.showErrorSnackBar(Get.context!,
                   'PAN Mapped with another profile..Please consider your PAN',
                   durations: 2000);
+              change(null, status: RxStatus.success());
             } else {
               SupaBaseController.toGetTheSelectedID(
-                  searchValue: gstNumberController.text,
-                  tableName: RoloxKey.supaBaseGSTTable,
-                  whatTypeOfValueYouWant: 'id',
-                  searchKey: 'gstNumber')
+                      searchValue: gstNumberController.text,
+                      tableName: RoloxKey.supaBaseGSTTable,
+                      whatTypeOfValueYouWant: 'id',
+                      searchKey: 'gstNumber')
                   .then((responseList) {
-                change(null, status: RxStatus.success());
                 if (responseList.isEmpty) {
-                  var tempMap = {
+                  var login = {
                     "name": companyNameController.text.trim(),
                     "profileType": 2,
                     "contactEmail": emailIDController.text.trim(),
@@ -99,23 +98,25 @@ class LoginProfileController extends GetxController
                     "gstNumber": gstNumberController.text,
                     'socialId': socialId.text,
                   };
-                  Get.toNamed(BusinessProfileScreen.routeName, arguments: tempMap);
+                  change(null, status: RxStatus.success());
+                  Get.toNamed(BusinessProfileScreen.routeName,
+                      arguments: login);
                 } else {
+                  change(null, status: RxStatus.success());
                   AppUtils.showErrorSnackBar(Get.context!,
                       'GST Mapped with another profile..Please consider your GST',
                       durations: 2000);
                 }
               });
-              change(null, status: RxStatus.success());
             }
           });
         }
       } else {
+        change(null, status: RxStatus.success());
         AppUtils.showErrorSnackBar(Get.context!,
             'Email already exist..Please consider your your email',
             durations: 3000);
       }
     });
-    change(null, status: RxStatus.success());
   }
 }
