@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
-import 'package:roloxmoney/screen/dashboard_screen/dashboard_controller.dart';
-import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
 import 'package:roloxmoney/screen/individual_profile_screen/individual_profile_controller.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
@@ -156,10 +154,10 @@ class IndividualProfileScreenSmallState
               SizedBox(height: 10),
               CustomText(
                 text: '${Languages.of(context)?.profileScreenFreeContent}',
-                style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: ColorResource.color8B8B8B,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall!
+                    .copyWith(fontSize: 16, fontWeight: FontWeight.w400),
               ),
               SizedBox(height: 10),
               GestureDetector(
@@ -365,10 +363,10 @@ class IndividualProfileScreenSmallState
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           CustomText(
             text: '${Languages.of(context)?.profileSecondPageContent}',
-            style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                color: ColorResource.colorFFFFFF,
-                fontSize: 16,
-                fontWeight: FontWeight.w400),
+            style: Theme.of(context)
+                .textTheme
+                .titleSmall!
+                .copyWith(fontSize: 16, fontWeight: FontWeight.w400),
           ),
           SizedBox(height: 10),
           // PAN No

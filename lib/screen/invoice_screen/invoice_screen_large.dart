@@ -103,10 +103,10 @@ class _InvoiceScreenLargeState extends State<InvoiceScreenLarge> {
                       top: 30, bottom: 60, right: 30, left: 30),
                   child: WidgetUtils.customTableWidget(
                     context: context,
-                    isHomeTap: false,
+                    isInvoiceTap: true,
                     listLength: widget.controller!.invoicesList.obs.value.length,
                     invoiceList: widget.controller!.invoicesList.obs.value as List<Invoice>,
-                    isPaymentTap: false,
+
                   ))
               : AppUtils.emptyViewWidget(
                   context: Get.context!,

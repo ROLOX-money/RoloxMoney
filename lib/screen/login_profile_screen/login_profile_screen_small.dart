@@ -294,67 +294,43 @@ class LoginProfileScreenSmallState extends State<LoginProfileScreenSmall> {
                       (widget.controller!.typOfBusiness.obs.value ==
                               TypOfBusiness.individual)
                           ? Form(
-                              key: widget.controller!.form,
-                              child: Column(
-                                children: [
-                                  WidgetUtils.genericTextFiled(
-                                      keyBoardType: TextInputType.name,
-                                      context: context,
-                                      validationRules: ['required'],
-                                      controller: widget
-                                          .controller!.firstNameController,
-                                      labelName:
-                                          '${Languages.of(context)?.fullName}',
-                                      hintText:
-                                          Languages.of(context)?.fullNameHint),
-                                  WidgetUtils.genericTextFiled(
-                                      context: context,
-                                      keyBoardType: TextInputType.emailAddress,
-                                      validationRules: ['required', 'email'],
-                                      controller:
-                                          widget.controller!.emailIDController,
-                                      labelName:
-                                          '${Languages.of(context)?.emailID}',
-                                      hintText:
-                                          Languages.of(context)?.emailIdHint),
-                                  WidgetUtils.genericTextFiled(
-                                      context: context,
-                                      keyBoardType: TextInputType.name,
-                                      validationRules: ['required'],
-                                      controller: widget.controller!.address1,
-                                      labelName:
-                                          '${Languages.of(context)?.address1}',
-                                      hintText:
-                                          '${Languages.of(context)?.address1}'),
-                                  WidgetUtils.genericTextFiled(
-                                      context: context,
-                                      keyBoardType: TextInputType.name,
-                                      validationRules: ['required'],
-                                      controller: widget.controller!.address2,
-                                      labelName:
-                                          '${Languages.of(context)?.address2}',
-                                      hintText:
-                                          '${Languages.of(context)?.address2}'),
-                                  WidgetUtils.genericTextFiled(
-                                      context: context,
-                                      keyBoardType: TextInputType.number,
-                                      validationRules: ['required'],
-                                      controller: widget.controller!.pinCode,
-                                      labelName:
-                                          '${Languages.of(context)?.pincode}',
-                                      hintText:
-                                          '${Languages.of(context)?.pincode}'),
-                                  WidgetUtils.genericTextFiled(
-                                      context: context,
-                                      keyBoardType: TextInputType.name,
-                                      controller: widget.controller!.socialId,
-                                      labelName:
-                                          '${Languages.of(context)?.enterAnyOneSocialMediaIdLabel}',
-                                      hintText:
-                                          Languages.of(context)?.socialIdHint),
-                                ],
-                              ),
-                            )
+                        key: widget.controller!.form,
+                        child: Column(
+                          children: [
+                            WidgetUtils.genericTextFiled(
+                                height: 50,
+                                keyBoardType: TextInputType.name,
+                                context: context,
+                                validationRules: ['required'],
+                                controller:
+                                widget.controller!.firstNameController,
+                                labelName:
+                                '${Languages.of(context)?.fullName}',
+                                hintText:
+                                Languages.of(context)?.fullNameHint),
+                            WidgetUtils.genericTextFiled(
+                                height: 50,
+                                context: context,
+                                keyBoardType: TextInputType.emailAddress,
+                                validationRules: ['required', 'email'],
+                                controller:
+                                widget.controller!.emailIDController,
+                                labelName:
+                                '${Languages.of(context)?.emailID}',
+                                hintText:
+                                Languages.of(context)?.emailIdHint),
+                            WidgetUtils.genericTextFiled(
+                                height: 50,
+                                context: context,
+                                keyBoardType: TextInputType.name,
+                                controller: widget.controller!.socialId,
+                                labelName:
+                                '${Languages.of(context)?.enterAnyOneSocialMediaIdLabel}',
+                                hintText:
+                                Languages.of(context)?.socialIdHint),
+                          ],
+                        ),
+                      )
                           : (widget.controller!.typOfBusiness.obs.value ==
                                   TypOfBusiness.business)
                               ? Form(

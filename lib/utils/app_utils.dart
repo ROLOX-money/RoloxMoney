@@ -56,23 +56,45 @@ class AppUtils {
     FocusScope.of(context).requestFocus(FocusNode());
   }
 
-  static String getInitials(name) {
-    final List<String> names = name.split(' ');
+  // static String getInitials(name) {
+  //   final List<String> names = name.split(' ');
+  //   String initials = '';
+  //   int numWords = 2;
+  //   if (names.length != 0 && names.length != 1) {
+  //     if (numWords < names.length) {
+  //       numWords = names.length;
+  //     }
+  //     for (int i = 0; i < numWords; i++) {
+  //       initials += '${names[i][0]}';
+  //       if (i == 1) {
+  //         break;
+  //       }
+  //     }
+  //   } else {
+  //     initials = names.isEmpty ? '' : name[0];
+  //   }
+  //   return initials.toUpperCase();
+  // }
+
+  static String getInitials(String? name) {
+    final List<String> names = name!.split(' ');
     String initials = '';
     int numWords = 2;
-    if (names.length != 0 && names.length != 1) {
+
+    if (names.isNotEmpty) {
       if (numWords < names.length) {
         numWords = names.length;
       }
       for (int i = 0; i < numWords; i++) {
-        initials += '${names[i][0]}';
+        if (names[i].isNotEmpty) {
+          initials += '${names[i][0]}';
+        }
         if (i == 1) {
           break;
         }
       }
-    } else {
-      initials = name[0];
     }
+
     return initials.toUpperCase();
   }
 

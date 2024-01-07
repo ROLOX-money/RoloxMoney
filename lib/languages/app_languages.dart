@@ -30,6 +30,8 @@ abstract class Languages {
 
   String get resendIN;
 
+  String get resend;
+
   String get profile;
 
   String get page;

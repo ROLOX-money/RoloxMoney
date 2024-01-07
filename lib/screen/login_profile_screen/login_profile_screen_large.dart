@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
-import 'package:roloxmoney/screen/business_profile_screen/business_profile_controller.dart';
-import 'package:roloxmoney/screen/business_profile_screen/business_profile_screen.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_controller.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
-import 'package:roloxmoney/screen/individual_profile_screen/individual_profile_controller.dart';
-import 'package:roloxmoney/screen/individual_profile_screen/individual_profile_screen.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
@@ -469,17 +465,23 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                         if (widget.controller!.form.currentState!.validate()) {
                           if (widget
                                   .controller!.typOfBusiness.obs.value.value ==
-                              TypOfBusiness.business) {
-                            Get.put(BusinessProfileController());
-                            Get.toNamed(BusinessProfileScreen.routeName);
-                          } else if (widget
-                                  .controller!.typOfBusiness.obs.value.value ==
-                              TypOfBusiness.individual) {
-                            Get.put(IndividualProfileController());
-                            Get.toNamed(IndividualProfileScreen.routeName);
-                          } else {
+                              TypOfBusiness.agency) {
                             showAlertForAgencyFlow();
+                          } else {
+                            widget.controller!.singUpNewUser();
                           }
+
+                          // if (widget.controller!.typOfBusiness.obs.value.value == TypOfBusiness.business) {
+                          //   Get.put(BusinessProfileController());
+                          //   Get.toNamed(BusinessProfileScreen.routeName);
+                          // } else if (widget
+                          //         .controller!.typOfBusiness.obs.value.value ==
+                          //     TypOfBusiness.individual) {
+                          //   Get.put(IndividualProfileController());
+                          //   Get.toNamed(IndividualProfileScreen.routeName);
+                          // } else {
+                          //   showAlertForAgencyFlow();
+                          // }
                         }
                       },
                     )

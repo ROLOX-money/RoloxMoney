@@ -102,12 +102,9 @@ class _ProjectScreenLargeState extends State<ProjectScreenLarge> {
                       top: 30, bottom: 60, right: 30, left: 30),
                   child: WidgetUtils.customTableWidget(
                     context: context,
-                    isHomeTap: false,
-                    listLength:
-                        widget.controller!.projectInvoicesList.obs.value.length,
-                    projectList:
-                        widget.controller!.projectInvoicesList.obs.value,
-                    isPaymentTap: false,
+                    isProjectTap: true,
+                    listLength: widget.controller!.projectInvoicesList.obs.value.length,
+                    projectList: widget.controller!.projectInvoicesList.obs.value,
                   ))
               : AppUtils.emptyViewWidget(
                   context: Get.context!,

@@ -65,8 +65,16 @@ class _DashBoardLargeScreenState extends State<DashBoardLargeScreen> {
                                     : Colors.transparent,
                                 gradient: LinearGradient(
                                   colors: [
-                                    ColorResource.primaryColor,
-                                    ColorResource.selectedTileColor
+                                    widget.controller!.selectedBottomButton.obs
+                                                .value.value ==
+                                            item.name!.obs.value
+                                        ? ColorResource.primaryColor
+                                        : Colors.transparent,
+                                    widget.controller!.selectedBottomButton.obs
+                                                .value.value ==
+                                            item.name!.obs.value
+                                        ? ColorResource.selectedTileColor
+                                        : Colors.transparent,
                                   ],
                                   stops: [0.2 / 8, 0.2 / 8],
                                   begin: Alignment.centerLeft,
@@ -215,8 +223,7 @@ class _DashBoardLargeScreenState extends State<DashBoardLargeScreen> {
                                 height: 30,
                               ),
                               CustomText(
-                                text:
-                                    '${Languages.of(context)?.welcomeToMean}',
+                                text: '${Languages.of(context)?.welcomeToMean}',
                                 style: Theme.of(context)
                                     .textTheme
                                     .titleSmall!

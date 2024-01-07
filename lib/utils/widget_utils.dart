@@ -296,31 +296,43 @@ abstract class WidgetUtils {
 
   static customTableWidget({
     required BuildContext context,
-    required bool isHomeTap,
+    bool? isHomeTap,
+    bool? isPaymentTap,
+    bool? isClientTap,
+    bool? isProjectTap,
+    bool? isInvoiceTap,
     required int listLength,
-    required bool isPaymentTap,
     List<Invoice>? invoiceList,
-    List<ProjectModel>? projectList,
     List<ClientModel>? clientList,
+    List<ProjectModel>? projectList,
   }) {
     Invoice invoiceModelData = Invoice();
-    ProjectModel projectModelData = ProjectModel();
     ClientModel clientModelData = ClientModel();
+    ProjectModel projectModelData = ProjectModel();
 
     Map<String, ColumnSize> value = {};
-    if (isHomeTap == true) {
+
+    if (isHomeTap == true || isInvoiceTap == true) {
       value = {
-        "SI.No": ColumnSize.S,
+        if (isHomeTap == true) "SI.No": ColumnSize.S,
         "Invoice Name": ColumnSize.L,
         "Amount": ColumnSize.S,
+        if (isInvoiceTap == true) "#Invoice No": ColumnSize.M,
         "Date": ColumnSize.M,
         "Project Name": ColumnSize.L,
         "Action": ColumnSize.M,
       };
-    } else if (isHomeTap == false && isPaymentTap == false) {
+    } else if (isClientTap == true) {
       value = {
         "Client Name": ColumnSize.L,
         "Project Title": ColumnSize.L,
+        "No of projects": ColumnSize.S,
+        "Date": ColumnSize.S,
+        "Action": ColumnSize.M,
+      };
+    } else if (isProjectTap == true) {
+      value = {
+        "Project Name": ColumnSize.L,
         "No of projects": ColumnSize.S,
         "Date": ColumnSize.S,
         "Action": ColumnSize.M,
@@ -335,7 +347,10 @@ abstract class WidgetUtils {
         "Action": ColumnSize.M,
       };
     }
+    print("values is : ${value.toString}");
+
     List<bool> isSelected = List.generate(listLength, (index) => false);
+
     return StatefulBuilder(builder:
         (BuildContext context, void Function(void Function()) setState) {
       return DataTable2(
@@ -362,28 +377,31 @@ abstract class WidgetUtils {
                   size: e.value))
               .toList(),
           rows: List<DataRow>.generate(listLength, (index) {
-            if (isHomeTap == true) {
+            if (isHomeTap == true || isInvoiceTap == true) {
               invoiceModelData = invoiceList![index];
-            } else if (isHomeTap == false) {
+            } else if (isClientTap == true) {
+              clientModelData = clientList![index];
+            } else if (isProjectTap == true) {
               projectModelData = projectList![index];
-            } else if (isHomeTap == false && isPaymentTap == false) {
+            } else if (isPaymentTap == true) {
               clientModelData = clientList![index];
             }
+
             List<DataCell> dataCell = [
-              if (isHomeTap == true) ...[
-                DataCell(Text('${index + 1}')),
+              if (isHomeTap == true || isInvoiceTap == true) ...[
+                if (isHomeTap == true) DataCell(Text('${index + 1}')),
                 DataCell(Row(
                   children: [
                     CircleAvatar(
                       radius: 16,
-                      backgroundColor: index.isOdd
+                      backgroundColor: listLength.isOdd
                           ? ColorResource.initialBgColor
                           : ColorResource.initialBgColor2,
                       child: CustomText(
                         text: AppUtils.getInitials(AppUtils.getFirstName(
                             invoiceModelData.clientName!)),
                         style: TextStyle(
-                            color: index.isOdd
+                            color: listLength.isOdd
                                 ? ColorResource.initialTextColor
                                 : ColorResource.initialTextColor2),
                       ),
@@ -393,6 +411,8 @@ abstract class WidgetUtils {
                   ],
                 )),
                 DataCell(Text(invoiceModelData.invoiceAmount.toString())),
+                if (isInvoiceTap == true)
+                  DataCell(Text(invoiceModelData.invoiceNumber.toString())),
                 DataCell(Text(DateFormat('MM/dd/yyyy')
                     .format(DateTime.parse(invoiceModelData.createdAt!)))),
                 DataCell(Text(invoiceModelData.projectName.toString())),
@@ -404,19 +424,19 @@ abstract class WidgetUtils {
                   ),
                 ))
               ],
-              if (isHomeTap == false && isPaymentTap == false) ...[
+              if (isClientTap == true) ...[
                 DataCell(Row(
                   children: [
                     CircleAvatar(
                       radius: 16,
-                      backgroundColor: index.isOdd
+                      backgroundColor: listLength.isOdd
                           ? ColorResource.initialBgColor
                           : ColorResource.initialBgColor2,
                       child: CustomText(
                         text: AppUtils.getInitials(AppUtils.getFirstName(
                             clientModelData.companyDB!.companyName.toString())),
                         style: TextStyle(
-                            color: index.isOdd
+                            color: listLength.isOdd
                                 ? ColorResource.initialTextColor
                                 : ColorResource.initialTextColor2),
                       ),
@@ -437,6 +457,37 @@ abstract class WidgetUtils {
                   ),
                 ))
               ],
+              if (isProjectTap == true) ...[
+                DataCell(Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 16,
+                      backgroundColor: listLength.isOdd
+                          ? ColorResource.initialBgColor
+                          : ColorResource.initialBgColor2,
+                      child: CustomText(
+                        text: AppUtils.getInitials(AppUtils.getFirstName(
+                            projectModelData.projectName.toString())),
+                        style: TextStyle(
+                            color: listLength.isOdd
+                                ? ColorResource.initialTextColor
+                                : ColorResource.initialTextColor2),
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Text(projectModelData.projectName.toString())
+                  ],
+                )),
+                DataCell(Text(projectModelData.noOfInvoice.toString())),
+                DataCell(Text(projectModelData.date!)),
+                DataCell(TextButton(
+                  onPressed: () {},
+                  child: CustomText(
+                    text: 'View Action',
+                    style: TextStyle(color: Theme.of(context).primaryColor),
+                  ),
+                ))
+              ],
               if (isPaymentTap == true) ...[
                 DataCell(Text(projectModelData.amount.toString())),
                 DataCell(Text(
@@ -446,14 +497,14 @@ abstract class WidgetUtils {
                   children: [
                     CircleAvatar(
                       radius: 16,
-                      backgroundColor: index.isOdd
+                      backgroundColor: listLength.isOdd
                           ? ColorResource.initialBgColor
                           : ColorResource.initialBgColor2,
                       child: CustomText(
                         text: AppUtils.getInitials(AppUtils.getFirstName(
                             projectModelData.projectName.toString())),
                         style: TextStyle(
-                            color: index.isOdd
+                            color: listLength.isOdd
                                 ? ColorResource.initialTextColor
                                 : ColorResource.initialTextColor2),
                       ),

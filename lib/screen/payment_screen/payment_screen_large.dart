@@ -116,7 +116,6 @@ class _PaymentScreenLargeState extends State<PaymentScreenLarge> {
                       top: 30, bottom: 60, right: 30, left: 30),
                   child: WidgetUtils.customTableWidget(
                     context: context,
-                    isHomeTap: false,
                     listLength:
                         widget.controller!.projectInvoicesList.obs.value.length,
                     projectList: widget.controller!.projectInvoicesList.value,

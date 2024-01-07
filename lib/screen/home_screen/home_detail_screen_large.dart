@@ -148,23 +148,30 @@ class _HomeDetailsScreenLargeState extends State<HomeDetailsScreenLarge> {
                     padding: const EdgeInsets.only(
                         top: 30, bottom: 60, right: 30, left: 30),
                     child: WidgetUtils.customTableWidget(
-                        context: context,
-                        isHomeTap: true,
-                        listLength: widget.controller!.invoicesList
-                            .where((p0) => widget.invoiceType == InvoiceType.UPCOMING
-                                ? DateFormat("dd/MM/yyyy").parse(p0.dueDate!).isBefore(DateTime.now().add(Duration(days: 2))) &&
-                                    p0.paid == false
-                                : p0.paid ==
-                                    (widget.invoiceType == InvoiceType.PAID))
-                            .length,
-                        invoiceList: widget.controller!.invoicesList
-                            .where((p0) => widget.invoiceType == InvoiceType.UPCOMING
-                                ? DateFormat("dd/MM/yyyy")
-                                        .parse(p0.dueDate!)
-                                        .isBefore(DateTime.now().add(Duration(days: 2))) &&
-                                    p0.paid == false
-                                : p0.paid == (widget.invoiceType == InvoiceType.PAID))
-                            .toList() as List<Invoice>,
-                        isPaymentTap: false)))));
+                      context: context,
+                      isHomeTap: true,
+                      listLength: widget.controller!.invoicesList
+                          .where((p0) =>
+                              widget.invoiceType == InvoiceType.UPCOMING
+                                  ? DateFormat("dd/MM/yyyy")
+                                          .parse(p0.dueDate!)
+                                          .isBefore(DateTime.now()
+                                              .add(Duration(days: 2))) &&
+                                      p0.paid == false
+                                  : p0.paid ==
+                                      (widget.invoiceType == InvoiceType.PAID))
+                          .length,
+                      invoiceList: widget.controller!.invoicesList
+                          .where((p0) =>
+                              widget.invoiceType == InvoiceType.UPCOMING
+                                  ? DateFormat("dd/MM/yyyy")
+                                          .parse(p0.dueDate!)
+                                          .isBefore(DateTime.now()
+                                              .add(Duration(days: 2))) &&
+                                      p0.paid == false
+                                  : p0.paid ==
+                                      (widget.invoiceType == InvoiceType.PAID))
+                          .toList() as List<Invoice>,
+                    )))));
   }
 }

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
-import 'package:roloxmoney/screen/dashboard_screen/dashboard_controller.dart';
-import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/utils/widget_utils.dart';
@@ -131,18 +129,22 @@ class _IndividualProfileScreenLargeState
                       isIcon: true,
                       fontSize: 18,
                       onTap: () {
-                        if (widget.controller!.form.currentState!.validate()) {
-                          if (widget.controller!.currentStep.obs.value.value !=
-                              2) {
-                            widget.controller!.stepCount(
-                                values: widget.controller!.currentStep.obs.value
-                                        .value +
-                                    1);
-                          } else {
-                            Get.put(DashboardController());
-                            Get.offAll(DashboardScreen());
-                          }
-                        }
+                        debugPrint(
+                            'screen-->${widget.controller!.currentStep.obs.value}');
+
+                        widget.controller!.validatingProfile();
+                        // if (widget.controller!.form.currentState!.validate()) {
+                        //   if (widget.controller!.currentStep.obs.value.value !=
+                        //       2) {
+                        //     widget.controller!.stepCount(
+                        //         values: widget.controller!.currentStep.obs.value
+                        //                 .value +
+                        //             1);
+                        //   } else {
+                        //     Get.put(DashboardController());
+                        //     Get.offAll(DashboardScreen());
+                        //   }
+                        // }
                       },
                     ),
                   )
@@ -425,17 +427,18 @@ class _IndividualProfileScreenLargeState
               ),
             ),
             SizedBox(height: 10),
-            WidgetUtils.genericTextFiled(
-              context: context,
-              height: 50,
-              validationRules: ['required'],
-              controller: widget.controller!.gstController,
-              labelName: '${Languages.of(context)?.gstNumber}',
-              labelStyle: Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(fontSize: 14, fontWeight: FontWeight.w500),
-            ),
+            if (widget.controller!.iDontHaveBusiness.obs.value.value)
+              WidgetUtils.genericTextFiled(
+                context: context,
+                height: 50,
+                validationRules: ['required'],
+                controller: widget.controller!.gstController,
+                labelName: '${Languages.of(context)?.gstNumber}',
+                labelStyle: Theme.of(context)
+                    .textTheme
+                    .titleMedium!
+                    .copyWith(fontSize: 14, fontWeight: FontWeight.w500),
+              ),
             SizedBox(height: 5),
             // Full Address
             WidgetUtils.genericTextFiled(

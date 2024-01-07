@@ -162,7 +162,7 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                                                 width: 32,
                                                 height: 32,
                                                 child: Image.network(
-                                                    'https://cdn.pixabay.com/photo/2020/07/04/08/24/india-5368684__340.jpg',
+                                                    'https://think360studio-media.s3.ap-south-1.amazonaws.com/download/india-flag-2021-wallpaper-1.png',
                                                     fit: BoxFit.cover),
                                               ),
                                             ),

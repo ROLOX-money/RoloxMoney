@@ -221,17 +221,26 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                     cardShape: 1,
                     isIcon: true,
                     onTap: () async {
-                      if (widget.controller!.form.currentState!.validate()) {
-                        widget.controller!.triggerLogin("smallScreen",context);
-                      }
-                      // widget.controller!.otpBottomSheet(
-                      //     mobileNumber:
-                      //         ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
+                      if (widget.controller!.form.currentState!.validate() &&
+                          widget.controller!.acceptTermsAndCondition.obs.value
+                              .value) {
+                        widget.controller!.triggerLogin("smallScreen", context);
+                        // widget.controller!.otpBottomSheet(
+                        //     mobileNumber:
+                        //         ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
 
-                      // otpBottomSheet(
-                      //     controller: widget.controller!,
-                      //     mobileNumber:
-                      //         ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
+                        // otpBottomSheet(
+                        //     controller: widget.controller!,
+                        //     mobileNumber:
+                        //         ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          backgroundColor: Colors.red,
+                          content: const Text(
+                              'Please check the Check box or Enter Valid mobile No'),
+                          duration: const Duration(seconds: 2),
+                        ));
+                      }
                     },
                   )
                 ],

@@ -1,16 +1,14 @@
-
 import 'package:get/get.dart';
-import 'package:roloxmoney/model/project_model.dart';
 import 'package:roloxmoney/screen/clients_screen/add_client/add_client_controller.dart';
 import 'package:roloxmoney/screen/clients_screen/add_client/add_client_screen.dart';
+import 'package:roloxmoney/screen/clients_screen/entites/clinet_model.dart';
 import 'package:roloxmoney/utils/supa_base_control.dart';
 
 /*Chinnadurai Viswanathan*/
 class ClientsController extends GetxController
     with StateMixin, SupaBaseController {
   RxList clientList = [].obs;
-  RxList<ProjectModel> projectInvoicesList = <ProjectModel>[].obs;
-
+  List<ClientModel> cModel = <ClientModel>[];
 
   @override
   void onInit() async {
@@ -39,10 +37,16 @@ class ClientsController extends GetxController
     //   change(projectInvoicesList);
     // });
     super.onInit();
-    toGetTheClientList().then((value) {
+    await toGetTheClientList().then((value) {
       clientList.value = value;
       change(clientList, status: RxStatus.success());
     });
+    if (clientList.length > 0) {
+      for (int i = 0; i < clientList.length; i++) {
+        ClientModel model = clientList.obs.value[i];
+        cModel.add(model);
+      }
+    }
   }
 
   void navigateAddClientScreen() {

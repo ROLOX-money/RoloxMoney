@@ -15,7 +15,9 @@ class ProjectsController extends GetxController with StateMixin {
   @override
   void onInit() async {
     change(null, status: RxStatus.success());
-    getProjectList();
+    print("projectInvoicesList before : ${projectInvoicesList.length}");
+    await getProjectList();
+    print("projectInvoicesList after : ${projectInvoicesList.length}");
     super.onInit();
   }
 

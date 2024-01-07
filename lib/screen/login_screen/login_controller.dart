@@ -26,10 +26,12 @@ class LoginController extends RoloxGetXController with SupaBaseController {
 
   RxBool isLogin = true.obs;
   RxBool acceptTermsAndCondition = false.obs;
+  RxInt seconds = 45.obs;
+  late Timer timer;
 
   @override
   void onInit() async {
-    mobilNumberController.text = '9585313659';
+    mobilNumberController.text = '8056527428';
 
     if (kDebugMode) {
       acceptTermsAndCondition.value = true;
@@ -39,6 +41,13 @@ class LoginController extends RoloxGetXController with SupaBaseController {
     // Future.delayed(const Duration(seconds: 5), () {});
     change(mobilNumberController);
     super.onInit();
+  }
+
+  void timerCalculation() {
+    timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
+      change(seconds--);
+    });
+
   }
 
   void navigateProfile() {
@@ -56,6 +65,7 @@ class LoginController extends RoloxGetXController with SupaBaseController {
   // Get.put(LoginProfileController());
   // Get.offAndToNamed(LoginProfileScreen.routeName);
   // Get.toNamed(LoginProfileScreen.routeName);
+
   Future<void> otpVerification({BuildContext? context}) async {
     if (otpController.text.length == 6) {
       await SupaBaseController.verifyThroughOTP(
@@ -175,6 +185,7 @@ class LoginController extends RoloxGetXController with SupaBaseController {
                       padding: const EdgeInsets.symmetric(
                           vertical: 8.0, horizontal: 30),
                       child: PinCodeTextField(
+                        autoDisposeControllers: false,
                         appContext: Get.context!,
                         length: 6,
                         cursorWidth: 1,
@@ -272,6 +283,7 @@ class LoginController extends RoloxGetXController with SupaBaseController {
             mobileNumber: '+91${mobilNumberController.text}')
         .then((value) {
       if (value) {
+        timerCalculation();
         if (screen.toLowerCase() == "smallscreen") {
           otpBottomSheet(
             mobileNumber: '${mobilNumberController.text}',
@@ -284,7 +296,6 @@ class LoginController extends RoloxGetXController with SupaBaseController {
         }
       }
     });
-    // otpBottomSheet(mobileNumber: '${mobilNumberController.text}');
     change(null, status: RxStatus.success());
   }
 
@@ -350,6 +361,7 @@ class LoginController extends RoloxGetXController with SupaBaseController {
                   padding:
                       const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30),
                   child: PinCodeTextField(
+                    autoDisposeControllers: false,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     appContext: context,
                     length: 6,
@@ -408,7 +420,8 @@ class LoginController extends RoloxGetXController with SupaBaseController {
                   height: 25,
                 ),
                 CustomText(
-                  text: '${Languages.of(context)?.resendIN} 0:45',
+                  text:
+                      '${Languages.of(context)?.resendIN} 0.$seconds',
                   style: Theme.of(context)
                       .textTheme
                       .titleSmall!

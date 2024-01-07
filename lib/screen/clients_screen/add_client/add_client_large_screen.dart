@@ -384,7 +384,6 @@ class _AddClientLargeScreenState extends State<AddClientLargeScreen> {
                                   height: 150,
                                   context: context,
                                   validationRules: ['required'],
-
                                   hintText: Languages.of(context)
                                       ?.enterYourAddressHintText,
                                   keyBoardType: TextInputType.streetAddress,
@@ -405,7 +404,7 @@ class _AddClientLargeScreenState extends State<AddClientLargeScreen> {
                                 onTap: () {
                                   if (widget.controller!.form.currentState!
                                       .validate()) {
-                                    Get.back();
+                                    widget.controller!.createClient();
                                   }
                                 },
                               ),

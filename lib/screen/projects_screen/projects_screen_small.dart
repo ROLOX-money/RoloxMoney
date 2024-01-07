@@ -114,7 +114,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                 ),
                                 child: CustomText(
                                   text: AppUtils.getInitials(
-                                          projectModel.clientName)
+                                          projectModel.clientName!)
                                       .toString(),
                                   style: Theme.of(context)
                                       .textTheme

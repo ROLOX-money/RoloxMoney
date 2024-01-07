@@ -24,12 +24,10 @@ class ClientScreenLarge extends StatefulWidget {
 }
 
 class _ClientScreenLargeState extends State<ClientScreenLarge> {
-
   @override
   void initState() {
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -112,10 +110,9 @@ class _ClientScreenLargeState extends State<ClientScreenLarge> {
                       top: 30, bottom: 60, right: 30, left: 30),
                   child: WidgetUtils.customTableWidget(
                     context: context,
-                    isHomeTap: false,
+                    isClientTap: true,
                     listLength: widget.controller!.clientList.obs.value.length,
-                    projectList: widget.controller!.projectInvoicesList.value,
-                    isPaymentTap: false,
+                    clientList: widget.controller!.cModel,
                   ))
               : Padding(
                   padding: const EdgeInsets.all(8.0),

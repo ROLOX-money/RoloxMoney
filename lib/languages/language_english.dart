@@ -27,6 +27,8 @@ class LanguageEn extends Languages {
 
   String get resendIN => 'Resend in';
 
+  String get resend => 'Resend ';
+
   String get profile => 'Profile';
 
   String get page => 'Page';
