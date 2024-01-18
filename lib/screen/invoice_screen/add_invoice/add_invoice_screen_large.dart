@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_controller.dart';
+import 'package:roloxmoney/utils/app_utils.dart';
+import 'package:roloxmoney/utils/auto_complete.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/utils/widget_utils.dart';
@@ -47,7 +49,8 @@ class _AddInvoiceScreenLargeState extends State<AddInvoiceScreenLarge> {
                     child: Container(
                         width: MediaQuery.of(context).size.width / 2,
                         height: MediaQuery.of(context).size.height / 1.2,
-                        padding: EdgeInsets.symmetric(horizontal: 16,vertical: 10),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                         decoration: BoxDecoration(
                             color: ColorResource.buttonTextColor,
                             borderRadius:
@@ -126,19 +129,49 @@ class _AddInvoiceScreenLargeState extends State<AddInvoiceScreenLarge> {
                                     labelName:
                                         '${Languages.of(context)?.invoiceValueWithoutGST}',
                                   ),
-                                  WidgetUtils.genericTextFiled(
-                                    height: 50,
-                                    context: context,
-                                    validationRules: ['required'],
-                                    hintText: Languages.of(context)
-                                        ?.brandNameHintText,
-                                    controller: widget
-                                        .controller!.projectNameController,
-                                    keyBoardType: TextInputType.emailAddress,
-                                    suffixImagePath: ImageResource.searchSVG,
-                                    labelName:
-                                        '${Languages.of(context)?.projectName}',
+                                  const SizedBox(
+                                    height: 5,
                                   ),
+                                  CustomText(
+                                    text: Languages.of(context)!.projectName,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .copyWith(fontWeight: FontWeight.w500),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Card(
+                                    key: Key("projectName"),
+                                    // alignment: Alignment.center,
+                                    child: AutoComplete.autoComplete(
+                                        hintText:
+                                            Languages.of(context)!.projectName,
+                                        value: null,
+                                        width: 830,
+                                        suggestionValue: widget
+                                            .controller!.projectList
+                                            .map((item) => item.projectName!)
+                                            .toList(),
+                                        onFieldSubmitted: (value) {
+                                          widget.controller!.toSetClientId(
+                                              searchingText: value);
+                                        }),
+                                  ),
+                                  // WidgetUtils.genericTextFiled(
+                                  //   height: 50,
+                                  //   context: context,
+                                  //   validationRules: ['required'],
+                                  //   hintText: Languages.of(context)
+                                  //       ?.brandNameHintText,
+                                  //   controller: widget
+                                  //       .controller!.projectNameController,
+                                  //   keyBoardType: TextInputType.emailAddress,
+                                  //   suffixImagePath: ImageResource.searchSVG,
+                                  //   labelName:
+                                  //       '${Languages.of(context)?.projectName}',
+                                  // ),
                                   WidgetUtils.genericTextFiled(
                                     height: 50,
                                     context: context,
@@ -187,7 +220,14 @@ class _AddInvoiceScreenLargeState extends State<AddInvoiceScreenLarge> {
                                     onTap: () {
                                       if (widget.controller!.form.currentState!
                                           .validate()) {
-                                        Get.back();
+                                        if (widget.controller!.projectId !=
+                                            null) {
+                                          widget.controller!.toAddInvoice();
+                                        } else {
+                                          AppUtils.showErrorSnackBar(context,
+                                              'Please select at least one project ',
+                                              durations: 2000);
+                                        }
                                       }
                                     },
                                   ),

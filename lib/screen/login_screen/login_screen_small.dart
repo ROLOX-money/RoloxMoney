@@ -45,7 +45,11 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  const SizedBox(
+                    height: 40,
+                  ),
                   Container(
                     alignment: Alignment.center,
                     padding: const EdgeInsets.only(left: 8.0),

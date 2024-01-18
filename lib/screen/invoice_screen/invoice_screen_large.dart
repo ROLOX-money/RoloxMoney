@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
-import 'package:roloxmoney/screen/invoice_screen/entities/invoice_model.dart';
 import 'package:roloxmoney/screen/invoice_screen/invoice_controller.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
@@ -105,7 +104,7 @@ class _InvoiceScreenLargeState extends State<InvoiceScreenLarge> {
                     context: context,
                     isInvoiceTap: true,
                     listLength: widget.controller!.invoicesList.obs.value.length,
-                    invoiceList: widget.controller!.invoicesList.obs.value as List<Invoice>,
+                    invoiceList: widget.controller!.invoicesList.obs.value,
 
                   ))
               : AppUtils.emptyViewWidget(

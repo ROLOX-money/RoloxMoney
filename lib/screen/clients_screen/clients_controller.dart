@@ -55,6 +55,12 @@ class ClientsController extends GetxController
       change(null, status: RxStatus.loading());
       toGetTheClientList().then((value) {
         clientList.value = value;
+        if (clientList.length > 0) {
+          for (int i = 0; i < clientList.length; i++) {
+            ClientModel model = clientList.obs.value[i];
+            cModel.add(model);
+          }
+        }
         change(clientList, status: RxStatus.success());
       });
     });

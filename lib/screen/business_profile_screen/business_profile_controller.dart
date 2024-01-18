@@ -19,6 +19,7 @@ class BusinessProfileController extends GetxController
   TextEditingController mobilNumberController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController plsIfSpecifyController = TextEditingController();
+  TextEditingController gstController = TextEditingController();
   TextEditingController plsIfSpecifyControllerForNatureOfBusiness =
       TextEditingController();
 
@@ -88,7 +89,8 @@ class BusinessProfileController extends GetxController
       AppUtils.showErrorSnackBar(Get.context!,
           'Nature of business is empty... Please consider your nature of business',
           durations: 3000);
-    } else if (natureOfWorkValue.value.toLowerCase() == 'others' &&
+    }
+    else if (natureOfWorkValue.value.toLowerCase() == 'others' &&
         plsIfSpecifyController.text.trim() == '') {
       AppUtils.showErrorSnackBar(Get.context!,
           'Nature of work is empty... Please consider your nature of work',

@@ -1,4 +1,5 @@
 class ProjectModel {
+  int? id;
   String? projectName;
   String? clientName;
   int? noOfInvoice;
@@ -7,7 +8,8 @@ class ProjectModel {
   bool? isCredit;
 
   ProjectModel(
-      {this.projectName,
+      {this.id,
+      this.projectName,
       this.noOfInvoice,
       this.amount,
       this.clientName,

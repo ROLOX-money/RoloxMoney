@@ -82,10 +82,12 @@ class AppUtils {
     int numWords = 2;
 
     if (names.isNotEmpty) {
-      if (numWords < names.length) {
-        numWords = names.length;
-      }
-      for (int i = 0; i < numWords; i++) {
+// not sure what is the pupose pof this line
+//       if (numWords < names.length) {
+//         numWords = names.length;
+//       }
+
+      for (int i = 0; i < names.length; i++) {
         if (names[i].isNotEmpty) {
           initials += '${names[i][0]}';
         }

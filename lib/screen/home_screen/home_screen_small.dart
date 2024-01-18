@@ -85,9 +85,11 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: invoiceView(
-                        context: context,
-                        controller: widget.controller!,
-                        scaffoldKey: widget.scaffoldKey),
+                      context: context,
+                      controller: widget.controller!,
+                      scaffoldKey: widget.scaffoldKey,
+                      isSmallView: true,
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
@@ -105,7 +107,8 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
                         context: context,
                         isInboundView: false,
                         controller: widget.controller!,
-                        scaffoldKey: widget.scaffoldKey),
+                        scaffoldKey: widget.scaffoldKey,
+                        isSmallView: true),
                   ),
                 ],
               ),

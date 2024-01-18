@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/business_profile_screen/business_profile_controller.dart';
-import 'package:roloxmoney/screen/dashboard_screen/dashboard_controller.dart';
-import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/utils/widget_utils.dart';
@@ -271,6 +269,20 @@ class _BusinessProfileLargeScreenState
                             ),
                           ],
                         ),
+                        if (widget
+                            .controller!.iDontHaveBusiness.obs.value.value)
+                          WidgetUtils.genericTextFiled(
+                            context: context,
+                            height: 50,
+                            validationRules: ['required'],
+                            controller: widget.controller!.gstController,
+                            labelName: '${Languages.of(context)?.gstNumber}',
+                            labelStyle: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .copyWith(
+                                    fontSize: 14, fontWeight: FontWeight.w500),
+                          ),
                         // business Name
                         WidgetUtils.genericTextFiled(
                           height: 50,
@@ -296,10 +308,8 @@ class _BusinessProfileLargeScreenState
                             selectedValues:
                                 widget.controller!.natureOfBusinessValue.value,
                             onChanged: (value) {
-                              widget.controller!.updateValuesOnUI(
-                                  value: value,
-                                  variableName:
-                                      widget.controller!.natureOfBusinessValue);
+                              widget.controller!
+                                  .updateNatureOfBusinessValue(value);
                             }),
                         SizedBox(height: 10),
                         if (widget.controller!.natureOfBusinessValue.value
@@ -327,15 +337,13 @@ class _BusinessProfileLargeScreenState
                             selectedValues:
                                 widget.controller!.natureOfWorkValue.value,
                             onChanged: (value) {
-                              widget.controller!.updateValuesOnUI(
-                                  value: value,
-                                  variableName:
-                                      widget.controller!.natureOfWorkValue);
+                              widget.controller!
+                                  .updateNatureOfWork(value);
                             }),
                         SizedBox(height: 10),
                         if (widget.controller!.natureOfWorkValue.value
                                 .toLowerCase() ==
-                            'other')
+                            'others')
                           WidgetUtils.genericTextFiled(
                             height: 50,
                             context: context,
@@ -442,8 +450,9 @@ class _BusinessProfileLargeScreenState
                           isIcon: true,
                           fontSize: 20,
                           onTap: () {
-                            Get.put(DashboardController());
-                            Get.offAll(DashboardScreen());
+                            widget.controller!.validatingProfile();
+                            // Get.put(DashboardController());
+                            // Get.offAll(DashboardScreen());
                           },
                         ),
                       ]),

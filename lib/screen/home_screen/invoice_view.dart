@@ -11,6 +11,7 @@ Widget invoiceView(
     {required BuildContext context,
     required GetxController controller,
     required GlobalKey<ScaffoldState>? scaffoldKey,
+    required bool isSmallView,
     bool isInboundView = true}) {
   return Column(
     children: [

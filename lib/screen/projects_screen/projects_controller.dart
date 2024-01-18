@@ -33,6 +33,7 @@ class ProjectsController extends GetxController with StateMixin {
         projectInvoicesList.value = [];
         value.forEach((element) {
           projectInvoicesList.add(ProjectModel(
+              id: element['id'],
               amount: element['projectvalue'].toString(),
               projectName: element['projectName'],
               clientName: element['clientName'],

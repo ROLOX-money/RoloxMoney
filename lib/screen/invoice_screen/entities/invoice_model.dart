@@ -6,7 +6,7 @@ class Invoice {
   String? invoiceName;
   String? invoiceNumber;
   double? invoiceAmount;
-  int? projectvalue;
+  double? projectvalue;
   String? dueDate;
   String? projectLink;
   String? refrenceID;

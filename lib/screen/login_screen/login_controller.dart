@@ -82,8 +82,11 @@ class LoginController extends RoloxGetXController with SupaBaseController {
               Get.offAndToNamed(LoginProfileScreen.routeName,
                   arguments: mobilNumberController.text);
             } else {
+              print("values is : ${value.toString()}");
+              Singleton.mobileUserId = value[0]["id"];
               Get.offAndToNamed(DashboardScreen.routeName,
                   arguments: mobilNumberController.text);
+
             }
           });
         } else {

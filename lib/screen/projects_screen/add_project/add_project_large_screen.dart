@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/projects_screen/add_project/add_project_controller.dart';
+import 'package:roloxmoney/utils/app_utils.dart';
+import 'package:roloxmoney/utils/auto_complete.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/utils/widget_utils.dart';
@@ -48,7 +50,8 @@ class _AddProjectLargeScreenState extends State<AddProjectLargeScreen> {
                     child: Container(
                         width: MediaQuery.of(context).size.width / 2,
                         height: MediaQuery.of(context).size.height / 1.2,
-                        padding: EdgeInsets.symmetric(horizontal: 16,vertical: 12),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                         decoration: BoxDecoration(
                             color: ColorResource.buttonTextColor,
                             borderRadius:
@@ -102,18 +105,50 @@ class _AddProjectLargeScreenState extends State<AddProjectLargeScreen> {
                                     labelName:
                                         '${Languages.of(context)?.projectName}',
                                   ),
-                                  WidgetUtils.genericTextFiled(
-                                    height: 50,
-                                    context: context,
-                                    validationRules: ['required'],
-                                    hintText: Languages.of(context)
-                                        ?.searchClientNameHintText,
-                                    suffixImagePath: ImageResource.searchSVG,
-                                    controller:
-                                        widget.controller!.clientNameController,
-                                    labelName:
-                                        '${Languages.of(context)?.clientName}',
+                                  const SizedBox(
+                                    height: 5,
                                   ),
+                                  CustomText(
+                                    text: Languages.of(context)!.clientName,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .copyWith(fontWeight: FontWeight.w500),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Card(
+                                    key: Key("projectName"),
+                                    // alignment: Alignment.center,
+                                    child: AutoComplete.autoComplete(
+                                        hintText: Languages.of(context)!
+                                            .searchClientNameHintText,
+                                        value: null,
+                                        width: 800,
+                                        suggestionValue: widget
+                                            .controller!.clientList
+                                            .map((item) =>
+                                                item.companyDB!.companyName!)
+                                            .toList(),
+                                        onFieldSubmitted: (value) {
+                                          widget.controller!.toSetClientId(
+                                              searchingText: value);
+                                        }),
+                                  ),
+
+                                  // WidgetUtils.genericTextFiled(
+                                  //   height: 50,
+                                  //   context: context,
+                                  //   validationRules: ['required'],
+                                  //   hintText: Languages.of(context)
+                                  //       ?.searchClientNameHintText,
+                                  //   suffixImagePath: ImageResource.searchSVG,
+                                  //   controller:
+                                  //       widget.controller!.clientNameController,
+                                  //   labelName:
+                                  //       '${Languages.of(context)?.clientName}',
+                                  // ),
                                   WidgetUtils.genericTextFiled(
                                     height: 50,
                                     context: context,
@@ -175,7 +210,13 @@ class _AddProjectLargeScreenState extends State<AddProjectLargeScreen> {
                                     onTap: () {
                                       if (widget.controller!.form.currentState!
                                           .validate()) {
-                                        Get.back();
+                                        if (widget.controller!.clientId !=
+                                            null) {
+                                          widget.controller!.toAddProject();
+                                        } else {
+                                          AppUtils.showErrorSnackBar(context,
+                                              'Please selected your client');
+                                        }
                                       }
                                     },
                                   ),

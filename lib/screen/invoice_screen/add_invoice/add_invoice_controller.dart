@@ -37,17 +37,22 @@ class AddInvoiceController extends GetxController
     gstChargesController.text = '0';
     hsnController.text = '123456';
     stateController.text = 'TamilNadu';
-    getProjectList();
+    // getProjectList();
+    toGetTheProjectList().then((value) {
+      projectList = value;
+      change(projectList, status: RxStatus.success());
+    });
     super.onInit();
   }
 
-  void getProjectList() {
-    projectList = [];
-    toGetTheProjectList().then((value) {
-      projectList = value;
-    });
-    change(projectList, status: RxStatus.success());
-  }
+  // void getProjectList() {
+  //   projectList = [];
+  //   toGetTheProjectList().then((value) {
+  //     projectList = value;
+  //   });
+  //
+  //   change(projectList, status: RxStatus.success());
+  // }
 
   toSetClientId({bool isClear = false, String? searchingText}) {
     if (isClear) {
@@ -133,7 +138,10 @@ class AddInvoiceController extends GetxController
             .eq('hsnCode', hsnController.text)
             .then((value) {
           if (!value.isEmpty) {
+            AppUtils.showSnackBar(
+                Get.context!, 'Successfully created your new invoice');
             userToInvoiceMapping(invoiceId: value[0]['id']);
+            Get.back(result: true);
           }
         });
       } else {

@@ -384,7 +384,7 @@ abstract class WidgetUtils {
             } else if (isProjectTap == true) {
               projectModelData = projectList![index];
             } else if (isPaymentTap == true) {
-              clientModelData = clientList![index];
+              // clientModelData = clientList![index];
             }
 
             List<DataCell> dataCell = [
@@ -399,7 +399,7 @@ abstract class WidgetUtils {
                           : ColorResource.initialBgColor2,
                       child: CustomText(
                         text: AppUtils.getInitials(AppUtils.getFirstName(
-                            invoiceModelData.clientName!)),
+                            invoiceModelData.invoiceName!)),
                         style: TextStyle(
                             color: listLength.isOdd
                                 ? ColorResource.initialTextColor
@@ -407,7 +407,7 @@ abstract class WidgetUtils {
                       ),
                     ),
                     SizedBox(width: 5),
-                    Text(invoiceModelData.clientName.toString())
+                    Text(invoiceModelData.invoiceName.toString())
                   ],
                 )),
                 DataCell(Text(invoiceModelData.invoiceAmount.toString())),
@@ -433,8 +433,8 @@ abstract class WidgetUtils {
                           ? ColorResource.initialBgColor
                           : ColorResource.initialBgColor2,
                       child: CustomText(
-                        text: AppUtils.getInitials(AppUtils.getFirstName(
-                            clientModelData.companyDB!.companyName.toString())),
+                        text: AppUtils.getInitials(
+                            clientModelData.companyDB!.companyName.toString()),
                         style: TextStyle(
                             color: listLength.isOdd
                                 ? ColorResource.initialTextColor
@@ -448,7 +448,7 @@ abstract class WidgetUtils {
                 DataCell(Text(projectModelData.projectName.toString())),
                 DataCell(Text(projectModelData.noOfInvoice.toString())),
                 DataCell(Text(DateFormat('MM/dd/yyyy')
-                    .format(DateTime.parse(projectModelData.date!)))),
+                    .format(DateTime.parse(clientModelData.companyDB!.createdAt!)))),
                 DataCell(TextButton(
                   onPressed: () {},
                   child: CustomText(
@@ -466,8 +466,8 @@ abstract class WidgetUtils {
                           ? ColorResource.initialBgColor
                           : ColorResource.initialBgColor2,
                       child: CustomText(
-                        text: AppUtils.getInitials(AppUtils.getFirstName(
-                            projectModelData.projectName.toString())),
+                        text: AppUtils.getInitials(
+                            projectModelData.clientName.toString()),
                         style: TextStyle(
                             color: listLength.isOdd
                                 ? ColorResource.initialTextColor

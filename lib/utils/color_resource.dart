@@ -112,7 +112,7 @@ class ColorResource {
       Color(0xffF58220),
       Color(0xffFDB714),
     ],
-  ).createShader(Rect.fromLTWH(0.0, 0.0, 500.0, 70.0));
+  ).createShader(Rect.fromLTWH(0.0, 0.0, 1000.0, 70.0));
 }
 
 //#E08AF4
