@@ -53,7 +53,8 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                   Container(
                     alignment: Alignment.center,
                     padding: const EdgeInsets.only(left: 8.0),
-                    child: Column(
+                    child: Stack(
+                      alignment: Alignment.center,
                       children: [
                         MediaQuery.removePadding(
                             child: Image.asset(
@@ -62,11 +63,10 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                             ),
                             context: context,
                             removeBottom: true),
-                        MediaQuery.removePadding(
+                        Padding(
+                            padding: EdgeInsets.only(top: 30),
                             child:
-                                AppUtils.setSVG(svgPath: ImageResource.means),
-                            context: context,
-                            removeTop: true),
+                                AppUtils.setSVG(svgPath: ImageResource.means)),
                       ],
                     ),
                   ),
