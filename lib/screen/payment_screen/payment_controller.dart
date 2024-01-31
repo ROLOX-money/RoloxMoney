@@ -17,23 +17,23 @@ class PaymentController extends GetxController with StateMixin {
     Future.delayed(const Duration(seconds: 5), () {
       projectInvoicesList.addAll([
         ProjectModel(
-            amount: '25000',
+            projectvalue: 25000,
             clientName: 'Target InfoTech',
             projectName: 'Target InfoTech',
-            date: DateTime.now().toString(),
+            dueDate: DateTime.now().toString(),
             isCredit: true,
             noOfInvoice: 2),
         ProjectModel(
-            amount: '25000',
+            projectvalue: 25000,
             clientName: 'Target InfoTech',
             projectName: 'Target InfoTech',
-            date: DateTime.now().toString(),
+            dueDate: DateTime.now().toString(),
             noOfInvoice: 2),
         ProjectModel(
-            amount: '25000',
+            projectvalue: 25000,
             projectName: 'Target InfoTech',
             clientName: 'Target InfoTech',
-            date: DateTime.now().toString(),
+            dueDate: DateTime.now().toString(),
             noOfInvoice: 2),
       ]);
       change(projectInvoicesList);

@@ -1,5 +1,4 @@
 
-
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/model/project_model.dart';
@@ -16,24 +15,27 @@ class InvoiceController extends GetxController with StateMixin {
   RxList<String> projectName = <String>[].obs;
   ProjectsController projectsController = Get.put(ProjectsController());
   RxList<ProjectModel> updatedProjectInvoicesList = <ProjectModel>[].obs;
+  RxInt listValueStart = 0.obs;
+  RxInt listValueEnd = 0.obs;
+  RxBool isEnabled = false.obs;
 
   @override
   void onInit() async {
     change(null, status: RxStatus.loading());
     await toGetTheInvoiceList().then((value) {
-      debugPrint(
-          "before project name updated invoice list value --> ${invoicesList.toString()}");
       List<int> projectId = <int>[];
-
       for (var i = 0; i < invoicesList.length; i++) {
         Invoice invoiceModel = invoicesList[i];
         projectId.add(int.parse(invoiceModel.projectName!));
       }
+
       for (var j = 0; j < projectId.length; j++) {
         for (var i = 0;
-            i < projectsController.projectInvoicesList.length;
+            i < Singleton.projectList.length;
+            // projectsController.projectInvoicesList.length;
             i++) {
-          ProjectModel projectModel = projectsController.projectInvoicesList[i];
+          // ProjectModel projectModel = projectsController.projectInvoicesList[i];
+          ProjectModel projectModel = Singleton.projectList[i];
           if (projectId[j] == projectModel.id) {
             projectName.add(projectModel.projectName!);
             projectModel.noOfInvoice = projectModel.noOfInvoice != null
@@ -41,20 +43,38 @@ class InvoiceController extends GetxController with StateMixin {
                 : 1;
             print("no of invoice added");
             updatedProjectInvoicesList.add(projectModel);
+            Singleton.updatedProjectList = updatedProjectInvoicesList;
+            change(Singleton.projectList, status: RxStatus.success());
           }
         }
       }
-
       for (var k = 0; k < invoicesList.length; k++) {
         invoicesList[k].projectName = projectName[k];
       }
 
       change(invoicesList, status: RxStatus.success());
+      change(Singleton.invoiceList, status: RxStatus.success());
+      change(Singleton.updatedProjectList, status: RxStatus.success());
       change(updatedProjectInvoicesList, status: RxStatus.success());
 
       debugPrint(
           "after project name updated invoice list value --> ${invoicesList.toString()}");
     });
+    if (invoicesList.isNotEmpty) {
+      if (invoicesList.length <= 20) {
+        listValueStart.value = 1;
+        listValueEnd.value = invoicesList.length + 1;
+        isEnabled.value = false;
+      } else if (invoicesList.length > 20) {
+        listValueStart.value = 21;
+        listValueEnd.value = invoicesList.length + 1;
+        isEnabled.value = true;
+      }
+    } else {
+      listValueStart.value = 0;
+      listValueEnd.value = 0;
+    }
+
     super.onInit();
   }
 
@@ -74,17 +94,21 @@ class InvoiceController extends GetxController with StateMixin {
           .then((value) {
             value.forEach((element) {
               invoicesList.add(Invoice(
-                  invoiceAmount: double.parse(
+                  invoiceValueWithoutGst: double.parse(
                       element['invoice']['invoiceValueWithoutGst'].toString()),
                   invoiceNumber: element['invoice']['invoiceNumber'],
                   invoiceName: element['invoice']['invoiceName'],
                   createdAt: element['invoice']['created_at'],
                   projectName: element['invoice']['projectId'].toString(),
-                  dueDate: element['invoice']['InvoiceDueDate']));
+                  hsnCode: int.parse(element['invoice']['hsnCode'].toString()),
+                  gstCharges: int.parse(element['invoice']['gstCharges'].toString()),
+                  invoiceDueDate: element['invoice']['InvoiceDueDate']));
             });
             debugPrint('invoiceListResponse--> $value');
           });
+      Singleton.invoiceList = invoicesList;
       change(invoicesList, status: RxStatus.success());
+      change(Singleton.invoiceList, status: RxStatus.success());
       return invoicesList;
     } catch (e) {
       e.printError();
@@ -99,6 +123,5 @@ class InvoiceController extends GetxController with StateMixin {
       if (value) toGetTheInvoiceList();
     });
     Get.lazyPut(() => AddInvoiceController());
-
   }
 }

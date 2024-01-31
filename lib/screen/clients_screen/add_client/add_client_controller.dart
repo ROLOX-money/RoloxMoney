@@ -2,6 +2,9 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:roloxmoney/screen/clients_screen/clients_controller.dart';
+import 'package:roloxmoney/screen/clients_screen/entites/clinet_model.dart';
 import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/RoloxKey.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
@@ -23,36 +26,52 @@ class AddClientController extends GetxController
   TextEditingController contactPersonController = TextEditingController();
   TextEditingController departmentController = TextEditingController();
   TextEditingController designationController = TextEditingController();
-  TextEditingController fullAddress = TextEditingController();
+
+  TextEditingController clientNameController = TextEditingController();
+  TextEditingController createdController = TextEditingController();
+  TextEditingController businessTypeController = TextEditingController();
+
   Rx<TypOfBusiness> typOfBusiness = TypOfBusiness.business.obs;
   RxBool iDontHaveBusiness = true.obs;
   final form = GlobalKey<FormState>();
 
   RxBool gstNumber = false.obs;
+  RxInt? clientIndex = (-1).obs;
+  ClientModel? clientDetails;
+  RxBool isReadOnly = false.obs;
+
+  ClientsController clientsController = Get.put(ClientsController());
+
   @override
   void onInit() async {
     change(null, status: RxStatus.success());
+    if (Get.arguments != null) {
+      clientIndex!.value = Get.arguments;
+      if (clientIndex!.value != -1) {
+        clientDetails = clientsController.cModel[clientIndex!.value];
+      }
+    }
+    if (clientDetails != null) {
+      clientNameController.text =
+          clientDetails!.companyDB!.companyName.toString();
+      createdController.text = DateFormat('MM/dd/yyyy').format(
+          DateTime.parse(clientDetails!.companyDB!.createdAt.toString()));
+      businessTypeController.text =
+          clientDetails!.companyDB!.typeOfbuisness.toString() == "1"
+              ? TypOfBusiness.individual.toString()
+              : TypOfBusiness.business.toString();
+      isReadOnly.value = true;
+    }
+
     Future.delayed(const Duration(seconds: 5), () {});
     super.onInit();
-
-    if (kDebugMode) {
-      brandNameController.text = 'Rolox Money';
-      gstNumberController.text = '123445667687';
-      legalNameController.text = 'Rolox Money';
-      emailIDController.text = 'chinnaduraiv@live.in';
-      mobileNumberController.text = '+919585313659';
-      contactPersonController.text = 'Chinnadurai Viswanathan';
-      panNoController.text = 'BRYPC4090C';
-      departmentController.text = 'Software Development';
-      designationController.text = 'Software Developer';
-      fullAddress.text = 'No:2/41, North Street,S.Ohaiyur, Kallakurichi,606204';
-    }
   }
 
   void gstNumberCheckBox({bool? values}) {
     gstNumber = values!.obs;
     change(gstNumber);
   }
+
   void businessToggle({TypOfBusiness? value}) {
     typOfBusiness = value!.obs;
     change(typOfBusiness);
@@ -87,13 +106,13 @@ class AddClientController extends GetxController
             }, tableName: RoloxKey.supaBaseCompanyTable)
                 .then((value) {
               if (value) {
-                debugPrint("After insert into ${RoloxKey
-                    .supaBaseCompanyTable}---> $value");
+                debugPrint(
+                    "After insert into ${RoloxKey.supaBaseCompanyTable}---> $value");
                 SupaBaseController.toGetTheSelectedCompany(
-                    companyName: brandNameController.text)
+                        companyName: brandNameController.text)
                     .then((companyDetails) {
-                  debugPrint("After getting from ${RoloxKey
-                      .supaBaseCompanyTable}---> $companyDetails");
+                  debugPrint(
+                      "After getting from ${RoloxKey.supaBaseCompanyTable}---> $companyDetails");
                   toInsert(
                       tableName: RoloxKey.supaBaseProfileCompanyTable,
                       userData: {
@@ -107,20 +126,19 @@ class AddClientController extends GetxController
                           tableName: RoloxKey.supaBaseAddressTable,
                           userData: {
                             'phone': mobileNumberController.text,
-                            'address_1': fullAddress.text,
+                            'address_1': fullAddressController.text,
                           }).then((addressInsertResponse) {
                         if (addressInsertResponse) {
                           SupaBaseController.toGetTheSelectedID(
-                              searchValue: Singleton.supabaseInstance.client
-                                  .auth.currentUser!.phone!
-                                  .contains('+')
-                                  ? Singleton.supabaseInstance.client.auth
-                                  .currentUser?.phone
-                                  : '+${Singleton.supabaseInstance.client.auth
-                                  .currentUser?.phone}',
-                              tableName: RoloxKey.supaBaseUserTable,
-                              whatTypeOfValueYouWant: 'id',
-                              searchKey: 'phone')
+                                  searchValue: Singleton.supabaseInstance.client
+                                          .auth.currentUser!.phone!
+                                          .contains('+')
+                                      ? Singleton.supabaseInstance.client.auth
+                                          .currentUser?.phone
+                                      : '+${Singleton.supabaseInstance.client.auth.currentUser?.phone}',
+                                  tableName: RoloxKey.supaBaseUserTable,
+                                  whatTypeOfValueYouWant: 'id',
+                                  searchKey: 'phone')
                               .then((userResponseList) {
                             if (userResponseList.isNotEmpty) {
                               //PAN Insert & GEST Insert
@@ -130,7 +148,7 @@ class AddClientController extends GetxController
                                     'Pannumber': panNoController.text,
                                     'refrenceid': userResponseList[0]['id'],
                                     'profiletype': typOfBusiness.value ==
-                                        TypOfBusiness.business
+                                            TypOfBusiness.business
                                         ? 2
                                         : 1,
                                   }).then((value) {
@@ -140,32 +158,32 @@ class AddClientController extends GetxController
                                       'gstNumber': gstNumberController.text,
                                       'refrenceid': userResponseList[0]['id'],
                                       'profileType': typOfBusiness.value ==
-                                          TypOfBusiness.business
+                                              TypOfBusiness.business
                                           ? 2
                                           : 1,
                                     }).then((value) {
                                   SupaBaseController.toGetTheSelectedID(
-                                      searchValue: brandNameController.text,
-                                      tableName:
-                                      RoloxKey.supaBaseCompanyTable,
-                                      whatTypeOfValueYouWant: 'id',
-                                      searchKey: 'companyName')
+                                          searchValue: brandNameController.text,
+                                          tableName:
+                                              RoloxKey.supaBaseCompanyTable,
+                                          whatTypeOfValueYouWant: 'id',
+                                          searchKey: 'companyName')
                                       .then((companyResponseList) {
                                     debugPrint(
                                         'companyResponseList--> ${companyResponseList}');
                                     if (companyResponseList.isNotEmpty) {
                                       toInsert(
                                           tableName:
-                                          RoloxKey.supaBaseUserToClientMap,
+                                              RoloxKey.supaBaseUserToClientMap,
                                           userData: {
                                             'userid': userResponseList[0]['id'],
                                             'companyId': companyResponseList[0]
-                                            ['id'], //Todo
-                                            'profileType': typOfBusiness
-                                                .value ==
-                                                TypOfBusiness.business
-                                                ? 2
-                                                : 1
+                                                ['id'], //Todo
+                                            'profileType':
+                                                typOfBusiness.value ==
+                                                        TypOfBusiness.business
+                                                    ? 2
+                                                    : 1
                                           }).then((value) {
                                         if (value) {
                                           AppUtils.showSnackBar(Get.context!,
@@ -200,7 +218,7 @@ class AddClientController extends GetxController
                     }
                   });
                 });
-              }else {
+              } else {
                 change(null, status: RxStatus.success());
               }
             });

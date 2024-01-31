@@ -31,35 +31,32 @@ class AddInvoiceController extends GetxController
   int? projectId;
   RxString projectName = ''.obs;
   Invoice? invoiceDetails;
-  int? invoiceIndex;
+  RxInt? invoiceIndex = (-1).obs;
+  RxBool isReadOnly = false.obs;
 
   @override
   void onInit() async {
     change(null, status: RxStatus.loading());
     // invoiceDetails = Get.arguments;
 
-    invoiceIndex = Get.arguments;
-
-    invoiceDetails = invoiceController.invoicesList[invoiceIndex!];
+    if (Get.arguments != null) {
+      invoiceIndex!.value = Get.arguments;
+      if (invoiceIndex!.value != -1) {
+        invoiceDetails = invoiceController.invoicesList[invoiceIndex!.value];
+      }
+    }
 
     if (invoiceDetails != null) {
       projectNameController.text = invoiceDetails!.projectName!;
       invoiceNameController.text = invoiceDetails!.invoiceName!;
-      invoiceNumberController.text = invoiceDetails!.invoiceNumber!;
+      invoiceNumberController.text = invoiceDetails!.invoiceNumber!.toString();
       invoiceValueWithoutGSTController.text =
-          invoiceDetails!.invoiceAmount!.toString();
-      invoiceDueDateController.text = invoiceDetails!.dueDate!;
-      gstChargesController.text = "0";
-      hsnController.text = "0";
+          invoiceDetails!.invoiceValueWithoutGst!.toString();
+      invoiceDueDateController.text = invoiceDetails!.invoiceDueDate!;
+      gstChargesController.text = invoiceDetails!.gstCharges.toString();
+      hsnController.text = invoiceDetails!.hsnCode.toString();
+      isReadOnly.value = true;
     }
-    // invoiceNameController.text = 'Invoice for Photo work';
-    // invoiceNumberController.text = '123456';
-    // invoiceValueWithoutGSTController.text = '1234.56';
-    // invoiceDueDateController.text = '21/07/2023';
-    // gstChargesController.text = '0';
-    // hsnController.text = '123456';
-    // stateController.text = 'TamilNadu';
-    // getProjectList();
     toGetTheProjectList().then((value) {
       projectList = value;
       change(projectList, status: RxStatus.success());

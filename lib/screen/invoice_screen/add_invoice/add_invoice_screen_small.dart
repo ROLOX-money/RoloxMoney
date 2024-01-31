@@ -73,8 +73,8 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                                         fontWeight: FontWeight.w600),
                               ),
                               CustomText(
-                                text: widget
-                                    .controller!.invoiceDetails!.invoiceAmount
+                                text: widget.controller!.invoiceDetails!
+                                    .invoiceValueWithoutGst
                                     .toString(),
                                 style: Theme.of(context)
                                     .textTheme
@@ -123,11 +123,13 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                           //     widget.controller!.toSetClientId(isClear: true);
                           //   },
                           // ),
+
+                          // project Name
                           if (widget.controller!.invoiceDetails != null)
                             WidgetUtils.genericTextFiled(
                               context: context,
                               validationRules: ['required'],
-                              isReadOnly: true,
+                              isReadOnly: widget.controller!.isReadOnly.value,
                               hintText: Languages.of(context)!.projectName,
                               keyBoardType: TextInputType.name,
                               controller:
@@ -162,9 +164,11 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                                   }),
                             )
                           ],
+                          // invoice name
                           WidgetUtils.genericTextFiled(
                             context: context,
                             validationRules: ['required'],
+                            isReadOnly: widget.controller!.isReadOnly.value,
                             hintText:
                                 Languages.of(context)?.invoiceNameHintText,
                             keyBoardType: TextInputType.name,
@@ -172,18 +176,22 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                                 widget.controller!.invoiceNameController,
                             labelName: '${Languages.of(context)?.invoiceName}',
                           ),
+                          // invoice no
                           WidgetUtils.genericTextFiled(
                             context: context,
                             validationRules: ['required'],
+                            isReadOnly: widget.controller!.isReadOnly.value,
                             hintText: Languages.of(context)?.invoiceNoHintText,
                             controller:
                                 widget.controller!.invoiceNumberController,
                             labelName:
                                 '${Languages.of(context)?.invoiceNumber}',
                           ),
+                          // invoice amount
                           WidgetUtils.genericTextFiled(
                             context: context,
                             validationRules: ['required'],
+                            isReadOnly: widget.controller!.isReadOnly.value,
                             hintText: Languages.of(context)?.valueHintText,
                             keyBoardType: TextInputType.name,
                             controller: widget
@@ -191,14 +199,16 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                             labelName:
                                 '${Languages.of(context)?.invoiceValueWithoutGST}',
                           ),
+                          // Due Date
                           WidgetUtils.genericTextFiled(
                             context: context,
                             hintText: "DD/MM/YYYY",
                             validationRules: ['required'],
+                            isReadOnly: widget.controller!.isReadOnly.value,
                             controller:
                                 widget.controller!.invoiceDueDateController,
                             keyBoardType: TextInputType.datetime,
-                            isReadOnly: true,
+                            // isReadOnly: true,
                             onTab: () {
                               widget.controller!.toSelectDate();
                             },
@@ -206,17 +216,21 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                             labelName:
                                 '${Languages.of(context)?.invoiceDueDate}',
                           ),
+                          // HSN value
                           WidgetUtils.genericTextFiled(
                             context: context,
                             validationRules: ['required'],
+                            isReadOnly: widget.controller!.isReadOnly.value,
                             hintText: Languages.of(context)?.hsnCodeHintText,
                             keyBoardType: TextInputType.phone,
                             controller: widget.controller!.hsnController,
                             labelName: '${Languages.of(context)?.hsnCode}',
                           ),
+                          // gst charge
                           WidgetUtils.genericTextFiled(
                             context: context,
                             validationRules: ['required'],
+                            isReadOnly: widget.controller!.isReadOnly.value,
                             hintText:
                                 '${Languages.of(context)?.gstCharges} (Optional)',
                             keyBoardType: TextInputType.phone,
@@ -235,7 +249,9 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                             height: 15,
                           ),
                           PrimaryButton(
-                            '${Languages.of(context)!.save}',
+                            (widget.controller!.invoiceDetails != null)
+                                ? '${Languages.of(context)!.paid}'
+                                : '${Languages.of(context)!.save}',
                             context,
                             cardShape: 1,
                             isIcon: true,

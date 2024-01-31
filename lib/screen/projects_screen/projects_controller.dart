@@ -12,6 +12,10 @@ import 'package:roloxmoney/utils/app_utils.dart';
 class ProjectsController extends GetxController with StateMixin {
   RxList<ProjectModel> projectInvoicesList = <ProjectModel>[].obs;
 
+  RxInt listValueStart = 0.obs;
+  RxInt listValueEnd = 0.obs;
+  RxBool isEnabled = false.obs;
+
   // InvoiceController invoiceController = Get.put(InvoiceController());
 
   @override
@@ -19,19 +23,31 @@ class ProjectsController extends GetxController with StateMixin {
     change(null, status: RxStatus.success());
     print("projectInvoicesList before : ${projectInvoicesList.length}");
     await getProjectList().then((value) {
-      // for (int i = 0; i < value.length; i++) {
-      //   for (int j = 0;
-      //       j < invoiceController.updatedProjectInvoicesList.length;
-      //       j++) {
-      //     if (value[i].id ==
-      //         invoiceController.updatedProjectInvoicesList[j].id) {
-      //       value[i] = invoiceController.updatedProjectInvoicesList[j];
-      //     }
-      //   }
-      // }
+      for (int i = 0; i < value.length; i++) {
+        for (int j = 0; j < Singleton.updatedProjectList.length; j++) {
+          if (value[i].id == Singleton.updatedProjectList[j].id) {
+            value[i] = Singleton.updatedProjectList[j];
+          }
+        }
+      }
+      Singleton.updatedProjectList.clear();
       change(projectInvoicesList, status: RxStatus.success());
     });
     print("projectInvoicesList after : ${projectInvoicesList.length}");
+    if (projectInvoicesList.isNotEmpty) {
+      if (projectInvoicesList.length <= 20) {
+        listValueStart.value = 1;
+        listValueEnd.value = projectInvoicesList.length + 1;
+        isEnabled.value = false;
+      } else if (projectInvoicesList.length > 20) {
+        listValueStart.value = 21;
+        listValueEnd.value = projectInvoicesList.length + 1;
+        isEnabled.value = true;
+      }
+    } else {
+      listValueStart.value = 0;
+      listValueEnd.value = 0;
+    }
     super.onInit();
   }
 
@@ -50,12 +66,13 @@ class ProjectsController extends GetxController with StateMixin {
           value.forEach((element) {
             projectInvoicesList.add(ProjectModel(
                 id: element['id'],
-                amount: element['projectvalue'].toString(),
+                projectvalue:int.tryParse( element['projectvalue'].toString()),
                 projectName: element['projectName'],
                 clientName: element['clientName'],
-                date: element['dueDate'],
+                dueDate: element['dueDate'],
                 noOfInvoice: element['noOfInvoice']));
           });
+          Singleton.projectList = projectInvoicesList;
         } else {
           projectInvoicesList.value = [];
           AppUtils.showErrorSnackBar(Get.context!,
@@ -63,6 +80,7 @@ class ProjectsController extends GetxController with StateMixin {
               durations: 2000);
         }
         change(projectInvoicesList, status: RxStatus.success());
+        change(Singleton.projectList, status: RxStatus.success());
       });
       return projectInvoicesList;
     } catch (e) {

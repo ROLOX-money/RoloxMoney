@@ -98,32 +98,48 @@ class AddProjectScreenSmallState extends State<AddProjectScreenSmall> {
                             //     widget.controller!.toSetClientId(isClear: true);
                             //   },
                             // ),
-                            CustomText(
-                              text: Languages.of(context)!.clientName,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium!
-                                  .copyWith(fontWeight: FontWeight.w500),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Card(
-                              key: Key("projectName"),
-                              // alignment: Alignment.center,
-                              child: AutoComplete.autoComplete(
-                                  hintText: Languages.of(context)!
-                                      .searchClientNameHintText,
-                                  value: null,
-                                  suggestionValue: widget.controller!.clientList
-                                      .map((item) =>
-                                          item.companyDB!.companyName!)
-                                      .toList(),
-                                  onFieldSubmitted: (value) {
-                                    widget.controller!
-                                        .toSetClientId(searchingText: value);
-                                  }),
-                            ),
+                            if (widget.controller!.projectDetails == null) ...[
+                              CustomText(
+                                text: Languages.of(context)!.clientName,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium!
+                                    .copyWith(fontWeight: FontWeight.w500),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Card(
+                                key: Key("projectName"),
+                                // alignment: Alignment.center,
+                                child: AutoComplete.autoComplete(
+                                    hintText: Languages.of(context)!
+                                        .searchClientNameHintText,
+                                    value: null,
+                                    suggestionValue: widget
+                                        .controller!.clientList
+                                        .map((item) =>
+                                            item.companyDB!.companyName!)
+                                        .toList(),
+                                    onFieldSubmitted: (value) {
+                                      widget.controller!
+                                          .toSetClientId(searchingText: value);
+                                    }),
+                              )
+                            ],
+                            if (widget.controller!.projectDetails != null)
+                              WidgetUtils.genericTextFiled(
+                                context: context,
+                                validationRules: ['required'],
+                                keyBoardType: TextInputType.name,
+                                hintText: Languages.of(context)!
+                                    .searchClientNameHintText,
+                                controller:
+                                    widget.controller!.clientNameController,
+                                labelName:
+                                    '${Languages.of(context)?.clientName}',
+                              ),
+                            // project name
                             WidgetUtils.genericTextFiled(
                               context: context,
                               validationRules: ['required'],
@@ -135,6 +151,7 @@ class AddProjectScreenSmallState extends State<AddProjectScreenSmall> {
                               labelName:
                                   '${Languages.of(context)?.projectName}',
                             ),
+                            // project value
                             WidgetUtils.genericTextFiled(
                               context: context,
                               validationRules: ['required'],
@@ -146,6 +163,7 @@ class AddProjectScreenSmallState extends State<AddProjectScreenSmall> {
                               labelName:
                                   '${Languages.of(context)?.projectValue}',
                             ),
+                            // due date
                             WidgetUtils.genericTextFiled(
                               context: context,
                               validationRules: [
@@ -163,6 +181,7 @@ class AddProjectScreenSmallState extends State<AddProjectScreenSmall> {
                               labelName:
                                   '${Languages.of(context)?.projectDueDate}',
                             ),
+                            // project email
                             WidgetUtils.genericTextFiled(
                               context: context,
                               validationRules: ['required', 'email'],
@@ -172,37 +191,39 @@ class AddProjectScreenSmallState extends State<AddProjectScreenSmall> {
                               controller: widget.controller!.emailIDController,
                               labelName: '${Languages.of(context)?.emailID}',
                             ),
+                            // project link
                             WidgetUtils.genericTextFiled(
                               context: context,
                               hintText: Languages.of(context)?.projectLink,
                               keyBoardType: TextInputType.name,
                               controller:
-                                  widget.controller!.projectLinkDController,
+                                  widget.controller!.projectLinkController,
                               labelName:
                                   '${Languages.of(context)?.projectLinkHint}',
                             ),
                             const SizedBox(
                               height: 15,
                             ),
-                            PrimaryButton(
-                              '${Languages.of(context)!.save}',
-                              context,
-                              cardShape: 1,
-                              isIcon: true,
-                              textColor: ColorResource.colorFFFFFF,
-                              fontSize: 20,
-                              onTap: () {
-                                if (widget.controller!.form.currentState!
-                                    .validate()) {
-                                  if (widget.controller!.clientId != null) {
-                                    widget.controller!.toAddProject();
-                                  } else {
-                                    AppUtils.showErrorSnackBar(
-                                        context, 'Please selected your client');
+                            if (widget.controller!.projectDetails == null)
+                              PrimaryButton(
+                                '${Languages.of(context)!.save}',
+                                context,
+                                cardShape: 1,
+                                isIcon: true,
+                                textColor: ColorResource.colorFFFFFF,
+                                fontSize: 20,
+                                onTap: () {
+                                  if (widget.controller!.form.currentState!
+                                      .validate()) {
+                                    if (widget.controller!.clientId != null) {
+                                      widget.controller!.toAddProject();
+                                    } else {
+                                      AppUtils.showErrorSnackBar(context,
+                                          'Please selected your client');
+                                    }
                                   }
-                                }
-                              },
-                            ),
+                                },
+                              ),
                             const SizedBox(
                               height: 15,
                             ),

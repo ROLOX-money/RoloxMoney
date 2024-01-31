@@ -166,7 +166,7 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                       height: 5,
                                     ),
                                     CustomText(
-                                      text: '${invoice.invoiceAmount ?? ''}',
+                                      text: '${invoice.invoiceValueWithoutGst ?? ''}',
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleSmall!
@@ -210,7 +210,7 @@ class InvoiceScreenSmallState extends State<InvoiceScreenSmall> {
                                           width: 10,
                                         ),
                                         CustomText(
-                                          text: '${invoice.dueDate}',
+                                          text: '${invoice.invoiceDueDate}',
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall!

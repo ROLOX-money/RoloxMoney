@@ -192,7 +192,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                         width: 5,
                                       ),
                                       CustomText(
-                                        text: '${projectModel.date}',
+                                        text: '${projectModel.dueDate}',
                                         style: Theme.of(context)
                                             .textTheme
                                             .titleSmall!

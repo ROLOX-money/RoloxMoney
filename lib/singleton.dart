@@ -1,4 +1,7 @@
 /*Chinnadurai Viswanathan*/
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:roloxmoney/model/project_model.dart';
+import 'package:roloxmoney/screen/invoice_screen/entities/invoice_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Singleton {
@@ -15,6 +18,11 @@ class Singleton {
   static final Singleton _singleton = Singleton._internal();
 
   static late final Supabase supabaseInstance;
+
+  static RxList<Invoice> invoiceList = <Invoice>[].obs;
+  static RxList<Invoice> updatedInvoiceList = <Invoice>[].obs;
+  static RxList<ProjectModel> projectList = <ProjectModel>[].obs;
+  static RxList<ProjectModel> updatedProjectList = <ProjectModel>[].obs;
 
   factory Singleton() {
     return _singleton;

@@ -5,8 +5,11 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/model/project_model.dart';
+import 'package:roloxmoney/screen/clients_screen/clients_controller.dart';
 import 'package:roloxmoney/screen/clients_screen/entites/clinet_model.dart';
 import 'package:roloxmoney/screen/invoice_screen/entities/invoice_model.dart';
+import 'package:roloxmoney/screen/invoice_screen/invoice_controller.dart';
+import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
@@ -421,14 +424,18 @@ abstract class WidgetUtils {
                     Text(invoiceModelData.invoiceName.toString())
                   ],
                 )),
-                DataCell(Text(invoiceModelData.invoiceAmount.toString())),
+                DataCell(
+                    Text(invoiceModelData.invoiceValueWithoutGst.toString())),
                 if (isInvoiceTap == true)
                   DataCell(Text(invoiceModelData.invoiceNumber.toString())),
                 DataCell(Text(DateFormat('MM/dd/yyyy')
                     .format(DateTime.parse(invoiceModelData.createdAt!)))),
                 DataCell(Text(invoiceModelData.projectName.toString())),
                 DataCell(TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    InvoiceController()
+                        .navigateAddInvoiceScreen(arguments: index);
+                  },
                   child: CustomText(
                     text: 'View Action',
                     style: TextStyle(color: Theme.of(context).primaryColor),
@@ -457,11 +464,17 @@ abstract class WidgetUtils {
                   ],
                 )),
                 DataCell(Text(projectModelData.projectName.toString())),
-                DataCell(Text(projectModelData.noOfInvoice.toString())),
+                DataCell(Text(
+                    (projectModelData.noOfInvoice.toString() == "null")
+                        ? "0"
+                        : projectModelData.noOfInvoice.toString())),
                 DataCell(Text(DateFormat('MM/dd/yyyy').format(
                     DateTime.parse(clientModelData.companyDB!.createdAt!)))),
                 DataCell(TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ClientsController()
+                        .navigateAddClientScreen(arguments: index);
+                  },
                   child: CustomText(
                     text: 'View Action',
                     style: TextStyle(color: Theme.of(context).primaryColor),
@@ -478,7 +491,7 @@ abstract class WidgetUtils {
                           : ColorResource.initialBgColor2,
                       child: CustomText(
                         text: AppUtils.getInitials(
-                            projectModelData.clientName.toString()),
+                            projectModelData.projectName.toString()),
                         style: TextStyle(
                             color: listLength.isOdd
                                 ? ColorResource.initialTextColor
@@ -486,13 +499,20 @@ abstract class WidgetUtils {
                       ),
                     ),
                     SizedBox(width: 5),
-                    Text(projectModelData.projectName.toString())
+                    Text(GetUtils.capitalizeFirst(
+                            projectModelData.projectName.toString()) ??
+                        "N")
                   ],
                 )),
-                DataCell(Text(projectModelData.noOfInvoice.toString())),
-                DataCell(Text(projectModelData.date!)),
+                DataCell(Text(projectModelData.noOfInvoice.toString() == "null"
+                    ? "0"
+                    : projectModelData.noOfInvoice.toString())),
+                DataCell(Text(projectModelData.dueDate!)),
                 DataCell(TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ProjectsController()
+                        .navigateAddProjectScreen(arguments: index);
+                  },
                   child: CustomText(
                     text: 'View Action',
                     style: TextStyle(color: Theme.of(context).primaryColor),
@@ -500,7 +520,7 @@ abstract class WidgetUtils {
                 ))
               ],
               if (isPaymentTap == true) ...[
-                DataCell(Text(projectModelData.amount.toString())),
+                DataCell(Text(projectModelData.projectvalue.toString())),
                 DataCell(Text(
                     projectModelData.isCredit == true ? "Credit" : "Debit ")),
                 DataCell(Text(projectModelData.noOfInvoice.toString())),
@@ -525,7 +545,7 @@ abstract class WidgetUtils {
                   ],
                 )),
                 DataCell(Text(DateFormat('MM/dd/yyyy')
-                    .format(DateTime.parse(projectModelData.date!)))),
+                    .format(DateTime.parse(projectModelData.dueDate!)))),
                 DataCell((projectModelData.isCredit == true)
                     ? SizedBox()
                     : TextButton(

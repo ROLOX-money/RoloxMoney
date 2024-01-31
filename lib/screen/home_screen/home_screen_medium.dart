@@ -49,12 +49,28 @@ class _HomeScreenMediumState extends State<HomeScreenMedium> {
                   SizedBox(height: 20),
                   widget.controller!.paidCardWidgetLarge2(
                     context: context,
+                    noOfInvoices: widget.controller!.allInvoiceCount.toString(),
+                    amount: widget.controller!.allInvoiceAmount.obs.value
+                        .roundToDouble()
+                        .toString(),
+                    dueAmount: widget.controller!.dueInvoiceAmount.toString(),
+                    dueCount: widget.controller!.dueInvoiceCount.toString(),
+                    overdueAmount:
+                        widget.controller!.overDueInvoiceAmount.toString(),
+                    overdueCount:
+                        widget.controller!.overDueInvoiceCount.toString(),
                   ),
                   SizedBox(height: 20),
                   CustomText(text: '${Languages.of(context)!.payableInvoice}'),
                   SizedBox(height: 20),
                   widget.controller!.paidCardWidgetLarge2(
                     context: context,
+                    noOfInvoices: "0",
+                    amount: "0",
+                    dueAmount: "0",
+                    dueCount: '0',
+                    overdueAmount: '0',
+                    overdueCount: '0',
                   ),
                   SizedBox(height: 20),
                   Padding(

@@ -17,33 +17,39 @@ class AddProjectController extends GetxController
   TextEditingController clientNameController = TextEditingController();
   TextEditingController projectValueController = TextEditingController();
   TextEditingController projectDueDateDController = TextEditingController();
-  TextEditingController projectLinkDController = TextEditingController();
   TextEditingController emailIDController = TextEditingController();
   TextEditingController projectLinkController = TextEditingController();
   final form = GlobalKey<FormState>();
   List<ClientModel> clientList = [];
   String? clientId;
   RxString clientName = ''.obs;
-  int? projectIndex;
+  RxInt? projectIndex = (-1).obs;
   ProjectModel? projectDetails;
+  RxBool isReadOnly = false.obs;
 
   ProjectsController projectsController = Get.put(ProjectsController());
 
   @override
   void onInit() async {
     change(null, status: RxStatus.loading());
-    projectIndex = Get.arguments;
-
-    projectDetails = projectsController.projectInvoicesList[projectIndex!];
+    if (Get.arguments != null) {
+      projectIndex!.value = Get.arguments;
+      if (projectIndex!.value != -1) {
+        projectDetails =
+            projectsController.projectInvoicesList[projectIndex!.value];
+      }
+    }
 
     if (projectDetails != null) {
       projectNameController.text = projectDetails!.projectName!;
       clientNameController.text = projectDetails!.clientName!;
-      projectValueController.text = projectDetails!.amount!;
-      projectDueDateDController.text = projectDetails!.date!;
-      projectLinkDController.text = "Null";
+      projectValueController.text = projectDetails!.projectvalue!.toString();
+      projectDueDateDController.text = projectDetails!.dueDate!;
+      projectLinkController.text = projectDetails!.projectLink != null
+          ? projectDetails!.projectLink!
+          : "";
       // emailIDController.text =
-
+      isReadOnly.value = true;
     }
 
     toGetTheClientList().then((value) {

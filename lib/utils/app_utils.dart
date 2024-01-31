@@ -202,11 +202,16 @@ class AppUtils {
   }
 
   static Widget pageNationButton(
-      {required IconData icon, required void Function()? onPressed}) {
+      {required IconData icon,
+      required void Function()? onPressed,
+      required bool enabled}) {
     return Container(
       height: 30,
       width: 28,
       decoration: BoxDecoration(
+          color: enabled
+              ? Colors.transparent
+              : ColorResource.disabledColor.withOpacity(0.3),
           border: Border.all(color: ColorResource.backgroundColor),
           borderRadius: BorderRadius.circular(8)),
       child: Center(
@@ -214,6 +219,9 @@ class AppUtils {
           icon: Icon(
             icon,
             size: 15,
+            color: enabled
+                ? ColorResource.enabledColor
+                : ColorResource.disabledColor,
           ),
           onPressed: onPressed,
         ),

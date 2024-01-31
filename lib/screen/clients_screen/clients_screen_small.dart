@@ -222,7 +222,11 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                             ColorResource.colorF5F5F5,
                                         textColor: ColorResource.color181B28,
                                         fontSize: 14,
-                                        onTap: () {},
+                                        onTap: () {
+                                          widget.controller!
+                                              .navigateAddClientScreen(
+                                                  arguments: index);
+                                        },
                                       ),
                                     )
                                   ],

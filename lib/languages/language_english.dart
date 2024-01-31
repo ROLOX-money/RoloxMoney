@@ -322,4 +322,6 @@ class LanguageEn extends Languages {
   String get overDue => "Overdue";
 
   String get netAmount => "Net Amount";
+
+
 }
