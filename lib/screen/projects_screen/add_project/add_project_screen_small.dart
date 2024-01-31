@@ -46,12 +46,12 @@ class AddProjectScreenSmallState extends State<AddProjectScreenSmall> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppBar(
-                      backgroundColor: Theme.of(context).backgroundColor,
+                      backgroundColor: ColorResource.buttonTextColor,
                       leading: IconButton(
                         icon: Icon(
                           Icons.arrow_back_sharp,
                           size: 30,
-                          color: Colors.white,
+                          // color: Colors.white,
                         ),
                         onPressed: () {
                           Get.back();
@@ -59,14 +59,16 @@ class AddProjectScreenSmallState extends State<AddProjectScreenSmall> {
                       ),
                       centerTitle: true,
                       title: CustomText(
-                        text: '${Languages.of(context)?.addProject}',
+                        text: widget.controller!.projectDetails != null
+                            ? widget.controller!.projectDetails!.projectName!
+                            : '${Languages.of(context)?.addProject}',
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: ColorResource.colorFFFFFF,
+                            // color: ColorResource.colorFFFFFF,
                             fontSize: 21,
                             fontWeight: FontWeight.w600),
                       ),
-                      shadowColor: Colors.grey,
-                      elevation: 0.75,
+                      // shadowColor: Colors.grey,
+                      elevation: 0.3,
                     ),
                     Form(
                       key: widget.controller!.form,
@@ -114,7 +116,8 @@ class AddProjectScreenSmallState extends State<AddProjectScreenSmall> {
                                       .searchClientNameHintText,
                                   value: null,
                                   suggestionValue: widget.controller!.clientList
-                                      .map((item) => item.companyDB!.companyName!)
+                                      .map((item) =>
+                                          item.companyDB!.companyName!)
                                       .toList(),
                                   onFieldSubmitted: (value) {
                                     widget.controller!
@@ -175,7 +178,8 @@ class AddProjectScreenSmallState extends State<AddProjectScreenSmall> {
                               keyBoardType: TextInputType.name,
                               controller:
                                   widget.controller!.projectLinkDController,
-                              labelName: '${Languages.of(context)?.emailID}',
+                              labelName:
+                                  '${Languages.of(context)?.projectLinkHint}',
                             ),
                             const SizedBox(
                               height: 15,
@@ -185,7 +189,7 @@ class AddProjectScreenSmallState extends State<AddProjectScreenSmall> {
                               context,
                               cardShape: 1,
                               isIcon: true,
-                              textColor: ColorResource. colorFFFFFF,
+                              textColor: ColorResource.colorFFFFFF,
                               fontSize: 20,
                               onTap: () {
                                 if (widget.controller!.form.currentState!
@@ -210,7 +214,7 @@ class AddProjectScreenSmallState extends State<AddProjectScreenSmall> {
                 ),
               ),
             ),
-            backgroundColor: Colors.white,
+            backgroundColor: ColorResource.buttonTextColor,
           ),
         );
       },

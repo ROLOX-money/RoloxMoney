@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
 import 'package:roloxmoney/screen/login_screen/login_controller.dart';
+import 'package:roloxmoney/screen/profile_screen/profile_controller.dart';
 import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/RoloxKey.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
@@ -70,11 +71,13 @@ class BusinessProfileController extends GetxController
   RxInt currentStep = 1.obs;
 
   LoginController loginController = Get.put(LoginController());
+  ProfileController profileController = Get.put(ProfileController());
 
   @override
   void onInit() async {
     change(null, status: RxStatus.success());
     mobilNumberController.value = loginController.mobilNumberController.value;
+    emailController.value = profileController.emailController.value;
     Future.delayed(const Duration(seconds: 5), () {});
     super.onInit();
   }
@@ -89,8 +92,7 @@ class BusinessProfileController extends GetxController
       AppUtils.showErrorSnackBar(Get.context!,
           'Nature of business is empty... Please consider your nature of business',
           durations: 3000);
-    }
-    else if (natureOfWorkValue.value.toLowerCase() == 'others' &&
+    } else if (natureOfWorkValue.value.toLowerCase() == 'others' &&
         plsIfSpecifyController.text.trim() == '') {
       AppUtils.showErrorSnackBar(Get.context!,
           'Nature of work is empty... Please consider your nature of work',

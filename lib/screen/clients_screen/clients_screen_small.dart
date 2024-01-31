@@ -54,15 +54,14 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               CustomText(
-                                text: '${Languages.of(context)!.clientDetails}'
-                                    .toUpperCase(),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall!
-                                      .copyWith(
-                                      color: ColorResource.color000000,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500),
+                                text: '${Languages.of(context)!.clientDetails}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(
+                                        color: ColorResource.color000000,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500),
                               ),
                               Container(
                                 width: 110,
@@ -219,7 +218,8 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                       child: SecondaryButton(
                                         '${Languages.of(context)!.viewMore}',
                                         context,
-                                        backgroundColor: ColorResource.colorF5F5F5,
+                                        backgroundColor:
+                                            ColorResource.colorF5F5F5,
                                         textColor: ColorResource.color181B28,
                                         fontSize: 14,
                                         onTap: () {},

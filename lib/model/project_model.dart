@@ -15,4 +15,9 @@ class ProjectModel {
       this.clientName,
       this.date,
       this.isCredit = false});
+
+  @override
+  String toString() {
+    return 'ProjectModel{id: $id, projectName: $projectName,noOfInvoice : $noOfInvoice, amount : $amount,clientName : $clientName,date : $date,isCredit : $isCredit}';
+  }
 }

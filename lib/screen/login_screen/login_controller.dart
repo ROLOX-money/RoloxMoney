@@ -47,7 +47,6 @@ class LoginController extends RoloxGetXController with SupaBaseController {
     timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
       change(seconds--);
     });
-
   }
 
   void navigateProfile() {
@@ -86,7 +85,6 @@ class LoginController extends RoloxGetXController with SupaBaseController {
               Singleton.mobileUserId = value[0]["id"];
               Get.offAndToNamed(DashboardScreen.routeName,
                   arguments: mobilNumberController.text);
-
             }
           });
         } else {
@@ -191,21 +189,21 @@ class LoginController extends RoloxGetXController with SupaBaseController {
                         autoDisposeControllers: false,
                         appContext: Get.context!,
                         length: 6,
-                        cursorWidth: 1,
+                        cursorWidth: 0.5,
                         cursorColor:
                             Theme.of(context).textTheme.titleMedium!.color,
                         pinTheme: PinTheme(
                             disabledColor:
                                 Theme.of(context).scaffoldBackgroundColor,
                             shape: PinCodeFieldShape.circle,
-                            borderRadius: BorderRadius.circular(5),
-                            fieldHeight: 50,
-                            fieldWidth: 50,
+                            borderRadius: BorderRadius.circular(3),
+                            fieldHeight: 40,
+                            fieldWidth: 40,
                             inactiveFillColor:
                                 Theme.of(context).scaffoldBackgroundColor,
                             activeFillColor:
                                 Theme.of(context).scaffoldBackgroundColor,
-                            borderWidth: 6,
+                            borderWidth: 4,
                             errorBorderColor: Colors.red,
                             activeColor:
                                 Theme.of(context).scaffoldBackgroundColor,
@@ -287,7 +285,7 @@ class LoginController extends RoloxGetXController with SupaBaseController {
         .then((value) {
       if (value) {
         timerCalculation();
-        if (screen.toLowerCase() == "smallscreen") {
+        if (screen == "smallScreen") {
           otpBottomSheet(
             mobileNumber: '${mobilNumberController.text}',
           );
@@ -423,8 +421,7 @@ class LoginController extends RoloxGetXController with SupaBaseController {
                   height: 25,
                 ),
                 CustomText(
-                  text:
-                      '${Languages.of(context)?.resendIN} 0.$seconds',
+                  text: '${Languages.of(context)?.resendIN} 0.$seconds',
                   style: Theme.of(context)
                       .textTheme
                       .titleSmall!

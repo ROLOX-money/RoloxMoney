@@ -46,25 +46,53 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppBar(
-                    backgroundColor: Theme.of(context).backgroundColor,
+                    backgroundColor: ColorResource.buttonTextColor,
                     leading: IconButton(
                       icon: Icon(
                         Icons.arrow_back_sharp,
                         size: 30,
-                        color: Colors.white,
+                        // color: Colors.white,
                       ),
                       onPressed: () {
                         Get.back();
                       },
                     ),
                     centerTitle: true,
-                    title: CustomText(
-                      text: '${Languages.of(context)?.addInvoice}',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: ColorResource.colorFFFFFF,
-                          fontSize: 21,
-                          fontWeight: FontWeight.w600),
-                    ),
+                    title: widget.controller!.invoiceDetails != null
+                        ? Column(
+                            children: [
+                              CustomText(
+                                text:
+                                    '${widget.controller!.invoiceDetails!.invoiceName}'
+                                    '${widget.controller!.invoiceDetails!.invoiceNumber}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(
+                                        fontSize: 21,
+                                        fontWeight: FontWeight.w600),
+                              ),
+                              CustomText(
+                                text: widget
+                                    .controller!.invoiceDetails!.invoiceAmount
+                                    .toString(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(
+                                        fontSize: 21,
+                                        fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          )
+                        : CustomText(
+                            text: '${Languages.of(context)?.addInvoice}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall!
+                                .copyWith(
+                                    fontSize: 21, fontWeight: FontWeight.w600),
+                          ),
                     shadowColor: Colors.grey,
                     elevation: 0.75,
                   ),
@@ -95,31 +123,45 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                           //     widget.controller!.toSetClientId(isClear: true);
                           //   },
                           // ),
-                          CustomText(
-                            text: Languages.of(context)!.projectName,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(fontWeight: FontWeight.w500),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Card(
-                            key: Key("projectName"),
-                            // alignment: Alignment.center,
-                            child: AutoComplete.autoComplete(
-                                hintText:
-                                    Languages.of(context)!.projectName,
-                                value: null,
-                                suggestionValue: widget.controller!.projectList
-                                    .map((item) => item.projectName!)
-                                    .toList(),
-                                onFieldSubmitted: (value) {
-                                  widget.controller!
-                                      .toSetClientId(searchingText: value);
-                                }),
-                          ),
+                          if (widget.controller!.invoiceDetails != null)
+                            WidgetUtils.genericTextFiled(
+                              context: context,
+                              validationRules: ['required'],
+                              isReadOnly: true,
+                              hintText: Languages.of(context)!.projectName,
+                              keyBoardType: TextInputType.name,
+                              controller:
+                                  widget.controller!.projectNameController,
+                              labelName:
+                                  '${Languages.of(context)?.projectName}',
+                            ),
+                          if (widget.controller!.invoiceDetails == null) ...[
+                            CustomText(
+                              text: Languages.of(context)!.projectName,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(fontWeight: FontWeight.w500),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Card(
+                              key: Key("projectName"),
+                              // alignment: Alignment.center,
+                              child: AutoComplete.autoComplete(
+                                  hintText: Languages.of(context)!.projectName,
+                                  value: null,
+                                  suggestionValue: widget
+                                      .controller!.projectList
+                                      .map((item) => item.projectName!)
+                                      .toList(),
+                                  onFieldSubmitted: (value) {
+                                    widget.controller!
+                                        .toSetClientId(searchingText: value);
+                                  }),
+                            )
+                          ],
                           WidgetUtils.genericTextFiled(
                             context: context,
                             validationRules: ['required'],
@@ -224,7 +266,7 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
             ),
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: ColorResource.buttonTextColor,
       ),
     );
   }

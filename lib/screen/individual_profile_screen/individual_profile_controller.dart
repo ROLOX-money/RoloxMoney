@@ -282,4 +282,15 @@ class IndividualProfileController extends GetxController
     currentStep = values.obs;
     change(currentStep);
   }
+
+  void clearData() {
+    otherIndustryOfWorkController.clear();
+    otherNatureController.clear();
+    panNumberController.clear();
+    gstController.clear();
+    addressController.clear();
+    pincodeController.clear();
+    plsIfSpecifyController.clear();
+    plsIfSpecifyControllerForNatureOfWork.clear();
+  }
 }

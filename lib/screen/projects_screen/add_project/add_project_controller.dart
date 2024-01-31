@@ -1,8 +1,9 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:roloxmoney/model/project_model.dart';
 import 'package:roloxmoney/screen/clients_screen/entites/clinet_model.dart';
+import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
 import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/RoloxKey.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
@@ -23,10 +24,28 @@ class AddProjectController extends GetxController
   List<ClientModel> clientList = [];
   String? clientId;
   RxString clientName = ''.obs;
+  int? projectIndex;
+  ProjectModel? projectDetails;
+
+  ProjectsController projectsController = Get.put(ProjectsController());
 
   @override
   void onInit() async {
     change(null, status: RxStatus.loading());
+    projectIndex = Get.arguments;
+
+    projectDetails = projectsController.projectInvoicesList[projectIndex!];
+
+    if (projectDetails != null) {
+      projectNameController.text = projectDetails!.projectName!;
+      clientNameController.text = projectDetails!.clientName!;
+      projectValueController.text = projectDetails!.amount!;
+      projectDueDateDController.text = projectDetails!.date!;
+      projectLinkDController.text = "Null";
+      // emailIDController.text =
+
+    }
+
     toGetTheClientList().then((value) {
       clientList = value;
       change(clientList, status: RxStatus.success());

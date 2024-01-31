@@ -65,7 +65,7 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                         fontWeight: FontWeight.w600),
                   ),
                   shadowColor: Colors.grey,
-                  elevation: 0.75,
+                  elevation: 0.3,
                 ),
                 Form(
                   key: widget.controller!.form,
@@ -76,14 +76,14 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                       children: [
                         // Type of Business
                         Card(
-                          elevation: 10,
+                          elevation: 6,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Container(
                             decoration: BoxDecoration(
-                                border:
-                                    Border.all(color: Colors.grey, width: 0.25),
+                                // border:
+                                //     Border.all(color: Colors.grey, width: 0.25),
                                 borderRadius: BorderRadius.circular(8),
                                 color: ColorResource.colorFFFFFF),
                             padding: EdgeInsets.all(10.0),
@@ -196,7 +196,6 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                                   ? '${Languages.of(context)?.brandName}'
                                   : '${Languages.of(context)?.fullName}',
                         ),
-
                         // Legal Name
                         if (widget.controller!.typOfBusiness.obs.value ==
                             TypOfBusiness.business)
@@ -211,42 +210,49 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                           ),
 
                         MediaQuery.removePadding(
-                          context: context, removeBottom: true,removeTop: true,
+                          context: context,
+                          removeBottom: true,
+                          removeTop: true,
                           child: ListTile(
                             contentPadding: EdgeInsets.zero,
                             horizontalTitleGap: 0,
-                             dense: true,
-                             minVerticalPadding: 0.0,
+                            dense: true,
+                            minVerticalPadding: 0.0,
                             title: CustomText(
                               text: Languages.of(context)!.iHaveAGSTNumber,
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall!
                                   .copyWith(
-                                  fontSize: 13,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400),
+                                      fontSize: 13,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400),
                             ),
                             leading: Checkbox(
-                              value: widget.controller!.gstNumber.obs
-                                  .value.value,
+                              value:
+                                  widget.controller!.gstNumber.obs.value.value,
                               activeColor: Colors.pinkAccent,
                               checkColor: Colors.white,
+                              visualDensity:
+                                  VisualDensity(horizontal: -4, vertical: -4),
                               onChanged: (value) {
-                                widget.controller!.gstNumberCheckBox(
-                                    values: value);
+                                widget.controller!
+                                    .gstNumberCheckBox(values: value);
                               },
                             ),
                           ),
                         ),
                         //  GST No
-                        WidgetUtils.genericTextFiled(
-                          context: context,
-                          validationRules: ['required'],
-                          hintText: Languages.of(context)?.gstNumberHint,
-                          controller: widget.controller!.gstNumberController,
-                          labelName: '${Languages.of(context)?.gstNumber}',
-                        ),
+
+                        if (widget.controller!.gstNumber.obs.value.value ==
+                            true)
+                          WidgetUtils.genericTextFiled(
+                            context: context,
+                            validationRules: ['required'],
+                            hintText: Languages.of(context)?.gstNumberHint,
+                            controller: widget.controller!.gstNumberController,
+                            labelName: '${Languages.of(context)?.gstNumber}',
+                          ),
                         // Pan No
                         WidgetUtils.genericTextFiled(
                           context: context,
@@ -255,43 +261,43 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                           controller: widget.controller!.panNoController,
                           labelName: '${Languages.of(context)?.panNumber}',
                         ),
+                        // Contact Person
                         WidgetUtils.genericTextFiled(
                           context: context,
                           validationRules: ['required'],
-                          hintText: Languages.of(context)
-                              ?.contactPersonNameHintText,
+                          hintText:
+                              Languages.of(context)?.contactPersonNameHintText,
                           controller:
-                          widget.controller!.contactPersonController,
+                              widget.controller!.contactPersonController,
                           keyBoardType: TextInputType.emailAddress,
-                          labelName: '${Languages.of(context)?.contact} ${Languages.of(context)?.person} ${Languages.of(context)?.optional}',
+                          labelName:
+                              '${Languages.of(context)?.contact} ${Languages.of(context)?.person} ${Languages.of(context)?.optional}',
                         ),
 
-
                         // Department
-                          if (widget.controller!.typOfBusiness.obs.value ==
-                              TypOfBusiness.business)
-                            WidgetUtils.genericTextFiled(
-                                context: context,
-                                validationRules: ['required'],
-                                hintText: Languages.of(context)
-                                    ?.departmentNameHintText,
-                                controller:
-                                widget.controller!.departmentController,
-                                keyBoardType: TextInputType.emailAddress,
-                                labelName:
-                                '${Languages.of(context)?.department}'),
-
-                        // Designation
+                        if (widget.controller!.typOfBusiness.obs.value ==
+                            TypOfBusiness.business)
                           WidgetUtils.genericTextFiled(
                               context: context,
                               validationRules: ['required'],
-                              hintText: Languages.of(context)
-                                  ?.designationNameHintText,
-                              keyBoardType: TextInputType.text,
+                              hintText:
+                                  Languages.of(context)?.departmentNameHintText,
                               controller:
-                              widget.controller!.designationController,
+                                  widget.controller!.departmentController,
+                              keyBoardType: TextInputType.emailAddress,
                               labelName:
-                              '${Languages.of(context)?.designation}'),
+                                  '${Languages.of(context)?.department}'),
+
+                        // Designation
+                        WidgetUtils.genericTextFiled(
+                            context: context,
+                            validationRules: ['required'],
+                            hintText:
+                                Languages.of(context)?.designationNameHintText,
+                            keyBoardType: TextInputType.text,
+                            controller:
+                                widget.controller!.designationController,
+                            labelName: '${Languages.of(context)?.designation}'),
                         // Email ID
                         WidgetUtils.genericTextFiled(
                           context: context,
@@ -311,12 +317,9 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                                 ?.clientMobileNumberHintText,
                             keyBoardType: TextInputType.phone,
                             controller:
-                            widget.controller!.mobileNumberController,
+                                widget.controller!.mobileNumberController,
                             labelName:
-                            '${Languages.of(context)?.mobileNumber}'),
-
-
-
+                                '${Languages.of(context)?.mobileNumber}'),
 
                         WidgetUtils.genericTextFiled(
                             context: context,
@@ -324,9 +327,10 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                             validationRules: ['required'],
                             controller: widget.controller!.fullAddress,
                             labelName: '${Languages.of(context)?.fullAddress}',
-                            hintText: '${Languages.of(context)?.fullAddress}'),
+                            hintText: '${Languages.of(context)?.fullAddress}',
+                            height: 100),
 
-                       /* WidgetUtils.genericTextFiled(
+                        /* WidgetUtils.genericTextFiled(
                             context: context,
                             keyBoardType: TextInputType.name,
                             validationRules: ['required'],

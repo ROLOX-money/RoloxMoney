@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/secondary_button.dart';
 import 'color_resource.dart';
@@ -113,6 +114,25 @@ class AppUtils {
 
   static Widget setSVG({String? svgPath}) {
     return SvgPicture.asset(svgPath!);
+  }
+
+  static Future<String> getPic(String? type) async {
+    var imagePath = "";
+    final picker = ImagePicker();
+    if (type!.toLowerCase() == "camera") {
+      await picker.pickImage(source: ImageSource.camera).then((value) {
+        if (value != null) {
+          imagePath = value.path;
+        }
+      });
+    } else if (type.toLowerCase() == "gallery") {
+      await picker.pickImage(source: ImageSource.gallery).then((value) {
+        if (value != null) {
+          imagePath = value.path;
+        }
+      });
+    }
+    return imagePath;
   }
 
   static Widget emptyViewWidget(

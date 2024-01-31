@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/model/project_model.dart';
@@ -12,14 +14,14 @@ import 'package:roloxmoney/utils/RoloxKey.dart';
 class InvoiceController extends GetxController with StateMixin {
   RxList<Invoice> invoicesList = <Invoice>[].obs;
   RxList<String> projectName = <String>[].obs;
-
   ProjectsController projectsController = Get.put(ProjectsController());
+  RxList<ProjectModel> updatedProjectInvoicesList = <ProjectModel>[].obs;
 
   @override
   void onInit() async {
-    change(null, status: RxStatus.success());
+    change(null, status: RxStatus.loading());
     await toGetTheInvoiceList().then((value) {
-      print(
+      debugPrint(
           "before project name updated invoice list value --> ${invoicesList.toString()}");
       List<int> projectId = <int>[];
 
@@ -34,6 +36,11 @@ class InvoiceController extends GetxController with StateMixin {
           ProjectModel projectModel = projectsController.projectInvoicesList[i];
           if (projectId[j] == projectModel.id) {
             projectName.add(projectModel.projectName!);
+            projectModel.noOfInvoice = projectModel.noOfInvoice != null
+                ? (projectModel.noOfInvoice! + 1)
+                : 1;
+            print("no of invoice added");
+            updatedProjectInvoicesList.add(projectModel);
           }
         }
       }
@@ -42,7 +49,10 @@ class InvoiceController extends GetxController with StateMixin {
         invoicesList[k].projectName = projectName[k];
       }
 
-      print(
+      change(invoicesList, status: RxStatus.success());
+      change(updatedProjectInvoicesList, status: RxStatus.success());
+
+      debugPrint(
           "after project name updated invoice list value --> ${invoicesList.toString()}");
     });
     super.onInit();
@@ -64,7 +74,8 @@ class InvoiceController extends GetxController with StateMixin {
           .then((value) {
             value.forEach((element) {
               invoicesList.add(Invoice(
-                  invoiceAmount: element['invoice']['invoiceValueWithoutGst'],
+                  invoiceAmount: double.parse(
+                      element['invoice']['invoiceValueWithoutGst'].toString()),
                   invoiceNumber: element['invoice']['invoiceNumber'],
                   invoiceName: element['invoice']['invoiceName'],
                   createdAt: element['invoice']['created_at'],
@@ -81,10 +92,13 @@ class InvoiceController extends GetxController with StateMixin {
     }
   }
 
-  void navigateAddInvoiceScreen() {
-    Get.put(AddInvoiceController());
-    Get.toNamed(AddInvoiceScreen.routeName)!.then((value) {
+  void navigateAddInvoiceScreen({int? arguments}) {
+    // Get.LazyPut(AddInvoiceController());
+    Get.toNamed(AddInvoiceScreen.routeName, arguments: arguments)!
+        .then((value) {
       if (value) toGetTheInvoiceList();
     });
+    Get.lazyPut(() => AddInvoiceController());
+
   }
 }

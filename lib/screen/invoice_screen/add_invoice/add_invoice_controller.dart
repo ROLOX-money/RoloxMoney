@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:roloxmoney/screen/invoice_screen/entities/invoice_model.dart';
 import 'package:roloxmoney/screen/invoice_screen/entities/project_model.dart';
+import 'package:roloxmoney/screen/invoice_screen/invoice_controller.dart';
 import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/RoloxKey.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
@@ -21,22 +23,42 @@ class AddInvoiceController extends GetxController
   TextEditingController hsnController = TextEditingController();
   TextEditingController stateController = TextEditingController();
 
+  InvoiceController invoiceController = Get.put(InvoiceController());
+
   final form = GlobalKey<FormState>();
 
   List<Project> projectList = [];
   int? projectId;
   RxString projectName = ''.obs;
+  Invoice? invoiceDetails;
+  int? invoiceIndex;
 
   @override
   void onInit() async {
     change(null, status: RxStatus.loading());
-    invoiceNameController.text = 'Invoice for Photo work';
-    invoiceNumberController.text = '123456';
-    invoiceValueWithoutGSTController.text = '1234.56';
-    invoiceDueDateController.text = '21/07/2023';
-    gstChargesController.text = '0';
-    hsnController.text = '123456';
-    stateController.text = 'TamilNadu';
+    // invoiceDetails = Get.arguments;
+
+    invoiceIndex = Get.arguments;
+
+    invoiceDetails = invoiceController.invoicesList[invoiceIndex!];
+
+    if (invoiceDetails != null) {
+      projectNameController.text = invoiceDetails!.projectName!;
+      invoiceNameController.text = invoiceDetails!.invoiceName!;
+      invoiceNumberController.text = invoiceDetails!.invoiceNumber!;
+      invoiceValueWithoutGSTController.text =
+          invoiceDetails!.invoiceAmount!.toString();
+      invoiceDueDateController.text = invoiceDetails!.dueDate!;
+      gstChargesController.text = "0";
+      hsnController.text = "0";
+    }
+    // invoiceNameController.text = 'Invoice for Photo work';
+    // invoiceNumberController.text = '123456';
+    // invoiceValueWithoutGSTController.text = '1234.56';
+    // invoiceDueDateController.text = '21/07/2023';
+    // gstChargesController.text = '0';
+    // hsnController.text = '123456';
+    // stateController.text = 'TamilNadu';
     // getProjectList();
     toGetTheProjectList().then((value) {
       projectList = value;

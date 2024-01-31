@@ -12,19 +12,20 @@ class Invoice {
   String? refrenceID;
   String? clientID;
 
-  Invoice(
-      {this.id,
-      this.createdAt,
-      this.projectName,
-      this.clientName,
-      this.invoiceName,
-      this.projectvalue,
-      this.invoiceNumber,
-      this.invoiceAmount,
-      this.dueDate,
-      this.projectLink,
-      this.refrenceID,
-      this.clientID});
+  Invoice({
+    this.id,
+    this.createdAt,
+    this.projectName,
+    this.clientName,
+    this.invoiceName,
+    this.projectvalue,
+    this.invoiceNumber,
+    this.invoiceAmount,
+    this.dueDate,
+    this.projectLink,
+    this.refrenceID,
+    this.clientID,
+  });
 
   Invoice.fromJson(Map<String, dynamic> json) {
     id = json['id'];

@@ -30,6 +30,7 @@ class ColorResource {
   static const Color initialTextColor2 = Color(0xffF2A536);
   static const Color textFiledBgColor = Color(0xffE4E4E4);
 
+
   static List<BoxShadow> boxShadow = [
     BoxShadow(
         color: Color(0xffF2F2F2).withOpacity(0.50),

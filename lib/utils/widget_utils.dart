@@ -33,7 +33,9 @@ abstract class WidgetUtils {
       bool obscureText = false,
       int? maximumWordCount,
       Function()? onTab,
-      double? height}) {
+      double? height,
+      EdgeInsetsGeometry? contentPadding,
+      TextAlignVertical? textAlignVertical}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -46,7 +48,7 @@ abstract class WidgetUtils {
               Theme.of(context)
                   .textTheme
                   .titleMedium!
-                  .copyWith(fontWeight: FontWeight.w500),
+                  .copyWith(fontWeight: FontWeight.w600, fontSize: 14),
         ),
         const SizedBox(
           height: 5,
@@ -60,6 +62,8 @@ abstract class WidgetUtils {
             maxLines: maxLines,
             isReadOnly: isReadOnly,
             hintText: hintText,
+            contentPadding: contentPadding,
+            textAlignVertical: textAlignVertical,
             focusedBorder: Colors.grey,
             textColor: ColorResource.color181B28,
             onTapped: isReadOnly ? onTab : null,
@@ -78,6 +82,9 @@ abstract class WidgetUtils {
             disableColor: Colors.red,
             keyBoardType: keyBoardType ?? TextInputType.name,
           ),
+        ),
+        SizedBox(
+          height: 5,
         ),
       ],
     );
@@ -178,48 +185,52 @@ abstract class WidgetUtils {
               ],
             ),
           ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                alignment: Alignment.center,
-                child: Image.asset(
-                  ImageResource.agencyAlertImage,
-                  height: 280,
-                  width: 180,
+          content: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    ImageResource.agencyAlertImage,
+                    height: 280,
+                    width: 180,
+                  ),
                 ),
-              ),
-              CustomText(
-                text: '${Languages.of(context)?.oopsAgency}',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall!
-                    .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              CustomText(
-                text: '${Languages.of(context)?.oopsAgencyMessage}',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall!
-                    .copyWith(fontSize: 14, fontWeight: FontWeight.w400),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              PrimaryButton('${Languages.of(context)!.continueText}', context,
-                  cardShape: 1,
-                  isIcon: true,
-                  fontSize: 20,
-                  onTap: primaryButtonOnTap),
-              SizedBox(
-                height: 10,
-              ),
-            ],
+                CustomText(
+                  text: '${Languages.of(context)?.oopsAgency}',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall!
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                CustomText(
+                  text: '${Languages.of(context)?.oopsAgencyMessage}',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: ColorResource.textSecondaryColor),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                PrimaryButton('${Languages.of(context)!.continueText}', context,
+                    cardShape: 1,
+                    isIcon: true,
+                    fontSize: 20,
+                    onTap: primaryButtonOnTap),
+                SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -447,8 +458,8 @@ abstract class WidgetUtils {
                 )),
                 DataCell(Text(projectModelData.projectName.toString())),
                 DataCell(Text(projectModelData.noOfInvoice.toString())),
-                DataCell(Text(DateFormat('MM/dd/yyyy')
-                    .format(DateTime.parse(clientModelData.companyDB!.createdAt!)))),
+                DataCell(Text(DateFormat('MM/dd/yyyy').format(
+                    DateTime.parse(clientModelData.companyDB!.createdAt!)))),
                 DataCell(TextButton(
                   onPressed: () {},
                   child: CustomText(

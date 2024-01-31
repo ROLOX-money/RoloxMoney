@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/login_screen/login_controller.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
+import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/widget/custom_button.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
@@ -85,10 +86,11 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                     height: 20,
                   ),
                   CustomText(
-                    text:
-                        '${Languages.of(context)?.mobileNumber}'.toUpperCase(),
+                    text: '${Languages.of(context)?.mobileNumber}',
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: Colors.black, fontWeight: FontWeight.w500),
+                        color: ColorResource.textColor,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14),
                   ),
                   const SizedBox(
                     height: 5,
@@ -165,9 +167,11 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                       ),
                     ),
                   ),
+                  SizedBox(height: 8),
                   ListTile(
                     contentPadding: EdgeInsets.zero,
                     horizontalTitleGap: 0,
+                    // minLeadingWidth: -10,
                     leading: Theme(
                       data: Theme.of(context).copyWith(
                         unselectedWidgetColor: Colors.black,
@@ -175,6 +179,9 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                       child: Checkbox(
                         value: widget.controller!.acceptTermsAndCondition.obs
                             .value.value,
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        visualDensity:
+                            VisualDensity(horizontal: -4, vertical: -4),
                         activeColor: Colors.pinkAccent,
                         checkColor: Colors.white,
                         onChanged: (value) {

@@ -97,9 +97,10 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                     widget.text.toString(),
                     textAlign: widget.textAlign,
                     style: Theme.of(context).textTheme.button!.copyWith(
-                        fontSize: widget.fontSize,
-                        color: widget.textColor.withOpacity(1),
-                        fontWeight: FontWeight.w600),
+                          fontSize: widget.fontSize,
+                          color: widget.textColor.withOpacity(1),
+                          fontWeight: FontWeight.w600,
+                        ),
                     maxLines: widget.maxLines,
                     overflow:
                         widget.isSingleLine ? TextOverflow.ellipsis : null,

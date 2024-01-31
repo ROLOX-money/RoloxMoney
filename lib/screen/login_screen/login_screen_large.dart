@@ -216,6 +216,8 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                               activeColor: Theme.of(context).primaryColor,
                               checkColor:
                                   Theme.of(context).scaffoldBackgroundColor,
+                              visualDensity:
+                                  VisualDensity(horizontal: -4, vertical: -4),
                               onChanged: (value) {
                                 widget.controller!
                                     .noAgreeTermsAndConditionCheckBox(
