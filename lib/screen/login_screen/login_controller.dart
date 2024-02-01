@@ -26,12 +26,15 @@ class LoginController extends RoloxGetXController with SupaBaseController {
 
   RxBool isLogin = true.obs;
   RxBool acceptTermsAndCondition = false.obs;
-  RxInt seconds = 45.obs;
   late Timer timer;
+
+  RxInt _otpTimer = 30.obs; // Initial timer value in seconds
+  Timer? _timer;
+
 
   @override
   void onInit() async {
-    mobilNumberController.text = '8056527428';
+    mobilNumberController.text = '9585313659';
 
     if (kDebugMode) {
       acceptTermsAndCondition.value = true;
@@ -43,12 +46,7 @@ class LoginController extends RoloxGetXController with SupaBaseController {
     super.onInit();
   }
 
-  void timerCalculation() {
-    timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
-      change(seconds--);
-    });
 
-  }
 
   void navigateProfile() {
     if (otpController.text.length == 6) {
@@ -100,6 +98,8 @@ class LoginController extends RoloxGetXController with SupaBaseController {
   }
 
   void otpBottomSheet({String? mobileNumber, String? otpString}) {
+    _otpTimer = 30.obs;
+    _startOTPTimer();
     showModalBottomSheet(
         enableDrag: true,
         isDismissible: false,
@@ -239,22 +239,6 @@ class LoginController extends RoloxGetXController with SupaBaseController {
                         cardShape: 1,
                         isIcon: true,
                         onTap: () {
-                          ///fixme
-                          // debugPrint(
-                          //     'otpController.text--> ${otpController.text}');
-                          // debugPrint('otpString--> $otpString');
-                          // if (otpString == otpController.text) {
-                          //   Get.snackbar(
-                          //       'Login Success', 'OTP verified...Thanks...',
-                          //       colorText: Colors.black,
-                          //       backgroundColor: Colors.white);
-                          // } else {
-                          //   Get.snackbar(
-                          //       'Login Failed', 'Something went wrong...',
-                          //       colorText: Colors.black,
-                          //       backgroundColor: Colors.white);
-                          // }
-                          // Get.back();
                           navigateProfile();
                         },
                       ),
@@ -263,7 +247,7 @@ class LoginController extends RoloxGetXController with SupaBaseController {
                       height: 25,
                     ),
                     CustomText(
-                      text: '${Languages.of(Get.context!)?.resendIN} 0:45',
+                      text: '${Languages.of(Get.context!)?.resendIN} ${_otpTimer.obs}',
                       style: Theme.of(Get.context!)
                           .textTheme
                           .titleSmall!
@@ -283,7 +267,6 @@ class LoginController extends RoloxGetXController with SupaBaseController {
             mobileNumber: '+91${mobilNumberController.text}')
         .then((value) {
       if (value) {
-        timerCalculation();
         if (screen.toLowerCase() == "smallscreen") {
           otpBottomSheet(
             mobileNumber: '${mobilNumberController.text}',
@@ -303,6 +286,8 @@ class LoginController extends RoloxGetXController with SupaBaseController {
       {LoginController? controller,
       String? mobileNumber,
       required BuildContext context}) {
+    _otpTimer = 30.obs;
+    _startOTPTimer();
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -421,7 +406,7 @@ class LoginController extends RoloxGetXController with SupaBaseController {
                 ),
                 CustomText(
                   text:
-                      '${Languages.of(context)?.resendIN} 0.$seconds',
+                      '${Languages.of(context)?.resendIN} 0.$_otpTimer',
                   style: Theme.of(context)
                       .textTheme
                       .titleSmall!
@@ -431,6 +416,23 @@ class LoginController extends RoloxGetXController with SupaBaseController {
             ),
           ),
         );
+      },
+    );
+  }
+  void _startOTPTimer() {
+    const oneSec = const Duration(seconds: 1);
+    _timer = Timer.periodic(
+      oneSec,
+          (Timer timer) {
+        if (_otpTimer == 0) {
+          // Timer reached zero, close the AlertDialog
+          timer.cancel();
+        } else {
+          _otpTimer--;
+          debugPrint("Timer $_otpTimer");
+          // Decrement the timer
+          change(_otpTimer);
+        }
       },
     );
   }

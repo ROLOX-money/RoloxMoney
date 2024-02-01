@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/model/group_invoices_model.dart';
 import 'package:roloxmoney/model/invoice_model.dart';
+import 'package:roloxmoney/network/get_connect.dart';
 import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_controller.dart';
 import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_screen.dart';
 import 'package:roloxmoney/screen/invoice_screen/entities/invoice_model.dart';
@@ -36,15 +37,14 @@ class HomeController extends GetxController with StateMixin {
   RxBool isEmpty = true.obs;
   RxInt buttonNo = 0.obs;
 
-  WithdrawFundController withdrawFundController = Get.put(WithdrawFundController());
+  WithdrawFundController withdrawFundController =
+      Get.put(WithdrawFundController());
 
   @override
   void onInit() async {
     change(null, status: RxStatus.success());
-
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 2), () {
       isEmpty.value = false;
-
       upcomingInvoicesList.addAll([
         GroupInvoices(
             boarderColor: ColorResource.colorE08AF4,

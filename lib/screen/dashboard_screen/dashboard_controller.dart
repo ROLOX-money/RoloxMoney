@@ -1,7 +1,11 @@
 import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:roloxmoney/method_channel/payment_nimbbl_method_channel.dart';
 import 'package:roloxmoney/model/dashboard_navigator_model.dart';
+import 'package:roloxmoney/network/get_connect.dart';
 import 'package:roloxmoney/screen/clients_screen/clients_controller.dart';
 import 'package:roloxmoney/screen/clients_screen/clients_screen.dart';
 import 'package:roloxmoney/screen/home_screen/home_controller.dart';
@@ -85,7 +89,7 @@ class DashboardController extends GetxController
     //   }
     // });
     // change(null, status: RxStatus.success());
-
+    paymentViewIntegration();
     super.onInit();
   }
 
@@ -135,5 +139,34 @@ class DashboardController extends GetxController
             context, MaterialPageRoute(builder: (context) => PaymentScreen()));
         break;
     }
+  }
+
+  Future<void> paymentViewIntegration() async {
+    await ApiService()
+        .generateToken(
+            'access_key_6EAvqqg82qg9LvPD', 'access_secret_1DvejxdkRxQZ63KB')
+        .then((value) async {
+      if (value.statusCode == 200) {
+        await ApiService()
+            .generateOrderId(jsonDecode(value.bodyString!)['token'])
+            .then((orderResponse) {
+          if (orderResponse.statusCode == 201) {
+            if (jsonDecode(orderResponse.bodyString!)['order_id'] != null) {
+              PaymentNimbblMethodChannel.paymentViewInitiating(
+                      nimbblToken: jsonDecode(value.bodyString!)['token'],
+                      orderID:
+                          jsonDecode(orderResponse.bodyString!)['order_id'])
+                  .then((value) {});
+            } else {
+              debugPrint("After order id empty error--> $value");
+            }
+          } else {
+            debugPrint("After order id response error--> $value");
+          }
+        });
+      } else {
+        debugPrint("After response error--> $value");
+      }
+    });
   }
 }
