@@ -31,6 +31,7 @@ class ColorResource {
   static const Color textFiledBgColor = Color(0xffE4E4E4);
   static const Color disabledColor = Color(0xffD6D5D5);
   static const Color enabledColor = Color(0xffA1A1A1);
+  static const Color dateBgColor = Color(0xffEBEBEB);
 
 
   static List<BoxShadow> boxShadow = [

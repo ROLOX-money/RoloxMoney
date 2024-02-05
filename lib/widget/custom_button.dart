@@ -9,7 +9,6 @@ class PrimaryButton extends StatefulWidget {
   final BuildContext context;
   final double cardElevation;
   final double cardShape;
-
   final TextAlign textAlign;
   final GestureTapCallback? onTap;
   final bool isUnderLine;
@@ -98,7 +97,9 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                     textAlign: widget.textAlign,
                     style: Theme.of(context).textTheme.button!.copyWith(
                           fontSize: widget.fontSize,
-                          color: widget.textColor.withOpacity(1),
+                          color: widget.isEnabled
+                              ? widget.textColor.withOpacity(1)
+                              : ColorResource.textSecondaryColor,
                           fontWeight: FontWeight.w600,
                         ),
                     maxLines: widget.maxLines,
@@ -111,7 +112,9 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Image.asset(
                     ImageResource.buttonArrow,
-                    color: ColorResource.colorFFFFFF,
+                    color: widget.isEnabled
+                        ? ColorResource.colorFFFFFF
+                        : ColorResource.textSecondaryColor,
                     width: 20,
                     height: 10,
                   ),

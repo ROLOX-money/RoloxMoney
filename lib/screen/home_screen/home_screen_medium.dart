@@ -36,110 +36,134 @@ class _HomeScreenMediumState extends State<HomeScreenMedium> {
             alignment: Alignment.topLeft,
             child: SingleChildScrollView(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: widget.controller!.typeOfBusiness.value == 1
+                    ? MainAxisAlignment.center
+                    : MainAxisAlignment.start,
+                crossAxisAlignment: widget.controller!.typeOfBusiness.value == 1
+                    ? CrossAxisAlignment.center
+                    : CrossAxisAlignment.start,
                 children: [
-                  CustomText(text: '${Languages.of(context)!.allInvoices}'),
-                  SizedBox(height: 20),
-                  CustomText(
-                    text: '${Languages.of(context)!.inboundInvoices}',
-                    fontWeight: FontWeight.w100,
-                    fontSize: 12,
-                  ),
-                  SizedBox(height: 20),
-                  widget.controller!.paidCardWidgetLarge2(
-                    context: context,
-                    noOfInvoices: widget.controller!.allInvoiceCount.toString(),
-                    amount: widget.controller!.allInvoiceAmount.obs.value
-                        .roundToDouble()
-                        .toString(),
-                    dueAmount: widget.controller!.dueInvoiceAmount.toString(),
-                    dueCount: widget.controller!.dueInvoiceCount.toString(),
-                    overdueAmount:
-                        widget.controller!.overDueInvoiceAmount.toString(),
-                    overdueCount:
-                        widget.controller!.overDueInvoiceCount.toString(),
-                  ),
-                  SizedBox(height: 20),
-                  CustomText(text: '${Languages.of(context)!.payableInvoice}'),
-                  SizedBox(height: 20),
-                  widget.controller!.paidCardWidgetLarge2(
-                    context: context,
-                    noOfInvoices: "0",
-                    amount: "0",
-                    dueAmount: "0",
-                    dueCount: '0',
-                    overdueAmount: '0',
-                    overdueCount: '0',
-                  ),
-                  SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 28),
-                    child: SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        height: 300,
-                        child: Card(
-                          color: ColorResource.buttonTextColor,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                alignment: Alignment.center,
-                                child: Image.asset(
-                                  ImageResource.withdrawImage,
-                                  height: 100,
-                                  width: 100,
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              CustomText(
-                                text:
-                                    '${Languages.of(context)?.youWalletBalance}',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleSmall!
-                                    .copyWith(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400),
-                              ),
-                              SizedBox(height: 10),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  CustomText(
-                                    text: "₹ 50000",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleSmall!
-                                        .copyWith(
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.w600),
+                  if (widget.controller!.typeOfBusiness.value == 1) ...[
+                    widget.controller!.paidCardWidgetLarge2(
+                      context: context,
+                      noOfInvoices:
+                          widget.controller!.allInvoiceCount.toString(),
+                      amount: widget.controller!.allInvoiceAmount.obs.value
+                          .toStringAsFixed(2),
+                      dueAmount: widget.controller!.dueInvoiceAmount
+                          .toStringAsFixed(2),
+                      dueCount: widget.controller!.dueInvoiceCount.toString(),
+                      overdueAmount: widget.controller!.overDueInvoiceAmount
+                          .toStringAsFixed(2),
+                      overdueCount:
+                          widget.controller!.overDueInvoiceCount.toString(),
+                    ),
+                  ],
+                  if (widget.controller!.typeOfBusiness.value == 2) ...[
+                    CustomText(text: '${Languages.of(context)!.allInvoices}'),
+                    SizedBox(height: 20),
+                    CustomText(
+                      text: '${Languages.of(context)!.inboundInvoices}',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 12,
+                    ),
+                    SizedBox(height: 20),
+                    widget.controller!.paidCardWidgetLarge2(
+                      context: context,
+                      noOfInvoices:
+                          widget.controller!.allInvoiceCount.toString(),
+                      amount: widget.controller!.allInvoiceAmount.obs.value
+                          .toStringAsFixed(2),
+                      dueAmount: widget.controller!.dueInvoiceAmount
+                          .toStringAsFixed(2),
+                      dueCount: widget.controller!.dueInvoiceCount.toString(),
+                      overdueAmount: widget.controller!.overDueInvoiceAmount
+                          .toStringAsFixed(2),
+                      overdueCount:
+                          widget.controller!.overDueInvoiceCount.toString(),
+                    ),
+                    SizedBox(height: 20),
+                    CustomText(
+                        text: '${Languages.of(context)!.payableInvoice}'),
+                    SizedBox(height: 20),
+                    widget.controller!.paidCardWidgetLarge2(
+                      context: context,
+                      noOfInvoices: "0",
+                      amount: "0",
+                      dueAmount: "0",
+                      dueCount: '0',
+                      overdueAmount: '0',
+                      overdueCount: '0',
+                    ),
+                    SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 28),
+                      child: SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: 300,
+                          child: Card(
+                            color: ColorResource.buttonTextColor,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  alignment: Alignment.center,
+                                  child: Image.asset(
+                                    ImageResource.withdrawImage,
+                                    height: 100,
+                                    width: 100,
                                   ),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.visibility_off,
-                                        color:
-                                            ColorResource.eyeVisibleIconColor,
-                                      ))
-                                ],
-                              ),
-                              SizedBox(height: 10),
-                              Container(
-                                width: 150,
-                                height: 40,
-                                child: SecondaryButton(
-                                    '${Languages.of(context)!.withdraw}',
-                                    context,
-                                    textColor: ColorResource.black,
-                                    fontSize: 14, onTap: () {
-                                  widget.controller!.navigateProfile(2);
-                                }),
-                              ),
-                            ],
-                          ),
-                        )),
-                  )
+                                ),
+                                SizedBox(height: 10),
+                                CustomText(
+                                  text:
+                                      '${Languages.of(context)?.youWalletBalance}',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall!
+                                      .copyWith(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400),
+                                ),
+                                SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    CustomText(
+                                      text: "₹ 50000",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall!
+                                          .copyWith(
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.w600),
+                                    ),
+                                    IconButton(
+                                        onPressed: () {},
+                                        icon: Icon(
+                                          Icons.visibility_off,
+                                          color:
+                                              ColorResource.eyeVisibleIconColor,
+                                        ))
+                                  ],
+                                ),
+                                SizedBox(height: 10),
+                                Container(
+                                  width: 150,
+                                  height: 40,
+                                  child: SecondaryButton(
+                                      '${Languages.of(context)!.withdraw}',
+                                      context,
+                                      textColor: ColorResource.black,
+                                      fontSize: 14, onTap: () {
+                                    widget.controller!.navigateProfile(2);
+                                  }),
+                                ),
+                              ],
+                            ),
+                          )),
+                    )
+                  ]
                 ],
               ),
             )

@@ -74,9 +74,12 @@ class _ClientScreenLargeState extends State<ClientScreenLarge> {
                           .format(DateTime.now())
                           .toString(),
                       context,
-                      borderRadius: 12,
-                      backgroundColor: ColorResource.dividerColor,
+                      borderRadius: 8,
+                      backgroundColor: ColorResource.dateBgColor,
                       isLeading: true,
+                      textColor: ColorResource.black,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
                       leadingWidget: Container(
                         height: 40,
                         width: 40,

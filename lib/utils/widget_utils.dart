@@ -347,7 +347,7 @@ abstract class WidgetUtils {
     } else if (isProjectTap == true) {
       value = {
         "Project Name": ColumnSize.L,
-        "No of projects": ColumnSize.S,
+        "No of Invoices": ColumnSize.S,
         "Date": ColumnSize.S,
         "Action": ColumnSize.M,
       };

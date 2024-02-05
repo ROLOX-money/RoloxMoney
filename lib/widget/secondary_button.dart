@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/font.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
+import 'package:roloxmoney/widget/custom_text.dart';
 /*Chinnadurai Viswanathan*/
 
 class SecondaryButton extends StatefulWidget {
@@ -31,7 +33,6 @@ class SecondaryButton extends StatefulWidget {
   final Color? disableColor;
   final Color? backgroundColor;
 
-
   SecondaryButton(this.text, this.context,
       {this.fontWeight = FontWeight.w600,
       this.leadingWidget = const Expanded(
@@ -44,7 +45,7 @@ class SecondaryButton extends StatefulWidget {
       this.textAlign = TextAlign.left,
       this.onTap,
       this.borderRadius = 0,
-      this.textColor = Colors.white,
+      this.textColor = ColorResource.buttonTextColor,
       this.fontSize = FontSize.fourteen,
       this.isUnderLine = false,
       this.isLeading = false,
@@ -79,7 +80,7 @@ class _SecondaryButtonState extends State<SecondaryButton> {
         width: MediaQuery.of(context).size.width,
         height: 46,
         decoration: BoxDecoration(
-            // borderRadius: BorderRadius.circular(widget.borderRadius),
+            borderRadius: BorderRadius.circular(widget.borderRadius),
             // border: Border.all(width: .5, color: Colors.transparent),
             color: widget.backgroundColor ?? Theme.of(context).backgroundColor),
         padding: const EdgeInsets.all(0.0),
@@ -90,16 +91,16 @@ class _SecondaryButtonState extends State<SecondaryButton> {
             if (widget.isLeading) widget.leadingWidget,
             if (widget.text != null)
               Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
-                  widget.text.toString(),
-                  textAlign: widget.textAlign,
-                  style: Theme.of(context).textTheme.button!.copyWith(
-                      fontSize: widget.fontSize, color: widget.textColor),
-                  maxLines: widget.maxLines,
-                  overflow: widget.isSingleLine ? TextOverflow.ellipsis : null,
-                ),
-              ),
+                  padding: const EdgeInsets.all(5.0),
+                  child: CustomText(
+                    text: widget.text.toString(),
+                    textAlign: widget.textAlign,
+                    color: widget.textColor,
+                    fontSize: widget.fontSize,
+                    fontWeight: FontWeight.w500,
+                    maxLines: widget.maxLines,
+                    // overflow: widget.isSingleLine ? TextOverflow.ellipsis : null,
+                  )),
             if (widget.isIcon)
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),

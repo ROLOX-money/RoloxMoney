@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -9,6 +8,7 @@ import 'package:roloxmoney/screen/withdraw_fund_screen/withdraw_controller.dart'
 import 'package:roloxmoney/screen/withdraw_fund_screen/withdraw_fund_screen.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
+import 'package:roloxmoney/utils/supa_base_control.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/secondary_button.dart';
 import 'package:roloxmoney/screen/dashboard_screen/entities/dashboard_model.dart';
@@ -38,6 +38,7 @@ class HomeController extends GetxController with StateMixin {
   RxList<DashBoardInvoice> allInvoiceList = <DashBoardInvoice>[].obs;
   RxList<DashBoardInvoice> dueInvoiceList = <DashBoardInvoice>[].obs;
   RxList<DashBoardInvoice> overDueInvoiceList = <DashBoardInvoice>[].obs;
+  RxInt typeOfBusiness = 0.obs;
 
   WithdrawFundController withdrawFundController =
       Get.put(WithdrawFundController());
@@ -45,7 +46,17 @@ class HomeController extends GetxController with StateMixin {
   @override
   void onInit() async {
     change(null, status: RxStatus.success());
-
+    SupaBaseController.toGetTheSelectedID(
+            searchKey: "id",
+            searchValue: Singleton.mobileUserId,
+            whatTypeOfValueYouWant: "profiletype",
+            tableName: RoloxKey.supaBaseUserTable)
+        .then((value) {
+      print("values is ${value.toString()}");
+      if (value.isNotEmpty) {
+        typeOfBusiness.value = int.tryParse(value[0]["profiletype"])!;
+      }
+    });
     toGetTheInvoiceList();
     super.onInit();
   }
