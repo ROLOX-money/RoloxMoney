@@ -89,7 +89,7 @@ class DashboardController extends GetxController
     //   }
     // });
     // change(null, status: RxStatus.success());
-    paymentViewIntegration();
+    // paymentViewIntegration();
     super.onInit();
   }
 
