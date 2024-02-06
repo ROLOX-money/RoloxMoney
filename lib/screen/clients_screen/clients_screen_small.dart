@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/clients_screen/clients_controller.dart';
 import 'package:roloxmoney/screen/clients_screen/entites/clinet_model.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
+import 'package:roloxmoney/widget/custom_button.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/rolox_money_widget.dart';
 import 'package:roloxmoney/widget/secondary_button.dart';
@@ -39,7 +41,7 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
         backgroundColor: Colors.transparent,
         body: Container(
           child: ListView(
-            physics: NeverScrollableScrollPhysics(),
+            physics: ScrollPhysics(),
             children: [
               SizedBox(
                 height: 15,
@@ -66,10 +68,9 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                               Container(
                                 width: 110,
                                 height: 40,
-                                child: SecondaryButton(
+                                child: PrimaryButton(
                                   '${Languages.of(context)!.addClient}',
                                   context,
-                                  backgroundColor: ColorResource.color000000,
                                   fontWeight: FontWeight.w500,
                                   textColor: ColorResource.colorFFFFFF,
                                   fontSize: 14,
@@ -94,7 +95,7 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                           itemCount:
                               widget.controller!.clientList.obs.value.length,
                           shrinkWrap: true,
-                          // physics: NeverScrollableScrollPhysics(),
+                          physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
                             ClientModel clientModel =
                                 widget.controller!.clientList.obs.value[index];
@@ -111,7 +112,7 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                     borderRadius: BorderRadius.all(
                                       Radius.circular(20),
                                     ),
-                                    color: ColorResource.color381D4E,
+                                    color: ColorResource.initialBgColor,
                                   ),
                                   child: CustomText(
                                     // text: AppUtils.getInitials('Client Name')
@@ -123,7 +124,7 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                         .textTheme
                                         .bodyLarge!
                                         .copyWith(
-                                            color: ColorResource.colorEC008C,
+                                            color: ColorResource.initialTextColor,
                                             fontWeight: FontWeight.w700),
                                   ),
                                 ),
@@ -136,8 +137,8 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                           .textTheme
                                           .titleSmall!
                                           .copyWith(
-                                              color: ColorResource.color000000,
-                                              fontSize: 15,
+                                              color: ColorResource.textColor,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.w500),
                                     ),
                                     SizedBox(
@@ -150,22 +151,22 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                           height: 20,
                                         ),
                                         SizedBox(
-                                          width: 5,
+                                          width: 10,
                                         ),
                                         CustomText(
                                           text:
-                                              '${clientModel.companyDB!.companyName}',
+                                              ' 0 ${Languages.of(context)?.projects}',
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall!
                                               .copyWith(
-                                                  color:
-                                                      ColorResource.colorA0BCD0,
-                                                  fontSize: 12,
+                                                  color: ColorResource
+                                                      .textSecondaryColor,
+                                                  fontSize: 14,
                                                   fontWeight: FontWeight.w400),
                                         ),
                                         SizedBox(
-                                          width: 5,
+                                          width: 10,
                                         ),
                                         Container(
                                           height: 5,
@@ -182,26 +183,28 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                           ),
                                         ),
                                         SizedBox(
+                                          width: 10,
+                                        ),
+                                        Image.asset(
+                                          ImageResource.calendar,
+                                          height: 20,
+                                        ),
+                                        SizedBox(
                                           width: 5,
                                         ),
-                                        // Image.asset(
-                                        //   ImageResource.calendar,
-                                        //   height: 20,
-                                        // ),
-                                        // SizedBox(
-                                        //   width: 5,
-                                        // ),
                                         CustomText(
-                                          text:
-                                              '${clientModel.companyDB!.companyName}',
+                                          text: DateFormat('MM/dd/yyyy').format(
+                                              DateTime.parse(clientModel
+                                                  .companyDB!.createdAt
+                                                  .toString())),
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleSmall!
                                               .copyWith(
-                                                  color:
-                                                      ColorResource.colorA0BCD0,
+                                                  color: ColorResource
+                                                      .textSecondaryColor,
                                                   overflow: TextOverflow.fade,
-                                                  fontSize: 12,
+                                                  fontSize: 14,
                                                   fontWeight: FontWeight.w400),
                                         ),
                                         SizedBox(
@@ -218,10 +221,11 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                       child: SecondaryButton(
                                         '${Languages.of(context)!.viewMore}',
                                         context,
+                                        fontWeight: FontWeight.w500,
                                         backgroundColor:
                                             ColorResource.colorF5F5F5,
-                                        textColor: ColorResource.color181B28,
-                                        fontSize: 14,
+                                        textColor: ColorResource.textColor,
+                                        fontSize: 16,
                                         onTap: () {
                                           widget.controller!
                                               .navigateAddClientScreen(

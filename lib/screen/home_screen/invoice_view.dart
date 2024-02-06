@@ -11,7 +11,11 @@ Widget invoiceView(
     {required BuildContext context,
     required GetxController controller,
     required GlobalKey<ScaffoldState>? scaffoldKey,
-    required bool isSmallView,
+    required int noOfInvoices,
+    required int dueInvoicesCount,
+    required int overDueInvoicesCount,
+    required int dueInvoiceAmount,
+    required int overDueInvoicesAmount,
     bool isInboundView = true}) {
   return Column(
     children: [
@@ -71,7 +75,7 @@ Widget invoiceView(
                           color: ColorResource.primaryColor.withOpacity(0.2),
                         ),
                         child: CustomText(
-                          text: '17',
+                          text: noOfInvoices.toString(),
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall!
@@ -106,7 +110,7 @@ Widget invoiceView(
                       SizedBox(height: 25),
                       CustomText(
                         text:
-                            '₹ ${(controller as HomeController).upComingTransaction.toStringAsFixed(2)}',
+                            '₹ ${(controller as HomeController).allInvoiceAmount.toStringAsFixed(2)}',
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
                             color: ColorResource.color000000,
                             fontSize: 18,
@@ -170,7 +174,7 @@ Widget invoiceView(
                             color: ColorResource.orangeColor.withOpacity(0.2),
                           ),
                           child: CustomText(
-                            text: '17',
+                            text: dueInvoicesCount.toString(),
                             style: Theme.of(context)
                                 .textTheme
                                 .titleSmall!
@@ -218,8 +222,7 @@ Widget invoiceView(
                         ),
                         SizedBox(height: 5),
                         CustomText(
-                          text:
-                              '₹ ${(controller).upComingTransaction.toStringAsFixed(2)}',
+                          text: '₹ ${dueInvoiceAmount.toStringAsFixed(2)}',
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall!
@@ -282,7 +285,7 @@ Widget invoiceView(
                             color: ColorResource.colorB12424.withOpacity(0.2),
                           ),
                           child: CustomText(
-                            text: '17',
+                            text: overDueInvoicesCount.toString(),
                             style: Theme.of(context)
                                 .textTheme
                                 .titleSmall!
@@ -330,8 +333,7 @@ Widget invoiceView(
                         ),
                         SizedBox(height: 5),
                         CustomText(
-                          text:
-                              '₹ ${(controller).upComingTransaction.toStringAsFixed(2)}',
+                          text: '₹ ${overDueInvoicesAmount.toStringAsFixed(2)}',
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall!

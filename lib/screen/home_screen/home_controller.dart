@@ -78,7 +78,7 @@ class HomeController extends GetxController with StateMixin {
             value.forEach((element) {
               invoicesList.add(
                 DashBoardInvoice(
-                    invoiceAmount: element['invoice']['invoiceValueWithoutGst'],
+                    invoiceAmount: double.parse(element['invoice']['invoiceValueWithoutGst'].toString()),
                     invoiceNumber: element['invoice']['invoiceNumber'],
                     invoiceName: element['invoice']['invoiceName'],
                     paid: element['invoice']['paid'],

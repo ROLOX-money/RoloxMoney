@@ -323,5 +323,7 @@ class LanguageEn extends Languages {
 
   String get netAmount => "Net Amount";
 
+  String get addPayments => "Add Payments";
+
 
 }

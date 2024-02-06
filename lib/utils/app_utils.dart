@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/widget/custom_button.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
 import 'color_resource.dart';
@@ -179,34 +178,36 @@ class AppUtils {
               SizedBox(
                 height: 20,
               ),
-              Container(
-                width: buttonWidth ?? 110,
-                height: 40,
-                child: SizedBox(
-                    height: 40,
-                    width: 120,
-                    child: PrimaryButton(
-                      '${Languages.of(context)!.addClient}',
-                      context,
-                      borderRadius: 12,
-                      onTap: () {
-                        callBack!();
-                      },
-                    )),
+              // Container(
+              //   width: buttonWidth ?? 110,
+              //   height: 40,
+              //   child:
 
-                // SecondaryButton(
-                //   buttonName,
-                //   context,
-                //   fontWeight: FontWeight.w500,
-                //   borderRadius: 8,
-                //   backgroundColor: ColorResource.color000000,
-                //   textColor: ColorResource.colorFFFFFF,
-                //   fontSize: 14,
-                //   onTap: () {
-                //     callBack!();
-                //   },
-                // ),
-              )
+              SizedBox(
+                  height: 40,
+                  width: buttonWidth ?? 110,
+                  child: PrimaryButton(
+                    buttonName,
+                    context,
+                    borderRadius: 12,
+                    onTap: () {
+                      callBack!();
+                    },
+                  )),
+
+              // SecondaryButton(
+              //   buttonName,
+              //   context,
+              //   fontWeight: FontWeight.w500,
+              //   borderRadius: 8,
+              //   backgroundColor: ColorResource.color000000,
+              //   textColor: ColorResource.colorFFFFFF,
+              //   fontSize: 14,
+              //   onTap: () {
+              //     callBack!();
+              //   },
+              // ),
+              // )
             ],
           ),
         ),

@@ -153,7 +153,6 @@ class _OtpScreenState extends State<OtpScreen> {
                       context,
                       cardShape: 1,
                       isIcon: true,
-                      isEnabled: loginController.otpController.text.isNotEmpty,
                       onTap: () {
                         loginController.navigateProfile();
                       },

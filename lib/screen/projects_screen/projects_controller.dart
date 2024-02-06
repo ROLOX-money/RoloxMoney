@@ -66,11 +66,13 @@ class ProjectsController extends GetxController with StateMixin {
           value.forEach((element) {
             projectInvoicesList.add(ProjectModel(
                 id: element['id'],
-                projectvalue:int.tryParse( element['projectvalue'].toString()),
+                projectvalue: int.tryParse(element['projectvalue'].toString()),
                 projectName: element['projectName'],
                 clientName: element['clientName'],
                 dueDate: element['dueDate'],
-                noOfInvoice: element['noOfInvoice']));
+                noOfInvoice: element['noOfInvoice'] != null
+                    ? element['noOfInvoice']
+                    : 0));
           });
           Singleton.projectList = projectInvoicesList;
         } else {

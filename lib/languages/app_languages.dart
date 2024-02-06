@@ -315,4 +315,7 @@ abstract class Languages {
   String get overDue;
 
   String get netAmount;
+
+  String get addPayments;
+
 }

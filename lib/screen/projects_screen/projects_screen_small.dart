@@ -6,6 +6,7 @@ import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
+import 'package:roloxmoney/widget/custom_button.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/rolox_money_widget.dart';
 import 'package:roloxmoney/widget/secondary_button.dart';
@@ -66,10 +67,9 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                             Container(
                               width: 110,
                               height: 40,
-                              child: SecondaryButton(
+                              child: PrimaryButton(
                                 '${Languages.of(context)!.addProject}',
                                 context,
-                                backgroundColor: ColorResource.color000000,
                                 fontWeight: FontWeight.w500,
                                 textColor: ColorResource.colorFFFFFF,
                                 fontSize: 14,
@@ -110,7 +110,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(20),
                                   ),
-                                  color: ColorResource.color381D4E,
+                                  color: ColorResource.initialBgColor,
                                 ),
                                 child: CustomText(
                                   text: AppUtils.getInitials(
@@ -120,7 +120,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                       .textTheme
                                       .titleMedium!
                                       .copyWith(
-                                          color: ColorResource.colorA0BCD0,
+                                          color: ColorResource.initialTextColor,
                                           fontWeight: FontWeight.w700),
                                 ),
                               ),
@@ -152,9 +152,8 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                         width: 5,
                                       ),
                                       CustomText(
-                                        text: projectModel.noOfInvoice
-                                                .toString() ??
-                                            '0',
+                                        text:
+                                            '${projectModel.noOfInvoice.toString()} ${Languages.of(context)?.invoices.capitalizeFirst}',
                                         style: Theme.of(context)
                                             .textTheme
                                             .titleSmall!
@@ -165,7 +164,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                                 fontWeight: FontWeight.w400),
                                       ),
                                       SizedBox(
-                                        width: 5,
+                                        width: 10,
                                       ),
                                       Container(
                                         height: 5,
@@ -182,7 +181,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 5,
+                                        width: 10,
                                       ),
                                       Image.asset(
                                         ImageResource.calendar,
