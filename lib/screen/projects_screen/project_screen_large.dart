@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
-import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';

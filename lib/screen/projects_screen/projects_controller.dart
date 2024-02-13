@@ -7,7 +7,6 @@ import 'package:roloxmoney/screen/projects_screen/add_project/add_project_screen
 import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/RoloxKey.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 /*Chinnadurai Viswanathan*/
 class ProjectsController extends GetxController with StateMixin {

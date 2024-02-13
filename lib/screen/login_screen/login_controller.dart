@@ -3,18 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
 import 'package:roloxmoney/screen/login_profile_screen/login_profile_screen.dart';
 import 'package:roloxmoney/screen/login_screen/otp_screen.dart';
 import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/supa_base_control.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
-import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/utils/rolox_getx_controller.dart';
-import 'package:roloxmoney/widget/custom_button.dart';
-import 'package:roloxmoney/widget/custom_text.dart';
+
 /*Chinnadurai Viswanathan*/
 
 class LoginController extends RoloxGetXController with SupaBaseController {
