@@ -504,9 +504,7 @@ abstract class WidgetUtils {
                         "N")
                   ],
                 )),
-                DataCell(Text(projectModelData.noOfInvoice.toString() == "null"
-                    ? "0"
-                    : projectModelData.noOfInvoice.toString())),
+                DataCell(Text(projectModelData.noOfInvoice.toString())),
                 DataCell(Text(projectModelData.dueDate!)),
                 DataCell(TextButton(
                   onPressed: () {

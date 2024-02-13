@@ -330,37 +330,32 @@ class _OtpScreenState extends State<OtpScreen> {
                 SizedBox(
                   height: 25,
                 ),
-                CustomText(
-                  text: '${Languages.of(Get.context!)?.resendIN} 0:45',
-                  style: Theme.of(Get.context!)
-                      .textTheme
-                      .titleSmall!
-                      .copyWith(fontSize: 14, fontWeight: FontWeight.w400),
-                ),
+                Obx(() {
+                  return CustomText(
+                    text: _timer.value != 0
+                        ? '${Languages.of(context)?.resendIN} 0:${_timer.value.toString()}'
+                        : '${Languages.of(context)?.resend}',
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: _timer.value != 0
+                            ? ColorResource.textColor
+                            : ColorResource.color0093FF),
+                    onTap: () async {
+                      if (_timer.value == 0) {
+                        await SupaBaseController.sendSignInCode(
+                                mobileNumber:
+                                    '+91${loginController.mobilNumberController.text}')
+                            .then((value) {
+                          _timer.value = 45;
+                          _startTimer();
+                        });
+                      }
+                    },
+                  );
+                }),
               ],
             ),
           );
-    // showModalBottomSheet(
-    //         enableDrag: true,
-    //         isDismissible: false,
-    //         context: Get.context!,
-    //         elevation: 30,
-    //         isScrollControlled: true,
-    //         backgroundColor: ColorResource.buttonTextColor,
-    //         shape: RoundedRectangleBorder(
-    //           borderRadius: BorderRadius.only(
-    //             topLeft: Radius.circular(22.0),
-    //             topRight: Radius.circular(22.0),
-    //           ),
-    //         ),
-    //         builder: (builder) {
-    //           return LayoutBuilder(builder: (context, constraint) {
-    //             return Padding(
-    //               padding: EdgeInsets.only(
-    //                   bottom: MediaQuery.of(Get.context!).viewInsets.bottom),
-    //               child:
-    //             );
-    //           });
-    //         });
   }
 }

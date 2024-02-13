@@ -45,20 +45,26 @@ class HomeController extends GetxController with StateMixin {
 
   @override
   void onInit() async {
-    change(null, status: RxStatus.success());
-    SupaBaseController.toGetTheSelectedID(
-            searchKey: "id",
-            searchValue: Singleton.mobileUserId,
-            whatTypeOfValueYouWant: "profiletype",
-            tableName: RoloxKey.supaBaseUserTable)
-        .then((value) {
-      print("values is ${value.toString()}");
-      if (value.isNotEmpty) {
-        typeOfBusiness.value = int.tryParse(value[0]["profiletype"])!;
-      }
-    });
-    toGetTheInvoiceList();
-    super.onInit();
+    change(null, status: RxStatus.loading());
+    try {
+      print("search value is  : ${Singleton.mobileUserId} ");
+
+      await SupaBaseController.toGetTheSelectedID(
+              searchKey: "id",
+              searchValue: Singleton.mobileUserId,
+              whatTypeOfValueYouWant: "profiletype",
+              tableName: RoloxKey.supaBaseUserTable)
+          .then((value) {
+        print("values is ${value.toString()}");
+        if (value.isNotEmpty) {
+          typeOfBusiness.value = int.tryParse(value[0]["profiletype"])!;
+        }
+      });
+      toGetTheInvoiceList();
+      super.onInit();
+    } catch (e) {
+      e.printError();
+    }
   }
 
   toGetTheInvoiceList() async {
@@ -78,7 +84,9 @@ class HomeController extends GetxController with StateMixin {
             value.forEach((element) {
               invoicesList.add(
                 DashBoardInvoice(
-                    invoiceAmount: double.parse(element['invoice']['invoiceValueWithoutGst'].toString()),
+                    invoiceAmount: double.parse(element['invoice']
+                            ['invoiceValueWithoutGst']
+                        .toString()),
                     invoiceNumber: element['invoice']['invoiceNumber'],
                     invoiceName: element['invoice']['invoiceName'],
                     paid: element['invoice']['paid'],

@@ -34,9 +34,10 @@ mixin SupaBaseController {
     }
   }
 
-  static Future<bool> verifyThroughOTP({required mobileNumber,
-    required otpNumber,
-    BuildContext? context}) async {
+  static Future<bool> verifyThroughOTP(
+      {required mobileNumber,
+      required otpNumber,
+      BuildContext? context}) async {
     try {
       return await Singleton.supabaseInstance.client.auth
           .verifyOTP(
@@ -65,11 +66,11 @@ mixin SupaBaseController {
           .from(RoloxKey.supaBaseUserTable)
           .select('id')
           .eq(
-          'phone',
-          Singleton.supabaseInstance.client.auth.currentUser!.phone!
-              .contains('+91')
-              ? Singleton.supabaseInstance.client.auth.currentUser?.phone
-              : '+${Singleton.supabaseInstance.client.auth.currentUser?.phone}')
+              'phone',
+              Singleton.supabaseInstance.client.auth.currentUser!.phone!
+                      .contains('+91')
+                  ? Singleton.supabaseInstance.client.auth.currentUser?.phone
+                  : '+${Singleton.supabaseInstance.client.auth.currentUser?.phone}')
           .then((value) {
         debugPrint('toGetTheSelectedUser response--> $value');
         return value;
@@ -111,11 +112,9 @@ mixin SupaBaseController {
           .then((value) {
         debugPrint('toInsert response--> $value');
         debugPrint(
-            'user phone--> ${Singleton.supabaseInstance.client.auth.currentUser
-                ?.phone}');
+            'user phone--> ${Singleton.supabaseInstance.client.auth.currentUser?.phone}');
         debugPrint(
-            'user id--> ${Singleton.supabaseInstance.client.auth.currentUser
-                ?.id}');
+            'user id--> ${Singleton.supabaseInstance.client.auth.currentUser?.id}');
         return true;
       });
     } catch (e) {
@@ -138,16 +137,16 @@ mixin SupaBaseController {
             .from(RoloxKey.supaBaseFCMTokenTable)
             .update({'fcmToken': fcmTokenValue})
             .eq(
-          'userId',
-          userID,
-        )
+              'userId',
+              userID,
+            )
             .select('*')
             .then((value) {
-          debugPrint('toInsert fcmToken--> $fcmTokenValue');
-          debugPrint('toInsert response--> $value');
-          debugPrint('toInsert userID--> $userID');
-          return true;
-        });
+              debugPrint('toInsert fcmToken--> $fcmTokenValue');
+              debugPrint('toInsert response--> $value');
+              debugPrint('toInsert userID--> $userID');
+              return true;
+            });
       });
     } catch (e) {
       debugPrint('exception--> $e');
@@ -163,10 +162,11 @@ mixin SupaBaseController {
   }
 
   //Common search
-  static Future<List> toGetTheSelectedID({String? whatTypeOfValueYouWant,
-    required searchKey,
-    required searchValue,
-    required tableName}) async {
+  static Future<List> toGetTheSelectedID(
+      {String? whatTypeOfValueYouWant,
+      required searchKey,
+      required searchValue,
+      required tableName}) async {
     try {
       debugPrint('whatTypeOfValueYouWant--> $whatTypeOfValueYouWant');
       debugPrint('searchKey--> $searchKey');
@@ -174,9 +174,11 @@ mixin SupaBaseController {
       debugPrint('tableName--> $tableName');
       return await Singleton.supabaseInstance.client
           .from(tableName)
-          .select(whatTypeOfValueYouWant ?? '*')
+          .select(whatTypeOfValueYouWant != null ? whatTypeOfValueYouWant : '*')
+          // .select(whatTypeOfValueYouWant ?? '*')
           .eq(searchKey, searchValue)
           .then((listOfResponse) {
+        debugPrint('listOfResponse--> ${listOfResponse.toString()}');
         if (listOfResponse is List) {
           return listOfResponse;
         } else {
@@ -250,11 +252,11 @@ mixin SupaBaseController {
           .select('''companyId, ${RoloxKey.supaBaseCompanyTable}!inner (*)''')
           .eq('userid', Singleton.mobileUserId)
           .then((value) {
-        value.forEach((element) {
-          clientList.add(ClientModel.fromJson(element));
-        });
-        debugPrint('clientListResponse--> $value');
-      });
+            value.forEach((element) {
+              clientList.add(ClientModel.fromJson(element));
+            });
+            debugPrint('clientListResponse--> $value');
+          });
       return clientList;
     } catch (e) {
       e.printError();
@@ -269,7 +271,7 @@ mixin SupaBaseController {
           .from(RoloxKey.supaBaseProjectDb)
           .select('*')
           .eq('refrenceID',
-          Singleton.supabaseInstance.client.auth.currentUser!.id)
+              Singleton.supabaseInstance.client.auth.currentUser!.id)
           .then((value) {
         value.forEach((element) {
           clientList.add(Project.fromJson(element));
@@ -294,10 +296,8 @@ mixin SupaBaseController {
 
       await Singleton.supabaseInstance.client
           .from(RoloxKey.supaBaseInvoiceTable)
-          .select('''projectId,${RoloxKey.supaBaseInvoiceTable}!inner''')
-          .execute();
-
-
+          .select(
+              '''projectId,${RoloxKey.supaBaseInvoiceTable}!inner''').execute();
     } catch (e) {}
   }
 }

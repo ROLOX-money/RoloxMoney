@@ -124,164 +124,165 @@ class LoginController extends RoloxGetXController with SupaBaseController {
         ),
         builder: (builder) {
           return LayoutBuilder(builder: (context, constraint) {
-            return Padding(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(Get.context!).viewInsets.bottom),
-              child: Container(
-                margin: EdgeInsets.only(top: 0.5),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(22),
-                    topRight: Radius.circular(22),
-                  ),
-                ),
-                height: 500.0,
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Image.asset(
-                        ImageResource.OTPImagePNG,
-                        height: 80,
-                        width: 80,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    CustomText(
-                      text:
-                          '${Languages.of(Get.context!)?.enter} 6 ${Languages.of(Get.context!)?.digit} ${Languages.of(Get.context!)?.otp}',
-                      style: Theme.of(Get.context!)
-                          .textTheme
-                          .titleSmall!
-                          .copyWith(fontSize: 18, fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomText(
-                          text:
-                              '${Languages.of(Get.context!)?.sentOTPToRegisteredMobile}',
-                          style: Theme.of(Get.context!)
-                              .textTheme
-                              .titleSmall!
-                              .copyWith(
-                                  fontSize: 14, fontWeight: FontWeight.w400),
-                        ),
-                        CustomText(
-                          text: ' +91 $mobileNumber',
-                          style: Theme.of(Get.context!)
-                              .textTheme
-                              .titleSmall!
-                              .copyWith(
-                                  color: ColorResource.textSecondaryColor,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 30),
-                      child: PinCodeTextField(
-                        autoDisposeControllers: false,
-                        appContext: Get.context!,
-                        length: 6,
-                        cursorWidth: 0.5,
-                        cursorColor:
-                            Theme.of(context).textTheme.titleMedium!.color,
-                        pinTheme: PinTheme(
-                            disabledColor:
-                                Theme.of(context).scaffoldBackgroundColor,
-                            shape: PinCodeFieldShape.circle,
-                            borderRadius: BorderRadius.circular(3),
-                            fieldHeight: 40,
-                            fieldWidth: 40,
-                            inactiveFillColor:
-                                Theme.of(context).scaffoldBackgroundColor,
-                            activeFillColor:
-                                Theme.of(context).scaffoldBackgroundColor,
-                            borderWidth: 4,
-                            errorBorderColor: Colors.red,
-                            activeColor:
-                                Theme.of(context).scaffoldBackgroundColor,
-                            selectedColor:
-                                Theme.of(context).scaffoldBackgroundColor,
-                            selectedFillColor:
-                                Theme.of(context).scaffoldBackgroundColor,
-                            inactiveColor:
-                                Theme.of(context).scaffoldBackgroundColor),
-                        enableActiveFill: true,
-                        backgroundColor:
-                            Theme.of(context).scaffoldBackgroundColor,
-                        controller: otpController,
-                        textStyle: Theme.of(Get.context!).textTheme.titleMedium,
-                        keyboardType: TextInputType.number,
-                        boxShadows: const [
-                          BoxShadow(
-                            offset: Offset(0, 0.5),
-                            color: Colors.grey,
-                            blurRadius: 5,
-                          )
-                        ],
-                        onChanged: (value) {},
-                      ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: PrimaryButton(
-                        '${Languages.of(Get.context!)!.signIn}',
-                        Get.context!,
-                        cardShape: 1,
-                        isIcon: true,
-                        onTap: () {
-                          ///fixme
-                          // debugPrint(
-                          //     'otpController.text--> ${otpController.text}');
-                          // debugPrint('otpString--> $otpString');
-                          // if (otpString == otpController.text) {
-                          //   Get.snackbar(
-                          //       'Login Success', 'OTP verified...Thanks...',
-                          //       colorText: Colors.black,
-                          //       backgroundColor: Colors.white);
-                          // } else {
-                          //   Get.snackbar(
-                          //       'Login Failed', 'Something went wrong...',
-                          //       colorText: Colors.black,
-                          //       backgroundColor: Colors.white);
-                          // }
-                          // Get.back();
-                          navigateProfile();
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    CustomText(
-                      text: '${Languages.of(Get.context!)?.resendIN} 0:45',
-                      style: Theme.of(Get.context!)
-                          .textTheme
-                          .titleSmall!
-                          .copyWith(fontSize: 14, fontWeight: FontWeight.w400),
-                    ),
-                  ],
-                ),
-              ),
-            );
+            return OtpScreen(screenName: "smallScreen");
+            //   Padding(
+            //   padding: EdgeInsets.only(
+            //       bottom: MediaQuery.of(Get.context!).viewInsets.bottom),
+            //   child: Container(
+            //     margin: EdgeInsets.only(top: 0.5),
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.only(
+            //         topLeft: Radius.circular(22),
+            //         topRight: Radius.circular(22),
+            //       ),
+            //     ),
+            //     height: 500.0,
+            //     child: Column(
+            //       children: [
+            //         SizedBox(
+            //           height: 40,
+            //         ),
+            //         Container(
+            //           alignment: Alignment.center,
+            //           child: Image.asset(
+            //             ImageResource.OTPImagePNG,
+            //             height: 80,
+            //             width: 80,
+            //           ),
+            //         ),
+            //         SizedBox(
+            //           height: 15,
+            //         ),
+            //         CustomText(
+            //           text:
+            //               '${Languages.of(Get.context!)?.enter} 6 ${Languages.of(Get.context!)?.digit} ${Languages.of(Get.context!)?.otp}',
+            //           style: Theme.of(Get.context!)
+            //               .textTheme
+            //               .titleSmall!
+            //               .copyWith(fontSize: 18, fontWeight: FontWeight.w600),
+            //         ),
+            //         SizedBox(
+            //           height: 15,
+            //         ),
+            //         Row(
+            //           mainAxisAlignment: MainAxisAlignment.center,
+            //           children: [
+            //             CustomText(
+            //               text:
+            //                   '${Languages.of(Get.context!)?.sentOTPToRegisteredMobile}',
+            //               style: Theme.of(Get.context!)
+            //                   .textTheme
+            //                   .titleSmall!
+            //                   .copyWith(
+            //                       fontSize: 14, fontWeight: FontWeight.w400),
+            //             ),
+            //             CustomText(
+            //               text: ' +91 $mobileNumber',
+            //               style: Theme.of(Get.context!)
+            //                   .textTheme
+            //                   .titleSmall!
+            //                   .copyWith(
+            //                       color: ColorResource.textSecondaryColor,
+            //                       fontSize: 14,
+            //                       fontWeight: FontWeight.w400),
+            //             ),
+            //           ],
+            //         ),
+            //         SizedBox(
+            //           height: 15,
+            //         ),
+            //         Padding(
+            //           padding: const EdgeInsets.symmetric(
+            //               vertical: 8.0, horizontal: 30),
+            //           child: PinCodeTextField(
+            //             autoDisposeControllers: false,
+            //             appContext: Get.context!,
+            //             length: 6,
+            //             cursorWidth: 0.5,
+            //             cursorColor:
+            //                 Theme.of(context).textTheme.titleMedium!.color,
+            //             pinTheme: PinTheme(
+            //                 disabledColor:
+            //                     Theme.of(context).scaffoldBackgroundColor,
+            //                 shape: PinCodeFieldShape.circle,
+            //                 borderRadius: BorderRadius.circular(3),
+            //                 fieldHeight: 40,
+            //                 fieldWidth: 40,
+            //                 inactiveFillColor:
+            //                     Theme.of(context).scaffoldBackgroundColor,
+            //                 activeFillColor:
+            //                     Theme.of(context).scaffoldBackgroundColor,
+            //                 borderWidth: 4,
+            //                 errorBorderColor: Colors.red,
+            //                 activeColor:
+            //                     Theme.of(context).scaffoldBackgroundColor,
+            //                 selectedColor:
+            //                     Theme.of(context).scaffoldBackgroundColor,
+            //                 selectedFillColor:
+            //                     Theme.of(context).scaffoldBackgroundColor,
+            //                 inactiveColor:
+            //                     Theme.of(context).scaffoldBackgroundColor),
+            //             enableActiveFill: true,
+            //             backgroundColor:
+            //                 Theme.of(context).scaffoldBackgroundColor,
+            //             controller: otpController,
+            //             textStyle: Theme.of(Get.context!).textTheme.titleMedium,
+            //             keyboardType: TextInputType.number,
+            //             boxShadows: const [
+            //               BoxShadow(
+            //                 offset: Offset(0, 0.5),
+            //                 color: Colors.grey,
+            //                 blurRadius: 5,
+            //               )
+            //             ],
+            //             onChanged: (value) {},
+            //           ),
+            //         ),
+            //         SizedBox(
+            //           height: 15,
+            //         ),
+            //         Padding(
+            //           padding: const EdgeInsets.symmetric(horizontal: 20),
+            //           child: PrimaryButton(
+            //             '${Languages.of(Get.context!)!.signIn}',
+            //             Get.context!,
+            //             cardShape: 1,
+            //             isIcon: true,
+            //             onTap: () {
+            //               ///fixme
+            //               // debugPrint(
+            //               //     'otpController.text--> ${otpController.text}');
+            //               // debugPrint('otpString--> $otpString');
+            //               // if (otpString == otpController.text) {
+            //               //   Get.snackbar(
+            //               //       'Login Success', 'OTP verified...Thanks...',
+            //               //       colorText: Colors.black,
+            //               //       backgroundColor: Colors.white);
+            //               // } else {
+            //               //   Get.snackbar(
+            //               //       'Login Failed', 'Something went wrong...',
+            //               //       colorText: Colors.black,
+            //               //       backgroundColor: Colors.white);
+            //               // }
+            //               // Get.back();
+            //               navigateProfile();
+            //             },
+            //           ),
+            //         ),
+            //         SizedBox(
+            //           height: 25,
+            //         ),
+            //         CustomText(
+            //           text: '${Languages.of(Get.context!)?.resendIN} 0:45',
+            //           style: Theme.of(Get.context!)
+            //               .textTheme
+            //               .titleSmall!
+            //               .copyWith(fontSize: 14, fontWeight: FontWeight.w400),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // );
           });
         });
   }
@@ -294,6 +295,7 @@ class LoginController extends RoloxGetXController with SupaBaseController {
       if (value) {
         timerCalculation();
         if (screen == "smallScreen") {
+          // OtpScreen(screenName: "smallScreen");
           otpBottomSheet(
             mobileNumber: '${mobilNumberController.text}',
           );

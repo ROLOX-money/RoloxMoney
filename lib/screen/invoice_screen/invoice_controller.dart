@@ -10,56 +10,42 @@ import 'package:roloxmoney/utils/RoloxKey.dart';
 
 /*Chinnadurai Viswanathan*/
 class InvoiceController extends GetxController with StateMixin {
-  RxList<Invoice> invoicesList = <Invoice>[].obs;
+  List<Invoice> invoicesList = <Invoice>[];
   RxList<String> projectName = <String>[].obs;
   ProjectsController projectsController = Get.put(ProjectsController());
-  RxList<ProjectModel> updatedProjectInvoicesList = <ProjectModel>[].obs;
+
   RxInt listValueStart = 0.obs;
   RxInt listValueEnd = 0.obs;
   RxBool isEnabled = false.obs;
-  final Map<int, int> invoiceCounts = {};
 
   @override
   void onInit() async {
     change(null, status: RxStatus.loading());
-    await toGetTheInvoiceList();
-    List<int> projectId = <int>[];
-    for (var i = 0; i < invoicesList.length; i++) {
-      Invoice invoiceModel = invoicesList[i];
-      projectId.add(int.parse(invoiceModel.projectName!));
-    }
-    for (var j = 0; j < projectId.length; j++) {
-      for (var i = 0;
-          i < Singleton.projectList.length;
-          // projectsController.projectInvoicesList.length;
-          i++) {
-        // ProjectModel projectModel = projectsController.projectInvoicesList[i];
-        ProjectModel projectModel = Singleton.projectList[i];
-        if (projectId[j] == projectModel.id) {
-          projectName.add(projectModel.projectName!);
-          projectModel.noOfInvoice = projectModel.noOfInvoice != null
-              ? (projectModel.noOfInvoice! + 1)
-              : 1;
-          print("no of invoice added");
-          updatedProjectInvoicesList.add(projectModel);
-          Singleton.updatedProjectList = updatedProjectInvoicesList;
-          change(Singleton.projectList, status: RxStatus.success());
+    await toGetTheInvoiceList().then((value) {
+      List<int> projectId = <int>[];
+      for (var i = 0; i < invoicesList.length; i++) {
+        Invoice invoiceModel = invoicesList[i];
+        projectId.add(int.parse(invoiceModel.projectName!));
+      }
+      for (var j = 0; j < projectId.length; j++) {
+        for (var i = 0;
+            i < projectsController.projectInvoicesList.length;
+            i++) {
+          ProjectModel projectModel = projectsController.projectInvoicesList[i];
+          if (projectId[j] == projectModel.id) {
+            projectName.add(projectModel.projectName!);
+          }
         }
       }
-    }
-    for (var k = 0; k < invoicesList.length; k++) {
-      invoicesList[k].projectName = projectName[k];
-    }
+      for (var k = 0; k < invoicesList.length; k++) {
+        invoicesList[k].projectName = projectName[k];
+      }
 
+      change(invoicesList, status: RxStatus.success());
 
-
-    change(invoicesList, status: RxStatus.success());
-    change(Singleton.invoiceList, status: RxStatus.success());
-    change(Singleton.updatedProjectList, status: RxStatus.success());
-    change(updatedProjectInvoicesList, status: RxStatus.success());
-
-    debugPrint(
-        "after project name updated invoice list value --> ${invoicesList.toString()}");
+      debugPrint(
+          "after project name updated invoice list value --> ${invoicesList.toString()}");
+    });
 
     if (invoicesList.isNotEmpty) {
       if (invoicesList.length <= 20) {
@@ -103,9 +89,7 @@ class InvoiceController extends GetxController with StateMixin {
             });
             debugPrint('invoiceListResponse--> $value');
           });
-      Singleton.invoiceList = invoicesList;
       change(invoicesList, status: RxStatus.success());
-      change(Singleton.invoiceList, status: RxStatus.success());
       return invoicesList;
     } catch (e) {
       e.printError();

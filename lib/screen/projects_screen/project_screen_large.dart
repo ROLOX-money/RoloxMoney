@@ -113,11 +113,12 @@ class _ProjectScreenLargeState extends State<ProjectScreenLarge> {
                   child: WidgetUtils.customTableWidget(
                     context: context,
                     isProjectTap: true,
-                    // listLength: widget.controller!.projectInvoicesList.obs.value.length,
-                    listLength: Singleton.projectList.obs.value.length,
-                    // projectList:
-                    //     widget.controller!.projectInvoicesList.obs.value,
-                    projectList: Singleton.projectList.obs.value,
+                    listLength:
+                        widget.controller!.projectInvoicesList.obs.value.length,
+                    // listLength: Singleton.projectList.obs.value.length,
+                    projectList:
+                        widget.controller!.projectInvoicesList.obs.value,
+                    // projectList: Singleton.projectList.obs.value,
                   ))
               : AppUtils.emptyViewWidget(
                   context: Get.context!,

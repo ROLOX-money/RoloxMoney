@@ -7,10 +7,13 @@ import 'package:roloxmoney/screen/projects_screen/add_project/add_project_screen
 import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/RoloxKey.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 /*Chinnadurai Viswanathan*/
 class ProjectsController extends GetxController with StateMixin {
   RxList<ProjectModel> projectInvoicesList = <ProjectModel>[].obs;
+  RxList<ProjectModel> updatedProjectList = <ProjectModel>[].obs;
+  final Map<int, int> invoiceCounts = {};
 
   RxInt listValueStart = 0.obs;
   RxInt listValueEnd = 0.obs;
@@ -22,18 +25,10 @@ class ProjectsController extends GetxController with StateMixin {
   void onInit() async {
     change(null, status: RxStatus.success());
     print("projectInvoicesList before : ${projectInvoicesList.length}");
-    await getProjectList().then((value) {
-      for (int i = 0; i < value.length; i++) {
-        for (int j = 0; j < Singleton.updatedProjectList.length; j++) {
-          if (value[i].id == Singleton.updatedProjectList[j].id) {
-            value[i] = Singleton.updatedProjectList[j];
-          }
-        }
-      }
-      Singleton.updatedProjectList.clear();
-      change(projectInvoicesList, status: RxStatus.success());
-    });
-    print("projectInvoicesList after : ${projectInvoicesList.length}");
+    // await getProjectList();
+
+    await fetchProjectsWithInvoices();
+
     if (projectInvoicesList.isNotEmpty) {
       if (projectInvoicesList.length <= 20) {
         listValueStart.value = 1;
@@ -74,7 +69,6 @@ class ProjectsController extends GetxController with StateMixin {
                     ? element['noOfInvoice']
                     : 0));
           });
-          Singleton.projectList = projectInvoicesList;
         } else {
           projectInvoicesList.value = [];
           AppUtils.showErrorSnackBar(Get.context!,
@@ -82,7 +76,6 @@ class ProjectsController extends GetxController with StateMixin {
               durations: 2000);
         }
         change(projectInvoicesList, status: RxStatus.success());
-        change(Singleton.projectList, status: RxStatus.success());
       });
       return projectInvoicesList;
     } catch (e) {
@@ -90,6 +83,67 @@ class ProjectsController extends GetxController with StateMixin {
       return [];
     }
   }
+
+  Future<List<ProjectModel>> fetchProjectsWithInvoices() async {
+    change(null, status: RxStatus.loading());
+    try {
+      await Singleton.supabaseInstance.client
+          .from('project_invoice_summary_with_invoice_count')
+          .select()
+          // .eq("refrenceID", Singleton.mobileUserId)
+          .execute()
+          .then((response) {
+        print('Projects with invoices: ${response.data}');
+        if (response.data is List) {
+          projectInvoicesList.value = [];
+          response.data.forEach((element) {
+            projectInvoicesList.add(ProjectModel(
+                id: element['id'],
+                projectvalue: int.tryParse(element['projectvalue'].toString()),
+                projectName: element['projectName'],
+                clientName: element['clientName'],
+                dueDate: element['dueDate'],
+                noOfInvoice: element['invoice_count']));
+          });
+        } else {
+          projectInvoicesList.value = [];
+          AppUtils.showErrorSnackBar(Get.context!,
+              'Something went wrong. Please try again after sometime',
+              durations: 2000);
+        }
+        change(projectInvoicesList, status: RxStatus.success());
+      });
+      return projectInvoicesList;
+    } catch (e) {
+      e.printError();
+      return [];
+    }
+  }
+
+  Future<void> fetchProjectsWithInvoicesByUsers() async {
+    await Singleton.supabaseInstance.client
+        .from('project_invoice_summary_with_invoice_count')
+        .select()
+        .eq("refrenceID", Singleton.mobileUserId)
+        .execute()
+        .then((response) {
+      print('Projects with invoices: ${response.data}');
+    });
+  }
+
+  // Future<void> fetchProjectInvoiceSummary() async {
+  //   final client = Supabase.instance.client;
+  //   final response = await client
+  //       // .from('project_invoice_summary_with_invoice_count')
+  //       .from('Project and Invoice Summary')
+  //       .select()
+  //       .execute();
+  //   if (response.data != null) {
+  //     print('Error fetching project invoice summary: ${response.data.message}');
+  //   } else {
+  //     print('Project invoice summary: ${response.data}');
+  //   }
+  // }
 
   void navigateAddProjectScreen({int? arguments}) {
     Get.toNamed(AddProjectScreen.routeName, arguments: arguments)!
