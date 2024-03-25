@@ -48,13 +48,11 @@ class NumberStepper extends StatelessWidget {
           child: getInnerElementOfStepper(i + 1, context),
           decoration: BoxDecoration(
             color: currentStep > i + 1
-                ? ColorResource.primaryColor
-                : Theme.of(context).scaffoldBackgroundColor,
+                ? ColorResource.color00E94F
+                : Theme.of(context).backgroundColor,
             borderRadius: BorderRadius.all(Radius.circular(25.0)),
             border: Border.all(
-              color: currentStep > i + 1
-                  ? ColorResource.stepperColor
-                  : ColorResource.stepperColor,
+              color: ColorResource.color00E94F,
               width: 1.0,
             ),
           ),
@@ -68,8 +66,8 @@ class NumberStepper extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 3),
               height: 1,
               color: currentStep > i + 1
-                  ? ColorResource.stepperColor
-                  : ColorResource.stepperLineColor,
+                  ? ColorResource.color00E94F
+                  : Colors.white,
             ),
           ),
         );
@@ -83,7 +81,8 @@ class NumberStepper extends StatelessWidget {
     if (index < currentStep) {
       return Icon(
         Icons.check,
-        color: stepCompleteColor,
+        color:
+            currentStep > index + 1 ? ColorResource.color00E94F : Colors.white,
         size: 20.0,
       );
     } else {
@@ -91,9 +90,7 @@ class NumberStepper extends StatelessWidget {
         child: CustomText(
           text: '$index',
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
-              color: currentStep > index + 1
-                  ? ColorResource.stepperLineColor
-                  : ColorResource.stepperColor,
+              color: ColorResource.color00E94F,
               fontSize: 16,
               fontWeight: FontWeight.w400),
         ),

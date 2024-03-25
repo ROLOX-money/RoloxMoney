@@ -7,6 +7,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/RoloxKey.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../login_profile_screen/login_profile_controller.dart';
 
 enum ModelOfWork { fullTime, partTime }
 
@@ -18,7 +21,6 @@ class ProfileController extends GetxController with StateMixin {
   TextEditingController businessNameController = TextEditingController();
   TextEditingController bankAccountController = TextEditingController();
   TextEditingController bankIFSCController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
   RxBool isFreelancer = false.obs;
   RxBool isLogo = false.obs;
   final form = GlobalKey<FormState>();

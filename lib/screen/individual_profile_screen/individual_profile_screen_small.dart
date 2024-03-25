@@ -5,6 +5,7 @@ import 'package:roloxmoney/screen/dashboard_screen/dashboard_controller.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
 import 'package:roloxmoney/screen/individual_profile_screen/individual_profile_controller.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
+import 'package:roloxmoney/utils/font.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/utils/widget_utils.dart';
 import 'package:roloxmoney/widget/custom_button.dart';
@@ -200,7 +201,7 @@ class IndividualProfileScreenSmallState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 30),
-                  // model of work
+                  // mode of work
                   WidgetUtils.dropDown(
                       context: context,
                       lableName:

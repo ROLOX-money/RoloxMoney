@@ -17,15 +17,12 @@ class AddClientController extends GetxController
   TextEditingController legalNameController = TextEditingController();
   TextEditingController emailIDController = TextEditingController();
   TextEditingController mobileNumberController = TextEditingController();
-  TextEditingController fullAddressController = TextEditingController();
   TextEditingController panNoController = TextEditingController();
-  TextEditingController aadhaarNoController = TextEditingController();
   TextEditingController contactPersonController = TextEditingController();
   TextEditingController departmentController = TextEditingController();
   TextEditingController designationController = TextEditingController();
   TextEditingController fullAddress = TextEditingController();
   Rx<TypOfBusiness> typOfBusiness = TypOfBusiness.business.obs;
-  RxBool iDontHaveBusiness = true.obs;
   final form = GlobalKey<FormState>();
 
   RxBool gstNumber = false.obs;
@@ -56,11 +53,6 @@ class AddClientController extends GetxController
   void businessToggle({TypOfBusiness? value}) {
     typOfBusiness = value!.obs;
     change(typOfBusiness);
-  }
-
-  void noBusinessCheckBox({bool? values}) {
-    iDontHaveBusiness = values!.obs;
-    change(iDontHaveBusiness);
   }
 
   void createClient() {

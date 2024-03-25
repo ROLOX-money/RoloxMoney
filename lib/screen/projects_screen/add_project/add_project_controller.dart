@@ -1,4 +1,4 @@
-
+import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +7,7 @@ import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/RoloxKey.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/picker.dart';
+import 'package:roloxmoney/utils/rolox_autocomplete_textfiled.dart';
 import 'package:roloxmoney/utils/supa_base_control.dart';
 
 /*Chinnadurai Viswanathan*/
@@ -18,7 +19,6 @@ class AddProjectController extends GetxController
   TextEditingController projectDueDateDController = TextEditingController();
   TextEditingController projectLinkDController = TextEditingController();
   TextEditingController emailIDController = TextEditingController();
-  TextEditingController projectLinkController = TextEditingController();
   final form = GlobalKey<FormState>();
   List<ClientModel> clientList = [];
   String? clientId;

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:roloxmoney/screen/login_screen/login_controller.dart';
 
 /*Chinnadurai Viswanathan*/
 class IndividualProfileController extends GetxController with StateMixin {
@@ -12,7 +11,8 @@ class IndividualProfileController extends GetxController with StateMixin {
   TextEditingController addressController = TextEditingController();
   TextEditingController gstController = TextEditingController();
   TextEditingController plsIfSpecifyController = TextEditingController();
-  TextEditingController plsIfSpecifyControllerForNatureOfWork = TextEditingController();
+  TextEditingController plsIfSpecifyControllerForNatureOfWork =
+      TextEditingController();
   TextEditingController mobilNumberController = TextEditingController();
   TextEditingController aadharNoController = TextEditingController();
 
@@ -28,13 +28,13 @@ class IndividualProfileController extends GetxController with StateMixin {
     'Auditor',
     'Other',
   ].obs;
-  RxString natureOfWorkValue = 'Software'.obs;
   RxList<String> natureOfBusiness = [
     'Software',
     'Driver',
     'Auditor',
-    'Others',
+    'Other',
   ].obs;
+  RxString natureOfWorkValue = 'Software'.obs;
   RxString natureOfBusinessValue = 'Software'.obs;
   RxBool iDontHaveBusiness = true.obs;
 
@@ -59,13 +59,10 @@ class IndividualProfileController extends GetxController with StateMixin {
 
   final form = GlobalKey<FormState>();
 
-  LoginController loginController = Get.put(LoginController());
-
   @override
   void onInit() async {
     change(null, status: RxStatus.success());
     Future.delayed(const Duration(seconds: 5), () {});
-    mobilNumberController.value = loginController.mobilNumberController.value;
     super.onInit();
   }
 

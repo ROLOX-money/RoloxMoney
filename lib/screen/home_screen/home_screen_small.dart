@@ -6,6 +6,7 @@ import 'package:roloxmoney/screen/home_screen/home_controller.dart';
 import 'package:roloxmoney/screen/home_screen/home_detail_screen.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
+import 'package:roloxmoney/widget/custom_button.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/rolox_money_widget.dart';
 import 'package:roloxmoney/widget/secondary_button.dart';
