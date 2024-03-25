@@ -47,7 +47,8 @@ class _AddInvoiceScreenLargeState extends State<AddInvoiceScreenLarge> {
                     child: Container(
                         width: MediaQuery.of(context).size.width / 2,
                         height: MediaQuery.of(context).size.height / 1.2,
-                        padding: EdgeInsets.symmetric(horizontal: 16,vertical: 10),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                         decoration: BoxDecoration(
                             color: ColorResource.buttonTextColor,
                             borderRadius:
@@ -130,6 +131,17 @@ class _AddInvoiceScreenLargeState extends State<AddInvoiceScreenLarge> {
                                     height: 50,
                                     context: context,
                                     validationRules: ['required'],
+                                    hintText: Languages.of(context)?.gstCharges,
+                                    keyBoardType: TextInputType.phone,
+                                    controller:
+                                        widget.controller!.gstChargesController,
+                                    labelName:
+                                        '${Languages.of(context)?.gstCharges}',
+                                  ),
+                                  WidgetUtils.genericTextFiled(
+                                    height: 50,
+                                    context: context,
+                                    validationRules: ['required'],
                                     hintText: Languages.of(context)
                                         ?.brandNameHintText,
                                     controller: widget
@@ -163,18 +175,6 @@ class _AddInvoiceScreenLargeState extends State<AddInvoiceScreenLarge> {
                                     labelName:
                                         '${Languages.of(context)?.hsnCode}',
                                   ),
-                                  WidgetUtils.genericTextFiled(
-                                    height: 50,
-                                    context: context,
-                                    validationRules: ['required'],
-                                    hintText: Languages.of(context)?.gstCharges,
-                                    keyBoardType: TextInputType.phone,
-                                    controller:
-                                        widget.controller!.gstChargesController,
-                                    labelName:
-                                        '${Languages.of(context)?.gstCharges}',
-                                  ),
-
                                   const SizedBox(
                                     height: 15,
                                   ),

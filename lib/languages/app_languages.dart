@@ -315,4 +315,10 @@ abstract class Languages {
   String get overDue;
 
   String get netAmount;
+
+  String get termsOfUse;
+
+  String get privacyPolicy;
+
+  String get alternate;
 }

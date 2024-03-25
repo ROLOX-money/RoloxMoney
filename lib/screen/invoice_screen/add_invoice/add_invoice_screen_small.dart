@@ -109,8 +109,7 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                             key: Key("projectName"),
                             // alignment: Alignment.center,
                             child: AutoComplete.autoComplete(
-                                hintText:
-                                    Languages.of(context)!.projectName,
+                                hintText: Languages.of(context)!.projectName,
                                 value: null,
                                 suggestionValue: widget.controller!.projectList
                                     .map((item) => item.projectName!)
@@ -130,15 +129,15 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                                 widget.controller!.invoiceNameController,
                             labelName: '${Languages.of(context)?.invoiceName}',
                           ),
-                          WidgetUtils.genericTextFiled(
-                            context: context,
-                            validationRules: ['required'],
-                            hintText: Languages.of(context)?.invoiceNoHintText,
-                            controller:
-                                widget.controller!.invoiceNumberController,
-                            labelName:
-                                '${Languages.of(context)?.invoiceNumber}',
-                          ),
+                          // WidgetUtils.genericTextFiled(
+                          //   context: context,
+                          //   validationRules: ['required'],
+                          //   hintText: Languages.of(context)?.invoiceNoHintText,
+                          //   controller:
+                          //       widget.controller!.invoiceNumberController,
+                          //   labelName:
+                          //       '${Languages.of(context)?.invoiceNumber}',
+                          // ),
                           WidgetUtils.genericTextFiled(
                             context: context,
                             validationRules: ['required'],
@@ -148,6 +147,15 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                                 .controller!.invoiceValueWithoutGSTController,
                             labelName:
                                 '${Languages.of(context)?.invoiceValueWithoutGST}',
+                          ),
+                          WidgetUtils.genericTextFiled(
+                            context: context,
+                            validationRules: ['required'],
+                            hintText:
+                                '${Languages.of(context)?.gstCharges} (Optional)',
+                            keyBoardType: TextInputType.phone,
+                            controller: widget.controller!.gstChargesController,
+                            labelName: '${Languages.of(context)?.gstCharges}',
                           ),
                           WidgetUtils.genericTextFiled(
                             context: context,
@@ -171,15 +179,6 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                             keyBoardType: TextInputType.phone,
                             controller: widget.controller!.hsnController,
                             labelName: '${Languages.of(context)?.hsnCode}',
-                          ),
-                          WidgetUtils.genericTextFiled(
-                            context: context,
-                            validationRules: ['required'],
-                            hintText:
-                                '${Languages.of(context)?.gstCharges} (Optional)',
-                            keyBoardType: TextInputType.phone,
-                            controller: widget.controller!.gstChargesController,
-                            labelName: '${Languages.of(context)?.gstCharges}',
                           ),
                           // WidgetUtils.genericTextFiled(
                           //   context: context,

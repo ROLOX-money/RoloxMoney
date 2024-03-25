@@ -292,7 +292,8 @@ class _IndividualProfileScreenLargeState
                   ),
                 // mobile no
                 CustomText(
-                  text: '${Languages.of(context)?.mobileNumber}',
+                  text:
+                      '${Languages.of(context)?.alternate} ${Languages.of(context)?.mobileNumber}',
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium!

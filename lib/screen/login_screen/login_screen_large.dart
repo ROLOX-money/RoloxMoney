@@ -237,7 +237,7 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                                 children: [
                                   TextSpan(
                                     text:
-                                        '${Languages.of(context)?.roloxTermsAndCondition}',
+                                        '${Languages.of(context)?.termsOfUse}',
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleMedium!
@@ -251,7 +251,38 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
                                         debugPrint(
-                                            "onTap of Terms and condition screen");
+                                            "onTap of Terms of use screen");
+
+                                        ///fixme
+                                        // need to navigate the terms and condition Screen
+                                      },
+                                  ),
+                                  TextSpan(
+                                    text: ' & ',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .copyWith(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400),
+                                  ),
+                                  TextSpan(
+                                    text:
+                                        '${Languages.of(context)?.privacyPolicy}',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .copyWith(
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            decoration:
+                                                TextDecoration.underline),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        debugPrint(
+                                            "onTap of privacy policy screen");
 
                                         ///fixme
                                         // need to navigate the terms and condition Screen

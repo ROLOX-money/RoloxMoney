@@ -187,7 +187,8 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                 ),
                               ),
                               SizedBox(width: 30),
-                              GestureDetector(
+                              // TODO -> Agency Flow Future update
+                              /*  GestureDetector(
                                 onTap: () {
                                   widget.controller!.businessToggle(
                                       value: TypOfBusiness.agency);
@@ -221,17 +222,19 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                     )
                                   ],
                                 ),
-                              ),
+                              ),*/
                             ],
                           ),
                           trailing: Image.asset(
                             (widget.controller!.typOfBusiness.obs.value ==
                                     TypOfBusiness.individual)
                                 ? ImageResource.businessType
-                                : (widget.controller!.typOfBusiness.obs.value ==
-                                        TypOfBusiness.business)
-                                    ? ImageResource.companyProfileImagePng
-                                    : ImageResource.businessType,
+                                : ImageResource.companyProfileImagePng,
+                            // TODO -> Agency Flow Future update
+                            /*     : (widget.controller!.typOfBusiness.obs.value ==
+                                         TypOfBusiness.business)
+                                     ? ImageResource.companyProfileImagePng
+                                     : ImageResource.businessType,*/
                             height: 113,
                             width: 113,
                           ),
@@ -354,8 +357,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                         hintText:
                                             '${Languages.of(context)?.gstNumberHint}'),
                                     // social id
-
-                                    WidgetUtils.genericTextFiled(
+                                    /*WidgetUtils.genericTextFiled(
                                         height: 50,
                                         context: context,
                                         keyBoardType: TextInputType.name,
@@ -363,7 +365,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                         labelName:
                                             '${Languages.of(context)?.enterAnyOneSocialMediaIdLabel}',
                                         hintText: Languages.of(context)
-                                            ?.socialIdHint),
+                                            ?.socialIdHint),*/
                                   ],
                                 ),
                               )
@@ -440,7 +442,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                         hintText:
                                             '${Languages.of(context)?.gstNumberHint}'),
                                     // social id
-                                    WidgetUtils.genericTextFiled(
+                                    /* WidgetUtils.genericTextFiled(
                                         height: 50,
                                         context: context,
                                         keyBoardType: TextInputType.name,
@@ -448,7 +450,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                         labelName:
                                             '${Languages.of(context)?.enterAnyOneSocialMediaIdLabel}',
                                         hintText: Languages.of(context)
-                                            ?.socialIdHint),
+                                            ?.socialIdHint),*/
                                   ],
                                 ),
                               ),
@@ -463,25 +465,27 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                       fontSize: 20,
                       onTap: () {
                         if (widget.controller!.form.currentState!.validate()) {
-                          if (widget
+                          widget.controller!.singUpNewUser();
+                          // TODO -> Agency Flow Future update
+                          /*if (widget
                                   .controller!.typOfBusiness.obs.value.value ==
                               TypOfBusiness.agency) {
                             showAlertForAgencyFlow();
                           } else {
                             widget.controller!.singUpNewUser();
-                          }
+                          }*/
 
-                          // if (widget.controller!.typOfBusiness.obs.value.value == TypOfBusiness.business) {
-                          //   Get.put(BusinessProfileController());
-                          //   Get.toNamed(BusinessProfileScreen.routeName);
-                          // } else if (widget
-                          //         .controller!.typOfBusiness.obs.value.value ==
-                          //     TypOfBusiness.individual) {
-                          //   Get.put(IndividualProfileController());
-                          //   Get.toNamed(IndividualProfileScreen.routeName);
-                          // } else {
-                          //   showAlertForAgencyFlow();
-                          // }
+                          /* if (widget.controller!.typOfBusiness.obs.value.value == TypOfBusiness.business) {
+                            Get.put(BusinessProfileController());
+                            Get.toNamed(BusinessProfileScreen.routeName);
+                          } else if (widget
+                                  .controller!.typOfBusiness.obs.value.value ==
+                              TypOfBusiness.individual) {
+                            Get.put(IndividualProfileController());
+                            Get.toNamed(IndividualProfileScreen.routeName);
+                          } else {
+                            showAlertForAgencyFlow();
+                          }*/
                         }
                       },
                     )

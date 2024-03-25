@@ -268,7 +268,8 @@ class IndividualProfileScreenSmallState
                     ),
                   // mobile no
                   CustomText(
-                    text: '${Languages.of(context)?.mobileNumber}',
+                    text:
+                        '${Languages.of(context)?.alternate} ${Languages.of(context)?.mobileNumber}',
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
                         color: ColorResource.colorEC008C,
                         fontSize: 14,

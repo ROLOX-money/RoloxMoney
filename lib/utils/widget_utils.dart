@@ -20,6 +20,7 @@ abstract class WidgetUtils {
       {required BuildContext context,
       required TextEditingController controller,
       required String labelName,
+      bool isRequired = true,
       List<String> validationRules = const [],
       String? suffixImagePath,
       String? hintText,
@@ -40,14 +41,25 @@ abstract class WidgetUtils {
         SizedBox(
           height: 10,
         ),
-        CustomText(
-          text: labelName,
-          style: labelStyle ??
-              Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(fontWeight: FontWeight.w500),
-        ),
+        RichText(
+            overflow: TextOverflow.fade,
+            softWrap: true,
+            text: TextSpan(
+              text: labelName,
+              style: labelStyle ??
+                  Theme.of(context)
+                      .textTheme
+                      .titleMedium!
+                      .copyWith(fontWeight: FontWeight.w500),
+              children: [
+                TextSpan(
+                    text: ' * ',
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        color: ColorResource.primaryColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400)),
+              ],
+            )),
         const SizedBox(
           height: 5,
         ),
@@ -108,7 +120,7 @@ abstract class WidgetUtils {
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
             border: Border.all(color: Colors.grey, width: 0.25),
-            // boxShadow: ColorResource.boxShadow,
+// boxShadow: ColorResource.boxShadow,
             color: Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.all(Radius.circular(5.0)),
           ),

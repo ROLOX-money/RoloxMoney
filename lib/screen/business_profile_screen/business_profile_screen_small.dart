@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/business_profile_screen/business_profile_controller.dart';
-import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/widget_utils.dart';
 import 'package:roloxmoney/widget/custom_button.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/custom_textfield.dart';
 import 'package:roloxmoney/widget/rolox_money_widget.dart';
-import '../dashboard_screen/dashboard_controller.dart';
 
 /*Chinnadurai Viswanathan*/
 // ignore: must_be_immutable
@@ -400,7 +398,7 @@ class BusinessProfileScreenSmallState
                                     ),
                                   CustomText(
                                     text:
-                                        '${Languages.of(context)?.mobileNumber}',
+                                        '${Languages.of(context)?.business} ${Languages.of(context)?.mobileNumber}',
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleSmall!
@@ -489,7 +487,7 @@ class BusinessProfileScreenSmallState
                                     controller:
                                         widget.controller!.emailController,
                                     labelName:
-                                        '${Languages.of(context)?.emailID}',
+                                        '${Languages.of(context)?.business} ${Languages.of(context)?.emailID}',
                                     labelStyle: Theme.of(context)
                                         .textTheme
                                         .titleSmall!

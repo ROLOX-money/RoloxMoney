@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=/Users/sarankumarjeyabalan/Desktop/flutter"
-export "FLUTTER_APPLICATION_PATH=/Users/sarankumarjeyabalan/Desktop/flutter_app/RoloxMoney/RoloxMoney"
+export "FLUTTER_ROOT=/Users/alwinraj/Documents/Software/flutter"
+export "FLUTTER_APPLICATION_PATH=/Users/alwinraj/Documents/proj/RoloxMoney"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=1.0.0"
