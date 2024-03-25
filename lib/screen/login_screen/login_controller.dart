@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -7,21 +6,17 @@ import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
-import 'package:roloxmoney/screen/login_profile_screen/login_profile_controller.dart';
 import 'package:roloxmoney/screen/login_profile_screen/login_profile_screen.dart';
 import 'package:roloxmoney/screen/welcome_screen/welcome_screen.dart';
 import 'package:roloxmoney/screen/welcome_screen/welcome_screen_controller.dart';
 import 'package:roloxmoney/singleton.dart';
-import 'package:roloxmoney/utils/RoloxKey.dart';
 import 'package:roloxmoney/utils/supa_base_control.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
-import 'package:roloxmoney/utils/http_url.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/utils/rolox_getx_controller.dart';
 import 'package:roloxmoney/widget/custom_button.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 /*Chinnadurai Viswanathan*/
 
 class LoginController extends RoloxGetXController with SupaBaseController {
@@ -38,6 +33,11 @@ class LoginController extends RoloxGetXController with SupaBaseController {
   @override
   void onInit() async {
     mobilNumberController.text = '9585313659';
+
+    if (kDebugMode) {
+      acceptTermsAndCondition.value = true;
+      otpController.text = "1234";
+    }
     change(null, status: RxStatus.success());
     // if (kDebugMode) mobilNumberController.text = '9585313659';
     // Future.delayed(const Duration(seconds: 5), () {});
@@ -45,6 +45,18 @@ class LoginController extends RoloxGetXController with SupaBaseController {
     super.onInit();
   }
 
+  void navigateProfile() {
+    if (otpController.text.length == 4) {
+      // Future.delayed(const Duration(seconds: 5), () {
+      Get.put(WelcomeController());
+      Get.toNamed(WelcomeScreen.routeName);
+      // });
+    }
+  }
+
+  // Get.put(LoginProfileController());
+  // Get.offAndToNamed(LoginProfileScreen.routeName);
+  // Get.toNamed(LoginProfileScreen.routeName);
   Future<void> otpVerification({BuildContext? context}) async {
     if (otpController.text.length == 6) {
       await SupaBaseController.verifyThroughOTP(
@@ -84,19 +96,6 @@ class LoginController extends RoloxGetXController with SupaBaseController {
   void noAgreeTermsAndConditionCheckBox({bool? values}) {
     acceptTermsAndCondition = values!.obs;
     change(acceptTermsAndCondition);
-  }
-
-  Future<void> triggerLogin() async {
-    change(null, status: RxStatus.loading());
-    /*await SupaBaseController.sendSignInCode(
-            mobileNumber: '+91${mobilNumberController.text}')
-        .then((value) {
-      if (value) {
-        otpBottomSheet(mobileNumber: '${mobilNumberController.text}');
-      }
-    });*/
-    otpBottomSheet(mobileNumber: '${mobilNumberController.text}');
-    change(null, status: RxStatus.success());
   }
 
   void otpBottomSheet({String? mobileNumber, String? otpString}) {
@@ -176,7 +175,7 @@ class LoginController extends RoloxGetXController with SupaBaseController {
                               .textTheme
                               .titleSmall!
                               .copyWith(
-                                  color: ColorResource.colorEC008C,
+                                  color: ColorResource.colorE08AF4,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400),
                         ),
@@ -192,8 +191,6 @@ class LoginController extends RoloxGetXController with SupaBaseController {
                         appContext: Get.context!,
                         length: 6,
                         cursorWidth: 1,
-                        autoFocus: true,
-                        enablePinAutofill: true,
                         cursorColor: ColorResource.colorFFFFFF,
                         pinTheme: PinTheme(
                             disabledColor:
@@ -224,7 +221,7 @@ class LoginController extends RoloxGetXController with SupaBaseController {
                           BoxShadow(
                             offset: Offset(0, 0.5),
                             color: Colors.grey,
-                            blurRadius: 4,
+                            blurRadius: 5,
                           )
                         ],
                         onChanged: (value) {},
@@ -239,7 +236,21 @@ class LoginController extends RoloxGetXController with SupaBaseController {
                       cardShape: 1,
                       isIcon: true,
                       onTap: () {
-                        otpVerification(context: context);
+                        ///fixme
+                        // debugPrint('otpController.text--> ${otpController.text}');
+                        // debugPrint('otpString--> $otpString');
+                        // if (otpString == otpController.text) {
+                        //   Get.snackbar(
+                        //       'Login Success', 'OTP verified...Thanks...',
+                        //       colorText: Colors.black,
+                        //       backgroundColor: Colors.white);
+                        // } else {
+                        //   Get.snackbar('Login Failed', 'Something went wrong...',
+                        //       colorText: Colors.black,
+                        //       backgroundColor: Colors.white);
+                        // }
+                        // Get.back();
+                        navigateProfile();
                       },
                     ),
                     SizedBox(
@@ -261,5 +272,18 @@ class LoginController extends RoloxGetXController with SupaBaseController {
             );
           });
         });
+  }
+
+  Future<void> triggerLogin() async {
+    change(null, status: RxStatus.loading());
+    /*await SupaBaseController.sendSignInCode(
+            mobileNumber: '+91${mobilNumberController.text}')
+        .then((value) {
+      if (value) {
+        otpBottomSheet(mobileNumber: '${mobilNumberController.text}');
+      }
+    });*/
+    otpBottomSheet(mobileNumber: '${mobilNumberController.text}');
+    change(null, status: RxStatus.success());
   }
 }

@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:roloxmoney/screen/clients_screen/client_screen_large.dart';
 import 'package:roloxmoney/screen/clients_screen/clients_controller.dart';
 import 'package:roloxmoney/screen/clients_screen/clients_screen_small.dart';
-import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
-import 'package:roloxmoney/screen/projects_screen/projects_screen_small.dart';
-import 'package:roloxmoney/screen/template_screen/template_controller.dart';
-import 'package:roloxmoney/screen/template_screen/template_screen_small.dart';
 import 'package:roloxmoney/widget/responsive_widget.dart';
 
 /*Chinnadurai Viswanathan*/
@@ -32,9 +29,9 @@ class ClientsScreenState extends State<ClientsScreen> {
       assignId: true,
       builder: (controller) {
         return ResponsiveWidget(
-          largeScreen: ClientsScreenSmall(
+          largeScreen: ClientScreenLarge(
               controller: controller, scaffoldKey: widget.scaffoldKey),
-          mediumScreen: ClientsScreenSmall(
+          mediumScreen: ClientScreenLarge(
               controller: controller, scaffoldKey: widget.scaffoldKey),
           smallScreen: ClientsScreenSmall(
               controller: controller, scaffoldKey: widget.scaffoldKey),

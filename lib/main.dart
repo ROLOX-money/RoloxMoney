@@ -1,7 +1,5 @@
-import 'package:altogic/altogic.dart';
+
 import 'package:dynamic_themes/dynamic_themes.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -24,16 +22,16 @@ import 'package:roloxmoney/screen/profile_screen/profile_controller.dart';
 import 'package:roloxmoney/screen/projects_screen/add_project/add_project_controller.dart';
 import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
 import 'package:roloxmoney/screen/welcome_screen/welcome_screen_controller.dart';
-import 'package:roloxmoney/singleton.dart';
+import 'package:roloxmoney/screen/withdraw_fund_screen/withdraw_controller.dart';
 import 'package:roloxmoney/utils/RoloxKey.dart';
 import 'package:roloxmoney/utils/app_themes.dart';
 import 'package:roloxmoney/widget/rolox_money_core_widgets.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+
 
 /*Chinnadurai Viswanathan*/
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
   Get.put(LoginController());
   Get.put(WelcomeController());
   Get.put(LoginProfileController());
@@ -49,6 +47,7 @@ Future<void> main() async {
   Get.lazyPut(() => AddBankAccountController());
   Get.lazyPut(() => ProfileController());
   Get.lazyPut(() => BankListController());
+  Get.lazyPut(() => WithdrawFundController());
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

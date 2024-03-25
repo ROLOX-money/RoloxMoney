@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
-import 'package:roloxmoney/screen/business_profile_screen/business_profile_controller.dart';
-import 'package:roloxmoney/screen/business_profile_screen/business_profile_screen.dart';
-import 'package:roloxmoney/screen/individual_profile_screen/individual_profile_controller.dart';
-import 'package:roloxmoney/screen/individual_profile_screen/individual_profile_screen.dart';
 import 'package:roloxmoney/screen/login_profile_screen/login_profile_controller.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';

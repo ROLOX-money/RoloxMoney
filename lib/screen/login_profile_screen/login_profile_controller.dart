@@ -1,15 +1,13 @@
 import 'dart:async';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
-import 'package:roloxmoney/screen/login_screen/login_screen.dart';
-import 'package:roloxmoney/singleton.dart';
+
 import 'package:roloxmoney/utils/RoloxKey.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/supa_base_control.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+
 
 /*Chinnadurai Viswanathan*/
 enum TypOfBusiness { individual, business, agency }
@@ -21,6 +19,8 @@ class LoginProfileController extends GetxController
   TextEditingController companyNameController = TextEditingController();
   TextEditingController panNumberController = TextEditingController();
   TextEditingController gstNumberController = TextEditingController();
+  TextEditingController aadhaarNumberController = TextEditingController();
+
   TextEditingController contactPersonNameController = TextEditingController();
   TextEditingController address1 = TextEditingController();
   TextEditingController address2 = TextEditingController();

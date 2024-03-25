@@ -377,7 +377,7 @@ class AutoCompleteTextFieldState<T> extends State<AutoCompleteTextField> {
                       }).toList(),
                     )))));
       });
-      Overlay.of(context)!.insert(listSuggestionsEntry!);
+      Overlay.of(context).insert(listSuggestionsEntry!);
     }
 
     filteredSuggestions = getSuggestions(

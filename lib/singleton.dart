@@ -1,5 +1,4 @@
 /*Chinnadurai Viswanathan*/
-import 'package:altogic/altogic.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Singleton {

@@ -4,7 +4,6 @@ import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_controller.dart';
 import 'package:roloxmoney/screen/payment_screen/add_bank_account/add_bank_account_controller.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
-import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/utils/widget_utils.dart';
 import 'package:roloxmoney/widget/custom_button.dart';
 import 'package:roloxmoney/widget/custom_text.dart';

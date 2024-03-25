@@ -242,7 +242,6 @@ class ClientsScreenSmallState extends State<ClientsScreenSmall> {
                                 ),
                               ),
                             );
-                            ;
                           })
                       : AppUtils.emptyViewWidget(
                           context: Get.context!,

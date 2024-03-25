@@ -1,9 +1,6 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:roloxmoney/model/project_model.dart';
-import 'package:roloxmoney/screen/clients_screen/entites/clinet_model.dart';
 import 'package:roloxmoney/screen/projects_screen/add_project/add_project_controller.dart';
 import 'package:roloxmoney/screen/projects_screen/add_project/add_project_screen.dart';
 import 'package:roloxmoney/singleton.dart';
@@ -12,13 +9,35 @@ import 'package:roloxmoney/utils/app_utils.dart';
 
 /*Chinnadurai Viswanathan*/
 class ProjectsController extends GetxController with StateMixin {
-  RxList projectInvoicesList = [].obs;
+  RxList<ProjectModel> projectInvoicesList = <ProjectModel>[].obs;
 
   @override
   void onInit() async {
-    change(null, status: RxStatus.loading());
+    change(null, status: RxStatus.success());
+    Future.delayed(const Duration(seconds: 5), () {
+      projectInvoicesList.addAll([
+        ProjectModel(
+            amount: '25000',
+            clientName: 'Target InfoTech',
+            projectName: 'Target InfoTech',
+            date: DateTime.now().toString(),
+            noOfInvoice: 2),
+        ProjectModel(
+            amount: '25000',
+            projectName: 'Target InfoTech',
+            clientName: 'Target InfoTech',
+            date: DateTime.now().toString(),
+            noOfInvoice: 2),
+        ProjectModel(
+            amount: '25000',
+            projectName: 'Target InfoTech',
+            clientName: 'Target InfoTech',
+            date: DateTime.now().toString(),
+            noOfInvoice: 2),
+      ]);
+      change(projectInvoicesList);
+    });
     getProjectList();
-
     super.onInit();
   }
 

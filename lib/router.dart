@@ -11,16 +11,21 @@ import 'package:roloxmoney/screen/payment_screen/add_bank_account/add_bank_accou
 import 'package:roloxmoney/screen/pd_view/pdf_screen.dart';
 import 'package:roloxmoney/screen/profile_screen/profile_screen.dart';
 import 'package:roloxmoney/screen/projects_screen/add_project/add_project_screen.dart';
+import 'package:roloxmoney/screen/welcome_screen/welcome_screen.dart';
+import 'package:roloxmoney/screen/withdraw_fund_screen/withdraw_fund_screen.dart';
 import 'package:roloxmoney/screen/splash_screen/splash_screen.dart';
 
 /*Chinnadurai Viswanathan*/
 class AppRoutes {
   static List<GetPage<dynamic>>? routes = [
+    // GetPage(name: '/', page: () => LoginScreen()),
+    // GetPage(name: '/', page: () => DashboardScreen()),
     GetPage(name: '/', page: () => SplashScreen()),
     GetPage(name: PDFScreen.routeName, page: () => PDFScreen()),
     // GetPage(name: '/', page: () => PDFScreen()),
     // GetPage(name: '/', page: () => HomeScreen()),
     GetPage(name: LoginScreen.routeName, page: () => LoginScreen()),
+    GetPage(name: WelcomeScreen.routeName, page: () => WelcomeScreen()),
 
     GetPage(
         name: LoginProfileScreen.routeName, page: () => LoginProfileScreen()),
@@ -39,5 +44,7 @@ class AppRoutes {
         page: () => AddBankAccountScreen()),
     GetPage(name: ProfileScreen.routeName, page: () => ProfileScreen()),
     GetPage(name: BankListScreen.routeName, page: () => BankListScreen()),
+    GetPage(
+        name: WithdrawFundScreen.routeName, page: () => WithdrawFundScreen()),
   ];
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/font.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 /*Chinnadurai Viswanathan*/
@@ -31,6 +30,7 @@ class SecondaryButton extends StatefulWidget {
   final bool isEnabled;
   final Color? disableColor;
   final Color? backgroundColor;
+
 
   SecondaryButton(this.text, this.context,
       {this.fontWeight = FontWeight.w600,
@@ -75,46 +75,42 @@ class _SecondaryButtonState extends State<SecondaryButton> {
           widget.onTap!();
         }
       },
-      child: SizedBox(
+      child: Container(
         width: MediaQuery.of(context).size.width,
         height: 46,
-        child: Container(
-          decoration: BoxDecoration(
-              // borderRadius: BorderRadius.circular(widget.borderRadius),
-              // border: Border.all(width: .5, color: ColorResource.color00E94F),
-              color:
-                  widget.backgroundColor ?? Theme.of(context).backgroundColor),
-          padding: const EdgeInsets.all(0.0),
-          child: Flex(
-            direction: widget.axis,
-            mainAxisAlignment: widget.alignment,
-            children: [
-              if (widget.isLeading) widget.leadingWidget,
-              if (widget.text != null)
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Text(
-                    widget.text.toString(),
-                    textAlign: widget.textAlign,
-                    style: Theme.of(context).textTheme.button!.copyWith(
-                        fontSize: widget.fontSize, color: widget.textColor),
-                    maxLines: widget.maxLines,
-                    overflow:
-                        widget.isSingleLine ? TextOverflow.ellipsis : null,
-                  ),
+        decoration: BoxDecoration(
+            // borderRadius: BorderRadius.circular(widget.borderRadius),
+            // border: Border.all(width: .5, color: Colors.transparent),
+            color: widget.backgroundColor ?? Theme.of(context).backgroundColor),
+        padding: const EdgeInsets.all(0.0),
+        child: Flex(
+          direction: widget.axis,
+          mainAxisAlignment: widget.alignment,
+          children: [
+            if (widget.isLeading) widget.leadingWidget,
+            if (widget.text != null)
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text(
+                  widget.text.toString(),
+                  textAlign: widget.textAlign,
+                  style: Theme.of(context).textTheme.button!.copyWith(
+                      fontSize: widget.fontSize, color: widget.textColor),
+                  maxLines: widget.maxLines,
+                  overflow: widget.isSingleLine ? TextOverflow.ellipsis : null,
                 ),
-              if (widget.isIcon)
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Image.asset(
-                    ImageResource.buttonArrow,
-                    width: 20,
-                    height: 10,
-                  ),
+              ),
+            if (widget.isIcon)
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Image.asset(
+                  ImageResource.buttonArrow,
+                  width: 20,
+                  height: 10,
                 ),
-              if (widget.isTrailing) widget.trailingWidget
-            ],
-          ),
+              ),
+            if (widget.isTrailing) widget.trailingWidget
+          ],
         ),
       ),
     );

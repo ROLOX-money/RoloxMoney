@@ -287,4 +287,23 @@ abstract class Languages {
   String get address2;
 
   String get projectLink;
+
+  String get darkMode;
+
+
+  String get projectLinkHint;
+
+  String get enterYourWork;
+
+  String get viewBankAccount;
+
+  String get noInvoices;
+
+  String get funds;
+
+  String get withdrawFundsHint;
+
+  String get withdrawalAmount;
+
+  String get registered;
 }

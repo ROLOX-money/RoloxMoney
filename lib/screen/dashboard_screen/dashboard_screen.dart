@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_controller.dart';
+import 'package:roloxmoney/screen/dashboard_screen/dashboard_large_screen.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen_small.dart';
-import 'package:roloxmoney/screen/template_screen/template_controller.dart';
-import 'package:roloxmoney/screen/template_screen/template_screen_small.dart';
 import 'package:roloxmoney/widget/responsive_widget.dart';
 
 /*Chinnadurai Viswanathan*/
@@ -30,7 +29,7 @@ class DashboardScreenState extends State<DashboardScreen> {
       assignId: true,
       builder: (controller) {
         return ResponsiveWidget(
-          largeScreen: DashboardScreenSmall(
+          largeScreen: DashBoardLargeScreen(
               controller: controller, scaffoldKey: widget.scaffoldKey),
           mediumScreen: DashboardScreenSmall(
               controller: controller, scaffoldKey: widget.scaffoldKey),

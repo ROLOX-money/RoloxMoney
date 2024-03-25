@@ -2,14 +2,11 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_share/flutter_share.dart';
-import 'package:internet_file/internet_file.dart';
-import 'package:internet_file/storage_io.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
-import 'package:share_plus/share_plus.dart';
 
 /*Chinnadurai Viswanathan*/
 class PDFController extends GetxController with StateMixin {

@@ -2,8 +2,9 @@ import 'package:roloxmoney/languages/app_languages.dart';
 /*Chinnadurai Viswanathan*/
 
 class LanguageEn extends Languages {
+
   @override
-  String get appName => 'Rolox Money';
+  String get appName => 'Means Money';
 
   String get notAMember => 'Not a member';
 
@@ -91,7 +92,7 @@ class LanguageEn extends Languages {
 
   String get welcomeToMean => 'Welcome to Means!';
 
-  String get welcomeNote => 'Manage your business \nwith';
+  String get welcomeNote => 'Manage your business with';
 
   String get professionalInvoice => 'professional invoices';
 
@@ -180,7 +181,7 @@ class LanguageEn extends Languages {
 
   String get agree => 'I agree to the ';
 
-  String get roloxTermsAndCondition => 'Rolox Terms & Conditions';
+  String get roloxTermsAndCondition => 'Means Terms & Conditions';
 
   String get fullName => 'Full Name';
 
@@ -207,10 +208,10 @@ class LanguageEn extends Languages {
   String get congratulations => 'Congratulations!';
 
   String get accountCreatedSuccessfully =>
-      'Your Rolox account has been created successfully';
+      'Your Means account has been created successfully';
 
   String get accountCreatedScreenContent =>
-      'Banking for Creators, Influencers, Freelancers, Gig, Solopreneurs, Small Business, Brands, Agencies';
+      'Invoice & Payments for Creators, Influencers,\n Freelancers, Gig, Solopreneurs, Agencies, Media,\n Brands, Startups, Small Business';
 
   String get letsExplore => 'Lets Explore';
 
@@ -282,14 +283,34 @@ class LanguageEn extends Languages {
 
   String get accountIfscHintText => 'Your account\'s IFSC code';
 
-  String get addProfilePhoto => 'ADD PROFILE PHOTO';
+  String get addProfilePhoto => 'ADD PROFILE\n PHOTO';
 
-  String get rolox => 'ROLOX';
+  String get rolox => 'Means';
+
+  String get darkMode => 'Dark Mode';
+
+  String get projectLink => "Project Link";
+
+  String get projectLinkHint => "Enter your Project Link Here";
+
+  String get enterYourWork => "Enter your work";
+
+  String get viewBankAccount => "View Bank Account";
 
   String get address1 => 'Address 1';
 
   String get address2 => 'Address 2';
 
-  String get projectLink =>
-      'Project Link (Optional)';
+  String get noInvoices => "No Invoices are there";
+
+  // String get projectLink =>
+  //     'Project Link (Optional)';
+
+  String get funds => "funds";
+
+  String get withdrawFundsHint => "Amount of funds you want to withdraw";
+
+  String get withdrawalAmount => "Withdrawal Amount";
+
+  String get registered => "Registered";
 }

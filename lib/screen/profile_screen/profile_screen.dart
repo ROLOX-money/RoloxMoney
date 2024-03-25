@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:roloxmoney/screen/business_profile_screen/business_profile_controller.dart';
-import 'package:roloxmoney/screen/business_profile_screen/business_profile_screen_small.dart';
 import 'package:roloxmoney/screen/profile_screen/profile_controller.dart';
+import 'package:roloxmoney/screen/profile_screen/profile_screen_large.dart';
 import 'package:roloxmoney/screen/profile_screen/profile_screen_small.dart';
 import 'package:roloxmoney/widget/responsive_widget.dart';
 
@@ -29,7 +28,7 @@ class ProfileScreenState extends State<ProfileScreen> {
       assignId: true,
       builder: (controller) {
         return ResponsiveWidget(
-          largeScreen: ProfileScreenSmall(
+          largeScreen: ProfileScreenLarge(
               controller: controller, scaffoldKey: scaffoldKey),
           mediumScreen: ProfileScreenSmall(
               controller: controller, scaffoldKey: scaffoldKey),

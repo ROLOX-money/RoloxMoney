@@ -1,11 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/secondary_button.dart';
-
 import 'color_resource.dart';
 
 class AppUtils {
@@ -99,15 +96,16 @@ class AppUtils {
       required String contentString,
       required String imagePath,
       required String buttonName,
+      double? buttonWidth,
       Function()? callBack}) {
     return Padding(
-      padding: EdgeInsets.only(top: 80,right: 20,left: 20),
+      padding: EdgeInsets.only(top: 80, right: 20, left: 20),
       child: Card(
         elevation: 10,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
-        color:  ColorResource.colorFFFFFF,
+        color: ColorResource.colorFFFFFF,
         child: Container(
           margin: EdgeInsets.all(20.0),
           decoration: BoxDecoration(
@@ -131,13 +129,13 @@ class AppUtils {
                 style: Theme.of(context)
                     .textTheme
                     .titleMedium!
-                    .copyWith(color:  ColorResource.color000000),
+                    .copyWith(color: ColorResource.color000000),
               ),
               SizedBox(
                 height: 20,
               ),
               Container(
-                width: 110,
+                width: buttonWidth ?? 110,
                 height: 40,
                 child: SecondaryButton(
                   buttonName,
@@ -157,5 +155,57 @@ class AppUtils {
         ),
       ),
     );
+  }
+
+  static Widget pageNationButton(
+      {required IconData icon, required void Function()? onPressed}) {
+    return Container(
+      height: 30,
+      width: 28,
+      decoration: BoxDecoration(
+          border: Border.all(color: ColorResource.backgroundColor),
+          borderRadius: BorderRadius.circular(8)),
+      child: Center(
+        child: IconButton(
+          icon: Icon(
+            icon,
+            size: 15,
+          ),
+          onPressed: onPressed,
+        ),
+      ),
+    );
+  }
+}
+
+class CustomAadhaarInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    var text = newValue.text.replaceAll(RegExp(r'\s'), '');
+    String formattedText = '';
+
+    // var buffer = new StringBuffer();
+    for (int i = 0; i < text.length; i += 4) {
+      if (i + 4 <= text.length) {
+        formattedText += text.substring(i, i + 4) + ' ';
+      } else {
+        formattedText += text.substring(i);
+      }
+    }
+
+    // buffer.write(text[i]);
+    // var nonZeroIndex = i + 1;
+    // if (nonZeroIndex % 4 == 0 && nonZeroIndex != text.length) {
+    //   buffer.write(
+    //       ' '); // Replace this with anything you want to put after each 4 numbers
+    // }
+    // }
+
+    // var string = buffer.toString();
+
+    return newValue.copyWith(
+        text: formattedText,
+        selection: new TextSelection.collapsed(offset: formattedText.length));
   }
 }
