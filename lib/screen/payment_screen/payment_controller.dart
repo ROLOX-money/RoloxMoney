@@ -1,14 +1,13 @@
 import 'dart:async';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:roloxmoney/model/project_model.dart';
-import 'package:roloxmoney/screen/bank_list_screen/bank_list_controller.dart';
-import 'package:roloxmoney/screen/payment_screen/add_bank_account/add_bank_account_controller.dart';
-import 'package:roloxmoney/screen/payment_screen/add_bank_account/add_bank_account_screen.dart';
+import 'package:roloxmoney/screen/projects_screen/add_project/add_project_controller.dart';
+import 'package:roloxmoney/screen/projects_screen/add_project/add_project_screen.dart';
+
 /*Chinnadurai Viswanathan*/
 class PaymentController extends GetxController with StateMixin {
-  RxList<ProjectModel> projectInvoicesList = <ProjectModel>[].obs;
-
-  BankListController bankListController = Get.put(BankListController());
+  RxList projectInvoicesList = [].obs;
 
   @override
   void onInit() async {
@@ -17,22 +16,19 @@ class PaymentController extends GetxController with StateMixin {
       projectInvoicesList.addAll([
         ProjectModel(
             amount: '25000',
-            clientName: 'Target InfoTech',
             projectName: 'Target InfoTech',
-            date: DateTime.now().toString(),
+            date: DateFormat('dd MMM yyyy').format(DateTime.now()),
             isCredit: true,
             noOfInvoice: 2),
         ProjectModel(
             amount: '25000',
-            clientName: 'Target InfoTech',
             projectName: 'Target InfoTech',
-            date: DateTime.now().toString(),
+            date: DateFormat('dd MMM yyyy').format(DateTime.now()),
             noOfInvoice: 2),
         ProjectModel(
             amount: '25000',
             projectName: 'Target InfoTech',
-            clientName: 'Target InfoTech',
-            date: DateTime.now().toString(),
+            date: DateFormat('dd MMM yyyy').format(DateTime.now()),
             noOfInvoice: 2),
       ]);
       change(projectInvoicesList);
@@ -42,7 +38,7 @@ class PaymentController extends GetxController with StateMixin {
   }
 
   void navigateAddPaymentScreen() {
-    Get.put(AddBankAccountController());
-    Get.toNamed(AddBankAccountScreen.routeName);
+    Get.put(AddProjectController());
+    Get.toNamed(AddProjectScreen.routeName);
   }
 }

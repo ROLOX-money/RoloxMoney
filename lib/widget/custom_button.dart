@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/font.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
@@ -29,7 +30,6 @@ class PrimaryButton extends StatefulWidget {
   final Font font;
   final bool isEnabled;
   final Color? disableColor;
-  final double? borderRadius;
 
   PrimaryButton(this.text, this.context,
       {this.fontWeight = FontWeight.w600,
@@ -42,7 +42,7 @@ class PrimaryButton extends StatefulWidget {
       this.font = Font.poppinsRegular,
       this.textAlign = TextAlign.left,
       this.onTap,
-      this.textColor = ColorResource.buttonTextColor,
+      this.textColor = ColorResource.color0D0D0D,
       this.fontSize = FontSize.fourteen,
       this.isUnderLine = false,
       this.isLeading = false,
@@ -56,8 +56,7 @@ class PrimaryButton extends StatefulWidget {
       this.alignment = MainAxisAlignment.center,
       this.maxLines,
       this.isEnabled = true,
-      this.disableColor,
-      this.borderRadius});
+      this.disableColor});
 
   @override
   _PrimaryButtonState createState() => _PrimaryButtonState();
@@ -78,12 +77,11 @@ class _PrimaryButtonState extends State<PrimaryButton> {
         height: 56,
         child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(widget.borderRadius ?? 0),
               // border: Border(
               //   bottom: BorderSide(color: Colors.white, width: 2),
               //   right: BorderSide(color: Colors.white, width: 2),
               // ),
-              color: ColorResource.buttonColor),
+              color: Colors.black),
           padding: const EdgeInsets.all(0.0),
           child: Flex(
             direction: widget.axis,
@@ -96,9 +94,9 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                   child: Text(
                     widget.text.toString(),
                     textAlign: widget.textAlign,
-                    style: Theme.of(context).textTheme.button!.copyWith(
+                    style: Theme.of(context).textTheme.displayMedium!.copyWith(
                         fontSize: widget.fontSize,
-                        color: widget.textColor.withOpacity(1),
+                        color: Colors.white,
                         fontWeight: FontWeight.w600),
                     maxLines: widget.maxLines,
                     overflow:
@@ -111,6 +109,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                   child: Image.asset(
                     ImageResource.buttonArrow,
                     width: 20,
+                    color: Colors.white,
                     height: 10,
                   ),
                 ),

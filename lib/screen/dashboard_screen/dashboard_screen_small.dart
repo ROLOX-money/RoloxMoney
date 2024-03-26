@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
+import 'package:roloxmoney/model/dashboard_navigator_model.dart';
 import 'package:roloxmoney/screen/clients_screen/clients_screen.dart';
 import 'package:roloxmoney/screen/dashboard_screen/dashboard_controller.dart';
 import 'package:roloxmoney/screen/home_screen/home_screen.dart';
+import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_controller.dart';
+import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_screen.dart';
 import 'package:roloxmoney/screen/invoice_screen/invoice_screen.dart';
 import 'package:roloxmoney/screen/payment_screen/payment_screen.dart';
 import 'package:roloxmoney/screen/profile_screen/profile_controller.dart';

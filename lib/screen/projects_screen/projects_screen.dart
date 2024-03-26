@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
 import 'package:roloxmoney/screen/projects_screen/projects_screen_small.dart';
+import 'package:roloxmoney/screen/template_screen/template_controller.dart';
+import 'package:roloxmoney/screen/template_screen/template_screen_small.dart';
 import 'package:roloxmoney/widget/responsive_widget.dart';
-
-import 'project_screen_large.dart';
 
 /*Chinnadurai Viswanathan*/
 class ProjectsScreen extends StatefulWidget {
@@ -30,9 +30,9 @@ class ProjectsScreenState extends State<ProjectsScreen> {
       assignId: true,
       builder: (controller) {
         return ResponsiveWidget(
-          largeScreen: ProjectScreenLarge(
+          largeScreen: ProjectsScreenSmall(
               controller: controller, scaffoldKey: widget.scaffoldKey),
-          mediumScreen: ProjectScreenLarge(
+          mediumScreen: ProjectsScreenSmall(
               controller: controller, scaffoldKey: widget.scaffoldKey),
           smallScreen: ProjectsScreenSmall(
               controller: controller, scaffoldKey: widget.scaffoldKey),

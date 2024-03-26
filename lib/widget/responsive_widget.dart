@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 const int largeScreenSize = 1366;
 const int mediumScreenSize = 1008;
@@ -22,8 +21,7 @@ class ResponsiveWidget extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         double _width = constraints.maxWidth;
-        if (_width >= largeScreenSize ||
-            Get.previousRoute == "dashBoardLargeScreen") {
+        if (_width >= largeScreenSize) {
           return largeScreen;
         } else if (_width < largeScreenSize && _width >= mediumScreenSize) {
           return mediumScreen;

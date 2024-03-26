@@ -4,8 +4,6 @@ import 'package:roloxmoney/screen/business_profile_screen/business_profile_contr
 import 'package:roloxmoney/screen/business_profile_screen/business_profile_screen_small.dart';
 import 'package:roloxmoney/widget/responsive_widget.dart';
 
-import 'busines_profile_large_screen.dart';
-
 /*Chinnadurai Viswanathan*/
 class BusinessProfileScreen extends StatefulWidget {
   BusinessProfileScreen({Key? key}) : super(key: key);
@@ -29,7 +27,7 @@ class BusinessProfileScreenState extends State<BusinessProfileScreen> {
       assignId: true,
       builder: (controller) {
         return ResponsiveWidget(
-          largeScreen: BusinessProfileLargeScreen(
+          largeScreen: BusinessProfileScreenSmall(
               controller: controller, scaffoldKey: scaffoldKey),
           mediumScreen: BusinessProfileScreenSmall(
               controller: controller, scaffoldKey: scaffoldKey),

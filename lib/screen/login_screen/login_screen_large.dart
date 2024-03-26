@@ -52,26 +52,22 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 50, bottom: 0),
+                    padding: const EdgeInsets.only(top: 100, bottom: 10),
                     child: CustomText(
                       text: '${Languages.of(context)?.welcomeToMean}',
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 18,
+                          color: ColorResource.colorEC008C,
                           fontWeight: FontWeight.w500),
                     ),
                   ),
                   Text.rich(
                     TextSpan(
-                        text: '${Languages.of(context)?.welcomeNote} ',
+                        text: '${Languages.of(context)?.welcomeNote}',
                         style: Theme.of(context)
                             .textTheme
                             .headlineLarge!
                             .copyWith(
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium!
-                                    .color,
+                                color: ColorResource.colorFFFFFF,
                                 fontWeight: FontWeight.w600),
                         children: <InlineSpan>[
                           TextSpan(
@@ -82,11 +78,9 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                                 .headlineLarge!
                                 .copyWith(
                                     fontWeight: FontWeight.w600,
-                                    fontSize: 34,
                                     height: 1.5,
                                     foreground: Paint()
-                                      ..shader =
-                                          ColorResource.linearGradient),
+                                      ..shader = ColorResource.linearGradient),
                           )
                         ]),
                     softWrap: true,
@@ -103,12 +97,8 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
               ),
             ),
             Container(
+                color: ColorResource.color383838,
                 width: MediaQuery.of(context).size.width / 2,
-                decoration: BoxDecoration(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(24),
-                        bottomLeft: Radius.circular(24))),
                 // padding: EdgeInsets.only(top: 60, left: 60, right: 60),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 100),
@@ -117,17 +107,15 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                       // mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 100, bottom: 0),
+                          padding: const EdgeInsets.only(top: 100, bottom: 10),
                           child: CustomText(
-                            text: '${Languages.of(context)?.mobileNumber}',
+                            text: '${Languages.of(context)?.mobileNumber}'
+                                .toUpperCase(),
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium!
                                 .copyWith(
-                                    color: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium!
-                                        .color,
+                                    color: ColorResource.colorEC008C,
                                     fontWeight: FontWeight.w500),
                           ),
                         ),
@@ -141,6 +129,7 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                                       .value,
                                   focusedBorder: Colors.grey,
                                   validatorCallBack: (bool value) {},
+                                  textColor: Colors.white,
                                   enableColor: Colors.grey,
                                   borderColor: Colors.red,
                                   validationRules: [
@@ -150,58 +139,62 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                                   disableColor: Colors.red,
                                   keyBoardType: TextInputType.phone,
                                   prefixIcon: Container(
-                                    width: 120,
-                                    padding: EdgeInsets.only(left: 8),
-                                    child: Row(
-                                      children: [
-                                        ClipOval(
-                                          child: Material(
-                                            child: InkWell(
-                                              splashColor: Colors.red,
-                                              // Splash color
-                                              onTap: () {},
-                                              child: SizedBox(
-                                                width: 32,
-                                                height: 32,
-                                                child: Image.network(
-                                                    'https://cdn.pixabay.com/photo/2020/07/04/08/24/india-5368684__340.jpg',
-                                                    fit: BoxFit.cover),
+                                    width: 150,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        children: [
+                                          ClipOval(
+                                            child: Material(
+                                              child: InkWell(
+                                                splashColor: Colors.red,
+                                                // Splash color
+                                                onTap: () {},
+                                                child: SizedBox(
+                                                  width: 32,
+                                                  height: 32,
+                                                  child: Image.network(
+                                                      'https://cdn.pixabay.com/photo/2020/07/04/08/24/india-5368684__340.jpg',
+                                                      fit: BoxFit.cover),
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        const SizedBox(width: 5),
-                                        CustomText(
-                                          text: '+91',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleMedium!
-                                              .copyWith(
-                                                  color: Theme.of(context)
-                                                      .textTheme
-                                                      .titleMedium!
-                                                      .color,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w400),
-                                        ),
-                                        Icon(
-                                          Icons.keyboard_arrow_down,
-                                          size: 22,
-                                          color: Theme.of(context)
-                                              .textTheme
-                                              .titleMedium!
-                                              .color,
-                                        ),
-                                        VerticalDivider(
-                                          thickness: 1,
-                                          indent: 15,
-                                          endIndent: 15,
-                                        )
-                                      ],
+                                          const SizedBox(width: 5),
+                                          CustomText(
+                                            text: '+91',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium!
+                                                .copyWith(
+                                                    color: Theme.of(context)
+                                                        .textTheme
+                                                        .titleMedium!
+                                                        .color,
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                          ),
+                                          Icon(
+                                            Icons.keyboard_arrow_down,
+                                            size: 22,
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium!
+                                                .color,
+                                          ),
+                                          VerticalDivider(
+                                            thickness: 1,
+                                            color: ColorResource.colorDDDDDD,
+                                            indent: 15,
+                                            endIndent: 15,
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                                height: 50,
+                                height: 70,
                               ),
                             )),
                         ListTile(
@@ -209,15 +202,13 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                           horizontalTitleGap: 0,
                           leading: Theme(
                             data: Theme.of(context).copyWith(
-                              unselectedWidgetColor:
-                                  Theme.of(context).unselectedWidgetColor,
+                              unselectedWidgetColor: ColorResource.color00E94F,
                             ),
                             child: Checkbox(
                               value: widget.controller!.acceptTermsAndCondition
                                   .obs.value.value,
-                              activeColor: Theme.of(context).primaryColor,
-                              checkColor:
-                                  Theme.of(context).scaffoldBackgroundColor,
+                              activeColor: Colors.blue,
+                              checkColor: ColorResource.color151515,
                               onChanged: (value) {
                                 widget.controller!
                                     .noAgreeTermsAndConditionCheckBox(
@@ -225,15 +216,27 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                               },
                             ),
                           ),
+                          // Checkbox(
+                          //   value: widget.controller!.acceptTermsAndCondition
+                          //       .obs.value.value,
+                          //   activeColor: Colors.blue,
+                          //   checkColor: ColorResource.color151515,
+                          //   onChanged: (value) {
+                          //     widget.controller!
+                          //         .noAgreeTermsAndConditionCheckBox(
+                          //         values: value);
+                          //   },
+                          // ),
                           title: RichText(
                               overflow: TextOverflow.fade,
                               softWrap: true,
                               text: TextSpan(
-                                text: '${Languages.of(context)?.agree} ',
+                                text: '${Languages.of(context)?.agree}',
                                 style: Theme.of(context)
                                     .textTheme
-                                    .titleMedium!
+                                    .titleSmall!
                                     .copyWith(
+                                        color: ColorResource.colorFFFFFF,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w400),
                                 children: [
@@ -242,10 +245,9 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                                         '${Languages.of(context)?.roloxTermsAndCondition}',
                                     style: Theme.of(context)
                                         .textTheme
-                                        .titleMedium!
+                                        .titleSmall!
                                         .copyWith(
-                                            color:
-                                                Theme.of(context).primaryColor,
+                                            color: ColorResource.color0093FF,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w400,
                                             decoration:
@@ -265,8 +267,7 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                         PrimaryButton(
                           '${Languages.of(context)!.send} ${Languages.of(context)!.otp}',
                           context,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
                           cardShape: 1,
                           isIcon: true,
                           onTap: () {
@@ -276,10 +277,10 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                                     .value.value) {
 
 
-                              otpAlertDialogue(
-                                  controller: widget.controller!,
-                                  mobileNumber:
-                                      ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
+                              // otpAlertDialogue(
+                              //     controller: widget.controller!,
+                              //     mobileNumber:
+                              //         ' +91 ${widget.controller!.mobilNumberController.obs.value.value.text}');
 
                               // otpBottomSheet(
                               //     controller: widget.controller!,
@@ -310,10 +311,9 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          backgroundColor: Theme.of(context).backgroundColor,
           shape: RoundedRectangleBorder(
-              side:
-                  BorderSide(color: Theme.of(context).scaffoldBackgroundColor),
+              side: BorderSide(color: ColorResource.colorFFFFFF),
               borderRadius: BorderRadius.all(Radius.circular(32.0))),
           content: Container(
             width: 500,
@@ -333,10 +333,10 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                 CustomText(
                   text:
                       '${Languages.of(context)?.enter} 4 ${Languages.of(context)?.digit} ${Languages.of(context)?.otp}',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleMedium!
-                      .copyWith(fontSize: 14, fontWeight: FontWeight.w400),
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      color: ColorResource.colorFFFFFF,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600),
                 ),
                 SizedBox(height: 20),
                 Row(
@@ -346,14 +346,14 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                       text:
                           '${Languages.of(context)?.sentOTPToRegisteredMobile}',
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: ColorResource.textSecondaryColor,
-                          fontSize: 16,
+                          color: ColorResource.colorFFFFFF,
+                          fontSize: 14,
                           fontWeight: FontWeight.w400),
                     ),
                     CustomText(
                       text: '$mobileNumber',
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: ColorResource.textSecondaryColor,
+                          color: ColorResource.colorEC008C,
                           fontSize: 14,
                           fontWeight: FontWeight.w400),
                     ),
@@ -364,33 +364,26 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30),
                   child: PinCodeTextField(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     appContext: context,
-                    length: 4,
+                    length: 6,
                     cursorWidth: 1,
-                    cursorColor: Theme.of(context).textTheme.titleMedium!.color,
+                    cursorColor: ColorResource.colorFFFFFF,
                     pinTheme: PinTheme(
-                        disabledColor:
-                            Theme.of(context).scaffoldBackgroundColor,
+                        disabledColor: Theme.of(context).backgroundColor,
                         shape: PinCodeFieldShape.circle,
                         borderRadius: BorderRadius.circular(5),
                         fieldHeight: 50,
                         fieldWidth: 50,
-                        inactiveFillColor:
-                            Theme.of(context).scaffoldBackgroundColor,
-                        activeFillColor:
-                            Theme.of(context).scaffoldBackgroundColor,
+                        inactiveFillColor: Theme.of(context).backgroundColor,
+                        activeFillColor: Theme.of(context).backgroundColor,
                         borderWidth: 6,
                         errorBorderColor: Colors.red,
-                        activeColor: Theme.of(context).scaffoldBackgroundColor,
-                        selectedColor:
-                            Theme.of(context).scaffoldBackgroundColor,
-                        selectedFillColor:
-                            Theme.of(context).scaffoldBackgroundColor,
-                        inactiveColor:
-                            Theme.of(context).scaffoldBackgroundColor),
+                        activeColor: Theme.of(context).backgroundColor,
+                        selectedColor: Theme.of(context).backgroundColor,
+                        selectedFillColor: Theme.of(context).backgroundColor,
+                        inactiveColor: Theme.of(context).backgroundColor),
                     enableActiveFill: true,
-                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                    backgroundColor: Theme.of(context).backgroundColor,
                     controller: controller!.otpController,
                     textStyle: Theme.of(context).textTheme.titleMedium,
                     keyboardType: TextInputType.number,
@@ -406,27 +399,25 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                   ),
                 ),
                 SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 35),
-                  child: PrimaryButton(
-                    '${Languages.of(context)!.signIn}',
-                    context,
-                    cardShape: 1,
-                    isIcon: true,
-                    onTap: () {
-                      controller.navigateProfile();
-                    },
-                  ),
+                PrimaryButton(
+                  '${Languages.of(context)!.signIn}',
+                  context,
+                  cardShape: 1,
+                  isIcon: true,
+                  onTap: () {
+                    Get.back();
+                    controller.otpVerification();
+                  },
                 ),
                 SizedBox(
                   height: 25,
                 ),
                 CustomText(
                   text: '${Languages.of(context)?.resendIN} 0:45',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall!
-                      .copyWith(fontSize: 16, fontWeight: FontWeight.w400),
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      color: ColorResource.colorFFFFFF,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400),
                 ),
               ],
             ),
