@@ -204,8 +204,7 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                                   fontWeight: FontWeight.w400),
                           children: [
                             TextSpan(
-                              text:
-                                  '${Languages.of(context)?.roloxTermsAndCondition}',
+                              text: '${Languages.of(context)?.termsOfUse}',
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall!
@@ -216,8 +215,34 @@ class LoginScreenSmallState extends State<LoginScreenSmall> {
                                       decoration: TextDecoration.underline),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  debugPrint(
-                                      "onTap of Terms and condition screen");
+                                  debugPrint("onTap of Terms of use screen");
+
+                                  ///fixme
+                                  // need to navigate the terms and condition Screen
+                                },
+                            ),
+                            TextSpan(
+                                text: ' & ',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400)),
+                            TextSpan(
+                              text: '${Languages.of(context)?.privacyPolicy}',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(
+                                      color: Colors.pinkAccent,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      decoration: TextDecoration.underline),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  debugPrint("onTap of Terms of use screen");
 
                                   ///fixme
                                   // need to navigate the terms and condition Screen

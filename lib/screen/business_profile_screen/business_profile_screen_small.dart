@@ -395,7 +395,7 @@ class BusinessProfileScreenSmallState
                                     ),
                                   CustomText(
                                     text:
-                                        '${Languages.of(context)?.mobileNumber}',
+                                        '${Languages.of(context)?.business} ${Languages.of(context)?.mobileNumber}',
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleSmall!
@@ -484,7 +484,7 @@ class BusinessProfileScreenSmallState
                                     controller:
                                         widget.controller!.emailController,
                                     labelName:
-                                        '${Languages.of(context)?.emailID}',
+                                        '${Languages.of(context)?.business} ${Languages.of(context)?.emailID}',
                                     labelStyle: Theme.of(context)
                                         .textTheme
                                         .titleSmall!

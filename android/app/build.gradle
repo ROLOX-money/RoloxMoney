@@ -50,6 +50,8 @@ def sprintNumber = "0"
 android {
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
+//    minSdkVersion 19
+//    minSdkVersion 22
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -69,7 +71,8 @@ android {
     }
     defaultConfig {
         applicationId "com.rolox"
-        minSdkVersion flutter.minSdkVersion
+//        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 22
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -87,7 +90,7 @@ android {
         }
     }
 
-    buildTypes {
+    buildTypes {En
         def CHARACTER = "Character"
         def XPOSELEVEL = "exposeLevel"
         debug {
@@ -135,4 +138,6 @@ static def getDate() {
 dependencies {
     implementation "com.google.android.gms:play-services-auth:$play_services_auth"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'tech.nimbbl.sdk:nimbbl-checkout-sdk:2.0.1'
+
 }

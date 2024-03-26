@@ -216,7 +216,33 @@ class _AddInvoiceScreenLargeState extends State<AddInvoiceScreenLarge> {
                                     labelName:
                                         '${Languages.of(context)?.invoiceValueWithoutGST}',
                                   ),
+
                                   // Due Date
+
+//                                   WidgetUtils.genericTextFiled(
+//                                     height: 50,
+//                                     context: context,
+//                                     validationRules: ['required'],
+//                                     hintText: Languages.of(context)?.gstCharges,
+//                                     keyBoardType: TextInputType.phone,
+//                                     controller:
+//                                         widget.controller!.gstChargesController,
+//                                     labelName:
+//                                         '${Languages.of(context)?.gstCharges}',
+//                                   ),
+//                                   WidgetUtils.genericTextFiled(
+//                                     height: 50,
+//                                     context: context,
+//                                     validationRules: ['required'],
+//                                     hintText: Languages.of(context)
+//                                         ?.brandNameHintText,
+//                                     controller: widget
+//                                         .controller!.projectNameController,
+//                                     keyBoardType: TextInputType.emailAddress,
+//                                     suffixImagePath: ImageResource.searchSVG,
+//                                     labelName:
+//                                         '${Languages.of(context)?.projectName}',
+//                                   ),
                                   WidgetUtils.genericTextFiled(
                                     height: 50,
                                     context: context,
@@ -246,20 +272,22 @@ class _AddInvoiceScreenLargeState extends State<AddInvoiceScreenLarge> {
                                     labelName:
                                         '${Languages.of(context)?.hsnCode}',
                                   ),
+
                                   // gst charge
-                                  WidgetUtils.genericTextFiled(
-                                    height: 50,
-                                    context: context,
-                                    validationRules: ['required'],
-                                    isReadOnly:
-                                        widget.controller!.isReadOnly.value,
-                                    hintText: Languages.of(context)?.gstCharges,
-                                    keyBoardType: TextInputType.phone,
-                                    controller:
-                                        widget.controller!.gstChargesController,
-                                    labelName:
-                                        '${Languages.of(context)?.gstCharges}',
-                                  ),
+//                                   WidgetUtils.genericTextFiled(
+//                                     height: 50,
+//                                     context: context,
+//                                     validationRules: ['required'],
+//                                     isReadOnly:
+//                                         widget.controller!.isReadOnly.value,
+//                                     hintText: Languages.of(context)?.gstCharges,
+//                                     keyBoardType: TextInputType.phone,
+//                                     controller:
+//                                         widget.controller!.gstChargesController,
+//                                     labelName:
+//                                         '${Languages.of(context)?.gstCharges}',
+//                                   ),
+
 
                                   const SizedBox(
                                     height: 15,

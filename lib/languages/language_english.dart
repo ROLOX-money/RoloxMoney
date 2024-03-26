@@ -325,5 +325,10 @@ class LanguageEn extends Languages {
 
   String get addPayments => "Add Payments";
 
+  String get termsOfUse => "Terms of Use";
+
+  String get privacyPolicy => "Privacy Policy";
+
+  String get alternate => "Alternate";
 
 }

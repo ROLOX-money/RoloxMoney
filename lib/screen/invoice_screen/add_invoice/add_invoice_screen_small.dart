@@ -123,7 +123,6 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                           //     widget.controller!.toSetClientId(isClear: true);
                           //   },
                           // ),
-
                           // project Name
                           if (widget.controller!.invoiceDetails != null)
                             WidgetUtils.genericTextFiled(
@@ -165,6 +164,31 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                             )
                           ],
                           // invoice name
+
+//                           CustomText(
+//                             text: Languages.of(context)!.projectName,
+//                             style: Theme.of(context)
+//                                 .textTheme
+//                                 .titleMedium!
+//                                 .copyWith(fontWeight: FontWeight.w500),
+//                           ),
+//                           const SizedBox(
+//                             height: 5,
+//                           ),
+//                           Card(
+//                             key: Key("projectName"),
+//                             // alignment: Alignment.center,
+//                             child: AutoComplete.autoComplete(
+//                                 hintText: Languages.of(context)!.projectName,
+//                                 value: null,
+//                                 suggestionValue: widget.controller!.projectList
+//                                     .map((item) => item.projectName!)
+//                                     .toList(),
+//                                 onFieldSubmitted: (value) {
+//                                   widget.controller!
+//                                       .toSetClientId(searchingText: value);
+//                                 }),
+//                           ),
                           WidgetUtils.genericTextFiled(
                             context: context,
                             validationRules: ['required'],
@@ -188,6 +212,17 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                                 '${Languages.of(context)?.invoiceNumber}',
                           ),
                           // invoice amount
+
+                          // WidgetUtils.genericTextFiled(
+                          //   context: context,
+                          //   validationRules: ['required'],
+                          //   hintText: Languages.of(context)?.invoiceNoHintText,
+                          //   controller:
+                          //       widget.controller!.invoiceNumberController,
+                          //   labelName:
+                          //       '${Languages.of(context)?.invoiceNumber}',
+                          // ),
+
                           WidgetUtils.genericTextFiled(
                             context: context,
                             validationRules: ['required'],
@@ -200,6 +235,15 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                                 '${Languages.of(context)?.invoiceValueWithoutGST}',
                           ),
                           // Due Date
+                          WidgetUtils.genericTextFiled(
+                            context: context,
+                            validationRules: ['required'],
+                            hintText:
+                                '${Languages.of(context)?.gstCharges} (Optional)',
+                            keyBoardType: TextInputType.phone,
+                            controller: widget.controller!.gstChargesController,
+                            labelName: '${Languages.of(context)?.gstCharges}',
+                          ),
                           WidgetUtils.genericTextFiled(
                             context: context,
                             hintText: "DD/MM/YYYY",
@@ -226,6 +270,7 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                             controller: widget.controller!.hsnController,
                             labelName: '${Languages.of(context)?.hsnCode}',
                           ),
+
                           // gst charge
                           WidgetUtils.genericTextFiled(
                             context: context,
@@ -237,6 +282,7 @@ class AddInvoiceScreenSmallState extends State<AddInvoiceScreenSmall> {
                             controller: widget.controller!.gstChargesController,
                             labelName: '${Languages.of(context)?.gstCharges}',
                           ),
+
                           // WidgetUtils.genericTextFiled(
                           //   context: context,
                           //   validationRules: ['required'],

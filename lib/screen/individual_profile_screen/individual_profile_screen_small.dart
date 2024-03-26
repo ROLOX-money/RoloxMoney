@@ -291,36 +291,44 @@ class IndividualProfileScreenSmallState
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
                     ),
-                    const SizedBox(height: 5),
-                    SizedBox(
-                      child: CustomTextField(
-                        widget.controller!.mobilNumberController.obs.value,
-                        focusedBorder: Colors.grey,
-                        textColor: ColorResource.color020e36,
-                        enableColor: Colors.grey,
-                        borderColor: Colors.grey,
-                        disableColor: Colors.grey,
-                        keyBoardType: TextInputType.phone,
-                        validationRules: ['required'],
-                        prefixIcon: Container(
-                          width: 100,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                ClipOval(
-                                  child: Material(
-                                    child: InkWell(
-                                      splashColor: Colors.red,
-                                      // Splash color
-                                      onTap: () {},
-                                      child: SizedBox(
-                                        width: 20,
-                                        height: 20,
-                                        child: Image.network(
-                                          'https://think360studio-media.s3.ap-south-1.amazonaws.com/download/india-flag-2021-wallpaper-1.png',
-                                          fit: BoxFit.fill,
-                                        ),
+                  // mobile no
+                  CustomText(
+                    text:
+                        '${Languages.of(context)?.alternate} ${Languages.of(context)?.mobileNumber}',
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        color: ColorResource.colorEC008C,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: 5),
+                  SizedBox(
+                    child: CustomTextField(
+                      widget.controller!.mobilNumberController.obs.value,
+                      focusedBorder: Colors.grey,
+                      textColor: ColorResource.color020e36,
+                      enableColor: Colors.grey,
+                      borderColor: Colors.grey,
+                      disableColor: Colors.grey,
+                      keyBoardType: TextInputType.phone,
+                      validationRules: ['required'],
+                      prefixIcon: Container(
+                        width: 100,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              ClipOval(
+                                child: Material(
+                                  child: InkWell(
+                                    splashColor: Colors.red,
+                                    // Splash color
+                                    onTap: () {},
+                                    child: SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: Image.network(
+                                        'https://think360studio-media.s3.ap-south-1.amazonaws.com/download/india-flag-2021-wallpaper-1.png',
+                                        fit: BoxFit.fill,
                                       ),
                                     ),
                                   ),

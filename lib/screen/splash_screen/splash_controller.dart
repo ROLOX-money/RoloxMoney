@@ -37,6 +37,7 @@ class SplashScreenController extends GetxController with StateMixin {
                   arguments: initializeValue.client.auth.currentUser?.phone);
             } else {
               Singleton.mobileUserId = value[0]['id'];
+
               Get.offAndToNamed(DashboardScreen.routeName);
               // Get.offAndToNamed(LoginProfileScreen.routeName,
               //     arguments: initializeValue.client.auth.currentUser?.phone);

@@ -359,7 +359,8 @@ class _BusinessProfileLargeScreenState
                           ),
                         // mobile no
                         CustomText(
-                          text: '${Languages.of(context)?.mobileNumber}',
+                          text:
+                              '${Languages.of(context)?.business} ${Languages.of(context)?.mobileNumber}',
                           style: Theme.of(context)
                               .textTheme
                               .titleMedium!
@@ -435,7 +436,8 @@ class _BusinessProfileLargeScreenState
                           height: 50,
                           context: context,
                           controller: widget.controller!.emailController,
-                          labelName: '${Languages.of(context)?.emailID}',
+                          labelName:
+                              '${Languages.of(context)?.business} ${Languages.of(context)?.emailID}',
                           labelStyle: Theme.of(context)
                               .textTheme
                               .titleMedium!

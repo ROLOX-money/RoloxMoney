@@ -318,4 +318,10 @@ abstract class Languages {
 
   String get addPayments;
 
+  String get termsOfUse;
+
+  String get privacyPolicy;
+
+  String get alternate;
+
 }
