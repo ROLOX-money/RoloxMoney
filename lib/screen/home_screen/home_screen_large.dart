@@ -47,8 +47,10 @@ class _HomeScreenLargeState extends State<HomeScreenLarge> {
                             topColor: ColorResource.red,
                             context: context,
                             title: "'${Languages.of(context)?.accountBalance}'",
-                            subTitleSecond: "'${Languages.of(context)!.withdraw}'",
-                            amount: "₹ 50000"),
+                            subTitleSecond:
+                                "'${Languages.of(context)!.withdraw}'",
+                            amount: widget.controller!.paidTransaction.obs.value
+                                .toString()),
                         widget.controller!.paidCardWidgetLarge(
                             isWalletBalance: true,
                             isWithdraw: true,
@@ -73,7 +75,8 @@ class _HomeScreenLargeState extends State<HomeScreenLarge> {
                             topColor: ColorResource.red,
                             context: context,
                             title: "'${Languages.of(context)?.accountBalance}'",
-                            subTitleSecond: "'${Languages.of(context)!.withdraw}'",
+                            subTitleSecond:
+                                "'${Languages.of(context)!.withdraw}'",
                             amount: "₹ 50000")
                       ],
                       if (widget.controller!.isEmpty.value == false) ...[
@@ -130,9 +133,11 @@ class _HomeScreenLargeState extends State<HomeScreenLarge> {
                               topColor: ColorResource.red,
                               context: context,
                               title: "${Languages.of(context)?.paidInvoices}",
-                              subTitle: "${Languages.of(context)?.noOf} ${Languages.of(context)?.invoices}",
+                              subTitle:
+                                  "${Languages.of(context)?.noOf} ${Languages.of(context)?.invoices}",
                               count: "07",
-                              subTitleSecond: "${Languages.of(context)?.transactionWorth}",
+                              subTitleSecond:
+                                  "${Languages.of(context)?.transactionWorth}",
                               amount: "₹ 50000"),
                         ),
                         GestureDetector(

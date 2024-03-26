@@ -65,268 +65,347 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                         fontWeight: FontWeight.w600),
                   ),
                   shadowColor: Colors.grey,
-                  elevation: 0.75,
+                  elevation: 0.3,
                 ),
-                Form(
-                  key: widget.controller!.form,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Type of Business
-                        Card(
-                          elevation: 10,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                (widget.controller!.clientDetails != null)
+                    ? Column(
+                        children: [
+                          // client name
+                          WidgetUtils.genericTextFiled(
+                            height: 50,
+                            context: context,
+                            validationRules: ['required'],
+                            isReadOnly: widget.controller!.isReadOnly.value,
+                            keyBoardType: TextInputType.name,
+                            hintText: Languages.of(context)?.clientName,
+                            controller: widget.controller!.clientNameController,
+                            labelName: '${Languages.of(context)?.clientName}',
                           ),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                border:
-                                    Border.all(color: Colors.grey, width: 0.25),
-                                borderRadius: BorderRadius.circular(8),
-                                color: ColorResource.colorFFFFFF),
-                            padding: EdgeInsets.all(10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                CustomText(
-                                  text:
-                                      '${Languages.of(context)?.typeOfBusiness}'
-                                          .toUpperCase(),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall!
-                                      .copyWith(
-                                          color: ColorResource.colorFFFFFF,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600),
+                          // created
+                          WidgetUtils.genericTextFiled(
+                            height: 50,
+                            context: context,
+                            validationRules: ['required'],
+                            isReadOnly: widget.controller!.isReadOnly.value,
+                            keyBoardType: TextInputType.name,
+                            hintText: "Created on",
+                            controller: widget.controller!.createdController,
+                            labelName: "Created on",
+                          ),
+                          // Type of business
+                          WidgetUtils.genericTextFiled(
+                            height: 50,
+                            context: context,
+                            validationRules: ['required'],
+                            isReadOnly: widget.controller!.isReadOnly.value,
+                            keyBoardType: TextInputType.name,
+                            hintText: Languages.of(context)?.typeOfBusiness,
+                            controller:
+                                widget.controller!.businessTypeController,
+                            labelName:
+                                '${Languages.of(context)?.typeOfBusiness}',
+                          ),
+                        ],
+                      )
+                    : Form(
+                        key: widget.controller!.form,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Type of Business
+                              Card(
+                                elevation: 6,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
-                                Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Radio(
-                                          value: TypOfBusiness.individual,
-                                          groupValue: widget.controller!
-                                              .typOfBusiness.obs.value.value,
-                                          activeColor:
-                                              ColorResource.colorEC008C,
-                                          onChanged: (TypOfBusiness? value) {
-                                            widget.controller!.businessToggle(
-                                                value:
-                                                    TypOfBusiness.individual);
-                                          },
-                                        ),
-                                        CustomText(
-                                          text:
-                                              '${Languages.of(context)?.individual}',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleSmall!
-                                              .copyWith(
-                                                  color:
-                                                      ColorResource.color181B28,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w600),
-                                        )
-                                      ],
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        widget.controller!.businessToggle(
-                                            value: TypOfBusiness.business);
-                                      },
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      // border:
+                                      //     Border.all(color: Colors.grey, width: 0.25),
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: ColorResource.colorFFFFFF),
+                                  padding: EdgeInsets.all(10.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CustomText(
+                                        text:
+                                            '${Languages.of(context)?.typeOfBusiness}'
+                                                .toUpperCase(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall!
+                                            .copyWith(
+                                                color:
+                                                    ColorResource.colorFFFFFF,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w600),
+                                      ),
+                                      Column(
                                         children: [
-                                          Radio(
-                                            value: TypOfBusiness.business,
-                                            groupValue: widget.controller!
-                                                .typOfBusiness.obs.value.value,
-                                            activeColor:
-                                                ColorResource.colorEC008C,
-                                            onChanged: (TypOfBusiness? value) {
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Radio(
+                                                value: TypOfBusiness.individual,
+                                                groupValue: widget
+                                                    .controller!
+                                                    .typOfBusiness
+                                                    .obs
+                                                    .value
+                                                    .value,
+                                                activeColor:
+                                                    ColorResource.colorEC008C,
+                                                onChanged:
+                                                    (TypOfBusiness? value) {
+                                                  widget.controller!
+                                                      .businessToggle(
+                                                          value: TypOfBusiness
+                                                              .individual);
+                                                },
+                                              ),
+                                              CustomText(
+                                                text:
+                                                    '${Languages.of(context)?.individual}',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleSmall!
+                                                    .copyWith(
+                                                        color: ColorResource
+                                                            .color181B28,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                              )
+                                            ],
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
                                               widget.controller!.businessToggle(
                                                   value:
                                                       TypOfBusiness.business);
                                             },
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Radio(
+                                                  value: TypOfBusiness.business,
+                                                  groupValue: widget
+                                                      .controller!
+                                                      .typOfBusiness
+                                                      .obs
+                                                      .value
+                                                      .value,
+                                                  activeColor:
+                                                      ColorResource.colorEC008C,
+                                                  onChanged:
+                                                      (TypOfBusiness? value) {
+                                                    widget.controller!
+                                                        .businessToggle(
+                                                            value: TypOfBusiness
+                                                                .business);
+                                                  },
+                                                ),
+                                                CustomText(
+                                                  text:
+                                                      '${Languages.of(context)?.business}',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleSmall!
+                                                      .copyWith(
+                                                          color: ColorResource
+                                                              .color181B28,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                )
+                                              ],
+                                            ),
                                           ),
-                                          CustomText(
-                                            text:
-                                                '${Languages.of(context)?.business}',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleSmall!
-                                                .copyWith(
-                                                    color: ColorResource
-                                                        .color181B28,
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.w600),
-                                          )
                                         ],
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                       ),
-                                    ),
-                                  ],
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                    ],
+                                  ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        WidgetUtils.genericTextFiled(
-                          context: context,
-                          validationRules: ['required'],
-                          keyBoardType: TextInputType.name,
-                          hintText:
-                              widget.controller!.typOfBusiness.obs.value ==
-                                      TypOfBusiness.business
-                                  ? Languages.of(context)?.brandNameHintText
-                                  : Languages.of(context)?.fullNameHint,
-                          controller: widget.controller!.brandNameController,
-                          labelName:
-                              widget.controller!.typOfBusiness.obs.value ==
-                                      TypOfBusiness.business
-                                  ? '${Languages.of(context)?.brandName}'
-                                  : '${Languages.of(context)?.fullName}',
-                        ),
+                              ),
+                              SizedBox(height: 10),
+                              WidgetUtils.genericTextFiled(
+                                context: context,
+                                validationRules: ['required'],
+                                keyBoardType: TextInputType.name,
+                                hintText: widget.controller!.typOfBusiness.obs
+                                            .value ==
+                                        TypOfBusiness.business
+                                    ? Languages.of(context)?.brandNameHintText
+                                    : Languages.of(context)?.fullNameHint,
+                                controller:
+                                    widget.controller!.brandNameController,
+                                labelName: widget.controller!.typOfBusiness.obs
+                                            .value ==
+                                        TypOfBusiness.business
+                                    ? '${Languages.of(context)?.brandName}'
+                                    : '${Languages.of(context)?.fullName}',
+                              ),
+                              // Legal Name
+                              if (widget.controller!.typOfBusiness.obs.value ==
+                                  TypOfBusiness.business)
+                                WidgetUtils.genericTextFiled(
+                                  context: context,
+                                  validationRules: ['required'],
+                                  keyBoardType: TextInputType.name,
+                                  hintText:
+                                      Languages.of(context)?.companyNameHint,
+                                  controller:
+                                      widget.controller!.legalNameController,
+                                  labelName:
+                                      '${Languages.of(context)?.business}  ${Languages.of(context)?.legalName}',
+                                ),
 
-                        // Legal Name
-                        if (widget.controller!.typOfBusiness.obs.value ==
-                            TypOfBusiness.business)
-                          WidgetUtils.genericTextFiled(
-                            context: context,
-                            validationRules: ['required'],
-                            keyBoardType: TextInputType.name,
-                            hintText: Languages.of(context)?.companyNameHint,
-                            controller: widget.controller!.legalNameController,
-                            labelName:
-                                '${Languages.of(context)?.business}  ${Languages.of(context)?.legalName}',
-                          ),
+                              MediaQuery.removePadding(
+                                context: context,
+                                removeBottom: true,
+                                removeTop: true,
+                                child: ListTile(
+                                  contentPadding: EdgeInsets.zero,
+                                  horizontalTitleGap: 0,
+                                  dense: true,
+                                  minVerticalPadding: 0.0,
+                                  title: CustomText(
+                                    text:
+                                        Languages.of(context)!.iHaveAGSTNumber,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleSmall!
+                                        .copyWith(
+                                            fontSize: 13,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w400),
+                                  ),
+                                  leading: Checkbox(
+                                    value: widget
+                                        .controller!.gstNumber.obs.value.value,
+                                    activeColor: Colors.pinkAccent,
+                                    checkColor: Colors.white,
+                                    visualDensity: VisualDensity(
+                                        horizontal: -4, vertical: -4),
+                                    onChanged: (value) {
+                                      widget.controller!
+                                          .gstNumberCheckBox(values: value);
+                                    },
+                                  ),
+                                ),
+                              ),
+                              //  GST No
 
-                        MediaQuery.removePadding(
-                          context: context, removeBottom: true,removeTop: true,
-                          child: ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            horizontalTitleGap: 0,
-                             dense: true,
-                             minVerticalPadding: 0.0,
-                            title: CustomText(
-                              text: Languages.of(context)!.iHaveAGSTNumber,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall!
-                                  .copyWith(
-                                  fontSize: 13,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            leading: Checkbox(
-                              value: widget.controller!.gstNumber.obs
-                                  .value.value,
-                              activeColor: Colors.pinkAccent,
-                              checkColor: Colors.white,
-                              onChanged: (value) {
-                                widget.controller!.gstNumberCheckBox(
-                                    values: value);
-                              },
-                            ),
-                          ),
-                        ),
-                        //  GST No
-                        WidgetUtils.genericTextFiled(
-                          context: context,
-                          validationRules: ['required'],
-                          hintText: Languages.of(context)?.gstNumberHint,
-                          controller: widget.controller!.gstNumberController,
-                          labelName: '${Languages.of(context)?.gstNumber}',
-                        ),
-                        // Pan No
-                        WidgetUtils.genericTextFiled(
-                          context: context,
-                          validationRules: ['required', 'pan'],
-                          hintText: Languages.of(context)?.panNumberHint,
-                          controller: widget.controller!.panNoController,
-                          labelName: '${Languages.of(context)?.panNumber}',
-                        ),
-                        WidgetUtils.genericTextFiled(
-                          context: context,
-                          validationRules: ['required'],
-                          hintText: Languages.of(context)
-                              ?.contactPersonNameHintText,
-                          controller:
-                          widget.controller!.contactPersonController,
-                          keyBoardType: TextInputType.emailAddress,
-                          labelName: '${Languages.of(context)?.contact} ${Languages.of(context)?.person} ${Languages.of(context)?.optional}',
-                        ),
-
-
-                        // Department
-                          if (widget.controller!.typOfBusiness.obs.value ==
-                              TypOfBusiness.business)
-                            WidgetUtils.genericTextFiled(
+                              if (widget
+                                      .controller!.gstNumber.obs.value.value ==
+                                  true)
+                                WidgetUtils.genericTextFiled(
+                                  context: context,
+                                  validationRules: ['required'],
+                                  hintText:
+                                      Languages.of(context)?.gstNumberHint,
+                                  controller:
+                                      widget.controller!.gstNumberController,
+                                  labelName:
+                                      '${Languages.of(context)?.gstNumber}',
+                                ),
+                              // Pan No
+                              WidgetUtils.genericTextFiled(
+                                context: context,
+                                validationRules: ['required', 'pan'],
+                                hintText: Languages.of(context)?.panNumberHint,
+                                controller: widget.controller!.panNoController,
+                                labelName:
+                                    '${Languages.of(context)?.panNumber}',
+                              ),
+                              // Contact Person
+                              WidgetUtils.genericTextFiled(
                                 context: context,
                                 validationRules: ['required'],
                                 hintText: Languages.of(context)
-                                    ?.departmentNameHintText,
+                                    ?.contactPersonNameHintText,
                                 controller:
-                                widget.controller!.departmentController,
+                                    widget.controller!.contactPersonController,
                                 keyBoardType: TextInputType.emailAddress,
                                 labelName:
-                                '${Languages.of(context)?.department}'),
+                                    '${Languages.of(context)?.contact} ${Languages.of(context)?.person} ${Languages.of(context)?.optional}',
+                              ),
 
-                        // Designation
-                          WidgetUtils.genericTextFiled(
-                              context: context,
-                              validationRules: ['required'],
-                              hintText: Languages.of(context)
-                                  ?.designationNameHintText,
-                              keyBoardType: TextInputType.text,
-                              controller:
-                              widget.controller!.designationController,
-                              labelName:
-                              '${Languages.of(context)?.designation}'),
-                        // Email ID
-                        WidgetUtils.genericTextFiled(
-                          context: context,
-                          validationRules: ['required', 'email'],
-                          hintText:
-                              Languages.of(context)?.clientsEmailIdHintText,
-                          keyBoardType: TextInputType.emailAddress,
-                          controller: widget.controller!.emailIDController,
-                          labelName: '${Languages.of(context)?.emailID}',
-                        ),
+                              // Department
+                              if (widget.controller!.typOfBusiness.obs.value ==
+                                  TypOfBusiness.business)
+                                WidgetUtils.genericTextFiled(
+                                    context: context,
+                                    validationRules: ['required'],
+                                    hintText: Languages.of(context)
+                                        ?.departmentNameHintText,
+                                    controller:
+                                        widget.controller!.departmentController,
+                                    keyBoardType: TextInputType.emailAddress,
+                                    labelName:
+                                        '${Languages.of(context)?.department}'),
 
-                        // Mobile No
-                        WidgetUtils.genericTextFiled(
-                            context: context,
-                            validationRules: ['required', 'mobile_number'],
-                            hintText: Languages.of(context)
-                                ?.clientMobileNumberHintText,
-                            keyBoardType: TextInputType.phone,
-                            controller:
-                            widget.controller!.mobileNumberController,
-                            labelName:
-                            '${Languages.of(context)?.mobileNumber}'),
+                              // Designation
+                              WidgetUtils.genericTextFiled(
+                                  context: context,
+                                  validationRules: ['required'],
+                                  hintText: Languages.of(context)
+                                      ?.designationNameHintText,
+                                  keyBoardType: TextInputType.text,
+                                  controller:
+                                      widget.controller!.designationController,
+                                  labelName:
+                                      '${Languages.of(context)?.designation}'),
+                              // Email ID
+                              WidgetUtils.genericTextFiled(
+                                context: context,
+                                validationRules: ['required', 'email'],
+                                hintText: Languages.of(context)
+                                    ?.clientsEmailIdHintText,
+                                keyBoardType: TextInputType.emailAddress,
+                                controller:
+                                    widget.controller!.emailIDController,
+                                labelName: '${Languages.of(context)?.emailID}',
+                              ),
 
+                              // Mobile No
+                              WidgetUtils.genericTextFiled(
+                                  context: context,
+                                  validationRules: [
+                                    'required',
+                                    'mobile_number'
+                                  ],
+                                  hintText: Languages.of(context)
+                                      ?.clientMobileNumberHintText,
+                                  keyBoardType: TextInputType.phone,
+                                  controller:
+                                      widget.controller!.mobileNumberController,
+                                  labelName:
+                                      '${Languages.of(context)?.mobileNumber}'),
 
+                              WidgetUtils.genericTextFiled(
+                                  context: context,
+                                  keyBoardType: TextInputType.streetAddress,
+                                  validationRules: ['required'],
+                                  controller:
+                                      widget.controller!.fullAddressController,
+                                  labelName:
+                                      '${Languages.of(context)?.fullAddress}',
+                                  hintText:
+                                      '${Languages.of(context)?.fullAddress}',
+                                  height: 100),
 
-
-                        WidgetUtils.genericTextFiled(
-                            context: context,
-                            keyBoardType: TextInputType.streetAddress,
-                            validationRules: ['required'],
-                            controller: widget.controller!.fullAddress,
-                            labelName: '${Languages.of(context)?.fullAddress}',
-                            hintText: '${Languages.of(context)?.fullAddress}'),
-
-                       /* WidgetUtils.genericTextFiled(
+                              /* WidgetUtils.genericTextFiled(
                             context: context,
                             keyBoardType: TextInputType.name,
                             validationRules: ['required'],
@@ -341,30 +420,30 @@ class AddClientScreenSmallState extends State<AddClientScreenSmall> {
                             controller: widget.controller!.pinCode,
                             labelName: '${Languages.of(context)?.pincode}',
                             hintText: '${Languages.of(context)?.pincode}'),*/
-                        const SizedBox(
-                          height: 15,
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              PrimaryButton(
+                                '${Languages.of(context)!.save}',
+                                context,
+                                cardShape: 1,
+                                isIcon: true,
+                                textColor: ColorResource.colorFFFFFF,
+                                fontSize: 20,
+                                onTap: () {
+                                  if (widget.controller!.form.currentState!
+                                      .validate()) {
+                                    widget.controller!.createClient();
+                                  }
+                                },
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                            ],
+                          ),
                         ),
-                        PrimaryButton(
-                          '${Languages.of(context)!.save}',
-                          context,
-                          cardShape: 1,
-                          isIcon: true,
-                          textColor: ColorResource.colorFFFFFF,
-                          fontSize: 20,
-                          onTap: () {
-                            if (widget.controller!.form.currentState!
-                                .validate()) {
-                              widget.controller!.createClient();
-                            }
-                          },
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                      ),
               ],
             ),
           ),

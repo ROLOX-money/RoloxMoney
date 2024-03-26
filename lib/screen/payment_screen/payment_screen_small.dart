@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/model/project_model.dart';
 import 'package:roloxmoney/screen/bank_list_screen/bank_list_controller.dart';
@@ -8,6 +9,7 @@ import 'package:roloxmoney/screen/payment_screen/payment_controller.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
+import 'package:roloxmoney/widget/custom_button.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/rolox_money_widget.dart';
 import 'package:roloxmoney/widget/secondary_button.dart';
@@ -56,23 +58,22 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomText(
-                          text: '${Languages.of(context)!.payments}'
-                              .toUpperCase(),
+                          text:
+                              '${Languages.of(context)!.payments.capitalizeFirst}',
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall!
                               .copyWith(
                                   color: ColorResource.color000000,
-                                  fontSize: 16,
+                                  fontSize: 22,
                                   fontWeight: FontWeight.w500),
                         ),
                         Container(
                           width: 161,
                           height: 40,
-                          child: SecondaryButton(
+                          child: PrimaryButton(
                             'View Bank Account',
                             context,
-                            backgroundColor: ColorResource.color000000,
                             fontWeight: FontWeight.w500,
                             textColor: ColorResource.colorFFFFFF,
                             fontSize: 14,
@@ -90,15 +91,13 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                   SizedBox(
                     height: 15,
                   ),
-                  widget.controller!.projectInvoicesList.obs.value
-                              .length >
-                          0
+                  widget.controller!.projectInvoicesList.obs.value.length > 0
                       ? ListView.separated(
                           separatorBuilder: (BuildContext context, int index) =>
                               Divider(
                                   height: 1, color: ColorResource.color181B28),
-                          itemCount: widget.controller!.projectInvoicesList.obs
-                              .value.length,
+                          itemCount: widget
+                              .controller!.projectInvoicesList.obs.value.length,
                           shrinkWrap: true,
                           // physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
@@ -117,7 +116,7 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                     borderRadius: BorderRadius.all(
                                       Radius.circular(20),
                                     ),
-                                    color: ColorResource.color381D4E,
+                                    color: ColorResource.initialBgColor,
                                   ),
                                   child: CustomText(
                                     text: AppUtils.getInitials(
@@ -127,7 +126,8 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                         .textTheme
                                         .titleMedium!
                                         .copyWith(
-                                            color: ColorResource.colorA0A1A9,
+                                            color:
+                                                ColorResource.initialTextColor,
                                             fontWeight: FontWeight.w700),
                                   ),
                                 ),
@@ -140,76 +140,56 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                       children: [
                                         Container(
                                           alignment: Alignment.center,
-                                          // padding: EdgeInsets.all(2),
+                                          padding: EdgeInsets.all(5),
                                           decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 3.0
-                                            ),
+                                            // border: Border.all(width: 3.0),
                                             borderRadius: BorderRadius.all(
-                                                Radius.circular(7.0) //                 <--- border radius here
-                                            ),
-                                            color: Colors.white
-                                            // color: projectModel.isCredit == false
-                                            //   ? ColorResource.color4A3114
-                                            //   : ColorResource.color1C5F2C,
+                                                Radius.circular(
+                                                    7.0) // <--- border radius here
+                                                ),
+                                            color: projectModel.isCredit ==
+                                                    false
+                                                ? ColorResource.pendingColor
+                                                : ColorResource.creditedColor,
                                           ),
-
                                           child: CustomText(
                                             text: projectModel.isCredit == false
                                                 ? 'Pending'.toUpperCase()
-                                                : '${Languages.of(context)!.credit}'
+                                                : '${Languages.of(context)!.credit}ed'
                                                     .toUpperCase(),
                                             color: Colors.red,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .titleSmall!
                                                 .copyWith(
-                                                    color:
-                                                        projectModel.isCredit ==
-                                                                false
-                                                            ? ColorResource
-                                                                .colorFFC700
-                                                            : ColorResource
-                                                                .color0093FF,
-                                                    fontSize: 09,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                          ),
-                                        ),
-                                        if(projectModel.isCredit == false)
-                                        Container(
-                                          height: 15,
-                                          alignment: Alignment.center,
-                                          child: CustomText(
-                                            text: 'Reminder',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleSmall!
-                                                .copyWith(
-                                                    color: projectModel
-                                                            .isCredit!
+                                                    color: projectModel.isCredit ==
+                                                            false
                                                         ? ColorResource
-                                                            .color0093FF
+                                                            .orangeColor
                                                         : ColorResource
-                                                            .colorFFC700,
-                                                    fontSize: 14,
-                                                    decoration: TextDecoration
-                                                        .underline,
-                                                    decorationColor:
-                                                        projectModel
-                                                                .isCredit!
-                                                            ? ColorResource
-                                                                .color0093FF
-                                                            : ColorResource
-                                                                .colorFFC700,
-                                                    decorationThickness: 4,
-                                                    decorationStyle:
-                                                        TextDecorationStyle
-                                                            .solid,
+                                                            .creditedTextColor,
+                                                    fontSize: 12,
                                                     fontWeight:
                                                         FontWeight.w500),
                                           ),
                                         ),
+                                        if (projectModel.isCredit == false)
+                                          Container(
+                                            height: 15,
+                                            alignment: Alignment.center,
+                                            child: CustomText(
+                                              text: 'Reminder',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleSmall!
+                                                  .copyWith(
+                                                      color: ColorResource
+                                                          .primaryColor,
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                            ),
+                                          ),
                                       ],
                                     ),
                                     SizedBox(height: 5),
@@ -219,10 +199,10 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                           .textTheme
                                           .titleSmall!
                                           .copyWith(
-                                              color: ColorResource.color000000,
+                                              color: ColorResource.textColor,
                                               overflow: TextOverflow.fade,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600),
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w700),
                                     ),
                                     SizedBox(height: 5),
                                     Row(
@@ -236,7 +216,7 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                                   .titleSmall!
                                                   .copyWith(
                                                       color: ColorResource
-                                                          .color181B28,
+                                                          .textColor,
                                                       fontSize: 14,
                                                       fontWeight:
                                                           FontWeight.w400),
@@ -248,7 +228,7 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                                       .titleSmall!
                                                       .copyWith(
                                                           color: ColorResource
-                                                              .colorA0A1A9,
+                                                              .textSecondaryColor,
                                                           fontSize: 14,
                                                           fontWeight:
                                                               FontWeight.w500),
@@ -259,7 +239,7 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                           textAlign: TextAlign.center,
                                         ),
                                         SizedBox(
-                                          width: 5,
+                                          width: 10,
                                         ),
                                         Container(
                                           height: 5,
@@ -276,24 +256,26 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                           ),
                                         ),
                                         SizedBox(
+                                          width: 10,
+                                        ),
+                                        CustomText(
+                                          text: DateFormat('MM/dd/yyyy').format(
+                                              DateTime.parse(
+                                                  DateTime.now().toString())),
+                                          // '${projectModel.date}',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleSmall!
+                                              .copyWith(
+                                                  color: ColorResource
+                                                      .textSecondaryColor,
+                                                  overflow: TextOverflow.fade,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400),
+                                        ),
+                                        SizedBox(
                                           width: 5,
                                         ),
-                                        //
-                                        // CustomText(
-                                        //   text: '${projectModel.date}',
-                                        //   style: Theme.of(context)
-                                        //       .textTheme
-                                        //       .titleSmall!
-                                        //       .copyWith(
-                                        //           color:
-                                        //               ColorResource.colorA0A1A9,
-                                        //           overflow: TextOverflow.fade,
-                                        //           fontSize: 12,
-                                        //           fontWeight: FontWeight.w400),
-                                        // ),
-                                        // SizedBox(
-                                        //   width: 5,
-                                        // ),
                                       ],
                                     ),
                                     SizedBox(
@@ -308,7 +290,8 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                                         fontWeight: FontWeight.w500,
                                         textColor: ColorResource.color181B28,
                                         fontSize: 14,
-                                        backgroundColor: ColorResource.colorF5F5F5,
+                                        backgroundColor:
+                                            ColorResource.colorF5F5F5,
                                         onTap: () {},
                                       ),
                                     )
@@ -319,7 +302,8 @@ class PaymentScreenSmallState extends State<PaymentScreenSmall> {
                           })
                       : AppUtils.emptyViewWidget(
                           context: Get.context!,
-                          buttonName: Languages.of(context)!.addInvoice,
+                          buttonName: '${Languages.of(context)?.addPayments}',
+                          buttonWidth: 130,
                           contentString: "No Payment are there",
                           imagePath: ImageResource.emptyPayment,
                           callBack: () {

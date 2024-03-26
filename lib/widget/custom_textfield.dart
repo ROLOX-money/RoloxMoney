@@ -43,45 +43,51 @@ class CustomTextField extends StatefulWidget {
   void Function(String)? onChanged;
   final Color? bgColor;
   final Color? fillColor;
+  EdgeInsetsGeometry? contentPadding;
+  TextAlignVertical? textAlignVertical;
 
-  CustomTextField(this.controller,
-      {super.key,
-      this.hintText,
-      this.obscureText = false,
-      this.suffixWidget,
-      this.prefixWidget,
-      this.isEnable = true,
-      this.onTapped,
-      this.isReadOnly = false,
-      this.maximumWordCount,
-      this.titleColor,
-      this.textColor = ColorResource.textColor,
-      this.borderColor = ColorResource.backgroundColor,
-      this.enableColor = ColorResource.backgroundColor,
-      this.disableColor = ColorResource.backgroundColor,
-      this.focusedBorder = ColorResource.backgroundColor,
-      this.isHighlighted = false,
-      this.highlightColor,
-      this.focusNode,
-      this.focusTextColor,
-      this.keyBoardType = TextInputType.name,
-      this.descriptionText,
-      this.oncomplete,
-      this.validatorCallBack,
-      this.onEditing,
-      this.prefixIcon,
-      this.isEnableLabel = true,
-      this.inputformaters,
-      this.validatorFunction,
-      this.autoValidateMode,
-      this.hintStyle,
-      this.errorStyle,
-      this.validationRules = const [],
-      this.maxLines,
-      this.minLines,
-      this.onChanged,
-      this.bgColor,
-      this.fillColor});
+  CustomTextField(
+    this.controller, {
+    super.key,
+    this.hintText,
+    this.obscureText = false,
+    this.suffixWidget,
+    this.prefixWidget,
+    this.isEnable = true,
+    this.onTapped,
+    this.isReadOnly = false,
+    this.maximumWordCount,
+    this.titleColor,
+    this.textColor = ColorResource.textColor,
+    this.borderColor = ColorResource.backgroundColor,
+    this.enableColor = ColorResource.backgroundColor,
+    this.disableColor = ColorResource.backgroundColor,
+    this.focusedBorder = ColorResource.backgroundColor,
+    this.isHighlighted = false,
+    this.highlightColor,
+    this.focusNode,
+    this.focusTextColor,
+    this.keyBoardType = TextInputType.name,
+    this.descriptionText,
+    this.oncomplete,
+    this.validatorCallBack,
+    this.onEditing,
+    this.prefixIcon,
+    this.isEnableLabel = true,
+    this.inputformaters,
+    this.validatorFunction,
+    this.autoValidateMode,
+    this.hintStyle,
+    this.errorStyle,
+    this.validationRules = const [],
+    this.maxLines,
+    this.minLines,
+    this.onChanged,
+    this.bgColor,
+    this.fillColor,
+    this.contentPadding,
+    this.textAlignVertical,
+  });
 
   @override
   CustomTextFieldState createState() => CustomTextFieldState();
@@ -105,7 +111,8 @@ class CustomTextFieldState extends State<CustomTextField> {
         child: TextFormField(
           maxLines: widget.maxLines ?? 1,
           minLines: widget.maxLines ?? 1,
-          textAlignVertical: TextAlignVertical.center,
+          textAlignVertical:
+              widget.textAlignVertical ?? TextAlignVertical.center,
           textInputAction: TextInputAction.done,
           validator: widget.validatorFunction ??
               (String? value) {
@@ -160,9 +167,12 @@ class CustomTextFieldState extends State<CustomTextField> {
           style: Theme.of(context).textTheme.bodyText1!.copyWith(
               color: (widget.focusNode != null && widget.focusNode!.hasFocus)
                   ? widget.focusTextColor
-                  : widget.textColor),
+                  : widget.textColor,
+              fontWeight: FontWeight.w600,
+              fontSize: 16),
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.never,
+            contentPadding: widget.contentPadding,
             prefix: widget.prefixWidget,
             fillColor: widget.fillColor ?? ColorResource.buttonTextColor,
             filled: true,
@@ -180,9 +190,10 @@ class CustomTextFieldState extends State<CustomTextField> {
                     color: ColorResource.hintTextColor,
                     fontFamily: 'Poppins-Medium',
                     fontWeight: FontWeight.w400,
-                    fontStyle: FontStyle.normal,
+
+                    // fontStyle: FontStyle.normal,
                     height: 1,
-                    fontSize: 14),
+                    fontSize: 16),
             errorStyle: widget.errorStyle ??
                 Theme.of(context)
                     .textTheme
@@ -200,7 +211,7 @@ class CustomTextFieldState extends State<CustomTextField> {
                 color: (widget.focusNode != null && widget.focusNode!.hasFocus)
                     ? ColorResource.colorF58220
                     : ColorResource.hintTextColor.withOpacity(0.4),
-                fontSize: 14,
+                fontSize: 16,
                 fontWeight: FontWeight.w400),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),

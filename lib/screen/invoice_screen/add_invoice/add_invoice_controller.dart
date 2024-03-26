@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:roloxmoney/screen/invoice_screen/entities/invoice_model.dart';
 import 'package:roloxmoney/screen/invoice_screen/entities/project_model.dart';
+import 'package:roloxmoney/screen/invoice_screen/invoice_controller.dart';
 import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/RoloxKey.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
@@ -21,33 +23,55 @@ class AddInvoiceController extends GetxController
   TextEditingController hsnController = TextEditingController();
   TextEditingController stateController = TextEditingController();
 
+  InvoiceController invoiceController = Get.put(InvoiceController());
+
   final form = GlobalKey<FormState>();
 
   List<Project> projectList = [];
   int? projectId;
   RxString projectName = ''.obs;
+  Invoice? invoiceDetails;
+  RxInt? invoiceIndex = (-1).obs;
+  RxBool isReadOnly = false.obs;
 
   @override
   void onInit() async {
     change(null, status: RxStatus.loading());
-    invoiceNameController.text = 'Invoice for Photo work';
-    invoiceNumberController.text = '123456';
-    invoiceValueWithoutGSTController.text = '1234.56';
-    invoiceDueDateController.text = '21/07/2023';
-    gstChargesController.text = '0';
-    hsnController.text = '123456';
-    stateController.text = 'TamilNadu';
-    getProjectList();
+    // invoiceDetails = Get.arguments;
+
+    if (Get.arguments != null) {
+      invoiceIndex!.value = Get.arguments;
+      if (invoiceIndex!.value != -1) {
+        invoiceDetails = invoiceController.invoicesList[invoiceIndex!.value];
+      }
+    }
+
+    if (invoiceDetails != null) {
+      projectNameController.text = invoiceDetails!.projectName!;
+      invoiceNameController.text = invoiceDetails!.invoiceName!;
+      invoiceNumberController.text = invoiceDetails!.invoiceNumber!.toString();
+      invoiceValueWithoutGSTController.text =
+          invoiceDetails!.invoiceValueWithoutGst!.toString();
+      invoiceDueDateController.text = invoiceDetails!.invoiceDueDate!;
+      gstChargesController.text = invoiceDetails!.gstCharges.toString();
+      hsnController.text = invoiceDetails!.hsnCode.toString();
+      isReadOnly.value = true;
+    }
+    toGetTheProjectList().then((value) {
+      projectList = value;
+      change(projectList, status: RxStatus.success());
+    });
     super.onInit();
   }
 
-  void getProjectList() {
-    projectList = [];
-    toGetTheProjectList().then((value) {
-      projectList = value;
-    });
-    change(projectList, status: RxStatus.success());
-  }
+  // void getProjectList() {
+  //   projectList = [];
+  //   toGetTheProjectList().then((value) {
+  //     projectList = value;
+  //   });
+  //
+  //   change(projectList, status: RxStatus.success());
+  // }
 
   toSetClientId({bool isClear = false, String? searchingText}) {
     if (isClear) {
@@ -133,7 +157,10 @@ class AddInvoiceController extends GetxController
             .eq('hsnCode', hsnController.text)
             .then((value) {
           if (!value.isEmpty) {
+            AppUtils.showSnackBar(
+                Get.context!, 'Successfully created your new invoice');
             userToInvoiceMapping(invoiceId: value[0]['id']);
+            Get.back(result: true);
           }
         });
       } else {

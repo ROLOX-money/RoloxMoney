@@ -174,9 +174,11 @@ mixin SupaBaseController {
       debugPrint('tableName--> $tableName');
       return await Singleton.supabaseInstance.client
           .from(tableName)
-          .select(whatTypeOfValueYouWant ?? '*')
+          .select(whatTypeOfValueYouWant != null ? whatTypeOfValueYouWant : '*')
+          // .select(whatTypeOfValueYouWant ?? '*')
           .eq(searchKey, searchValue)
           .then((listOfResponse) {
+        debugPrint('listOfResponse--> ${listOfResponse.toString()}');
         if (listOfResponse is List) {
           return listOfResponse;
         } else {
@@ -247,12 +249,7 @@ mixin SupaBaseController {
     try {
       await Singleton.supabaseInstance.client
           .from(RoloxKey.supaBaseUserToClientMap)
-          .select('''
-    companyId,
-    ${RoloxKey.supaBaseCompanyTable}!inner (
-      *
-    )
-  ''')
+          .select('''companyId, ${RoloxKey.supaBaseCompanyTable}!inner (*)''')
           .eq('userid', Singleton.mobileUserId)
           .then((value) {
             value.forEach((element) {
@@ -286,5 +283,21 @@ mixin SupaBaseController {
       e.printError();
       return [];
     }
+  }
+
+  Future toGetTheNoOfInvoices() async {
+    var projectsResponse;
+    try {
+      await Singleton.supabaseInstance.client
+          .from(RoloxKey.supaBaseProjectDb)
+          .select('*')
+          .order('id')
+          .then((value) => {projectsResponse = value.body});
+
+      await Singleton.supabaseInstance.client
+          .from(RoloxKey.supaBaseInvoiceTable)
+          .select(
+              '''projectId,${RoloxKey.supaBaseInvoiceTable}!inner''').execute();
+    } catch (e) {}
   }
 }

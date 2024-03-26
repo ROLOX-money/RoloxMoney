@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/home_screen/home_detail_screen.dart';
 import 'package:roloxmoney/screen/invoice_screen/entities/invoice_model.dart';
-import 'package:roloxmoney/utils/app_utils.dart';
+
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
 import 'package:roloxmoney/utils/widget_utils.dart';
@@ -127,15 +127,15 @@ class _HomeDetailsScreenLargeState extends State<HomeDetailsScreenLarge> {
                         children: [
                           CustomText(text: '1-8 of 20'),
                           SizedBox(width: 5),
-                          AppUtils.pageNationButton(
-                              icon: Icons.arrow_back_ios, onPressed: () {}),
-                          SizedBox(width: 5),
-                          AppUtils.pageNationButton(
-                              icon: Icons.arrow_forward_ios, onPressed: () {}),
-                          SizedBox(width: 5),
-                          AppUtils.pageNationButton(
-                              icon: Icons.double_arrow_rounded,
-                              onPressed: () {}),
+                          // AppUtils.pageNationButton(
+                          //     icon: Icons.arrow_back_ios, onPressed: () {}),
+                          // SizedBox(width: 5),
+                          // AppUtils.pageNationButton(
+                          //     icon: Icons.arrow_forward_ios, onPressed: () {}),
+                          // SizedBox(width: 5),
+                          // AppUtils.pageNationButton(
+                          //     icon: Icons.double_arrow_rounded,
+                          //     onPressed: () {}),
                         ],
                       ),
                       SizedBox(width: 20)

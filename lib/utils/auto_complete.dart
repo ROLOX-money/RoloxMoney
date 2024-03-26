@@ -5,6 +5,7 @@ class AutoComplete {
   static Widget autoComplete(
       {required String hintText,
       String? value,
+      double? width,
       List<String>? suggestionValue,
       Function(dynamic)? onFieldSubmitted}) {
     List<String> values = suggestionValue ?? [];
@@ -81,7 +82,7 @@ class AutoComplete {
                 color: Colors.white,
                 child: Container(
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black54,width: 0.5),
+                    border: Border.all(color: Colors.black54, width: 0.5),
                     color: Colors.white70,
                     borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(5),
@@ -90,7 +91,7 @@ class AutoComplete {
                       bottomRight: Radius.circular(5),
                     ),
                   ),
-                  width: MediaQuery.of(context).size.width - 30,
+                  width: width ?? MediaQuery.of(context).size.width - 30,
                   height: options.length == 1
                       ? 75
                       : options.length < 4

@@ -1,6 +1,4 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
@@ -9,11 +7,11 @@ import 'package:roloxmoney/model/invoice_model.dart';
 import 'package:roloxmoney/network/get_connect.dart';
 import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_controller.dart';
 import 'package:roloxmoney/screen/invoice_screen/add_invoice/add_invoice_screen.dart';
-import 'package:roloxmoney/screen/invoice_screen/entities/invoice_model.dart';
 import 'package:roloxmoney/screen/withdraw_fund_screen/withdraw_controller.dart';
 import 'package:roloxmoney/screen/withdraw_fund_screen/withdraw_fund_screen.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
+import 'package:roloxmoney/utils/supa_base_control.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/secondary_button.dart';
 import 'package:roloxmoney/screen/dashboard_screen/entities/dashboard_model.dart';
@@ -22,279 +20,55 @@ import 'package:roloxmoney/utils/RoloxKey.dart';
 
 /*Chinnadurai Viswanathan*/
 class HomeController extends GetxController with StateMixin {
-  RxList invoicesList = [].obs;
+  RxList<DashBoardInvoice> invoicesList = <DashBoardInvoice>[].obs;
   RxDouble paidTransaction = 0.0.obs;
   RxDouble dueTransaction = 0.0.obs;
   RxDouble upComingTransaction = 0.0.obs;
-  RxList groupInvoicesList = [].obs;
+
   RxList upcomingInvoicesList = [].obs;
   RxList dueInvoicesList = [].obs;
   RxList paidInvoicesList = [].obs;
-  RxList<InvoiceModel> upcomingInvoicesListLargeScreen = <InvoiceModel>[].obs;
-  RxList<InvoiceModel> dueInvoicesListLargeScreen = <InvoiceModel>[].obs;
-  RxList<InvoiceModel> paidInvoicesListLargeScreen = <InvoiceModel>[].obs;
+
   RxList<bool> isSelected = <bool>[].obs;
   RxBool isEmpty = true.obs;
   RxInt buttonNo = 0.obs;
+  RxInt allInvoiceCount = 0.obs;
+  RxInt dueInvoiceCount = 0.obs;
+  RxInt overDueInvoiceCount = 0.obs;
+  RxDouble allInvoiceAmount = 0.0.obs;
+  RxDouble dueInvoiceAmount = 0.0.obs;
+  RxDouble overDueInvoiceAmount = 0.0.obs;
+  RxList<DashBoardInvoice> allInvoiceList = <DashBoardInvoice>[].obs;
+  RxList<DashBoardInvoice> dueInvoiceList = <DashBoardInvoice>[].obs;
+  RxList<DashBoardInvoice> overDueInvoiceList = <DashBoardInvoice>[].obs;
+  RxInt typeOfBusiness = 0.obs;
 
   WithdrawFundController withdrawFundController =
       Get.put(WithdrawFundController());
 
   @override
   void onInit() async {
-    change(null, status: RxStatus.success());
-    Future.delayed(const Duration(seconds: 2), () {
-      isEmpty.value = false;
-      upcomingInvoicesList.addAll([
-        GroupInvoices(
-            boarderColor: ColorResource.colorE08AF4,
-            groupName: Languages.of(Get.context!)!.upcomingInvoices,
-            invoiceList: [
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateFormat('yyyy MM dd').format(DateTime.now()),
-                  workName: 'Brochure Design'),
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-            ]),
-      ]);
-      dueInvoicesList.addAll([
-        GroupInvoices(
-            boarderColor: ColorResource.colorF27C6C,
-            groupName: Languages.of(Get.context!)!.dueInvoices,
-            invoiceList: [
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-            ])
-      ]);
-      paidInvoicesList.addAll([
-        GroupInvoices(
-            boarderColor: ColorResource.color4A89D1,
-            groupName: Languages.of(Get.context!)!.paidInvoices,
-            invoiceList: [
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-            ]),
-      ]);
-      groupInvoicesList.addAll([
-        GroupInvoices(
-            boarderColor: ColorResource.colorE08AF4,
-            groupName: Languages.of(Get.context!)!.upcomingInvoices,
-            invoiceList: [
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateFormat('yyyy MM dd').format(DateTime.now()),
-                  workName: 'Brochure Design'),
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-            ]),
-        GroupInvoices(
-            boarderColor: ColorResource.colorF27C6C,
-            groupName: Languages.of(Get.context!)!.dueInvoices,
-            invoiceList: [
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-            ]),
-        GroupInvoices(
-            boarderColor: ColorResource.color4A89D1,
-            groupName: Languages.of(Get.context!)!.paidInvoices,
-            invoiceList: [
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-              InvoiceModel(
-                  amount: '25000',
-                  clientName: 'Target InfoTech',
-                  date: DateTime.now().toString(),
-                  workName: 'Brochure Design'),
-            ]),
-      ]);
 
-      upcomingInvoicesListLargeScreen.addAll([
-        InvoiceModel(
-            amount: '25000',
-            clientName: 'Target InfoTech',
-            date: DateTime.now().toString(),
-            workName: 'Brochure Design'),
-        InvoiceModel(
-            amount: '25000',
-            clientName: 'Hyundai Corporation',
-            date: DateTime.now().toString(),
-            workName: 'Brochure Design'),
-        InvoiceModel(
-            amount: '25000',
-            clientName: 'Target InfoTech',
-            date: DateTime.now().toString(),
-            workName: 'Brochure Design'),
-        InvoiceModel(
-            amount: '25000',
-            clientName: 'Hyundai Corporation',
-            date: DateTime.now().toString(),
-            workName: 'Brochure Design'),
-        InvoiceModel(
-            amount: '25000',
-            clientName: 'Target InfoTech',
-            date: DateTime.now().toString(),
-            workName: 'Brochure Design'),
-        InvoiceModel(
-            amount: '25000',
-            clientName: 'Hyundai Corporation',
-            date: DateTime.now().toString(),
-            workName: 'Brochure Design'),
-        InvoiceModel(
-            amount: '25000',
-            clientName: 'Target InfoTech',
-            date: DateTime.now().toString(),
-            workName: 'Brochure Design'),
-        InvoiceModel(
-            amount: '25000',
-            clientName: 'Hyundai Corporation',
-            date: DateTime.now().toString(),
-            workName: 'Brochure Design'),
-      ]);
-      dueInvoicesListLargeScreen.addAll([
-        InvoiceModel(
-            amount: '25000',
-            clientName: 'Target InfoTech',
-            date: DateTime.now().toString(),
-            workName: 'Brochure Design'),
-        InvoiceModel(
-            amount: '25000',
-            clientName: 'Hyundai Corporation',
-            date: DateTime.now().toString(),
-            workName: 'Brochure Design'),
-        InvoiceModel(
-            amount: '25000',
-            clientName: 'Target InfoTech',
-            date: DateTime.now().toString(),
-            workName: 'Brochure Design'),
-        InvoiceModel(
-            amount: '25000',
-            clientName: 'Hyundai Corporation',
-            date: DateTime.now().toString(),
-            workName: 'Brochure Design'),
-      ]);
-      paidInvoicesListLargeScreen.addAll([
-        InvoiceModel(
-            amount: '25000',
-            clientName: 'Target InfoTech',
-            date: DateTime.now().toString(),
-            workName: 'Brochure Design'),
-        InvoiceModel(
-            amount: '25000',
-            clientName: 'Hyundai Corporation',
-            date: DateTime.now().toString(),
-            workName: 'Brochure Design'),
-        InvoiceModel(
-            amount: '25000',
-            clientName: 'Target InfoTech',
-            date: DateTime.now().toString(),
-            workName: 'Brochure Design'),
-        InvoiceModel(
-            amount: '25000',
-            clientName: 'Hyundai Corporation',
-            date: DateTime.now().toString(),
-            workName: 'Brochure Design'),
-      ]);
+    change(null, status: RxStatus.loading());
+    try {
+      print("search value is  : ${Singleton.mobileUserId} ");
 
-      change(groupInvoicesList);
-    });
-    // toGetTheInvoiceList();
-    super.onInit();
+      await SupaBaseController.toGetTheSelectedID(
+              searchKey: "id",
+              searchValue: Singleton.mobileUserId,
+              whatTypeOfValueYouWant: "profiletype",
+              tableName: RoloxKey.supaBaseUserTable)
+          .then((value) {
+        print("values is ${value.toString()}");
+        if (value.isNotEmpty) {
+          typeOfBusiness.value = int.tryParse(value[0]["profiletype"])!;
+        }
+      });
+      toGetTheInvoiceList();
+      super.onInit();
+    } catch (e) {
+      e.printError();
+    }
   }
 
   toGetTheInvoiceList() async {
@@ -310,10 +84,13 @@ class HomeController extends GetxController with StateMixin {
   ''')
           .eq('userid', Singleton.mobileUserId)
           .then((value) {
+            print("dashboard invoice list is --> $value");
             value.forEach((element) {
               invoicesList.add(
                 DashBoardInvoice(
-                    invoiceAmount: element['invoice']['invoiceValueWithoutGst'],
+                    invoiceAmount: double.parse(element['invoice']
+                            ['invoiceValueWithoutGst']
+                        .toString()),
                     invoiceNumber: element['invoice']['invoiceNumber'],
                     invoiceName: element['invoice']['invoiceName'],
                     paid: element['invoice']['paid'],
@@ -322,8 +99,10 @@ class HomeController extends GetxController with StateMixin {
             });
           });
 
+      allInvoiceList.value = invoicesList;
+
       invoicesList.obs.value.toList().forEach((element) {
-        DashBoardInvoice dashBoardInvoice = element as DashBoardInvoice;
+        DashBoardInvoice dashBoardInvoice = element;
 
         if (dashBoardInvoice.paid!) {
           paidTransaction.value =
@@ -341,7 +120,34 @@ class HomeController extends GetxController with StateMixin {
           upComingTransaction.value =
               upComingTransaction.value + dashBoardInvoice.invoiceAmount!;
         } else {}
+
+        if (element.paid == false) {
+          if (DateFormat("dd/MM/yyyy")
+              .parse(dashBoardInvoice.dueDate!)
+              .isBefore(DateTime.now().subtract(Duration(days: 7)))) {
+            overDueInvoiceList.add(element);
+          } else {
+            dueInvoiceList.add(element);
+          }
+        } else {}
       });
+
+      allInvoiceCount.value = allInvoiceList.obs.value.length;
+      dueInvoiceCount.value = dueInvoiceList.obs.value.length;
+      overDueInvoiceCount.value = overDueInvoiceList.obs.value.length;
+      allInvoiceAmount.value = allInvoiceList.fold(
+          0.0,
+          (previousValue, element) =>
+              previousValue + element.invoiceAmount!.toDouble());
+      dueInvoiceAmount.value = dueInvoiceList.fold(
+          0.0,
+          (previousValue, element) =>
+              previousValue + element.invoiceAmount!.toDouble());
+      overDueInvoiceAmount.value = overDueInvoiceList.fold(
+          0.0,
+          (previousValue, element) =>
+              previousValue + element.invoiceAmount!.toDouble());
+
       change(upComingTransaction);
       change(paidTransaction);
       change(dueTransaction);
@@ -639,6 +445,236 @@ class HomeController extends GetxController with StateMixin {
                 ],
               )))
     ]);
+  }
+
+  Widget paidCardWidgetLarge2({
+    required BuildContext context,
+    required String amount,
+    required String noOfInvoices,
+    required String dueAmount,
+    required String dueCount,
+    required String overdueAmount,
+    required String overdueCount,
+  }) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+            width: MediaQuery.of(context).size.width / 2.6,
+            height: 200,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey, width: 0.15),
+              borderRadius: BorderRadius.circular(8),
+              gradient: LinearGradient(
+                colors: [
+                  ColorResource.colorEC008C,
+                  ColorResource.colorFFFFFF,
+                ],
+                stops: [0.2 / 8, 0.01],
+              ),
+            ),
+            padding: EdgeInsets.zero,
+            child: Theme(
+                data: Theme.of(context).copyWith(
+                    unselectedWidgetColor: Colors.grey,
+                    disabledColor: ColorResource.color00E94F),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Column(
+                          children: [
+                            CustomText(
+                              text:
+                                  '${Languages.of(context)!.noOf} ${Languages.of(context)!.invoices}',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w400),
+                            ),
+                            SizedBox(height: 20),
+                            Container(
+                              height: 50,
+                              width: 50,
+                              alignment: Alignment.center,
+                              padding: EdgeInsets.all(8.0),
+                              margin: EdgeInsets.only(top: 5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50.0),
+                                color:
+                                    ColorResource.primaryColor.withOpacity(0.2),
+                              ),
+                              child: CustomText(
+                                text: noOfInvoices,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold,
+                                        height: 1.5,
+                                        color: ColorResource.primaryColor),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(width: 10),
+                        Container(
+                          height: 80,
+                          width: 120,
+                          child: VerticalDivider(
+                              color: ColorResource.cardDividerColor,
+                              thickness: 1.0),
+                        ),
+                        SizedBox(width: 10),
+                        Column(
+                          children: [
+                            CustomText(
+                              text:
+                                  '${Languages.of(context)!.transactionWorth}',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w400),
+                            ),
+                            SizedBox(height: 30),
+                            CustomText(
+                              text: amount,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w600),
+                            ),
+                            SizedBox(height: 10),
+                          ],
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 30),
+                  ],
+                ))),
+        SizedBox(width: 40),
+        Container(
+            width: MediaQuery.of(context).size.width / 6.5,
+            height: 200,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey, width: 0.15),
+              borderRadius: BorderRadius.circular(8),
+              gradient: LinearGradient(
+                colors: [
+                  ColorResource.stepperColor,
+                  ColorResource.colorFFFFFF,
+                ],
+                stops: [0.2 / 6, 0.04],
+              ),
+            ),
+            padding: EdgeInsets.zero,
+            child: Theme(
+                data: Theme.of(context).copyWith(
+                    unselectedWidgetColor: Colors.grey,
+                    disabledColor: ColorResource.color00E94F),
+                child: dueInvoiceCard(context, true, dueAmount, dueCount))),
+        SizedBox(width: 20),
+        Container(
+            width: MediaQuery.of(context).size.width / 6.5,
+            height: 200,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey, width: 0.15),
+              borderRadius: BorderRadius.circular(8),
+              gradient: LinearGradient(
+                colors: [
+                  ColorResource.stepperColor,
+                  ColorResource.colorFFFFFF,
+                ],
+                stops: [0.2 / 6, 0.04],
+              ),
+            ),
+            padding: EdgeInsets.zero,
+            child: Theme(
+                data: Theme.of(context).copyWith(
+                    unselectedWidgetColor: Colors.grey,
+                    disabledColor: ColorResource.color00E94F),
+                child: dueInvoiceCard(
+                    context, false, overdueAmount, overdueCount))),
+      ],
+    );
+  }
+
+  Widget dueInvoiceCard(
+      BuildContext context, bool isDue, String dueAmount, String dueCount) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 50,
+              width: 50,
+              alignment: Alignment.center,
+              padding: EdgeInsets.all(8.0),
+              margin: EdgeInsets.only(top: 5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50.0),
+                color: ColorResource.stepperColor.withOpacity(0.2),
+              ),
+              child: CustomText(
+                text: dueCount,
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    height: 1.5,
+                    color: ColorResource.primaryColor),
+              ),
+            ),
+            SizedBox(width: 10),
+            CustomText(
+              text: isDue
+                  ? '${Languages.of(context)!.due}'
+                  : '${Languages.of(context)!.overDue}',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    height: 1.5,
+                  ),
+            ),
+          ],
+        ),
+        SizedBox(height: 20),
+        Divider(indent: 50, endIndent: 50),
+        CustomText(
+          text: '${Languages.of(context)!.netAmount}',
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: ColorResource.textSecondaryColor),
+        ),
+        SizedBox(height: 20),
+        CustomText(
+          text: dueAmount,
+          style: Theme.of(context)
+              .textTheme
+              .titleSmall!
+              .copyWith(fontSize: 24, fontWeight: FontWeight.w600),
+        ),
+      ],
+    );
   }
 
   void navigateProfile(int buttonNo) {

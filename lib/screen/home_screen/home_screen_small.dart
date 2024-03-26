@@ -44,69 +44,108 @@ class HomeScreenSmallState extends State<HomeScreenSmall> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomeScreenDetail(
-                            controller: widget.controller,
-                            scaffoldKey: widget.scaffoldKey,
-                            invoiceType: InvoiceType.ALL,
+                  if (widget.controller!.typeOfBusiness.value == 1) ...[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: invoiceView(
+                          context: context,
+                          controller: widget.controller!,
+                          scaffoldKey: widget.scaffoldKey,
+                          noOfInvoices:
+                              widget.controller!.allInvoiceCount.value,
+                          dueInvoicesCount:
+                              widget.controller!.dueInvoiceCount.value,
+                          overDueInvoicesCount:
+                              widget.controller!.overDueInvoiceCount.value,
+                          dueInvoiceAmount:
+                              widget.controller!.dueInvoiceAmount.toInt(),
+                          overDueInvoicesAmount:
+                              widget.controller!.overDueInvoiceAmount.toInt()),
+                    ),
+                  ],
+                  if (widget.controller!.typeOfBusiness.value == 2) ...[
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomeScreenDetail(
+                              controller: widget.controller,
+                              scaffoldKey: widget.scaffoldKey,
+                              invoiceType: InvoiceType.ALL,
+                            ),
                           ),
+                        );
+                      },
+                      child: Row(children: [
+                        CustomText(
+                          text: '${Languages.of(context)?.allInvoices}',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleSmall!
+                              .copyWith(
+                                  color: ColorResource.color000000,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600),
                         ),
-                      );
-                    },
-                    child: Row(children: [
-                      CustomText(
-                        text: '${Languages.of(context)?.allInvoices}',
+                        SizedBox(width: 10),
+                        Icon(
+                          Icons.arrow_forward,
+                          color: ColorResource.color000000,
+                        ),
+                      ]),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: CustomText(
+                        text: '${Languages.of(context)?.inboundInvoices}',
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
                             color: ColorResource.color000000,
                             fontSize: 18,
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.w400),
                       ),
-                      SizedBox(width: 10),
-                      Icon(
-                        Icons.arrow_forward,
-                        color: ColorResource.color000000,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: invoiceView(
+                          context: context,
+                          controller: widget.controller!,
+                          scaffoldKey: widget.scaffoldKey,
+                          noOfInvoices:
+                              widget.controller!.allInvoiceCount.value,
+                          dueInvoicesCount:
+                              widget.controller!.dueInvoiceCount.value,
+                          overDueInvoicesCount:
+                              widget.controller!.overDueInvoiceCount.value,
+                          dueInvoiceAmount:
+                              widget.controller!.dueInvoiceAmount.toInt(),
+                          overDueInvoicesAmount:
+                              widget.controller!.overDueInvoiceAmount.toInt()),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: CustomText(
+                        text: '${Languages.of(context)?.payableInvoice}',
+                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                            color: ColorResource.color000000,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400),
                       ),
-                    ]),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: CustomText(
-                      text: '${Languages.of(context)?.inboundInvoices}',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: ColorResource.color000000,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w400),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: invoiceView(
-                        context: context,
-                        controller: widget.controller!,
-                        scaffoldKey: widget.scaffoldKey),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: CustomText(
-                      text: '${Languages.of(context)?.payableInvoice}',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: ColorResource.color000000,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w400),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: invoiceView(
+                          context: context,
+                          isInboundView: false,
+                          controller: widget.controller!,
+                          scaffoldKey: widget.scaffoldKey,
+                          noOfInvoices: 0,
+                          dueInvoicesCount: 0,
+                          overDueInvoicesCount: 0,
+                          dueInvoiceAmount: 0.0.toInt(),
+                          overDueInvoicesAmount: 0.0.toInt()),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: invoiceView(
-                        context: context,
-                        isInboundView: false,
-                        controller: widget.controller!,
-                        scaffoldKey: widget.scaffoldKey),
-                  ),
+                  ]
                 ],
               ),
             ),

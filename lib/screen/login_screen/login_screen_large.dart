@@ -216,6 +216,8 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                               activeColor: Theme.of(context).primaryColor,
                               checkColor:
                                   Theme.of(context).scaffoldBackgroundColor,
+                              visualDensity:
+                                  VisualDensity(horizontal: -4, vertical: -4),
                               onChanged: (value) {
                                 widget.controller!
                                     .noAgreeTermsAndConditionCheckBox(
@@ -298,6 +300,10 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                           fontWeight: FontWeight.w500,
                           cardShape: 1,
                           isIcon: true,
+                          isEnabled: widget.controller!.mobilNumberController
+                                  .text.isNotEmpty &&
+                              widget.controller!.acceptTermsAndCondition.obs
+                                  .value.value,
                           onTap: () {
                             if (widget.controller!.form.currentState!
                                     .validate() &&

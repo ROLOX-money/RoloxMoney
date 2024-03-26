@@ -1,8 +1,9 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:roloxmoney/model/project_model.dart';
 import 'package:roloxmoney/screen/clients_screen/entites/clinet_model.dart';
+import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
 import 'package:roloxmoney/singleton.dart';
 import 'package:roloxmoney/utils/RoloxKey.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
@@ -16,17 +17,41 @@ class AddProjectController extends GetxController
   TextEditingController clientNameController = TextEditingController();
   TextEditingController projectValueController = TextEditingController();
   TextEditingController projectDueDateDController = TextEditingController();
-  TextEditingController projectLinkDController = TextEditingController();
   TextEditingController emailIDController = TextEditingController();
   TextEditingController projectLinkController = TextEditingController();
   final form = GlobalKey<FormState>();
   List<ClientModel> clientList = [];
   String? clientId;
   RxString clientName = ''.obs;
+  RxInt? projectIndex = (-1).obs;
+  ProjectModel? projectDetails;
+  RxBool isReadOnly = false.obs;
+
+  ProjectsController projectsController = Get.put(ProjectsController());
 
   @override
   void onInit() async {
     change(null, status: RxStatus.loading());
+    if (Get.arguments != null) {
+      projectIndex!.value = Get.arguments;
+      if (projectIndex!.value != -1) {
+        projectDetails =
+            projectsController.projectInvoicesList[projectIndex!.value];
+      }
+    }
+
+    if (projectDetails != null) {
+      projectNameController.text = projectDetails!.projectName!;
+      clientNameController.text = projectDetails!.clientName!;
+      projectValueController.text = projectDetails!.projectvalue!.toString();
+      projectDueDateDController.text = projectDetails!.dueDate!;
+      projectLinkController.text = projectDetails!.projectLink != null
+          ? projectDetails!.projectLink!
+          : "";
+      // emailIDController.text =
+      isReadOnly.value = true;
+    }
+
     toGetTheClientList().then((value) {
       clientList = value;
       change(clientList, status: RxStatus.success());

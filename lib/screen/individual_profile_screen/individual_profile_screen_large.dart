@@ -242,10 +242,7 @@ class _IndividualProfileScreenLargeState
                     selectedValues:
                         widget.controller!.natureOfBusinessValue.value,
                     onChanged: (value) {
-                      widget.controller!.updateValuesOnUI(
-                          value: value,
-                          variableName:
-                              widget.controller!.natureOfBusinessValue);
+                      widget.controller!.updateNatureOfBusinessValue(value);
                     }),
                 SizedBox(height: 10),
                 if (widget.controller!.natureOfBusinessValue.value
@@ -270,9 +267,7 @@ class _IndividualProfileScreenLargeState
                     dropDownList: widget.controller!.natureOfWork.obs.value,
                     selectedValues: widget.controller!.natureOfWorkValue.value,
                     onChanged: (value) {
-                      widget.controller!.updateValuesOnUI(
-                          value: value,
-                          variableName: widget.controller!.natureOfWorkValue);
+                      widget.controller!.updatedModelOfWorkValue(value);
                     }),
                 SizedBox(height: 10),
                 if (widget.controller!.natureOfWorkValue.value.toLowerCase() ==

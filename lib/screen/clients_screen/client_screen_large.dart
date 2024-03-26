@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/screen/clients_screen/clients_controller.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
@@ -65,15 +66,20 @@ class _ClientScreenLargeState extends State<ClientScreenLarge> {
                       )),
                 ),
                 SizedBox(
-                    width: 140,
+                    width: 150,
                     height: 40,
                     child: SecondaryButton(
                       onTap: () {},
-                      "27/08/23",
+                      DateFormat("dd/MM/yyyy")
+                          .format(DateTime.now())
+                          .toString(),
                       context,
-                      borderRadius: 12,
-                      backgroundColor: ColorResource.dividerColor,
+                      borderRadius: 8,
+                      backgroundColor: ColorResource.dateBgColor,
                       isLeading: true,
+                      textColor: ColorResource.black,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
                       leadingWidget: Container(
                         height: 40,
                         width: 40,
@@ -85,16 +91,24 @@ class _ClientScreenLargeState extends State<ClientScreenLarge> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CustomText(text: '1-8 of 20'),
+                    CustomText(
+                        text:
+                            '${widget.controller!.listValueStart} - ${widget.controller!.listValueEnd} of 20'),
                     SizedBox(width: 5),
                     AppUtils.pageNationButton(
-                        icon: Icons.arrow_back_ios, onPressed: () {}),
+                        icon: Icons.arrow_back_ios,
+                        onPressed: () {},
+                        enabled: true),
                     SizedBox(width: 5),
                     AppUtils.pageNationButton(
-                        icon: Icons.arrow_forward_ios, onPressed: () {}),
+                        icon: Icons.arrow_forward_ios,
+                        onPressed: () {},
+                        enabled: widget.controller!.isEnabled.value),
                     SizedBox(width: 5),
                     AppUtils.pageNationButton(
-                        icon: Icons.double_arrow_rounded, onPressed: () {}),
+                        icon: Icons.double_arrow_rounded,
+                        onPressed: () {},
+                        enabled: widget.controller!.isEnabled.value),
                   ],
                 ),
                 SizedBox(width: 20)

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
-import 'package:roloxmoney/screen/invoice_screen/entities/invoice_model.dart';
 import 'package:roloxmoney/screen/invoice_screen/invoice_controller.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
@@ -59,12 +59,12 @@ class _InvoiceScreenLargeState extends State<InvoiceScreenLarge> {
                   )),
               SizedBox(width: 10),
               Container(
-                  width: 120,
+                  width: 150,
                   height: 30,
                   padding: EdgeInsets.only(top: 8, bottom: 8),
                   child: SecondaryButton(
                     onTap: () {},
-                    "27/08/23",
+                    DateFormat("dd/MM/yyyy").format(DateTime.now()).toString(),
                     context,
                     backgroundColor: ColorResource.dividerColor,
                     isLeading: true,
@@ -80,16 +80,24 @@ class _InvoiceScreenLargeState extends State<InvoiceScreenLarge> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CustomText(text: '1-8 of 20'),
+                  CustomText(
+                      text:
+                          '${widget.controller!.listValueStart} - ${widget.controller!.listValueEnd} of 20'),
                   SizedBox(width: 5),
                   AppUtils.pageNationButton(
-                      icon: Icons.arrow_back_ios, onPressed: () {}),
+                      icon: Icons.arrow_back_ios,
+                      onPressed: () {},
+                      enabled: true),
                   SizedBox(width: 5),
                   AppUtils.pageNationButton(
-                      icon: Icons.arrow_forward_ios, onPressed: () {}),
+                      icon: Icons.arrow_forward_ios,
+                      onPressed: () {},
+                      enabled: widget.controller!.isEnabled.value),
                   SizedBox(width: 5),
                   AppUtils.pageNationButton(
-                      icon: Icons.double_arrow_rounded, onPressed: () {}),
+                      icon: Icons.double_arrow_rounded,
+                      onPressed: () {},
+                      enabled: widget.controller!.isEnabled.value),
                 ],
               ),
               SizedBox(width: 20)
@@ -104,9 +112,9 @@ class _InvoiceScreenLargeState extends State<InvoiceScreenLarge> {
                   child: WidgetUtils.customTableWidget(
                     context: context,
                     isInvoiceTap: true,
-                    listLength: widget.controller!.invoicesList.obs.value.length,
-                    invoiceList: widget.controller!.invoicesList.obs.value as List<Invoice>,
-
+                    listLength:
+                        widget.controller!.invoicesList.obs.value.length,
+                    invoiceList: widget.controller!.invoicesList.obs.value,
                   ))
               : AppUtils.emptyViewWidget(
                   context: Get.context!,

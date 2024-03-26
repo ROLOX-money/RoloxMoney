@@ -95,14 +95,14 @@ class _PaymentScreenLargeState extends State<PaymentScreenLarge> {
                   children: [
                     CustomText(text: '1-8 of 20'),
                     SizedBox(width: 5),
-                    AppUtils.pageNationButton(
-                        icon: Icons.arrow_back_ios, onPressed: () {}),
-                    SizedBox(width: 5),
-                    AppUtils.pageNationButton(
-                        icon: Icons.arrow_forward_ios, onPressed: () {}),
-                    SizedBox(width: 5),
-                    AppUtils.pageNationButton(
-                        icon: Icons.double_arrow_rounded, onPressed: () {}),
+                    // AppUtils.pageNationButton(
+                    //     icon: Icons.arrow_back_ios, onPressed: () {}),
+                    // SizedBox(width: 5),
+                    // AppUtils.pageNationButton(
+                    //     icon: Icons.arrow_forward_ios, onPressed: () {}),
+                    // SizedBox(width: 5),
+                    // AppUtils.pageNationButton(
+                    //     icon: Icons.double_arrow_rounded, onPressed: () {}),
                   ],
                 ),
               ],

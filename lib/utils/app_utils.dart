@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:roloxmoney/widget/custom_button.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
-import 'package:roloxmoney/widget/secondary_button.dart';
 import 'color_resource.dart';
 
 class AppUtils {
@@ -82,10 +83,12 @@ class AppUtils {
     int numWords = 2;
 
     if (names.isNotEmpty) {
-      if (numWords < names.length) {
-        numWords = names.length;
-      }
-      for (int i = 0; i < numWords; i++) {
+// not sure what is the pupose pof this line
+//       if (numWords < names.length) {
+//         numWords = names.length;
+//       }
+
+      for (int i = 0; i < names.length; i++) {
         if (names[i].isNotEmpty) {
           initials += '${names[i][0]}';
         }
@@ -111,6 +114,25 @@ class AppUtils {
 
   static Widget setSVG({String? svgPath}) {
     return SvgPicture.asset(svgPath!);
+  }
+
+  static Future<String> getPic(String? type) async {
+    var imagePath = "";
+    final picker = ImagePicker();
+    if (type!.toLowerCase() == "camera") {
+      await picker.pickImage(source: ImageSource.camera).then((value) {
+        if (value != null) {
+          imagePath = value.path;
+        }
+      });
+    } else if (type.toLowerCase() == "gallery") {
+      await picker.pickImage(source: ImageSource.gallery).then((value) {
+        if (value != null) {
+          imagePath = value.path;
+        }
+      });
+    }
+    return imagePath;
   }
 
   static Widget emptyViewWidget(
@@ -156,22 +178,36 @@ class AppUtils {
               SizedBox(
                 height: 20,
               ),
-              Container(
-                width: buttonWidth ?? 110,
-                height: 40,
-                child: SecondaryButton(
-                  buttonName,
-                  context,
-                  fontWeight: FontWeight.w500,
-                  borderRadius: 8,
-                  backgroundColor: ColorResource.color000000,
-                  textColor: ColorResource.colorFFFFFF,
-                  fontSize: 14,
-                  onTap: () {
-                    callBack!();
-                  },
-                ),
-              )
+              // Container(
+              //   width: buttonWidth ?? 110,
+              //   height: 40,
+              //   child:
+
+              SizedBox(
+                  height: 40,
+                  width: buttonWidth ?? 110,
+                  child: PrimaryButton(
+                    buttonName,
+                    context,
+                    borderRadius: 12,
+                    onTap: () {
+                      callBack!();
+                    },
+                  )),
+
+              // SecondaryButton(
+              //   buttonName,
+              //   context,
+              //   fontWeight: FontWeight.w500,
+              //   borderRadius: 8,
+              //   backgroundColor: ColorResource.color000000,
+              //   textColor: ColorResource.colorFFFFFF,
+              //   fontSize: 14,
+              //   onTap: () {
+              //     callBack!();
+              //   },
+              // ),
+              // )
             ],
           ),
         ),
@@ -180,11 +216,16 @@ class AppUtils {
   }
 
   static Widget pageNationButton(
-      {required IconData icon, required void Function()? onPressed}) {
+      {required IconData icon,
+      required void Function()? onPressed,
+      required bool enabled}) {
     return Container(
       height: 30,
       width: 28,
       decoration: BoxDecoration(
+          color: enabled
+              ? Colors.transparent
+              : ColorResource.disabledColor.withOpacity(0.3),
           border: Border.all(color: ColorResource.backgroundColor),
           borderRadius: BorderRadius.circular(8)),
       child: Center(
@@ -192,6 +233,9 @@ class AppUtils {
           icon: Icon(
             icon,
             size: 15,
+            color: enabled
+                ? ColorResource.enabledColor
+                : ColorResource.disabledColor,
           ),
           onPressed: onPressed,
         ),

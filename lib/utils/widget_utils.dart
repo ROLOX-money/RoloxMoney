@@ -5,8 +5,11 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:roloxmoney/languages/app_languages.dart';
 import 'package:roloxmoney/model/project_model.dart';
+import 'package:roloxmoney/screen/clients_screen/clients_controller.dart';
 import 'package:roloxmoney/screen/clients_screen/entites/clinet_model.dart';
 import 'package:roloxmoney/screen/invoice_screen/entities/invoice_model.dart';
+import 'package:roloxmoney/screen/invoice_screen/invoice_controller.dart';
+import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
@@ -34,13 +37,16 @@ abstract class WidgetUtils {
       bool obscureText = false,
       int? maximumWordCount,
       Function()? onTab,
-      double? height}) {
+      double? height,
+      EdgeInsetsGeometry? contentPadding,
+      TextAlignVertical? textAlignVertical}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
           height: 10,
         ),
+
         RichText(
             overflow: TextOverflow.fade,
             softWrap: true,
@@ -72,6 +78,8 @@ abstract class WidgetUtils {
             maxLines: maxLines,
             isReadOnly: isReadOnly,
             hintText: hintText,
+            contentPadding: contentPadding,
+            textAlignVertical: textAlignVertical,
             focusedBorder: Colors.grey,
             textColor: ColorResource.color181B28,
             onTapped: isReadOnly ? onTab : null,
@@ -90,6 +98,9 @@ abstract class WidgetUtils {
             disableColor: Colors.red,
             keyBoardType: keyBoardType ?? TextInputType.name,
           ),
+        ),
+        SizedBox(
+          height: 5,
         ),
       ],
     );
@@ -190,48 +201,52 @@ abstract class WidgetUtils {
               ],
             ),
           ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                alignment: Alignment.center,
-                child: Image.asset(
-                  ImageResource.agencyAlertImage,
-                  height: 280,
-                  width: 180,
+          content: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    ImageResource.agencyAlertImage,
+                    height: 280,
+                    width: 180,
+                  ),
                 ),
-              ),
-              CustomText(
-                text: '${Languages.of(context)?.oopsAgency}',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall!
-                    .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              CustomText(
-                text: '${Languages.of(context)?.oopsAgencyMessage}',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall!
-                    .copyWith(fontSize: 14, fontWeight: FontWeight.w400),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              PrimaryButton('${Languages.of(context)!.continueText}', context,
-                  cardShape: 1,
-                  isIcon: true,
-                  fontSize: 20,
-                  onTap: primaryButtonOnTap),
-              SizedBox(
-                height: 10,
-              ),
-            ],
+                CustomText(
+                  text: '${Languages.of(context)?.oopsAgency}',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall!
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                CustomText(
+                  text: '${Languages.of(context)?.oopsAgencyMessage}',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: ColorResource.textSecondaryColor),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                PrimaryButton('${Languages.of(context)!.continueText}', context,
+                    cardShape: 1,
+                    isIcon: true,
+                    fontSize: 20,
+                    onTap: primaryButtonOnTap),
+                SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -345,7 +360,7 @@ abstract class WidgetUtils {
     } else if (isProjectTap == true) {
       value = {
         "Project Name": ColumnSize.L,
-        "No of projects": ColumnSize.S,
+        "No of Invoices": ColumnSize.S,
         "Date": ColumnSize.S,
         "Action": ColumnSize.M,
       };
@@ -396,7 +411,7 @@ abstract class WidgetUtils {
             } else if (isProjectTap == true) {
               projectModelData = projectList![index];
             } else if (isPaymentTap == true) {
-              clientModelData = clientList![index];
+              // clientModelData = clientList![index];
             }
 
             List<DataCell> dataCell = [
@@ -411,7 +426,7 @@ abstract class WidgetUtils {
                           : ColorResource.initialBgColor2,
                       child: CustomText(
                         text: AppUtils.getInitials(AppUtils.getFirstName(
-                            invoiceModelData.clientName!)),
+                            invoiceModelData.invoiceName!)),
                         style: TextStyle(
                             color: listLength.isOdd
                                 ? ColorResource.initialTextColor
@@ -419,17 +434,21 @@ abstract class WidgetUtils {
                       ),
                     ),
                     SizedBox(width: 5),
-                    Text(invoiceModelData.clientName.toString())
+                    Text(invoiceModelData.invoiceName.toString())
                   ],
                 )),
-                DataCell(Text(invoiceModelData.invoiceAmount.toString())),
+                DataCell(
+                    Text(invoiceModelData.invoiceValueWithoutGst.toString())),
                 if (isInvoiceTap == true)
                   DataCell(Text(invoiceModelData.invoiceNumber.toString())),
                 DataCell(Text(DateFormat('MM/dd/yyyy')
                     .format(DateTime.parse(invoiceModelData.createdAt!)))),
                 DataCell(Text(invoiceModelData.projectName.toString())),
                 DataCell(TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    InvoiceController()
+                        .navigateAddInvoiceScreen(arguments: index);
+                  },
                   child: CustomText(
                     text: 'View Action',
                     style: TextStyle(color: Theme.of(context).primaryColor),
@@ -445,8 +464,8 @@ abstract class WidgetUtils {
                           ? ColorResource.initialBgColor
                           : ColorResource.initialBgColor2,
                       child: CustomText(
-                        text: AppUtils.getInitials(AppUtils.getFirstName(
-                            clientModelData.companyDB!.companyName.toString())),
+                        text: AppUtils.getInitials(
+                            clientModelData.companyDB!.companyName.toString()),
                         style: TextStyle(
                             color: listLength.isOdd
                                 ? ColorResource.initialTextColor
@@ -458,11 +477,17 @@ abstract class WidgetUtils {
                   ],
                 )),
                 DataCell(Text(projectModelData.projectName.toString())),
-                DataCell(Text(projectModelData.noOfInvoice.toString())),
-                DataCell(Text(DateFormat('MM/dd/yyyy')
-                    .format(DateTime.parse(projectModelData.date!)))),
+                DataCell(Text(
+                    (projectModelData.noOfInvoice.toString() == "null")
+                        ? "0"
+                        : projectModelData.noOfInvoice.toString())),
+                DataCell(Text(DateFormat('MM/dd/yyyy').format(
+                    DateTime.parse(clientModelData.companyDB!.createdAt!)))),
                 DataCell(TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ClientsController()
+                        .navigateAddClientScreen(arguments: index);
+                  },
                   child: CustomText(
                     text: 'View Action',
                     style: TextStyle(color: Theme.of(context).primaryColor),
@@ -478,8 +503,8 @@ abstract class WidgetUtils {
                           ? ColorResource.initialBgColor
                           : ColorResource.initialBgColor2,
                       child: CustomText(
-                        text: AppUtils.getInitials(AppUtils.getFirstName(
-                            projectModelData.projectName.toString())),
+                        text: AppUtils.getInitials(
+                            projectModelData.projectName.toString()),
                         style: TextStyle(
                             color: listLength.isOdd
                                 ? ColorResource.initialTextColor
@@ -487,13 +512,18 @@ abstract class WidgetUtils {
                       ),
                     ),
                     SizedBox(width: 5),
-                    Text(projectModelData.projectName.toString())
+                    Text(GetUtils.capitalizeFirst(
+                            projectModelData.projectName.toString()) ??
+                        "N")
                   ],
                 )),
                 DataCell(Text(projectModelData.noOfInvoice.toString())),
-                DataCell(Text(projectModelData.date!)),
+                DataCell(Text(projectModelData.dueDate!)),
                 DataCell(TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ProjectsController()
+                        .navigateAddProjectScreen(arguments: index);
+                  },
                   child: CustomText(
                     text: 'View Action',
                     style: TextStyle(color: Theme.of(context).primaryColor),
@@ -501,7 +531,7 @@ abstract class WidgetUtils {
                 ))
               ],
               if (isPaymentTap == true) ...[
-                DataCell(Text(projectModelData.amount.toString())),
+                DataCell(Text(projectModelData.projectvalue.toString())),
                 DataCell(Text(
                     projectModelData.isCredit == true ? "Credit" : "Debit ")),
                 DataCell(Text(projectModelData.noOfInvoice.toString())),
@@ -526,7 +556,7 @@ abstract class WidgetUtils {
                   ],
                 )),
                 DataCell(Text(DateFormat('MM/dd/yyyy')
-                    .format(DateTime.parse(projectModelData.date!)))),
+                    .format(DateTime.parse(projectModelData.dueDate!)))),
                 DataCell((projectModelData.isCredit == true)
                     ? SizedBox()
                     : TextButton(

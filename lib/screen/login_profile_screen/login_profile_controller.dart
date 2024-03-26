@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/screen/business_profile_screen/business_profile_screen.dart';
-import 'package:roloxmoney/screen/dashboard_screen/dashboard_screen.dart';
 import 'package:roloxmoney/screen/individual_profile_screen/individual_profile_screen.dart';
 
 import 'package:roloxmoney/utils/RoloxKey.dart';
@@ -118,5 +117,19 @@ class LoginProfileController extends GetxController
             durations: 3000);
       }
     });
+  }
+
+  clearData() {
+    firstNameController.clear();
+    emailIDController.clear();
+    companyNameController.clear();
+    panNumberController.clear();
+    gstNumberController.clear();
+    aadhaarNumberController.clear();
+    contactPersonNameController.clear();
+    address1.clear();
+    address2.clear();
+    pinCode.clear();
+    socialId.clear();
   }
 }

@@ -326,7 +326,7 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                             '${Languages.of(context)?.panNumber}',
                                         hintText:
                                             '${Languages.of(context)?.panNumberHint}'),
-                                    // aadhaar Numberƒ
+                                    // Contact Person Name
                                     WidgetUtils.genericTextFiled(
                                         height: 50,
                                         context: context,
@@ -334,7 +334,6 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                         keyBoardType: TextInputType.text,
                                         validationRules: [
                                           'required',
-                                          'number_only'
                                         ],
                                         // inputformaters: [
                                         //   CustomAadhaarInputFormatter()
@@ -349,7 +348,10 @@ class _LoginProfileScreenLargeState extends State<LoginProfileScreenLarge> {
                                         height: 50,
                                         context: context,
                                         keyBoardType: TextInputType.name,
-                                        validationRules: ['required'],
+                                        validationRules: [
+                                          'required',
+                                          'number_only'
+                                        ],
                                         controller: widget
                                             .controller!.gstNumberController,
                                         labelName:

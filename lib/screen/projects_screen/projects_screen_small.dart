@@ -6,6 +6,7 @@ import 'package:roloxmoney/screen/projects_screen/projects_controller.dart';
 import 'package:roloxmoney/utils/app_utils.dart';
 import 'package:roloxmoney/utils/color_resource.dart';
 import 'package:roloxmoney/utils/image_resource.dart';
+import 'package:roloxmoney/widget/custom_button.dart';
 import 'package:roloxmoney/widget/custom_text.dart';
 import 'package:roloxmoney/widget/rolox_money_widget.dart';
 import 'package:roloxmoney/widget/secondary_button.dart';
@@ -66,10 +67,9 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                             Container(
                               width: 110,
                               height: 40,
-                              child: SecondaryButton(
+                              child: PrimaryButton(
                                 '${Languages.of(context)!.addProject}',
                                 context,
-                                backgroundColor: ColorResource.color000000,
                                 fontWeight: FontWeight.w500,
                                 textColor: ColorResource.colorFFFFFF,
                                 fontSize: 14,
@@ -110,17 +110,17 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(20),
                                   ),
-                                  color: ColorResource.color381D4E,
+                                  color: ColorResource.initialBgColor,
                                 ),
                                 child: CustomText(
                                   text: AppUtils.getInitials(
-                                          projectModel.clientName!)
+                                          projectModel.projectName!)
                                       .toString(),
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleMedium!
                                       .copyWith(
-                                          color: ColorResource.colorA0BCD0,
+                                          color: ColorResource.initialTextColor,
                                           fontWeight: FontWeight.w700),
                                 ),
                               ),
@@ -128,13 +128,15 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomText(
-                                    text: projectModel.clientName!,
+                                    text:
+                                        projectModel.projectName!.capitalize ??
+                                            "",
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleSmall!
                                         .copyWith(
-                                            color: ColorResource.color000000,
-                                            fontSize: 15,
+                                            color: ColorResource.textColor,
+                                            fontSize: 16,
                                             fontWeight: FontWeight.w500),
                                   ),
                                   SizedBox(
@@ -150,18 +152,19 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                         width: 5,
                                       ),
                                       CustomText(
-                                        text: projectModel.projectName!,
+                                        text:
+                                            '${projectModel.noOfInvoice.toString()} ${Languages.of(context)?.invoices.capitalizeFirst}',
                                         style: Theme.of(context)
                                             .textTheme
                                             .titleSmall!
                                             .copyWith(
-                                                color:
-                                                    ColorResource.colorA0A1A9,
-                                                fontSize: 12,
+                                                color: ColorResource
+                                                    .textSecondaryColor,
+                                                fontSize: 14,
                                                 fontWeight: FontWeight.w400),
                                       ),
                                       SizedBox(
-                                        width: 5,
+                                        width: 10,
                                       ),
                                       Container(
                                         height: 5,
@@ -178,7 +181,7 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 5,
+                                        width: 10,
                                       ),
                                       Image.asset(
                                         ImageResource.calendar,
@@ -188,15 +191,15 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                         width: 5,
                                       ),
                                       CustomText(
-                                        text: '${projectModel.date}',
+                                        text: '${projectModel.dueDate}',
                                         style: Theme.of(context)
                                             .textTheme
                                             .titleSmall!
                                             .copyWith(
-                                                color:
-                                                    ColorResource.colorA0A1A9,
+                                                color: ColorResource
+                                                    .textSecondaryColor,
                                                 overflow: TextOverflow.fade,
-                                                fontSize: 12,
+                                                fontSize: 14,
                                                 fontWeight: FontWeight.w400),
                                       ),
                                       SizedBox(
@@ -214,10 +217,15 @@ class ProjectsScreenSmallState extends State<ProjectsScreenSmall> {
                                       '${Languages.of(context)!.viewMore}',
                                       context,
                                       fontWeight: FontWeight.w500,
-                                      backgroundColor: ColorResource.colorF5F5F5,
-                                      textColor: ColorResource.color181B28,
-                                      fontSize: 14,
-                                      onTap: () {},
+                                      backgroundColor:
+                                          ColorResource.colorF5F5F5,
+                                      textColor: ColorResource.textColor,
+                                      fontSize: 16,
+                                      onTap: () {
+                                        widget.controller!
+                                            .navigateAddProjectScreen(
+                                                arguments: index);
+                                      },
                                     ),
                                   )
                                 ],

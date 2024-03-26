@@ -9,6 +9,9 @@ class ClientsController extends GetxController
     with StateMixin, SupaBaseController {
   RxList clientList = [].obs;
   List<ClientModel> cModel = <ClientModel>[];
+  RxInt listValueStart = 0.obs;
+  RxInt listValueEnd = 0.obs;
+  RxBool isEnabled = false.obs;
 
   @override
   void onInit() async {
@@ -46,17 +49,37 @@ class ClientsController extends GetxController
         ClientModel model = clientList.obs.value[i];
         cModel.add(model);
       }
+      if (cModel.isNotEmpty) {
+        if (cModel.length <= 20) {
+          listValueStart.value = 1;
+          listValueEnd.value = cModel.length + 1;
+          isEnabled.value = false;
+        } else if (cModel.length > 20) {
+          listValueStart.value = 21;
+          listValueEnd.value = cModel.length + 1;
+          isEnabled.value = true;
+        }
+      } else {
+        listValueStart.value = 0;
+        listValueEnd.value = 0;
+      }
     }
   }
 
-  void navigateAddClientScreen() {
-    Get.put(AddClientController());
-    Get.toNamed(AddClientScreen.routeName)?.then((value) {
+  void navigateAddClientScreen({int? arguments}) {
+    Get.toNamed(AddClientScreen.routeName, arguments: arguments)?.then((value) {
       change(null, status: RxStatus.loading());
       toGetTheClientList().then((value) {
         clientList.value = value;
+        if (clientList.length > 0) {
+          for (int i = 0; i < clientList.length; i++) {
+            ClientModel model = clientList.obs.value[i];
+            cModel.add(model);
+          }
+        }
         change(clientList, status: RxStatus.success());
       });
     });
+    Get.lazyPut(() => AddClientController());
   }
 }

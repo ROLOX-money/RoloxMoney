@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:roloxmoney/model/bank_model.dart';
@@ -47,7 +48,7 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
                   icon: Icon(
                     Icons.arrow_back_sharp,
                     size: 30,
-                    color:  ColorResource.color181B28,
+                    color: ColorResource.color181B28,
                   ),
                   onPressed: () {
                     Get.back();
@@ -77,13 +78,13 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
                       ? Column(
                           children: [
                             ListView.builder(
-                                itemCount: widget.controller!.bankList.obs.value
-                                    .length,
+                                itemCount: widget
+                                    .controller!.bankList.obs.value.length,
                                 shrinkWrap: true,
                                 padding: EdgeInsets.symmetric(horizontal: 10),
                                 itemBuilder: (BuildContext context, int index) {
-                                  BankModel bankModel = widget.controller!
-                                      .bankList.obs.value[index];
+                                  BankModel bankModel = widget
+                                      .controller!.bankList.obs.value[index];
                                   return Container(
                                     margin: EdgeInsets.only(top: 25),
                                     alignment: Alignment.centerLeft,
@@ -91,10 +92,11 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
                                       border: Border.all(
                                         color: bankModel.isPrimary
                                             ? ColorResource.colorA0A1A9
-                                            : ColorResource.color383838,
+                                            : Colors.transparent,
                                         style: BorderStyle.solid,
                                         width: 1.0,
                                       ),
+                                      boxShadow: ColorResource.boxShadow,
                                       color: Colors.transparent,
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
@@ -113,7 +115,8 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
                                           borderRadius: BorderRadius.all(
                                             Radius.circular(20),
                                           ),
-                                          color: ColorResource.color381D4E,
+                                          color: ColorResource
+                                              .photoBackgroundColor,
                                         ),
                                         child: CustomText(
                                           text: AppUtils.getInitials(
@@ -154,7 +157,7 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
                                                 .titleSmall!
                                                 .copyWith(
                                                     color: ColorResource
-                                                        .colorA0A1A9
+                                                        .textColor
                                                         .withOpacity(0.6),
                                                     overflow: TextOverflow.fade,
                                                     fontSize: 14,
@@ -172,7 +175,7 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
                                                       .titleSmall!
                                                       .copyWith(
                                                           color: ColorResource
-                                                              .colorA0A1A9
+                                                              .textColor
                                                               .withOpacity(0.6),
                                                           overflow:
                                                               TextOverflow.fade,
@@ -187,10 +190,16 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
                                       trailing: Checkbox(
                                         value: bankModel.isPrimary,
                                         checkColor: ColorResource.colorFFFFFF,
+                                        side: BorderSide(
+                                            color: ColorResource.textColor),
                                         shape: CircleBorder(),
                                         // tristate: true,
                                         activeColor: ColorResource.colorEC008C,
-                                        onChanged: (bool? value) {},
+                                        onChanged: (bool? value) {
+                                          widget.controller!
+                                              .changedThePrimaryAccount(
+                                                  selectedIndex: index);
+                                        },
                                       ),
                                     ),
                                   );
@@ -198,62 +207,75 @@ class BankListScreenSmallState extends State<BankListScreenSmall> {
                             SizedBox(
                               height: 10,
                             ),
-
                             Container(
-                              margin: EdgeInsets.symmetric(vertical: 25,horizontal: 10),
+                              margin: EdgeInsets.symmetric(
+                                  vertical: 25, horizontal: 10),
                               alignment: Alignment.centerLeft,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: ColorResource.color60616B,
-                                  style: BorderStyle.solid,
-                                  width: 1.0,
+                                  style: BorderStyle.none,
+                                  // width: 1.0,
                                 ),
                                 color: Colors.transparent,
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
-                              padding: EdgeInsets.symmetric(vertical: 15, ),
-                              child: ListTile(
-                                onTap: () {},
-                                leading: Container(
-                                  height: 45,
-                                  width: 45,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: ColorResource.color60616B,
-                                      style: BorderStyle.solid,
-                                      width: 1.0,
+                              padding: EdgeInsets.symmetric(
+                                vertical: 15,
+                              ),
+                              child: DottedBorder(
+                                dashPattern: [3, 5],
+                                strokeWidth: 2,
+                                borderType: BorderType.RRect,
+                                padding: EdgeInsets.symmetric(vertical: 15),
+                                child: ListTile(
+                                  onTap: () {
+                                    Get.put(AddBankAccountController());
+                                    Get.toNamed(AddBankAccountScreen.routeName);
+                                  },
+                                  leading: Container(
+                                    height: 45,
+                                    width: 45,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: ColorResource.color60616B,
+                                        style: BorderStyle.solid,
+                                        width: 1.0,
+                                      ),
+                                      color: Colors.transparent,
+                                      borderRadius: BorderRadius.circular(40.0),
                                     ),
-                                    color: Colors.transparent,
-                                    borderRadius: BorderRadius.circular(40.0),
-                                  ),
-                                  child: Image.asset(
-                                    ImageResource.bank,
-                                    height: 25,
-                                    color: ColorResource.color60616B,
-                                    width: 25,
-                                  ),
-                                ),
-                                title: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CustomText(
-                                      text: 'Add Bank Account',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall!
-                                          .copyWith(
-                                              color: ColorResource.color60616B,
-                                              overflow: TextOverflow.fade,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600),
+                                    child: Image.asset(
+                                      ImageResource.bank,
+                                      height: 25,
+                                      color: ColorResource.textColor,
+                                      width: 25,
                                     ),
-                                  ],
-                                ),
-                                trailing: Icon(
-                                  Icons.add,
-                                  color: ColorResource.color60616B,
-                                  size: 30.0,
+                                  ),
+                                  title: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CustomText(
+                                        text: 'Add New Bank Account'
+                                            .capitalizeFirst!,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall!
+                                            .copyWith(
+                                                color: ColorResource.textColor,
+                                                overflow: TextOverflow.fade,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600),
+                                      ),
+                                    ],
+                                  ),
+                                  trailing: Icon(
+                                    Icons.add,
+                                    color: ColorResource.textColor,
+                                    size: 30.0,
+                                  ),
                                 ),
                               ),
                             ),

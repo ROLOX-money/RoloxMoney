@@ -29,6 +29,13 @@ class ColorResource {
   static const Color initialTextColor = Color(0xffA44FE7);
   static const Color initialTextColor2 = Color(0xffF2A536);
   static const Color textFiledBgColor = Color(0xffE4E4E4);
+  static const Color disabledColor = Color(0xffD6D5D5);
+  static const Color enabledColor = Color(0xffA1A1A1);
+  static const Color dateBgColor = Color(0xffEBEBEB);
+
+  static const Color creditedColor = Color(0xffE4F2E7);
+  static const Color creditedTextColor = Color(0xff1C5F2C);
+  static const Color pendingColor = Color(0xffF6E9D4);
 
   static List<BoxShadow> boxShadow = [
     BoxShadow(
@@ -106,13 +113,13 @@ class ColorResource {
   static const Color black = Color(0xff222222);
   static const Color backgroundPatchGrey = Color.fromRGBO(248, 248, 250, 0.8);
   static const Color red = Color(0xffF92538);
-  static  Shader linearGradient = LinearGradient(
+  static Shader linearGradient = LinearGradient(
     colors: <Color>[
       Color(0xffEC008C),
       Color(0xffF58220),
       Color(0xffFDB714),
     ],
-  ).createShader(Rect.fromLTWH(0.0, 0.0, 500.0, 70.0));
+  ).createShader(Rect.fromLTWH(0.0, 0.0, 1000.0, 70.0));
 }
 
 //#E08AF4
