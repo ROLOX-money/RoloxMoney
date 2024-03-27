@@ -161,6 +161,8 @@ class LanguageEn extends Languages {
 
   String get invoiceValueWithoutGST => 'Invoice Value without GST';
 
+  String get invoiceValueWithGST => 'Invoice Value with GST';
+
   String get hsnCode => 'HSN Code';
 
   String get gstCharges => 'GST Charges';
@@ -330,5 +332,4 @@ class LanguageEn extends Languages {
   String get privacyPolicy => "Privacy Policy";
 
   String get alternate => "Alternate";
-
 }

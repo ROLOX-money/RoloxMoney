@@ -160,6 +160,8 @@ abstract class Languages {
 
   String get invoiceValueWithoutGST;
 
+  String get invoiceValueWithGST;
+
   String get hsnCode;
 
   String get gstCharges;
@@ -323,5 +325,4 @@ abstract class Languages {
   String get privacyPolicy;
 
   String get alternate;
-
 }

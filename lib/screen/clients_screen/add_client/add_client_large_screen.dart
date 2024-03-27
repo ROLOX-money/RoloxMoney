@@ -350,17 +350,21 @@ class _AddClientLargeScreenState extends State<AddClientLargeScreen> {
                                       ),
                                     ),
                                     //  GST No
-                                    WidgetUtils.genericTextFiled(
-                                      height: 50,
-                                      context: context,
-                                      validationRules: ['required'],
-                                      hintText:
-                                          Languages.of(context)?.gstNumberHint,
-                                      controller: widget
-                                          .controller!.gstNumberController,
-                                      labelName:
-                                          '${Languages.of(context)?.gstNumber}',
-                                    ),
+
+                                    if (widget.controller!.iDontHaveBusiness.obs
+                                            .value.value ==
+                                        true)
+                                      WidgetUtils.genericTextFiled(
+                                        height: 50,
+                                        context: context,
+                                        validationRules: ['required'],
+                                        hintText: Languages.of(context)
+                                            ?.gstNumberHint,
+                                        controller: widget
+                                            .controller!.gstNumberController,
+                                        labelName:
+                                            '${Languages.of(context)?.gstNumber}',
+                                      ),
                                     // Pan No
                                     WidgetUtils.genericTextFiled(
                                       height: 50,

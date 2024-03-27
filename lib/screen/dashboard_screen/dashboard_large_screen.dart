@@ -236,35 +236,27 @@ class _DashBoardLargeScreenState extends State<DashBoardLargeScreen> {
                               SizedBox(
                                 height: 10,
                               ),
-                              Text.rich(
-                                TextSpan(
-                                    text:
-                                        '${Languages.of(context)?.welcomeNote}\n',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium!
-                                        .copyWith(
-                                            fontSize: 30,
-                                            fontWeight: FontWeight.w600),
-                                    children: <InlineSpan>[
-                                      TextSpan(
-                                        text:
-                                            ' ${Languages.of(context)?.professionalInvoice}',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium!
-                                            .copyWith(
-                                                fontSize: 30,
-                                                fontWeight: FontWeight.w600,
-                                                height: 1.5,
-                                                foreground: Paint()
-                                                  ..shader = ColorResource
-                                                      .linearGradient),
-                                      )
-                                    ]),
-                                maxLines: 2,
-                                softWrap: true,
-                                textAlign: TextAlign.center,
+                              Text(
+                                '${Languages.of(context)?.welcomeNote}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium!
+                                    .copyWith(
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.w600),
+                              ),
+                              Text(
+                                ' ${Languages.of(context)?.professionalInvoice}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium!
+                                    .copyWith(
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.w600,
+                                        height: 1.5,
+                                        foreground: Paint()
+                                          ..shader =
+                                              ColorResource.linearGradient),
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(

@@ -26,11 +26,8 @@ class LoginController extends RoloxGetXController with SupaBaseController {
   RxInt seconds = 45.obs;
   Timer? timer;
 
-
-
   RxInt _otpTimer = 30.obs; // Initial timer value in seconds
   Timer? _timer;
-
 
   @override
   void onInit() async {
@@ -46,7 +43,6 @@ class LoginController extends RoloxGetXController with SupaBaseController {
     super.onInit();
   }
 
-
   void timerCalculation() {
     timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
       if (seconds.value == 0) {
@@ -59,7 +55,6 @@ class LoginController extends RoloxGetXController with SupaBaseController {
       }
     });
   }
-
 
   void navigateProfile() {
     if (otpController.text.length == 6) {
@@ -114,7 +109,7 @@ class LoginController extends RoloxGetXController with SupaBaseController {
 
   void otpBottomSheet({String? mobileNumber, String? otpString}) {
     _otpTimer = 30.obs;
-    _startOTPTimer();
+    // _startOTPTimer();
     showModalBottomSheet(
         enableDrag: true,
         isDismissible: false,

@@ -60,34 +60,20 @@ class _LoginScreenLargeState extends State<LoginScreenLarge> {
                           fontWeight: FontWeight.w500),
                     ),
                   ),
-                  Text.rich(
-                    TextSpan(
-                        text: '${Languages.of(context)?.welcomeNote} ',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineLarge!
-                            .copyWith(
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium!
-                                    .color,
-                                fontWeight: FontWeight.w600),
-                        children: <InlineSpan>[
-                          TextSpan(
-                            text:
-                                ' ${Languages.of(context)?.professionalInvoice}',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineLarge!
-                                .copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 34,
-                                    height: 1.5,
-                                    foreground: Paint()
-                                      ..shader = ColorResource.linearGradient),
-                          )
-                        ]),
-                    softWrap: true,
+                  Text(
+                    '${Languages.of(context)?.welcomeNote}',
+                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                        color: Theme.of(context).textTheme.titleMedium!.color,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  Text(
+                    '${Languages.of(context)?.professionalInvoice}',
+                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 34,
+                        height: 1.5,
+                        foreground: Paint()
+                          ..shader = ColorResource.linearGradient),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 50),

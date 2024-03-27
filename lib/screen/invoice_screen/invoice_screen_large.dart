@@ -46,7 +46,7 @@ class _InvoiceScreenLargeState extends State<InvoiceScreenLarge> {
                 textAlign: TextAlign.center),
             actions: [
               Container(
-                  height: 30,
+                  height: 60,
                   width: 120,
                   padding: EdgeInsets.only(top: 8, bottom: 8),
                   child: PrimaryButton(
@@ -60,7 +60,7 @@ class _InvoiceScreenLargeState extends State<InvoiceScreenLarge> {
               SizedBox(width: 10),
               Container(
                   width: 150,
-                  height: 30,
+                  height: 60,
                   padding: EdgeInsets.only(top: 8, bottom: 8),
                   child: SecondaryButton(
                     onTap: () {},
